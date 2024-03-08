@@ -347,4 +347,11 @@
 # Eclipse Core
 # JDT-specific (Eclipse Java Development Tools)
 
+### replit ###
+# Replit config file
+**/.replit
+
+# Replit Nix config file
+**/replit.nix
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,java,eclipse,visualstudiocode,intellij,maven,gradle
