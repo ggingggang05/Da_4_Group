@@ -16,6 +16,21 @@ public class NoticeDao {
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
+   // C(create)
+   // 공지사항 등록 
+   public void insert(NoticeDto noticeDto) {
+      String sql = "insert into notice (notice_no, notice_title, notice_content,"
+	                              + "notice_writer, notice_wdate, notice_vcount) "
+	                              + "valuse (notice_seq.nextval, ?, ?, ?, ?, ?)";
+      Object[] data = {
+	         noticeDto.getNoticeTitle(), noticeDto.getNoticeContent(),
+	         noticeDto.getNoticeWriter(), noticeDto.getNoticeWdate(),
+	         noticeDto.getNoticeVcount()
+      };
+      jdbcTemplate.update(sql, data);
+   }
+
+	
 		
 	// R(read)
 	public List<NoticeDto> selectList(){// 공지의 단순 목록만 나오게
@@ -35,4 +50,6 @@ public class NoticeDao {
 		List<NoticeDto> list = jdbcTemplate.query(sql, noticeMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	
 }
