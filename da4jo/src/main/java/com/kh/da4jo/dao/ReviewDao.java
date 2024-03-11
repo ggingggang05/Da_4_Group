@@ -23,37 +23,44 @@ public class ReviewDao {
 	
 	//작성
 	public void insert(ReviewDto reviewDto) {
-		String sql = "";
-		Object[] data = {};
+		String sql = "insert into review"
+						+ "review_no, review_title, review_content, "
+						+ "review_writer, review_wdate, review_vcount) "
+						+ "values(?, ?, ?, ?, ?)";
+		Object[] data = {
+				reviewDto.getReviewNo(), reviewDto.getReviewTitle(), 
+				reviewDto.getReviewContent(), reviewDto.getReviewWriter(), 
+				reviewDto.getReviewWdate(), reviewDto.getReviewVcount()
+		};
 		jdbcTemplate.update(sql, data);
 		
 	}
 	
 	//목록
 	public List<ReviewDto> selectList() {
-		String sql = "";
-		Object[] data = {};
+		String sql = "select "
+				+ "review_no, review_title, review_content, "
+				+ "review_writer, review_wdate, review_vcount "
+				+ "from review order by review_no desc";
 		return jdbcTemplate.query(sql, reviewMapper);
 		
 	}
 	
 	//검색
 	public List<ReviewDto> selectList(String column, String keyword) {
-		String sql = "";
-		Object[] data = {};
+		String sql = "select "
+				+ "review_no, review_title, review_content, "
+				+ "review_writer, review_wdate, review_vcount "
+				+ "from review "
+				+ "where instr("+column+", ?) > 0 "
+				+ "order by review_no desc";
+		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, reviewMapper, data);
-	}
-	
-	//수정
-	public boolean update(ReviewDto reviewDto) {
-		String sql = "";
-		Object[] data = {};
-		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 	//삭제
 	public boolean delete(int reviewNo) {
-		String sql = "";
+		String sql = "delete review where review_no = ?";
 		Object[] data = {reviewNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
