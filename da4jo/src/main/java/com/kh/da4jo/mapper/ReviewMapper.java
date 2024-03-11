@@ -1,11 +1,10 @@
 package com.kh.da4jo.mapper;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-import dto.ReviewDto;
+import com.kh.da4jo.dto.ReviewDto;
 
 @Service
 public class ReviewMapper implements RowMapper<ReviewDto>{
@@ -19,7 +18,7 @@ public class ReviewMapper implements RowMapper<ReviewDto>{
 		reviewDto.setReviewWriter(rs.getString("review_writer"));
 		reviewDto.setReviewWdate(rs.getDate("review_wdate"));
 		reviewDto.setReviewVcount(rs.getInt("review_vcount"));
-		
+	
 		return reviewDto;
 	}
 
