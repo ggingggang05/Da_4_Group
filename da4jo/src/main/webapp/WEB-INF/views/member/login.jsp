@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,54 +34,31 @@
     </script>
 </head>
 <body>
-    <form action="join" method="post" autocapitalize="off" >
-        <div class="container w-500">
+
+    <div class="container w-500">
+        <form autocapitalize="off" action="login" method="post" onsubmit="return validateForm()">
             <div class="cell center">
-                <h1>회원가입 화면</h1>
+                <h1>로그인 화면</h1>
             </div>
             <div class="cell">
-                아이디<input type="text" name="memberId">
-            </div>  
-            <div class="cell">
-                비밀번호<input type="text" name="memberPw">
+                <input type="text" name="memberId" placeholder="아이디" class="tool w-100">
             </div>
             <div class="cell">
-                한국이름<input type="text" name="memberNameKor">
+                <input type="text" name="memberPw" placeholder="비밀번호" class="tool w-100">
             </div>
-            <div class="cell">
-                영어이름<input type="text" name="memberNameEng">
-            </div>
-            <div class="cell">
-                이메일<input type="text"name="memberEmail">
-            </div>
-            <div class="cell">
-                연락처1<input type="text" name="memberContact1">
-            </div>
-            <div class="cell">
-                연락처2<input type="text" name="memberContact2">
-            </div>
-            <div class="cell">
-                생년월일<input type="text" name="memberBirth">
-            </div>
-            <div class="cell">
-                통관번호<input type="text" name="memberClearanceId">
-            </div>
-            <div class="cell">
-                우편번호<input type="text" name="memberZipcode">
-            </div>
-            <div class="cell">
-                기본주소<input type="text" name="memberAddress1">
-            </div>
-            <div class="cell">
-                상세주소<input type="text" name="memberAddress2">
-            </div>
-            <div class="cell">
-                <button>
-                    가입하기
-                </button>
+            <div>
+                <c:if test="${param.error != null}">
+                    <h4 style= "color:red"> 로그인 정보가 일치하지 않습니다</h4>
+                </c:if>
             </div>
 
-        </div>
-    </form>
+            <div class="cell">
+                <button type="submit">
+                    로그인
+                </button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
