@@ -35,36 +35,31 @@ public class QnaDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	//정렬 기준 정하기
 	//목록
 	public List<QnaDto> selectList() {
-		String sql = "";
-		Object[] data = {
-				
-		};
+		String sql = "select "
+				+ "qna_no, qna_secreat, qna_title, qna_content, "
+				+ "qna_writer, qna_wdate, qna_vcount "
+				+ "from qna order by qna_no desc";
 		return jdbcTemplate.query(sql, qnaMapper);
 	}
 	
 	//검색
 	public List<QnaDto> selectList(String column, String keyword) {
-		String sql = "";
-		Object[] data = {
-				
-		};
+		String sql = "select "
+				+ "qna_no, qna_secreat, qna_title, qna_content, "
+				+ "qna_writer, qna_wdate, qna_vcount "
+				+ "from qna "
+				+ "where instr("+column+", ?) > 0 "
+				+ "order by qna_no desc";
+		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, qnaMapper, data);
-	}
-	
-	//수정
-	public boolean update(QnaDto qnaDto) {
-		String sql = "";
-		Object[] data = {
-				
-		};
-		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 	//삭제
 	public boolean delete(int qnaNo) {
-		String sql = "";
+		String sql = "delete qna where qna_no = ?";
 		Object[] data = {qnaNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
