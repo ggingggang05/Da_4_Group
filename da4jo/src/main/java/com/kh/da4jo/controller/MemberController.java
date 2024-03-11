@@ -53,7 +53,7 @@ public class MemberController {
 			session.setAttribute("loginLevel",	findDto.getMemberLevel());
 			
 			//최종 로그인 시각 갱신
-			memberDao.updateMemberLogin(findDto.getMemberId());
+			memberDao.updateMemberLoginDate(findDto.getMemberId());
 			
 			return "redirect:/";
 		}
@@ -61,6 +61,14 @@ public class MemberController {
 			return "redicect:login?error";
 		}
 	}
+	//로그아웃
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginId"); // 세션 값 삭제
+		session.removeAttribute("loginLevel");
+		return "redirect:/";
+	}
+	
 	
 }
 

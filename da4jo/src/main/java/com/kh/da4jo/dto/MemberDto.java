@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class MemberDto {
 	
-	private int memberNo;
 	private String memberId;
 	private String memberPw;
 	private String memberNameKor;
@@ -23,12 +22,7 @@ public class MemberDto {
 	private int memberCredit;
 	private int memberPoint;
 	private String memberBlock;
-	public int getMemberNo() {
-		return memberNo;
-	}
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
-	}
+
 	public String getMemberId() {
 		return memberId;
 	}
@@ -141,14 +135,16 @@ public class MemberDto {
 		super();
 	}
 	@Override
-	public String toString() { //비밀번호 제외
-		return "MemberDto [memberNo=" + memberNo + ", memberId=" + memberId + ", memberNameKor=" + memberNameKor
-				+ ", memberNameEng=" + memberNameEng + ", memberEmail=" + memberEmail + ", memberContact1="
-				+ memberContact1 + ", memberContact2=" + memberContact2 + ", memberBirth=" + memberBirth
-				+ ", memberClearanceId=" + memberClearanceId + ", memberZipcode=" + memberZipcode + ", memberAddress1="
-				+ memberAddress1 + ", memberAddress2=" + memberAddress2 + ", memberLevel=" + memberLevel
-				+ ", memberJoinDate=" + memberJoinDate + ", memberLoginDate=" + memberLoginDate + ", memberCredit="
-				+ memberCredit + ", memberPoint=" + memberPoint + ", memberBlock=" + memberBlock + "]";
+	public String toString() {
+		return "MemberDto [memberId=" + memberId + ", memberNameKor=" + memberNameKor + ", memberNameEng="
+				+ memberNameEng + ", memberEmail=" + memberEmail + ", memberContact1=" + memberContact1
+				+ ", memberContact2=" + memberContact2 + ", memberBirth=" + memberBirth + ", memberClearanceId="
+				+ memberClearanceId + ", memberZipcode=" + memberZipcode + ", memberAddress1=" + memberAddress1
+				+ ", memberAddress2=" + memberAddress2 + ", memberLevel=" + memberLevel + ", memberJoinDate="
+				+ memberJoinDate + ", memberLoginDate=" + memberLoginDate + ", memberCredit=" + memberCredit
+				+ ", memberPoint=" + memberPoint + ", memberBlock=" + memberBlock + "]";
 	}
+	
+	
 	
 }

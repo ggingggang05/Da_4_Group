@@ -16,7 +16,6 @@ public class MemberMapper implements RowMapper<MemberDto>{
 	@Override
 	public MemberDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		MemberDto memberDto = new MemberDto();
-		memberDto.setMemberNo(rs.getInt("member_no"));
 		memberDto.setMemberId(rs.getString("member_id"));
 		memberDto.setMemberPw(rs.getString("member_pw"));
 		memberDto.setMemberNameKor(rs.getString("member_name_kor"));
