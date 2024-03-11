@@ -1,11 +1,11 @@
-package mapper;
+package com.kh.da4jo.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dto.PoDto;
+import com.kh.da4jo.dto.PoDto;
 
 public class PoMapper implements RowMapper<PoDto>
 {

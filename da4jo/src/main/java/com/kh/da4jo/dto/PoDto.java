@@ -1,4 +1,4 @@
-package dto;
+package com.kh.da4jo.dto;
 
 public class PoDto
 {

@@ -1,4 +1,4 @@
-package mapper;
+package com.kh.da4jo.mapper;
 
 
 
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import dto.MemberDto;
+import com.kh.da4jo.dto.MemberDto;
 
 @Service
 public class MemberMapper implements RowMapper<MemberDto>{
