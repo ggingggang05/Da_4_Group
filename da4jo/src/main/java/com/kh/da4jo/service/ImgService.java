@@ -1,4 +1,4 @@
-package com.kh.da4jo.controller.service;
+package com.kh.da4jo.service;
 
 import java.io.File;
 import java.io.IOException;
