@@ -154,8 +154,19 @@
             <div class="container">
                 <div class="cell">
                     <ul class="right contour head">
-                        <li><a href="/member/login">로그인</a></li>
-                        <li><a href="/member/join">회원가입</a></li>
+                    	<c:if test="${sessionScope.loginLevel == '관리자'}">
+							<li><a href="#">관리자메뉴</a></li>
+						</c:if>
+                        <c:choose>
+                        	<c:when test= "${sessionScope.loginId ==null }">
+                        		<li><a href="/member/login">로그인</a></li>
+                        		<li><a href="/member/join">회원가입</a></li>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<li><a href="#">로그아웃</a></li>
+                        		<li><a href="#">마이페이지</a></li>
+                        	</c:otherwise>
+                        </c:choose>
                         <li><a href="#">고객센터</a></li>
                     </ul>
                 </div>
