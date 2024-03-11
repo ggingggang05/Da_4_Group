@@ -12,7 +12,7 @@ public class MemberDto {
 	private String memberEmail;
 	private String memberContact1;
 	private String memberContact2;
-	private Date memberBirth;
+	private String memberBirth;
 	private String  memberClearanceId;
 	private String memberZipcode;
 	private String memberAddress1;
@@ -71,10 +71,10 @@ public class MemberDto {
 	public void setMemberContact2(String memberContact2) {
 		this.memberContact2 = memberContact2;
 	}
-	public Date getMemberBirth() {
+	public String getMemberBirth() {
 		return memberBirth;
 	}
-	public void setMemberBirth(Date memberBirth) {
+	public void setMemberBirth(String memberBirth) {
 		this.memberBirth = memberBirth;
 	}
 	public String getMemberClearanceId() {
