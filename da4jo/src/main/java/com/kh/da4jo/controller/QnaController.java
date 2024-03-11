@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/qna")
 public class QnaController {
 	
-	//	@GetMapping("/writer") {
-	//		return 
-	//	}
-	//@PostMapping("/writer")
+//	@GetMapping("/writer") {
+//		
+//			return 
+//		}
+//	@PostMapping("/writer")
 
 }
