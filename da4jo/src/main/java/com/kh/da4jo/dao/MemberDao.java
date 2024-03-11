@@ -23,7 +23,7 @@ public class MemberDao {
 				  + "member_no, member_id, member_pw, member_name_kor, "
 				  + "member_name_eng, member_email, member_contact1, "
 				  + "member_contact2, member_birth, member_clearance_id, "
-				  + "member_zipcode, member_address1, member_address2, "
+				  + "member_zipcode, member_address1, member_address2 "
 				 + ") values (member_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		Object[] data = {
@@ -56,6 +56,13 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
+	//최종로그인 시각 변경
+	public boolean updateMemberLogin(String memberNo) {
+		String sql = "update member "
+								+ "set member_login_date=sysdate "
+								+ "where member_no = ?";
+		Object[] data = {memberNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
 }
