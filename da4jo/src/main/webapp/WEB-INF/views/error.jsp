@@ -3,6 +3,8 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>꽁기깅강낑공낑깡공</h1>
+<div class="cell center">
+	<img src="/image/꽁기깅강깅강.gif">
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

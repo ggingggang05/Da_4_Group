@@ -47,7 +47,6 @@ public class FileDownloadController
 		
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
-				//.header(HttpHeaders.CONTENT_TYPE, attachDto.getAttachType())
 				.contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.contentLength(imgDto.getImgSize())
 				.header(HttpHeaders.CONTENT_DISPOSITION, 
