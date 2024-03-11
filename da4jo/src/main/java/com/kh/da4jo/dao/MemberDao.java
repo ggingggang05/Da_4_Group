@@ -20,11 +20,11 @@ public class MemberDao {
 	//회원 가입(등록)
 	public void insert(MemberDto memberDto) {
 		String sql = "insert into member(" 
-				  + "member_no, member_id, member_pw, member_name_kor, "
+				  + "member_id, member_pw, member_name_kor, "
 				  + "member_name_eng, member_email, member_contact1, "
 				  + "member_contact2, member_birth, member_clearance_id, "
 				  + "member_zipcode, member_address1, member_address2 "
-				 + ") values (member_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				 + ") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		Object[] data = {
 				memberDto.getMemberId(), memberDto.getMemberPw(),
@@ -50,19 +50,38 @@ public class MemberDao {
 		return jdbcTemplate.query(sql, memberMapper, data);
 	}
 	//회원 상세 조회
-	public MemberDto selectOne(String memberNo) {
+	public MemberDto selectOne(String memberId) {
 		String sql = "select * from member where member_id = ?";
-		Object[] data = {memberNo};
+		Object[] data = {memberId};
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
 	//최종로그인 시각 변경
-	public boolean updateMemberLogin(String memberNo) {
+	public boolean updateMemberLoginDate(String memberId) {
 		String sql = "update member "
 								+ "set member_login_date=sysdate "
-								+ "where member_no = ?";
-		Object[] data = {memberNo};
+								+ "where member_id = ?";
+		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	//회원 본인 정보 수정
+	public boolean updateMember(MemberDto memberDto) {
+		String sql = "update member set "
+				+ "member_name_kor=?, member_name_eng=?, "
+				+ "member_email=?, member_contact1=?, "
+				+ "member_contact2=?, member_birth=?, "
+				+ "member_clearance_id=?, member_zipcode=?,"
+				+ "member_address1=?, member_address2=? "
+				+ "where member_Id=?";
+		Object[] data = {
+				memberDto.getMemberNameKor(), memberDto.getMemberNameEng(),
+				memberDto.getMemberEmail(), memberDto.getMemberContact1(),
+				memberDto.getMemberContact2(), memberDto.getMemberBirth(),
+				memberDto.getMemberClearanceId(), memberDto.getMemberZipcode(),
+				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
+				memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql,data) > 0;
 	}
 	
 }

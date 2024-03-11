@@ -40,7 +40,7 @@
             <div class="cell">
                 아이디<input type="text" name="memberId">
             </div>  
-            <div class="cell">
+            <div class="cell"> <!-- type="password"변경 전 -->
                 비밀번호<input type="text" name="memberPw">
             </div>
             <div class="cell">
