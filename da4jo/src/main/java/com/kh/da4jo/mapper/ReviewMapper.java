@@ -13,7 +13,7 @@ public class ReviewMapper implements RowMapper<ReviewDto>{
 	public ReviewDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ReviewDto reviewDto = new ReviewDto();
 		reviewDto.setReviewNo(rs.getInt("review_no"));
-		reviewDto.setReviewTitle(rs.getNString("reivew_title"));
+		reviewDto.setReviewTitle(rs.getString("review_title"));
 		reviewDto.setReviewContent(rs.getString("review_content"));
 		reviewDto.setReviewWriter(rs.getString("review_writer"));
 		reviewDto.setReviewWdate(rs.getDate("review_wdate"));
