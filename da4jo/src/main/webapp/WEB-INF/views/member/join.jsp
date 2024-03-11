@@ -38,22 +38,22 @@
                 <h1>회원가입 화면</h1>
             </div>
             <div class="cell">
-                아이디<input type="text" name="memberId">
+                아이디*<input type="text" name="memberId">
             </div>  
             <div class="cell"> <!-- type="password"변경 전 -->
-                비밀번호<input type="text" name="memberPw">
+                비밀번호*<input type="text" name="memberPw">
             </div>
             <div class="cell">
-                한국이름<input type="text" name="memberNameKor">
+                한국이름*<input type="text" name="memberNameKor">
             </div>
             <div class="cell">
                 영어이름<input type="text" name="memberNameEng">
             </div>
             <div class="cell">
-                이메일<input type="text"name="memberEmail">
+                이메일*<input type="text"name="memberEmail">
             </div>
             <div class="cell">
-                연락처1<input type="text" name="memberContact1">
+                연락처1*<input type="text" name="memberContact1">
             </div>
             <div class="cell">
                 연락처2<input type="text" name="memberContact2">
