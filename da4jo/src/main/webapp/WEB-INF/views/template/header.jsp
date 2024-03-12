@@ -175,7 +175,7 @@
         </div>
         <div class="container">
             <div class="cell center">
-                <h1>환율표자리</h1>
+                <img src="/image/로고템플릿cut.png" width="100px">
             </div>
         </div>
         <div class="nav">
