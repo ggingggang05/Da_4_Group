@@ -58,23 +58,6 @@
         
     </div>
     
-    <table class="table table-border">
-		<thead>
-			<tr>
-				<th><a href="#"></a></th>
-				<th>충전시간</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="creditDto" items="#">
-			<tr>
-				<td>${creditDto.creditCharge}</td>
-				<td>
-					<fmt:formatDate value="${creditDto.creditTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate>
-				</td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
