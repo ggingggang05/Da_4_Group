@@ -83,6 +83,12 @@
 		<div class="swiper-button-next"></div>
 	</div>
 </div>
+<div class="container">
+	<div class="cell center">
+		<h1>페이지 내용 자리</h1>
+		<img src="/image/로고템플릿.png" width="600px">
+	</div>
+</div>
 
 
 

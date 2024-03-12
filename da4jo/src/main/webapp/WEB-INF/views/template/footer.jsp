@@ -3,7 +3,7 @@
 			</div>
         </div>
         <div class="footer">
-            <div class="container">
+            <div class="container" style="width: 1140px;">
                 <div class="footer-top">
                     <div class="cell flex-cell center auto-width">
                         <div class="cell cs">
