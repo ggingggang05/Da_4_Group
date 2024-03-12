@@ -1,25 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
 
-</head>
-<body>
+
+<form action="write" method="post" autocapitalize="off">
+<div class="container">
 	<div>
-		<div>
-			<h1>리뷰글 작성</h1>
-		</div>
-		<form action="write" method="post" autocapitalize="off">
-			<input type="text" name="reviewTitle"> <br><br>
-			<textarea name="reviewContent"></textarea> <br><br> 
-
-			<button>등록</button>
-		</form>
+		<h1>리뷰글 작성</h1>
 	</div>
-</body>
-</html>
+
+	<label>제목</label> 
+	<div>
+		<input type="text" name="reviewTitle"> 
+	</div>
+	
+	<label>내용</label>
+	<div>
+		<textarea name="reviewContent"></textarea>
+	</div>	
+
+	<button>등록</button>
+</div>
+</form>
+
+
+
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

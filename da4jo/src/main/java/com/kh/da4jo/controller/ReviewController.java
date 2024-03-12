@@ -36,7 +36,7 @@ public class ReviewController {
 		reviewDto.setReviewNo(sequence);
 		reviewDao.insert(reviewDto);
 		
-		return "redirect:detail?reviewNo?="+sequence;
+		return "redirect:detail?reviewNo="+sequence;
 
 	}
 	
