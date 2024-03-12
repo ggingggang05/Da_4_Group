@@ -154,17 +154,18 @@
             <div class="container">
                 <div class="cell">
                     <ul class="right contour head">
-                    	<c:if test="${sessionScope.loginLevel == '관리자'}">
+                    	<c:if test="${sessionScope.loginLevel == '관리자' || '총관리자'}">
 							<li><a href="#">관리자메뉴</a></li>
 						</c:if>
                         <c:choose>
-                        	<c:when test= "${sessionScope.loginId ==null }">
-                        		<li><a href="/member/login">로그인</a></li>
-                        		<li><a href="/member/join">회원가입</a></li>
+                        	<c:when test= "${sessionScope.loginId != null}">
+                        		<li><a href="/member/logout">로그아웃</a></li>
+                        		<li><a href="/member/mypage">mypage</a></li>
+
                         	</c:when>
                         	<c:otherwise>
-                        		<li><a href="#">로그아웃</a></li>
-                        		<li><a href="#">마이페이지</a></li>
+                        		<li><a href="/member/login">로그인</a></li>
+                        		<li><a href="/member/join">회원가입</a></li>
                         	</c:otherwise>
                         </c:choose>
                         <li><a href="#">고객센터</a></li>
@@ -187,7 +188,7 @@
 
                 <li><a href="#">수수료 및 요금표</a></li>
 
-                <li><a href="#">공지사항</a></li>
+                <li><a href="/board/notice/list">공지사항</a></li>
 
                 <li><a href="#">이용후기</a></li>
 
