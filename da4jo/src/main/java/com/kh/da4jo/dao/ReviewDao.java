@@ -23,28 +23,33 @@ public class ReviewDao {
 	
 	//작성
 	public void insert(ReviewDto reviewDto) {
-		String sql = "insert into review"
+		String sql = "insert into review("
 						+ "review_no, review_title, review_content, "
-						+ "review_writer, review_wdate, review_vcount) "
+						+ "review_writer, review_vcount) "
 						+ "values(?, ?, ?, ?, ?)";
 		Object[] data = {
 				reviewDto.getReviewNo(), reviewDto.getReviewTitle(), 
-				reviewDto.getReviewContent(), reviewDto.getReviewWriter(), 
-				reviewDto.getReviewWdate(), reviewDto.getReviewVcount()
+				reviewDto.getReviewContent(), reviewDto.getReviewWriter(), reviewDto.getReviewVcount()
 		};
 		jdbcTemplate.update(sql, data);
 		
 	}
 	
-	//목록
-	public List<ReviewDto> selectList() {
-		String sql = "select "
-				+ "review_no, review_title, review_content, "
-				+ "review_writer, review_wdate, review_vcount "
-				+ "from review order by review_no desc";
-		return jdbcTemplate.query(sql, reviewMapper);
-		
-	}
+	//목록 [페이징 구현 전까지 주석]
+		public List<ReviewDto> selectList() {
+			String sql = "select "
+					+ "review_no, review_title, review_content, "
+					+ "review_writer, review_wdate, review_vcount "
+					+ "from review order by review_no desc";
+			return jdbcTemplate.query(sql, reviewMapper);
+			
+		}
+	 
+//	//목록 단순 리스트
+//	public List<ReviewDto> selectList() {
+//		String sql = "select * from review order by review_no desc";
+//		return jdbcTemplate.query(sql, reviewMapper);
+//	}
 	
 	//검색
 	public List<ReviewDto> selectList(String column, String keyword) {
@@ -57,6 +62,14 @@ public class ReviewDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
+	
+	//단일조회
+		public ReviewDto selectOne(int boardNo) {
+			String sql = "select * from review where review_no = ?";
+			Object[] data = {boardNo};
+			List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper, data);
+			return list.isEmpty() ? null : list.get(0);
+		}
 	
 	//삭제
 	public boolean delete(int reviewNo) {

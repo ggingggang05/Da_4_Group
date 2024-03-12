@@ -20,6 +20,8 @@ public class QnaController {
 
 	//목록 및 상세
 	//@RequestMapping("list")
+	
+	
 	//@RequestMapping("detail")
 
 	//수정 [관리자]
