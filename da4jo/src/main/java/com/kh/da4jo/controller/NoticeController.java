@@ -12,14 +12,14 @@ import com.kh.da4jo.dao.NoticeDao;
 import com.kh.da4jo.dto.NoticeDto;
 
 @Controller
-@RequestMapping("/notice")
+@RequestMapping("/board")
 public class NoticeController {
 	
 	@Autowired
 	private NoticeDao noticeDao;
 	
 	// 공지 목록 + 검색
-	@RequestMapping("/list")
+	@RequestMapping("/notice/list")
 	public String list(
 			@RequestParam (required = false)String column, 
 			@RequestParam (required = false)String keyword,
@@ -28,15 +28,15 @@ public class NoticeController {
 		boolean isSearch = column != null && keyword != null;
 		// column 값과 keyword 값이 둘다 null이 아닌 경우는 검색 페이지를 보여주는 변수 설정
 		
-		List<NoticeDto> list = isSearch ? noticeDao.selectList(column, keyword) : noticeDao.selectList();
+		List<NoticeDto> noticeList = isSearch ? noticeDao.selectList(column, keyword) : noticeDao.selectList();
 		
-		model.addAttribute("list",list); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
+		model.addAttribute("noticeList",noticeList); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
 		
 		return "/WEB-INF/views/board/notice/list.jsp";
 	}
 	
 	// 공지 상세
-	@RequestMapping("/detail")
+	@RequestMapping("/notice/detail")
 	public String detail(@RequestParam int noticeNo, Model model) {
 		NoticeDto noticeDto = noticeDao.selectOne(noticeNo); // 게시글 번호 주면 상세 페이지
 		model.addAttribute("noticeDto",noticeDto); // noticeDto라는 이름으로 jsp에 객체 전달(게시글번호)
