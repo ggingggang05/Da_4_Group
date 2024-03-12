@@ -13,7 +13,6 @@
 <div><h1>공지사항</h1></div>
 <form action="write" method="post" autocapitalize="off"> 
 <!-- checkForm 해서 검사한번해야함 onsubmit="return checkForm" -->
-<input type="hidden" name="noticeNo" value="${param.noticeNo}">
 제목 : <input type="text" name="noticeTitle"><br><br>
 내용 : <textarea name="noticeContent"></textarea><br><br>
 

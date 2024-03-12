@@ -41,10 +41,16 @@
                         </div>
                         <div class="cell notice">
                             <h3>공지사항 <span>/ Notice</span>
-                                <a href="#" class="link-notice"><i class="fa-solid fa-plus"></i></a>
+                                <a href="/board/notice/list" class="link-notice"><i class="fa-solid fa-plus"></i></a>
                             </h3>
                             <div class="cell center">
-                                <h1>공지사항 게시판 자리</h1>
+                                <ul class="menu">
+                                	<li>
+                                		<a href="/board/notice/detail?noticeNo=1" class="link">
+                                		${noticeDto.noticeTitle}<span class="date">${noticeDto.noticeWdate}</span>
+                                		</a>
+                                	</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -58,7 +64,5 @@
             </div>
         </div>
     </main>
-
 </body>
-
 </html>

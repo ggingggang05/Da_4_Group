@@ -13,26 +13,25 @@ import com.kh.da4jo.dto.NoticeDto;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/admin/board/notice")
+public class AdminNoticeController {
 	@Autowired
 	private NoticeDao noticeDao;
-	
 	// 공지사항 관련 
-	@GetMapping("/board/notice/write")
+	@GetMapping("/write")
 	public String boardNoticeWrite() {
 		return "/WEB-INF/views/board/notice/write.jsp";
 	}
-	@PostMapping("/board/notice/write")
+	@PostMapping("/write")
 	public String boardNoticeWrite(@ModelAttribute NoticeDto noticeDto,
 								   HttpSession session) {
 		// 세션에서 로그인 한 사용자 ID 추출
 		String loginId = (String)session.getAttribute("loginId");
 		// 아이디를 게시글 정보에 포함
 		noticeDto.setNoticeWriter(loginId);
-		
-		
+		int sequence = noticeDao.getSequence();
+		noticeDto.setNoticeNo(sequence);
 		noticeDao.insert(noticeDto);
-		return "redirect:detail?noticeNo="+noticeDto.getNoticeNo();
+		return "redirect:/board/notice/detail?noticeNo="+sequence;	
 	}
 }

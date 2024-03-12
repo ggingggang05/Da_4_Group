@@ -17,14 +17,20 @@ public class NoticeDao {
 	private NoticeMapper noticeMapper;
 	
    // C(create)
+	// noticeNo 미리 뽑는코드
+	public int getSequence() {
+		String sql = "select notice_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
    // 공지사항 등록 
    public void insert(NoticeDto noticeDto) {
-      String sql = "insert into notice (notice_no, notice_title, notice_content,"
-	                              + "notice_writer, notice_wdate) "
-	                              + "values (notice_seq.nextval, ?, ?, ?, ?)";
+      String sql = "insert into notice(notice_no, notice_title, notice_content,"
+	                              + "notice_writer) "
+	                              + "values(?, ?, ?, ?)";
       Object[] data = {
-	         noticeDto.getNoticeTitle(), noticeDto.getNoticeContent(),
-	         noticeDto.getNoticeWriter(), noticeDto.getNoticeWdate(),
+	         noticeDto.getNoticeNo(), noticeDto.getNoticeTitle(),
+	         noticeDto.getNoticeContent(), noticeDto.getNoticeWriter()
       };
       jdbcTemplate.update(sql, data);
    }
