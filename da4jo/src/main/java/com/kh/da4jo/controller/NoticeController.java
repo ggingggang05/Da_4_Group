@@ -32,7 +32,7 @@ public class NoticeController {
 		
 		model.addAttribute("list",list); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
 		
-		return "/WEB-INF/views/notice/list.jsp";
+		return "/WEB-INF/views/board/notice/list.jsp";
 	}
 	
 	// 공지 상세
@@ -41,6 +41,6 @@ public class NoticeController {
 		NoticeDto noticeDto = noticeDao.selectOne(noticeNo); // 게시글 번호 주면 상세 페이지
 		model.addAttribute("noticeDto",noticeDto); // noticeDto라는 이름으로 jsp에 객체 전달(게시글번호)
 		
-		return "/WEB-INF/views/notice/detail.jsp";
+		return "/WEB-INF/views/board/notice/detail.jsp";
 	}
 }
