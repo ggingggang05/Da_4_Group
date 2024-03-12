@@ -28,9 +28,9 @@ public class NoticeController {
 		boolean isSearch = column != null && keyword != null;
 		// column 값과 keyword 값이 둘다 null이 아닌 경우는 검색 페이지를 보여주는 변수 설정
 		
-		List<NoticeDto> noticeList = isSearch ? noticeDao.selectList(column, keyword) : noticeDao.selectList();
+		List<NoticeDto> noticeDto = isSearch ? noticeDao.selectList(column, keyword) : noticeDao.selectList();
 		
-		model.addAttribute("noticeList",noticeList); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
+		model.addAttribute("noticeDto", noticeDto); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
 		
 		return "/WEB-INF/views/board/notice/list.jsp";
 	}
