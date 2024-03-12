@@ -20,12 +20,11 @@ public class NoticeDao {
    // 공지사항 등록 
    public void insert(NoticeDto noticeDto) {
       String sql = "insert into notice (notice_no, notice_title, notice_content,"
-	                              + "notice_writer, notice_wdate, notice_vcount) "
-	                              + "valuse (notice_seq.nextval, ?, ?, ?, ?, ?)";
+	                              + "notice_writer, notice_wdate) "
+	                              + "values (notice_seq.nextval, ?, ?, ?, ?)";
       Object[] data = {
 	         noticeDto.getNoticeTitle(), noticeDto.getNoticeContent(),
 	         noticeDto.getNoticeWriter(), noticeDto.getNoticeWdate(),
-	         noticeDto.getNoticeVcount()
       };
       jdbcTemplate.update(sql, data);
    }
