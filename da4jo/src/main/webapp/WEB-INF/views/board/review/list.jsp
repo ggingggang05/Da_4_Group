@@ -4,6 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
+.title{
+    border-top: 1px solid #bdc3c7;
+ 	border-bottom: 1px solid #bdc3c7;
+ 	background-color: #ecf0f1;
+}
+.list{
+	border-bottom: 1px solid #b2bec3;
+}
+
 
 </style>
 
@@ -17,7 +26,7 @@
 		<h2><a href="write">글쓰기</a></h2>
 	</div>
 
-	<ul class="">
+	<ul class="menu title">
 		<li>번호</li>
 		<li>제목</li>
 		<li>작성자</li>
@@ -26,7 +35,7 @@
 	</ul>
 
 	<c:forEach var="reviewDto" items="${list}">
-		<ul class="menu">
+		<ul class="menu list">
 			<li>${reviewDto.reviewNo}</li>
 			<li><a href="detail?reviewNo=${reviewDto.reviewNo}">${reviewDto.reviewTitle}</a>
 			</li>
