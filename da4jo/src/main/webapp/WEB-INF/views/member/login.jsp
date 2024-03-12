@@ -33,7 +33,7 @@
                 <input type="text" name="memberId" placeholder="아이디" class="tool w-100">
             </div>
             <div class="cell"> <!-- type="password"변경 전 -->
-                <input type="password" name="memberPw" placeholder="비밀번호" class="tool w-100">
+                <input type="text" name="memberPw" placeholder="비밀번호" class="tool w-100">
             </div>
             
             <div>

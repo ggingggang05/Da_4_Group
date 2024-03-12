@@ -49,10 +49,17 @@ public class MemberDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, memberMapper, data);
 	}
-	//회원 상세 조회
+	//회원 상세 조회(아이디)
 	public MemberDto selectOne(String memberId) {
 		String sql = "select * from member where member_id = ?";
 		Object[] data = {memberId};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	//회원 상세 조회(이메일)
+	public MemberDto selectEmail(String memberEamil) {
+		String sql = "select * from member where member_email = ?";
+		Object[] data = {memberEamil};
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
