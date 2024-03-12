@@ -47,7 +47,6 @@
                                 <ul class="menu">
                                 	<li>
                                 		<a href="/board/notice/detail?noticeNo=1" class="link">
-                                		${noticeDto.noticeTitle}<span class="date">${noticeDto.noticeWdate}</span>
                                 		</a>
                                 	</li>
                                 </ul>
