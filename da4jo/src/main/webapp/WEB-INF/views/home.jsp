@@ -9,7 +9,7 @@
 		<h1>메인 페이지 내용</h1>
 	</div>
 	<div class="cell w-100 center">
-		<img src="/image/로고템플릿.png" width="600px">
+		
 	</div>
 </div>
 
