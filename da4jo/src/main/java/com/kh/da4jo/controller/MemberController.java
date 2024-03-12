@@ -49,7 +49,7 @@ public class MemberController {
 				&& inputDto.getMemberPw().equals(findDto.getMemberPw());
 		//결과 처리
 		if(isValid) {
-			session.setAttribute("loginID",	findDto.getMemberId());
+			session.setAttribute("loginId",	findDto.getMemberId());
 			session.setAttribute("loginLevel",	findDto.getMemberLevel());
 			
 			//최종 로그인 시각 갱신
@@ -62,7 +62,7 @@ public class MemberController {
 		}
 	}
 	//로그아웃
-	@RequestMapping("logout")
+	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId"); // 세션 값 삭제
 		session.removeAttribute("loginLevel");
