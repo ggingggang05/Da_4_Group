@@ -16,6 +16,7 @@ public class MemberRestController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	//회원가입 아이디 검사
 	@RequestMapping("/checkJoinId")
 	public String checkJoinId(@RequestParam String memberId) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
@@ -25,6 +26,18 @@ public class MemberRestController {
 		}
 		else {
 			return "joinN"; //사용 불가능한 경우(DB에 있는 경우)
+		}
+	}
+	
+	//이메일 검사
+	@RequestMapping("/checkEmail")
+	public String checkEmail(@RequestParam String memberEmail) {
+		MemberDto memberDto = memberDao.selectEmail(memberEmail);
+		if(memberDto == null) { //이메일이 DB에 없다면
+			return "emailY";//사용 가능한 경우(DB == null)
+		}
+		else {
+			return "emailN"; //사용 불가능한 경우(DB에 있는 경우)
 		}
 	}
 	
@@ -40,5 +53,7 @@ public class MemberRestController {
 			return "loginN"; //사용 불가능한 경우(DB == null)
 		}
 	}
+	
+
 
 }
