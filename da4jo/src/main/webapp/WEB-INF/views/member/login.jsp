@@ -6,22 +6,42 @@
 
 <head>
 	<title>Da4Jo: 로그인</title>
-</head>
-    
+
+    <script type="text/javascript">
+        function validateForm() {
+
+            var userId = document.getElementsByName("memberId")[0].value;
+            var userPw = document.getElementsByName("memberPw")[0].value;
+
+            if (event.submitter && event.submitter.classList.contains("login")) {
+                if (userId.trim() == "" || userPw.trim() == "") {
+                    alert("아이디와 비밀번호를 모두 입력하세요.");
+                    return false;
+                }
+            }
+        }
+
+    </script>
+ </head>   
     <div class="container w-500">
-        <form autocapitalize="off" action="login" method="post" onsubmit="return validateForm()">
+        <form autocomplete="off" action="login" method="post" onsubmit="return validateForm()">
             <div class="cell center">
                 <h1>로그인 화면</h1>
             </div>
+            
             <div class="cell">
                 <input type="text" name="memberId" placeholder="아이디" class="tool w-100">
             </div>
             <div class="cell"> <!-- type="password"변경 전 -->
-                <input type="text" name="memberPw" placeholder="비밀번호" class="tool w-100">
+                <input type="password" name="memberPw" placeholder="비밀번호" class="tool w-100">
             </div>
+            
             <div>
                 <c:if test="${param.error != null}">
-                    <h4 style= "color:red"> 로그인 정보가 일치하지 않습니다</h4>
+                    <h5 style= "color:red"> 
+                   		 아이디 또는 비밀번호를 잘못 입력했습니다.<br>
+						입력하신 내용을 다시 확인해주세요.
+					</h5>
                 </c:if>
             </div>
             
@@ -35,7 +55,7 @@
                </div>
 
             <div class="cell">
-                <button type="submit">
+                <button type="submit" class= "login tool w-100">
                     로그인
                 </button>
             </div>

@@ -2,6 +2,7 @@ package com.kh.da4jo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,12 +28,12 @@ public class MemberController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto) {
 		memberDao.insert(memberDto);
-		return "redirect:joinFinish";
+		return "redirect:login";
 	}
-		@RequestMapping("/joinFinish")
-		public String joinFinish() {
-			return "/WEB-INF/views/member/joinFinish.jsp";
-	}
+//	@RequestMapping("/joinFinish")
+//	public String joinFinish() {
+//		return "/WEB-INF/views/member/joinFinish.jsp";
+//	}
 	
 	//로그인
 	@GetMapping("/login")
@@ -58,7 +59,7 @@ public class MemberController {
 			return "redirect:/";
 		}
 		else {//로그인 실패
-			return "redicect:login?error";
+			return "redirect:login?error";
 		}
 	}
 	//로그아웃
@@ -67,6 +68,19 @@ public class MemberController {
 		session.removeAttribute("loginId"); // 세션 값 삭제
 		session.removeAttribute("loginLevel");
 		return "redirect:/";
+	}
+	
+	//마이페이지
+	@RequestMapping("/mypage")
+	public String mypage(HttpSession session, Model model) {
+		//로그인 아이디 추출
+		String loginId = (String) session.getAttribute("loginId");
+		//아이디 정보 조회
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		//화면으로 전달
+		model.addAttribute("memberDto", memberDto);
+		
+		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	
 	
