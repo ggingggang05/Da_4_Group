@@ -28,30 +28,87 @@
     <script src="commons.js"></script>
     <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
     <script type="text/javascript">
-        $(function(){
-    	    $("[name=memberPw]").on("blur", function(){
-    	        var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{6,15}$/;
-    	        state.memberPwValid = regex.test($(this).val());
-    	        $(this).removeClass("success fail")
-    	                    .addClass(state.memberPwValid ? "success" : "fail");
-    	    });
-    	    $("#pw-reinput").blur(function(){
-    	        var memberPw = $("[name=memberPw]").val();
-    	        state.memberPwCheckValid = memberPw == $(this).val();
-    	        
-    	        if(memberPw.length == 0) {
-    	            $(this).removeClass("success fail fail2").addClass("fail2");
-    	        }
-    	        else {
-    	            $(this).removeClass("success fail fail2")
-    	                        .addClass(state.memberPwCheckValid ? "success" : "fail");
-    	        }
-    	    });
+	    var state = {
+		        //key : value
+		        //필수항목 : true; , 선택항목 : false;
+		        memberIdValid : false,
+		        memberPwValid : false,
+		        memberPwCheckValid : false,
+		        memberNameKorValid : false,
+		        memberNameEngValid : true,//선택
+		        memberEmailValid : false,
+		        memberContact1Valid : false,
+		        memberContact2Valid : true,//선택
+		        memberBirthValid : true, //선택
+		       memberClrearanceIdValid : true,//선택
+		        memberAddressValid : true,//선택
+		        //객체에 함수를 변수처럼 생성할 수 있다
+		        //- this는 객체 자신(자바와 동일하지만 생략이 불가능)
+		        ok : function(){
+		            return this.memberIdValid && this.memberPwValid 
+	            		&& this.memberPwCheckValid && this.memberNameKorValid 
+	            		&& this.memberEmailValid && this.memberContact1Valid 
+	            		&& this.memberContact2Valid && this.memberBirthValid 
+	            		&& this.memberClrearanceIdValid && this.memberAddressValid;
+		        },
+	   		 };
+	    $("[name=memberId]").blur(function(){
+	        var regex = /^[a-z][a-z0-9]{7,19}$/;
+	        var value = $(this).val();	    
+	    
+	        if(regex.test(value)) {//아이디 형식 검사를 통과했다면
+	            $.ajax({
+	                url : "/rest/member/checkJoinId",
+	                method : "post",
+	                data: {
+	                    memberId : value
+	                },
+	                success : function(response) {
+	                    //console.log(response);
+	                    if(response == "joinN") {
+	                        $("[name=memberId]").removeClass("success fail fail2").addClass("fail2");
+	                        state.memberIdValid = false;
+	                    }
+	                    else if(response == "joinY") {
+	                        $("[name=memberId]").removeClass("success fail fail2").addClass("success");
+	                        state.memberIdValid = true;
+	                    }
+	                }
+	            });
+	        }
+	        else {//아이디가 형식검사를 통과하지 못했다면
+	            $("[name=memberId]").removeClass("success fail fail2").addClass("fail");
+	            state.memberIdValid = false;
+	        }
+	    });	        
+	    $("[name=memberPw]").on("blur", function(){
+	        var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$%^&*]{6,15}$/;
+	        state.memberPwValid = regex.test($(this).val());
+	        $(this).removeClass("success fail")
+	                    .addClass(state.memberPwValid ? "success" : "fail");
+	    });	     
+	    $("#pw-reinput").blur(function(){
+	        var memberPw = $("[name=memberPw]").val();
+	        state.memberPwCheckValid = memberPw == $(this).val();
+	        
+	        if(memberPw.length == 0) {
+	            $(this).removeClass("success fail fail2").addClass("fail2");
+	        }
+	        else {
+	            $(this).removeClass("success fail fail2")
+	                        .addClass(state.memberPwCheckValid ? "success" : "fail");
+	        }
+	    });	    
+	    $("[name=memberNameKor]").blur(function(){
+	        var regex = /^[가-힣]{2,7}$/;
+	        var value = $(this).val();
+	    
+	    
         });
     </script>
 </head>
 <body>
-    <form action="join" method="post" autocapitalize="off" >
+    <form action="join" method="post" autocomplete="off">
         <div class="container w-500">
             <div class="cell center">
                 <h1>회원가입 화면</h1>
@@ -68,7 +125,7 @@
             	<div class="fail-feedback">비밀번호에는 반드시 영문 대,소문자와 숫자, 특수문자가 포함되어야 합니다</div>
             </div>
             <div class= "cell">
-				비밀번호 확인 *<input type= "text" id="pw-reinput">
+				비밀번호 확인 *<input type= "text" id="pw-reinput" a>
 				<div class="success-feedback">비밀번호가 일치합니다</div>
 			    <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
 			    <div class="fail2-feedback">비밀번호를 먼저 입력하세요</div>
