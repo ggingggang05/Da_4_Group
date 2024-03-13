@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dto.MemberDto;
+import com.kh.da4jo.service.EmailService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +21,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private EmailService emailService;
 	
 	
 	//회원가입
@@ -30,6 +33,10 @@ public class MemberController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto) {
 		memberDao.insert(memberDto);
+		
+		//가입 환영 메일 발송
+		emailService.welcomSendMail(memberDto.getMemberEmail());
+		
 		return "redirect:login";
 	}
 	
@@ -152,21 +159,21 @@ public class MemberController {
 	public String exit() {
 		return "/WEB-INF/views/member/mypage/exit.jsp";
 	}
-	@PostMapping("/mypage/exit")
-	public String exit(@RequestParam String memberPw,
-					@ModelAttribute MemberDto memberDto,
-					HttpSession session) {
-		String loginId = (String)session.getAttribute("loginId");
-		
-		MemberDto findDto = memberDao.selectOne(loginId);
-		boolean isValid = findDto.getMemberPw().equals(memberPw);
-		
-		if(isValid) {
-			try {
-				int 
-			}
-		}
-	}
+//	@PostMapping("/mypage/exit")
+//	public String exit(@RequestParam String memberPw,
+//					@ModelAttribute MemberDto memberDto,
+//					HttpSession session) {
+//		String loginId = (String)session.getAttribute("loginId");
+//		
+//		MemberDto findDto = memberDao.selectOne(loginId);
+//		boolean isValid = findDto.getMemberPw().equals(memberPw);
+//		
+//		if(isValid) {
+//			try {
+//				int 
+//			}
+//		}
+//	}
 	
 	
 }

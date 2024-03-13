@@ -39,7 +39,7 @@
 	                    memberId : value
 	                },
 	                success : function(response) {
-	                    console.log(response);
+	                    console.log(response); 
 	                    if(response == "joinN") {
 	                        $("[name=memberId]").removeClass("success fail fail2").addClass("fail2");
 	                        state.memberIdValid = false;
@@ -76,21 +76,25 @@
 	        }
 	    });	   
 	    
-	    //한글이름 검사
-	     $("[name=memberNameKor]").blur(function(){
+	    //한글이름 입력 구현중
+	    /* $("[name=memberNameKor]").blur(function(){
 	        var regex = /^[가-힣]{2,7}$/;
 	        var value = $(this).val();
 	    	state.memberNameKorValid = regex.test($(this).val);
 	    	
-	    	if(regex.test(value)){// 형식 검사 통과
-	    		$(this).removeClass("fail").addClass("success");
-	    		state.memberNameKorValid = true;
+	    	if(regex.test(value)){
+	    		
 	    	}
-	    	else{ //한글 이름 형식 검사 실패
-	    		$(this).removeClass("success fail")
-   							 .addClass(state.memberNameKorValid ? "success" : "fail");
+	    	
+	    	if(memberNameKor.length ==0){
+	    		$(this).removeClass("success fail").addClass("fail")
+	    		
 	    	}
-	    }); 
+	    	else{
+		    	$(this).removeClass("success fail")
+	    			 .addClass(state.memberNameKorValid ? "success" : "fail");
+	    	}
+	    }); */
 	    //영어이름 검사
 	    $("[name=memberNameEng]").blur(function(){
 	    	var regex = /^[A-Za-z]+$/;
@@ -131,20 +135,7 @@
 	    });
 	        
 	    //연락처1* 검사
-	     $("[name=memberContact1]").blur(function(){
-	        var regex = /^[0-9]+$/;
-	        var value = $(this).val();
-	    	state.memberContact1Valid = regex.test($(this).val);
-	    	
-	    	if(regex.test(value)){
-	    		$(this).removeClass("fail").addClass("success");
-	    		state.memberContact1Valid = true;
-	    	}
-	    	else{
-	    		$(this).removeClass("success fail")
-   							 .addClass(state.memberContact1Valid ? "success" : "fail");
-	    	}
-	    });    	    
+	    
 	    
 	    //연락처2 검사
 	    $("[name=memberContact2]").blur(function(){
@@ -166,7 +157,7 @@
 	    
 	    //통관번호 
 	    $("[name=memberClearanceId]").blur(function(){
-	    	var regex = /^P[0-9]{12}$/; //db 정규표현식 P대문자만 허용 됨
+	    	var regex = /^P[0-9]{12}$/; 
 	    	var value = $(this).val();
 	    	state.memberClearanceIdValid = value.length == 0 || regex.test(value);
 	        $(this).removeClass("success fail")
@@ -174,26 +165,13 @@
 	    });	   
 	    
 	    //주소
-	    $("[name=memberAddress2]").blur(function(){
-	        var post = $("[name=memberZipcode]").val();
-	        var address1 = $("[name=memberAddress1]").val();
-	        var address2 = $("[name=memberAddress2]").val();
-
-	        var isClear = post.length == 0 && address1.length == 0 && address2.length == 0;
-	        var isFill = post.length > 0 && address1.length > 0 && address2.length > 0;
-	
-	        state.memberAddressValid = isClear || isFill;
-	        
-	        $("[name=memberZipcode], [name=memberAddress1], [name=memberAddress2]")
-            .removeClass("success fail")
-            .addClass(state.memberAddressValid ? "success" : "fail");
-		});
+	    
+	    
    });
     </script>
-    
 </head>
 <body>
-	<form action="join" method="post" autocomplete="off">
+	<form action="join" method="post" autocomplete="off" enctype="multipart/form-data">
 		<div class="container w-500">
 			<div class="cell center">
 				<h1>회원가입 화면</h1>
@@ -273,7 +251,7 @@
 			</div>
 			
 			<div class="cell">
-				통관번호<input type="text" name="memberClearanceId" class= "tool w-100" value="P">
+				통관번호<input type="text" name="memberClearanceId" class= "tool w-100">
 					<div class="success-feedback">
 						<label><i class="fa-solid fa-circle-check"></i></label>
 					</div>
@@ -288,7 +266,6 @@
 			</div>
 			<div class="cell">
 				<input type="text" name="memberAddress2" class= "tool" placeholder="상세주소">
-				<div class="fail-feedback">주소를 모두 작성하세요</div>
 			</div>
 			<div class="cell">
 				<button>가입하기</button>

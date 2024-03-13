@@ -21,7 +21,7 @@ public class EmailService {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(email);//받는 사람
 		message.setSubject("[다사조] WELCOME!!");//제목
-		message.setText("다 사줄게");//내용
+		message.setText("다 사줘~~~");//내용
 		
 		sender.send(message);//보내기
 	}
