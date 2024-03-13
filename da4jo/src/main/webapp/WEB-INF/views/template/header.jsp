@@ -211,7 +211,7 @@
 
 					<li><a href="#">이용후기</a></li>
 
-					<li><a href="#"><button class="btn delivery">배송대행 신청하기</button></a></li>
+					<li><a href="/member/po/list"><button class="btn delivery">배송대행 신청하기</button></a></li>
 
 				</ul>
 			</div>
