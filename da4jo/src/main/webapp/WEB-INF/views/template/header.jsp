@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -152,8 +152,9 @@
 				}
 			}
 		};
-
-		$("[name=boardContent]").summernote(options);
+		$("[name=reviewContent]").summernote(options);
+		$("[name=qnaContent]").summernote(options);
+		$("[name=noticeContent]").summernote(options);
 	});
 </script>
 
@@ -169,14 +170,9 @@
 			<div class="container">
 				<div class="cell">
 					<ul class="right contour head">
-						<c:choose>
-							<c:when test="${sessionScope.loginLevel == '관리자'}">
-								<li><a href="#">관리자</a></li>
-							</c:when>
-							<c:when test="${sessionScope.loginLevel == '총관리자'}">
-								<li><a href="#">총관리자</a></li>
-							</c:when>
-						</c:choose>
+						<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
+							<li><a href="#">${sessionScope.loginLevel}</a></li>
+						</c:if>
 						<c:choose>
 							<c:when test="${sessionScope.loginId != null}">
 								<li><a href="/member/logout">로그아웃</a></li>
@@ -209,9 +205,10 @@
 
 					<li><a href="/board/notice/list">공지사항</a></li>
 
-					<li><a href="#">이용후기</a></li>
+					<li><a href="/board/review/list">이용후기</a></li>
 
-					<li><a href="/member/po/list"><button class="btn delivery">배송대행 신청하기</button></a></li>
+					<li><a href="/member/po/list"><button class="btn delivery">배송대행
+								신청하기</button></a></li>
 
 				</ul>
 			</div>

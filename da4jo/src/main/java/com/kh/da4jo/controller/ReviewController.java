@@ -66,10 +66,21 @@ public class ReviewController {
 	}
 	
 	//수정
-	//@GetMapping("/edit")
-	//@PostMapping("/edit")
+//	@GetMapping("/edit") {
+//		public String edit() {
+//			
+//		}
+//		return "";
+//	}
+//	@PostMapping("/edit") {
+//		
+//	}
 	
 	//삭제
-	//@RequestMapping("/delete")
+	@RequestMapping("/review/delete")
+	public String delete(@RequestParam int reviewNo) {
+		reviewDao.delete(reviewNo);
+		return "redirect:/board/review/list";
+	}
 	
 }
