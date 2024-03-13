@@ -6,7 +6,6 @@ public class PoDto{
 	private String poCustomer;
 	private String poNameEng;
 	private String poNameKor;
-
 	private String poContact;
 	private String poLink;
 	private int poQty;
