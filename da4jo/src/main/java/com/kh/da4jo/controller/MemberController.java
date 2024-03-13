@@ -20,6 +20,7 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
@@ -30,6 +31,7 @@ public class MemberController {
 		memberDao.insert(memberDto);
 		return "redirect:login";
 	}
+	
 //	@RequestMapping("/joinFinish")
 //	public String joinFinish() {
 //		return "/WEB-INF/views/member/joinFinish.jsp";
