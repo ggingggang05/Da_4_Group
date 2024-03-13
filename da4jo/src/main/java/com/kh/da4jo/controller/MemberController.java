@@ -176,6 +176,7 @@ public class MemberController {
 	public String exit() {
 		return "/WEB-INF/views/member/mypage/exit.jsp";
 	}
+	
 //	@PostMapping("/mypage/exit")
 //	public String exit(@RequestParam String memberPw,
 //					@ModelAttribute MemberDto memberDto,
@@ -191,6 +192,19 @@ public class MemberController {
 //			}
 //		}
 //	}
+	
+	//프로필 다운로드
+	@RequestMapping("/img")
+	public String img(HttpSession session) {
+		try {
+			String loginId = (String)session.getAttribute("loginId");
+			int imgNo = memberDao.findImgNo(loginId);
+			return "redirect:/download?imgNo=" + imgNo;
+		}
+		catch(Exception e) {
+			return "redirect:/image/로고템플릿.png";
+		}
+	}
 	
 	
 	
