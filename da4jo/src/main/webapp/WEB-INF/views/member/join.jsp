@@ -101,7 +101,7 @@
 	    });
 	    //이메일 검사
 	    $("[name=memberEmail]").blur(function(){
-	        var regex = /^[a-z0-9_]{8,20}@[a-z0-9.]{1,20}$/;
+	        var regex = /^[a-z0-9_]{5,20}@[a-z0-9.]{1,20}$/;
 	        var value = $(this).val();
 	    
 	        if(regex.test(value)) {//이메일 형식 검사 통과
@@ -175,25 +175,27 @@
 	    
 	    //주소
 	    $("[name=memberAddress2]").blur(function(){
-	        var post = $("[name=memberZipcode]").val();
+	        var zipcode = $("[name=memberZipcode]").val();
 	        var address1 = $("[name=memberAddress1]").val();
 	        var address2 = $("[name=memberAddress2]").val();
 
-	        var isClear = post.length == 0 && address1.length == 0 && address2.length == 0;
-	        var isFill = post.length > 0 && address1.length > 0 && address2.length > 0;
-	
-	        state.memberAddressValid = isClear || isFill;
+	        var isAddress1Null = address1.length == 0;
+	        var isAddress2Null = address2.length == 0;
+		
+	    	 // "zipcode", "address1", "address2" 모두 null이거나
+	        // "zipcode", "address1"이 모두 null이 아니면서 "address2"가 null인 경우 valid
+	        state.memberAddressValid = (zipcode.length == 0 && isAddress1Null && isAddress2Null) || (!isAddress1Null && isAddress2Null);
 	        
 	        $("[name=memberZipcode], [name=memberAddress1], [name=memberAddress2]")
-            .removeClass("success fail")
-            .addClass(state.memberAddressValid ? "success" : "fail");
+				            .removeClass("success fail")
+				         	  	 .addClass(state.memberAddressValid ? "success" : "fail");
 		});
    });
     </script>
     
 </head>
 <body>
-	<form action="join" method="post" autocomplete="off">
+	<form action="join" method="post" autocomplete="off" enctype="multipart/form-data">
 		<div class="container w-500">
 			<div class="cell center">
 				<h1>회원가입 화면</h1>
@@ -288,8 +290,17 @@
 			</div>
 			<div class="cell">
 				<input type="text" name="memberAddress2" class= "tool" placeholder="상세주소">
+					<div class="success-feedback">
+						<label><i class="fa-solid fa-circle-check"></i></label>
+					</div>
 				<div class="fail-feedback">주소를 모두 작성하세요</div>
 			</div>
+			
+			<div class="cell">
+				<label>프로필 이미지</label>
+				<input type="file" name="img" class="tool w-100">
+			</div>
+			
 			<div class="cell">
 				<button>가입하기</button>
 			</div>

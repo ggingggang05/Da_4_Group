@@ -1,5 +1,7 @@
 package com.kh.da4jo.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.da4jo.dao.ImgDao;
 import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dto.MemberDto;
 import com.kh.da4jo.service.EmailService;
+import com.kh.da4jo.service.ImgService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,7 +28,10 @@ public class MemberController {
 	private MemberDao memberDao;
 	@Autowired
 	private EmailService emailService;
-	
+	@Autowired
+	private ImgService imgService;
+	@Autowired
+	private ImgDao imgDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -31,8 +39,17 @@ public class MemberController {
 		return "/WEB-INF/views/member/join.jsp";
 	}
 	@PostMapping("/join")
-	public String join(@ModelAttribute MemberDto memberDto) {
+	public String join(@ModelAttribute MemberDto memberDto,
+									@RequestParam MultipartFile img) throws IllegalStateException, IOException {
+		//회원 정보 등록
 		memberDao.insert(memberDto);
+		
+		//첨부파일 등록
+		if(!img.isEmpty()) {
+			int imgNo = imgService.save(img);//파일저장 + DB저장
+			
+			memberDao.connect(memberDto.getMemberId(), imgNo);//연결
+		}
 		
 		//가입 환영 메일 발송
 		emailService.welcomSendMail(memberDto.getMemberEmail());
