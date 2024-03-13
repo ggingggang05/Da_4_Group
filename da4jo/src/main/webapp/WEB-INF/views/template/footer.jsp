@@ -11,7 +11,7 @@
                             <div class="cell">
                                 <ul class="menu">
                                     <li>
-                                        <a href="">
+                                        <a href="/board/qna/list">
                                             <img src="/image/1대1문의.png">
                                         </a>
                                     </li>
@@ -47,6 +47,7 @@
                                 <ul class="menu">
                                 	<li>
                                 		<a href="/board/notice/detail?noticeNo=1" class="link">
+                                		
                                 		</a>
                                 	</li>
                                 </ul>

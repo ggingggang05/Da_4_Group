@@ -64,9 +64,9 @@
 	<div class="flex-cell">
 	<a href="/board/notice/list" class="link">
 	<button class="btn">목록으로</button></a>
-	<a href="/board/notice/edit?boardNo=${noticeDto.noticeNo}" class="link">
+	<a href="/board/notice/edit?noticeNo=${noticeDto.noticeNo}" class="link">
 	<button class="btn">수정</button></a>
-	<a href="/admin/board/notice/delete?noticeNo=${noticeDto.noticeNo}" class="link">
+	<a href="/board/notice/delete?noticeNo=${noticeDto.noticeNo}" class="link">
 	<button class="btn">삭제</button></a>
 	
 	</div>		
