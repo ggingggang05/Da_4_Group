@@ -15,7 +15,6 @@ public class NoticeDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private NoticeMapper noticeMapper;
-	@Autowired
 
 	// C(create)
 	// noticeNo 시퀀스 미리 뽑는코드
