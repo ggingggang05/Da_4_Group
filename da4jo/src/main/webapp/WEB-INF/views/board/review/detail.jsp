@@ -34,8 +34,9 @@
 
 	<div class="cell flex-cell auto-width">
 		<div class="cell">
-			<a class="btn" href="write">리뷰글작성</a> 
-			<a class="btn" href="#">리뷰글수정</a>
+			<a class="btn" href="list">목록으로</a> 
+			<a class ="btn" href="write">리뷰글작성</a> 
+			<a class="btn" href="/board/review/edit?reviewNo=${reviewDto.reviewNo}">리뷰글수정</a>
 			<a class="btn negative" href="/board/review/delete?reviewNo=${reviewDto.reviewNo}">리뷰글삭제</a>
 		</div>
 	

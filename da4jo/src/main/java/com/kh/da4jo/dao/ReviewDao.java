@@ -70,7 +70,7 @@ public class ReviewDao {
 			List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper, data);
 			return list.isEmpty() ? null : list.get(0);
 		}
-	
+		
 	//삭제
 	public boolean delete(int reviewNo) {
 		String sql = "delete review where review_no = ?";
@@ -78,5 +78,16 @@ public class ReviewDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	//수정
+	public boolean update(ReviewDto reviewDto) {
+		String sql = "update review "
+						+ "set review_title=?, review_content=? "
+						+ "where review_no = ?";
+		Object[] data = {
+				reviewDto.getReviewTitle(), reviewDto.getReviewContent(),
+				reviewDto.getReviewNo()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
 }

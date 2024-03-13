@@ -65,16 +65,21 @@ public class ReviewController {
 		return "/WEB-INF/views/board/review/detail.jsp";
 	}
 	
+	
 	//수정
-//	@GetMapping("/edit") {
-//		public String edit() {
-//			
-//		}
-//		return "";
-//	}
-//	@PostMapping("/edit") {
-//		
-//	}
+	@GetMapping("/review/edit") 
+	public String edit(@RequestParam int reviewNo, Model model) {
+		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		model.addAttribute("reviewDto", reviewDto);
+		return "/WEB-INF/views/board/review/edit.jsp";
+	}
+	
+	@PostMapping("/review/edit")
+	public String edit(@ModelAttribute ReviewDto reviewDto) {
+		reviewDao.update(reviewDto);
+		return "redirect:detail?reviewNo=" + reviewDto.getReviewNo();
+	}
+	
 	
 	//삭제
 	@RequestMapping("/review/delete")
