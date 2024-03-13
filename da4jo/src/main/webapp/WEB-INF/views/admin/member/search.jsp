@@ -7,14 +7,20 @@
 .container {
 	width: 1140px;
 }
+.menu-type {
+	background-color: #F1F3F5;
+	border-bottom: 1px solid #2D3436;
+	border-top: 1px solid #2D3436;
+}
+.menu-list {
+	border-bottom: 1px solid #DEE2E6;
+}
 
 </style>
-
-
 <form action="search" method="get">
 	<div class="container">
 		<div class="cell listArea">
-			<ul class="menu">
+			<ul class="menu menu-type">
 				<li>아이디</li>
 				<li>이름</li>
 				<li>이름(영문)</li>
@@ -25,7 +31,7 @@
 				<li>상세</li>
 			</ul>
 			<c:forEach var="memberDto" items="${list}">
-				<ul class="menu">
+				<ul class="menu menu-list">
 					<li>${memberDto.memberId}</li>
 					<li>${memberDto.memberNameKor}</li>
 					<li>${memberDto.memberNameEng}</li>
