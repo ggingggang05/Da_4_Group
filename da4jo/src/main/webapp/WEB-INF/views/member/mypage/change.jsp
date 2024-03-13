@@ -6,6 +6,14 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script type="text/javascript">
+    function validateForm() {
+		var choice = window.confirm("수정하시겠습니까?");
+		if(choice == false) return;
+    }
+</script>
+
+
 <script type="text/javascript"> 
 $(function(){
     var state = {
@@ -177,12 +185,23 @@ $(function(){
 
 <!-- 개인정보 수정 페이지 -->
 <!-- <form action="/member/mypage/change" method="post" autocomplete="off"> -->
-<form action="change" method="post" autocomplete="off">
+<form action="change" method="post" autocomplete="off" onsubmit="return validateForm()">
 	<div class="container w-500">
 		<div class="cell center">
 			<h1>개인정보 변경</h1>	
 		</div>
 		<!-- 수정할 정보 -->
+		<div class="cell">
+			<label>프로필 이미지</label>
+			<div class="flex-cell">
+				<div class="w-25">
+					<img src="img" width="100%">
+				</div>
+				<div class="w-75 right">
+					<input type="file" name="img" class="tool w-100">
+				</div>
+			</div>
+		</div>
 		<div class="cell">
 			<label>아이디<b style="color:red">*</b></label>
 			<input type="text" name="memberId" class= "tool w-100" placeholder="아이디" value="${memberDto.memberId}">
@@ -263,6 +282,7 @@ $(function(){
 			</div>
 			<div class="fail-feedback">잘못된 형식입니다.</div>
 		</div>
+		
 		
 		<hr>
 

@@ -55,8 +55,7 @@
 		<div class="end-wrapper">
 			<!-- 정보 리스트 -->
 			<div class="cell center flex-cell">
-				<div class="w-30">
-					<div class="cell center">
+				<div class="cell center">
 						<h3>아이디</h3>
 						<h3>이름(한글)</h3>
 						<h3>이름(영문)</h3>
@@ -71,8 +70,8 @@
 						<h3>포인트</h3>
 					</div>
 				</div>	
-				<div class="w-70">
-					<div class="cell center">
+				<div class="cell center">
+					<div class="w-70">
 					<h5>${memberDto.memberId}</h5>
 					<h5>${memberDto.memberNameKor}</h5>
 					<h5>${memberDto.memberNameEng}</h5>
