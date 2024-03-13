@@ -10,10 +10,8 @@
 		<h1>아이디 찾기</h1>
 	</div>
 	<div class="cell mt-0 flex-cell">
-		<input type="text" name="memberNick" required class="tool w-100" placeholder="닉네임을 입력하세요">
+		<input type="text" name="memberEmail" required class="tool w-100" placeholder="이메일을 입력하세요">
 		<button type="submit" class="btn positive"><i class="fa-solid fa-magnifying-glass"></i></button>
-	</div>
-	<div class="cell">
 	</div>
 </div>
 </form>

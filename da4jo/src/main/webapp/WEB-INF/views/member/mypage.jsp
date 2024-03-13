@@ -31,7 +31,7 @@
 		<div class="start-wrapper">
 			<div class="cell">
 				<!-- 이미지 -->
-				<img src="profileImg" width="100%">
+				<img src="img" width="100%">
 			</div>
 			<!-- 정보 수정 및 회원 탈퇴 버튼 -->
 			<div class="cell p-10 mb-20 pt-50">
