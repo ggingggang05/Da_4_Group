@@ -88,4 +88,17 @@ public class ReviewController {
 		return "redirect:/board/review/list";
 	}
 	
+	//이미지
+//	@RequestMapping("/image")
+//	public String image(HttpSession session) {
+//		try {
+//			String loginId = (String) session.getAttribute("loginId");
+//			int attachNo = reviewDao.findAttachNo(loginId);
+//			return "redirect:/download?attachNo="+attachNo;
+//		}
+//		catch(Exception e) {
+//			return "redirect:/image/user.png";
+//		}
+//	}
+	
 }
