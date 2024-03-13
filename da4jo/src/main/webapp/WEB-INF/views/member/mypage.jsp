@@ -50,41 +50,41 @@
 		<!-- 화면 오른쪽 -->
 		<div class="end-wrapper">
 			<!-- 정보 리스트 -->
-			<div class="cell center floating-cell">
+			<div class="cell center flex-cell">
 				<div class="w-30">
-					<ul>
-					<li>아이디</li>
-					<li>이름(한글)</li>
-					<li>이름(영문)</li>
-					<li>이메일</li>
-					<li>통관번호</li>
-					<li>연락처1</li>
-					<li>연락처2</li>
-					<li>주소</li>
-					<li>생년월일</li>
-					<li>회원등급</li>
-					<li>충전캐쉬</li>
-					<li>포인트</li>
-					</ul>
-				</div>
-				<div>
-					<ul>
-					<li>${memberDto.memberId}</li>
-					<li>${memberDto.memberNameKor}</li>
-					<li>${memberDto.memberNameEng}</li>
-					<li>${memberDto.memberEmail}</li>
-					<li>${memberDto.memberClearanceId}</li>
-					<li>${memberDto.memberContact1}</li>
-					<li>${memberDto.memberContact2}</li>
-					<li>[${memberDto.memberZipcode}]<br>
-						${memberDto.memberAddress1}, ${memberDto.memberAddress2}
-					</li>
-					<li>${memberDto.memberBirth}</li>
-					<li>${memberDto.memberLevel}</li>
-					<li>${memberDto.memberCredit}</li>
-					<li>${memberDto.memberPoint}</li>
-					</ul>
+					<div class="cell center">
+						<h3>아이디</h3>
+						<h3>이름(한글)</h3>
+						<h3>이름(영문)</h3>
+						<h3>이메일</h3>
+						<h3>통관번호</h3>
+						<h3>연락처1</h3>
+						<h3>연락처2</h3>
+						<h3>주소</h3>
+						<h3>생년월일</h3>
+						<h3>회원등급</h3>
+						<h3>충전캐쉬</h3>
+						<h3>포인트</h3>
+					</div>
 				</div>	
+				<div class="w-70">
+					<div class="cell center">
+					<h5>${memberDto.memberId}</h5>
+					<h5>${memberDto.memberNameKor}</h5>
+					<h5>${memberDto.memberNameEng}</h5>
+					<h5>${memberDto.memberEmail}</h5>
+					<h5>${memberDto.memberClearanceId}</h5>
+					<h5>${memberDto.memberContact1}</h5>
+					<h5>${memberDto.memberContact2}</h5>
+					<h5>[${memberDto.memberZipcode}]<br>
+						${memberDto.memberAddress1}, ${memberDto.memberAddress2}
+					</h5>
+					<h5>${memberDto.memberBirth}</h5>
+					<h5>${memberDto.memberLevel}</h5>
+					<h5>${memberDto.memberCredit}</h5>
+					<h5>${memberDto.memberPoint}</h5>
+					</div>
+				</div>
 			</div><!-- 정보 리스트 닫는 태그 -->
 			
 			<!-- 캐쉬 충전 내역 테이블 -->
