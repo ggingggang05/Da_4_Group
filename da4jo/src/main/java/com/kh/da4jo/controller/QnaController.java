@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.da4jo.dao.QnaDao;
 
 @Controller
-@RequestMapping("/qna")
+@RequestMapping("/board")
 public class QnaController {
 	
 	@Autowired
@@ -19,7 +19,12 @@ public class QnaController {
 	
 
 	//목록 및 상세
-	//@RequestMapping("list")
+	@RequestMapping("/qna/list")
+	public String list() {
+		
+		
+		return "/WEB-INF/views/board/qna/list.jsp";
+	}
 	
 	
 	//@RequestMapping("detail")
