@@ -36,6 +36,9 @@
 			<!-- 정보 수정 및 회원 탈퇴 버튼 -->
 			<div class="cell p-10 mb-20 pt-50">
 				<div class="cell">
+					<a class="btn w-100" href="/member/mypage/purchase/list">구매 신청서</a>
+				</div>
+				<div class="cell">
 					<a class="btn w-100" href="/member/mypage/password">비밀번호 변경</a>
 				</div>
 				<div class="cell">
