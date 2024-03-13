@@ -756,10 +756,6 @@ textarea.tool.tool-fixed {
     position: absolute;
     left: 5px;
 }
-/* a태그 선택시 색깔 변경, commons.js에 함수 있음*/
-.currentLink {
-    color: #0984e3;
-}
 /* 내용 헤드*/
 .content.content-head {
     text-align: left !important;
