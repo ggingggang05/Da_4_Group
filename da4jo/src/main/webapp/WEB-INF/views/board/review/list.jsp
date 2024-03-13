@@ -28,6 +28,7 @@
 
 	<ul class="menu title">
 		<li>번호</li>
+		<li>이미지</li>
 		<li>제목</li>
 		<li>작성자</li>
 		<li>작성일</li>
@@ -37,6 +38,7 @@
 	<c:forEach var="reviewDto" items="${list}">
 		<ul class="menu list">
 			<li>${reviewDto.reviewNo}</li>
+			<li>???</li>
 			<li><a href="detail?reviewNo=${reviewDto.reviewNo}">${reviewDto.reviewTitle}</a>
 			</li>
 			<li>${reviewDto.reviewWriter}</li>
