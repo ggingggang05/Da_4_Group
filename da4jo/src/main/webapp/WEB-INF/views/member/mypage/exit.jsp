@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- 회원 탈퇴 페이지 -->
-<form action="/member/mypage" method="post">
+<form action="exit" method="post">
 	<div class="container w-500">
 		<div class="cell center">
 			<h1>회원 탈퇴</h1>

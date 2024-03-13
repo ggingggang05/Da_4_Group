@@ -133,7 +133,7 @@ public class MemberController {
 		MemberDto findDto = memberDao.selectOne(loginId);
 		//판정
 		boolean isValid = memberDto.getMemberPw().equals(findDto.getMemberPw());
-		
+		System.out.println("isValid = " + isValid);
 		//변경 (판정문이 맞다면 == 현재 입력된 비밀번호와 원래 비밀번호 일치 여부 확인)
 		if(isValid) {
 			memberDao.updateMember(memberDto);
@@ -165,10 +165,10 @@ public class MemberController {
 			memberDto.setMemberPw(changePw);
 			memberDao.updateMemberPw(memberDto);
 			
-			return "redirect:member/mypage";
+			return "redirect:/member/mypage";
 		}
 		else {
-			return "redirect:mypage?error";
+			return "redirect:/member/mypage/password?error";
 		}
 	}
 	

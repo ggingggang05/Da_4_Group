@@ -81,22 +81,22 @@ public class MemberDao {
 				+ "member_name_kor=?, member_name_eng=?, "
 				+ "member_email=?, member_contact1=?, "
 				+ "member_contact2=?, member_birth=?, "
-				+ "member_clearance_id=?, member_zipcode=?,"
-				+ "member_address1=?, member_address2=? "
-				+ "where member_Id=?";
+				+ "member_clearance_id=?, "
+				+ "member_zipcode=?, member_address1=?, member_address2=? "
+				+ "where member_id=?";
 		Object[] data = {
 				memberDto.getMemberNameKor(), memberDto.getMemberNameEng(),
 				memberDto.getMemberEmail(), memberDto.getMemberContact1(),
 				memberDto.getMemberContact2(), memberDto.getMemberBirth(),
-				memberDto.getMemberClearanceId(), memberDto.getMemberZipcode(),
-				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
+				memberDto.getMemberClearanceId(),
+				memberDto.getMemberZipcode(), memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
 				memberDto.getMemberId()
 		};
 		return jdbcTemplate.update(sql,data) > 0;
 	}
 	//회원 비밀번호 수정
 	public boolean updateMemberPw(MemberDto memberDto){
-		String sql = "update member set memeber_pw=? where memeber_id=?";
+		String sql = "update member set member_pw=? where member_id=?";
 		Object[] data = { memberDto.getMemberPw(), memberDto.getMemberId() };
 		
 		return jdbcTemplate.update(sql, data) > 0;

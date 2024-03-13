@@ -176,7 +176,8 @@ $(function(){
 </script>
 
 <!-- 개인정보 수정 페이지 -->
-<form action="/member/mypage" method="post" autocomplete="off">
+<!-- <form action="/member/mypage/change" method="post" autocomplete="off"> -->
+<form action="change" method="post" autocomplete="off">
 	<div class="container w-500">
 		<div class="cell center">
 			<h1>개인정보 변경</h1>	
@@ -268,7 +269,7 @@ $(function(){
 		<!-- 개인정보 수정을 위한 비밀번호 확인 -->
 		<div class="cell mt-20">
 			<label>비밀번호 확인<b style="color:red">*</b></label>
-			<input type="password" name="memberPw" required class="tool w-100">
+			<input type="password" name="memberPw" class="tool w-100">
 		</div>
 		<div>
           	<c:if test="${param.error != null}">

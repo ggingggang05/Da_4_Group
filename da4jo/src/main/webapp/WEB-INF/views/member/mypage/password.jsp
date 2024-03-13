@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- 비밀번호 변경 페이지 -->
-<form action="/mypage/password" method="post">
+<form action="password" method="post">
 	<div class="container w-500">
 		<div class="cell center">
 			<h1>비밀번호 변경</h1>
