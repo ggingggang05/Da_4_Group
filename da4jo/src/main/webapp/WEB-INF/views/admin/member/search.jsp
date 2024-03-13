@@ -4,34 +4,48 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-.container {
-	width: 1140px;
+.menu-type {
+	background-color: #F1F3F5;
+	border-bottom: 1px solid #2D3436;
+	border-top: 1px solid #2D3436;
+}
+.menu-list {
+	border-bottom: 1px solid #DEE2E6;
+}
+.menu-type li:nth-child(4),
+.menu-list li:nth-child(4) {
+	width: 350px;
+}
+.menu-type li:nth-child(7),
+.menu-list li:nth-child(7) {
+	width: 100px;
+}
+.menu-type li:nth-child(8),
+.menu-list li:nth-child(8) {
+	width: 100px;
 }
 
+
 </style>
-
-
 <form action="search" method="get">
-	<div class="container">
+	<div class="container container-body">
 		<div class="cell listArea">
-			<ul class="menu">
+			<ul class="menu menu-type">
 				<li>아이디</li>
 				<li>이름</li>
 				<li>이름(영문)</li>
 				<li>이메일</li>
 				<li>개인통관고유부호</li>
-				<li>보유크레딧</li>
 				<li>차단여부</li>
 				<li>상세</li>
 			</ul>
 			<c:forEach var="memberDto" items="${list}">
-				<ul class="menu">
+				<ul class="menu menu-list">
 					<li>${memberDto.memberId}</li>
 					<li>${memberDto.memberNameKor}</li>
 					<li>${memberDto.memberNameEng}</li>
 					<li>${memberDto.memberEmail}</li>
 					<li>${memberDto.memberClearanceId}</li>
-					<li>${memberDto.memberCredit}</li>
 					<li>${memberDto.memberBlock}</li>
 					<li><a href="mypage?${memberDto.memberId}"><i
 							class="fa-solid fa-list"></i></a></li>

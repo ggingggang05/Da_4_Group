@@ -186,7 +186,7 @@
 					<ul class="right contour head">
 						<c:if
 							test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
-							<li><a href="#">${sessionScope.loginLevel}</a></li>
+							<li><a href="/admin/">${sessionScope.loginLevel}</a></li>
 						</c:if>
 						<c:choose>
 							<c:when test="${sessionScope.loginId != null}">

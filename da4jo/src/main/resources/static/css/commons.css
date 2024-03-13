@@ -683,3 +683,18 @@ textarea.tool.tool-fixed {
 	vertical-align: middle;
 	text-align: center;
 }
+
+/* 가장 외곽 컨테이너*/
+.container.container-body{
+	width: 1140px;
+}
+/* ul 타입(분류)*/
+.menu.menu-type {
+	background-color: #F1F3F5;
+	border-bottom: 1px solid #2D3436;
+	border-top: 1px solid #2D3436;
+}
+/* ul 리스트(내용)*/
+.menu.menu-list {
+	border-bottom: 1px solid #DEE2E6;
+}
