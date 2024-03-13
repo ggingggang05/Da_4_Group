@@ -26,6 +26,7 @@
 	            		&& this.memberClrearanceIdValid && this.memberAddressValid;
 		        },
 	   		 };
+	    
 	    //아이디 검사(비동기)
 	    $("[name=memberId]").blur(function(){
 	        var regex = /^[a-z][a-z0-9]{7,19}$/;

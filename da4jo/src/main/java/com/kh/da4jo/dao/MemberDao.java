@@ -37,6 +37,7 @@ public class MemberDao {
 		jdbcTemplate.update(sql,data);
 	}
 	
+	
 	//회원 목록 조회
 	public List<MemberDto>selectList(){
 		String sql = "select * from member order by member_id asc";

@@ -48,6 +48,7 @@ public class MemberController {
 		if(!img.isEmpty()) {
 			int imgNo = imgService.save(img);//파일저장 + DB저장
 			
+			
 			memberDao.connect(memberDto.getMemberId(), imgNo);//연결
 		}
 		

@@ -16,6 +16,7 @@ public class ImgService
 	@Autowired
 	private ImgDao imgDao;
 	
+	
 	public int save(MultipartFile img) throws IllegalStateException, IOException {
 		int imgNo = imgDao.getSequnce();
 		File dir = new File(System.getProperty("user.home"), "upload");
