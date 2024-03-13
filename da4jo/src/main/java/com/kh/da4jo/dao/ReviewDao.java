@@ -64,9 +64,9 @@ public class ReviewDao {
 	}
 	
 	//단일조회
-		public ReviewDto selectOne(int boardNo) {
+		public ReviewDto selectOne(int reviewNo) {
 			String sql = "select * from review where review_no = ?";
-			Object[] data = {boardNo};
+			Object[] data = {reviewNo};
 			List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper, data);
 			return list.isEmpty() ? null : list.get(0);
 		}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.kh.da4jo.dto.QnaDto;
+import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.mapper.QnaMapper;
 
 @Repository
@@ -23,14 +24,13 @@ public class QnaDao {
 	//작성
 	public void insert(QnaDto qnaDto) {
 		String sql = "insert into qna("
-				+ "qna_no, qna_secreat, qna_title, qna_content, "
-				+ "qna_writer, qna_wdate, qna_vcount) "
-				+ "values(?, ?, ?, ?, ?, ?)";
+				+ "qna_no, qna_title, qna_content, "
+				+ "qna_writer, qna_vcount) "
+				+ "values(?, ?, ?, ?, ?)";
 		Object[] data = {
-					qnaDto.getQnaNo(), qnaDto.getQnaSecreate(), 
+					qnaDto.getQnaNo(), 
 					qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
-					qnaDto.getQnaWriter(), qnaDto.getQnaWdate(),
-					qnaDto.getQnaVcount()					
+					qnaDto.getQnaWriter(), qnaDto.getQnaVcount()				
 				};
 		jdbcTemplate.update(sql, data);
 	}
@@ -56,6 +56,26 @@ public class QnaDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, qnaMapper, data);
 	}
+	
+	//단일 조회
+	public QnaDto selectOne(int qnaNo) {
+		String sql = "select * from qna where qna_no = ?";
+		Object[] data = {qnaNo};
+		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	//수정
+		public boolean update(QnaDto qnaDto) {
+			String sql = "update qna "
+							+ "set qna_title=?, qna_content=? "
+							+ "where qna_no = ?";
+			Object[] data = {
+					qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
+					qnaDto.getQnaNo()
+			};
+			return jdbcTemplate.update(sql, data) > 0;
+		}
 	
 	//삭제
 	public boolean delete(int qnaNo) {
