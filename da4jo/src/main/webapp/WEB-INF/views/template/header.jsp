@@ -38,6 +38,20 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<!-- select2 cdn -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$(".searchSelect").select2({
+			minimumResultsForSearch : Infinity //selelct창에 검색 바 유무(주석처리 시 생김)
+		});
+	});
+</script>
 <style>
 .note-editor {
 	border: 1px solid #636e72 !important;
@@ -170,7 +184,8 @@
 			<div class="container">
 				<div class="cell">
 					<ul class="right contour head">
-						<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
+						<c:if
+							test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 							<li><a href="#">${sessionScope.loginLevel}</a></li>
 						</c:if>
 						<c:choose>
