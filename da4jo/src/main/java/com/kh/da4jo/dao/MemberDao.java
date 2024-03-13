@@ -146,6 +146,9 @@ public class MemberDao {
 	
 	//이미지 번호 찾기
 	public int findImgNo(String memberId) {
-		String sql = "select img_no from "
+		String sql = "select img_no from member_img where member_id=?";
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 }
