@@ -90,6 +90,7 @@
 				</div>
 			</div><!-- 정보 리스트 닫는 태그 -->
 			
+			
 			<!-- 캐쉬 충전 내역 테이블 -->
 			<c:if test="${empty CashList}"> <!-- 캐쉬 내역이 없는 경우 -->
 					<div class="cell center mt-30">

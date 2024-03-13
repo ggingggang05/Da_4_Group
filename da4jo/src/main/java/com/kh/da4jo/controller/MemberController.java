@@ -240,6 +240,7 @@ public class MemberController {
 	
 	
 	
+	
 	//구매 신청서 리스트 페이지
 //	@RequestMapping("/mypage/list")
 //	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {

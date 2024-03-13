@@ -160,4 +160,5 @@ public class MemberDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	
 }

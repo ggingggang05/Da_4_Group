@@ -13,7 +13,6 @@
     }
 </script>
 
-
 <!-- 회원 탈퇴 페이지 -->
 <form action="exit" method="post" autocomplete="off" onsubmit="return validateForm()">
 	<div class="container w-500">

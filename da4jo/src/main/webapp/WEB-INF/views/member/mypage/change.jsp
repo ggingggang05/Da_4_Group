@@ -202,6 +202,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
+		
 		<div class="cell">
 			<label>아이디<b style="color:red">*</b></label>
 			<input type="text" name="memberId" class= "tool w-100" placeholder="아이디" value="${memberDto.memberId}">
