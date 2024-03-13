@@ -77,3 +77,12 @@ $(function(){
         $(this).parents(".page").hide().prev(".page").show();
     });
 });
+
+/* a태그 선택 시 해당 a태그 색깔 변경*/
+/* currentLink는 commons.css에 있음*/
+$(function () {
+    $(".title-body a").click(function(){
+        $(".title-body a").removeClass("currentLink");
+        $(this).addClass("currentLink");
+    });
+});

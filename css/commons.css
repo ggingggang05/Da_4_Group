@@ -19,6 +19,7 @@
 .container {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 /*
@@ -249,12 +250,11 @@ textarea.tool.tool-fixed {
 */
 .link {
     text-decoration: none;
-    color: #2d3436;
     display: inline-block;
 }
 .link:hover {
-    /* color: #0984e3; */
-    text-decoration: underline;
+    color: #0984e3; 
+    cursor: pointer;
 }
 
 .link.link-animation {
@@ -653,4 +653,122 @@ textarea.tool.tool-fixed {
     transition: width 0.1s linear;
     border: 1px solid none;
     border-radius: 5px;
+}
+
+/* select 디자인 업그레이드*/
+.select2-selection__rendered {
+	line-height: 31px !important;
+}
+.select2-container .select2-selection--single {
+	height: 35px !important;
+}
+.select2-selection__arrow {
+	height: 34px !important;
+}
+/* select width(글자 크기에 따라 수정하여 사용)*/
+.searchSelect {
+	width: 120px;
+}
+/* searchSelect와 크기 맞추기 위해서 사용*/
+.searchBar {
+	font-size: 16px;
+	height: 35px;
+	padding: none;
+	vertical-align: middle;
+}
+/* searchSelect와 크기 맞추기 위해서 사용*/
+.searchBtn {
+	height: 35px;
+	line-height: 0px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+/* 가장 외곽 컨테이너*/
+.container.container-body{
+	width: 1140px;
+}
+/* ul 타입(분류)*/
+.menu.menu-type {
+	background-color: #F1F3F5;
+	border-bottom: 1px solid #2D3436;
+	border-top: 1px solid #2D3436;
+}
+/* ul 리스트(내용)*/
+.menu.menu-list {
+	border-bottom: 1px solid #DEE2E6;
+}
+
+
+/* flex container*/
+  .container.flex-container {
+    display: flex;
+}
+
+/* flex container 비율 설정*/
+.flex-container>.container:nth-child(1) {
+    flex-grow: 1;
+}
+
+.flex-container>.container:nth-child(2) {
+    flex-grow: 8;
+}
+
+/* 요소 컨테이너 padding설정*/
+.container.inner-container {
+    padding: 20px;
+}
+
+/* title head */
+.title.title-head {
+    border-top: 2px solid #2D3436;
+    border-bottom: 1px solid #2D3436;
+    background-color: #f5f6f7;
+}
+
+/* title head 텍스트*/
+.title-head-text {
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+/* title body*/
+/* 메인 내용*/
+.title-body-main {
+    text-align: left;
+    font-size: 14px;
+    padding: 10px 10px 15px 10px;
+    border-bottom: 1px dotted #2D3436;
+}
+.title-body-text {
+    margin: 10px 10px 0 0;
+}
+/* 서브 내용*/
+.title-body-sub {
+    color: #6c6e6e;
+    position: relative;
+    padding-left: 14px;
+}
+/* 서브 내용 앞 - 표시*/
+.title-body-sub a::before {
+    content: "-";
+    font-size: 15px;
+    position: absolute;
+    left: 5px;
+}
+/* a태그 선택시 색깔 변경, commons.js에 함수 있음*/
+.currentLink {
+    color: #0984e3;
+}
+/* 내용 헤드*/
+.content.content-head {
+    text-align: left !important;
+    border-bottom: 1px solid #e6e7e7;
+    font-size: 20px;
+}
+.content-head-text > i {
+    padding: 0 10px 0 10px;
+}
+.content-head-text {
+    margin: 10px 0;
 }
