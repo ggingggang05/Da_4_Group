@@ -16,6 +16,8 @@ public class PoMapper implements RowMapper<PoDto>{
 		PoDto poDto = new PoDto();
 		poDto.setPoNo(rs.getInt("Po_no"));
 		poDto.setPoCustomer(rs.getString("po_customer"));
+		poDto.setPoNameEng(rs.getString("po_name_eng"));
+		poDto.setPoNameKor(rs.getString("po_name_kor"));
 		poDto.setPoContact(rs.getString("po_contact"));
 		poDto.setPoLink(rs.getString("po_link"));
 		poDto.setPoQty(rs.getInt("po_qty"));
