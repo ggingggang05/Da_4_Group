@@ -137,18 +137,18 @@ public class MemberController {
 		//변경 (판정문이 맞다면 == 현재 입력된 비밀번호와 원래 비밀번호 일치 여부 확인)
 		if(isValid) {
 			memberDao.updateMember(memberDto);
-			return "redirect:mypage";
+			return "redirect:/member/mypage";
 		} else {
-			return "redirect:mypage/change?error";
+			return "redirect:/member/mypage/change?error";
 		}
 	}
 	
 	//회원 비밀번호 변경 페이지
-	@GetMapping("/password")
+	@GetMapping("/mypage/password")
 	public String password() {
 		return "/WEB-INF/views/member/mypage/password.jsp";
 	}
-	@PostMapping("/password")
+	@PostMapping("/mypage/password")
 	public String password(@RequestParam String originPw,
 						@RequestParam String changePw,
 						HttpSession session) {
@@ -165,7 +165,7 @@ public class MemberController {
 			memberDto.setMemberPw(changePw);
 			memberDao.updateMemberPw(memberDto);
 			
-			return "redirect:mypage";
+			return "redirect:member/mypage";
 		}
 		else {
 			return "redirect:mypage?error";
@@ -191,6 +191,21 @@ public class MemberController {
 //				int 
 //			}
 //		}
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//구매 신청서 리스트 페이지
+//	@RequestMapping("/mypage/list")
+//	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {
+//		
 //	}
 	
 	

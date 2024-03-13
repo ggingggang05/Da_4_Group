@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- 회원 탈퇴 페이지 -->
-<form action="exit" method="post">
+<form action="/member/mypage" method="post">
 	<div class="container w-500">
 		<div class="cell center">
 			<h1>회원 탈퇴</h1>
@@ -19,7 +19,7 @@
 			<input type="password" name="memberPw" placeholder="비밀번호 입력" required class="tool w-100">
 		</div>
 		<div class="cell">
-			<button class="btn negative w-100">탈퇴하겠습니다</button>
+			<button class="btn negative w-100">회원탈퇴</button>
 		</div>
 		<c:if test="${param.error != null}">
 			<div class="cell">
