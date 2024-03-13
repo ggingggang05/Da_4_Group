@@ -654,3 +654,32 @@ textarea.tool.tool-fixed {
     border: 1px solid none;
     border-radius: 5px;
 }
+
+/* select 디자인 업그레이드*/
+.select2-selection__rendered {
+	line-height: 31px !important;
+}
+.select2-container .select2-selection--single {
+	height: 35px !important;
+}
+.select2-selection__arrow {
+	height: 34px !important;
+}
+/* select width(글자 크기에 따라 수정하여 사용)*/
+.searchSelect {
+	width: 120px;
+}
+/* searchSelect와 크기 맞추기 위해서 사용*/
+.searchBar {
+	font-size: 16px;
+	height: 35px;
+	padding: none;
+	vertical-align: middle;
+}
+/* searchSelect와 크기 맞추기 위해서 사용*/
+.searchBtn {
+	height: 35px;
+	line-height: 0px;
+	vertical-align: middle;
+	text-align: center;
+}
