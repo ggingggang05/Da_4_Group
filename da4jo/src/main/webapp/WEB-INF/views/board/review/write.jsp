@@ -20,6 +20,12 @@
 	<div>
 		<textarea name="reviewContent"></textarea>
 	</div>	
+	
+	
+	<h2>이미지</h2> 
+	<div>
+		<input type="file" name="???" accept="image/*">
+	</div>
 
 	<button class="btn">등록</button>
 </div>
