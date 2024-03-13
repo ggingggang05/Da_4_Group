@@ -11,11 +11,19 @@ import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dto.PoDto;
 
 @Controller
-@RequestMapping("/po")
+@RequestMapping("/member/po")
 public class PoController {
 
 	@Autowired
 	private PoDao poDao;
+	
+	
+	@RequestMapping("/request")
+	public String request() {
+		
+		return "/WEB-INF/views/member/po/request.jsp";
+	}
+	
 	
 	@RequestMapping("/list")
 	public String list() {
