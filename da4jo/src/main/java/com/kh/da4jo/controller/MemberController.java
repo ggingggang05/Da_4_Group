@@ -177,21 +177,36 @@ public class MemberController {
 		return "/WEB-INF/views/member/mypage/exit.jsp";
 	}
 	
-//	@PostMapping("/mypage/exit")
-//	public String exit(@RequestParam String memberPw,
-//					@ModelAttribute MemberDto memberDto,
-//					HttpSession session) {
-//		String loginId = (String)session.getAttribute("loginId");
-//		
-//		MemberDto findDto = memberDao.selectOne(loginId);
-//		boolean isValid = findDto.getMemberPw().equals(memberPw);
-//		
-//		if(isValid) {
-//			try {
-//				int 
-//			}
-//		}
-//	}
+	@PostMapping("/mypage/exit")
+	public String exit(@RequestParam String memberPw,
+					@ModelAttribute MemberDto memberDto,
+					HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		MemberDto findDto = memberDao.selectOne(loginId);
+		boolean isValid = findDto.getMemberPw().equals(memberPw);
+		
+		if(isValid) {
+			try {
+				//프로필 삭제
+				int imgNo = memberDao.findImgNo(loginId);
+				imgService.removeFile(imgNo);
+			} 
+			catch(Exception e) {
+				//e.printStackTrace();
+			}
+			finally {
+				//회원 탈퇴
+				memberDao.deleteMember(loginId);
+				//로그아웃
+				session.removeAttribute("loginId");
+			}
+			return "redirect:/";
+		}
+		else {
+			return "redirect:exit?error";
+		}
+	}
 	
 	//프로필 다운로드
 	@RequestMapping("/img")
