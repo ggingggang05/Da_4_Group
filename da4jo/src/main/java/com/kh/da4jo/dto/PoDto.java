@@ -4,6 +4,9 @@ public class PoDto{
 	
 	private int poNo;
 	private String poCustomer;
+	private String poNameEng;
+	private String poNameKor;
+
 	private String poContact;
 	private String poLink;
 	private int poQty;
@@ -25,6 +28,18 @@ public class PoDto{
 	}
 	public void setPoCustomer(String poCustomer){
 		this.poCustomer = poCustomer;
+	}
+	public String getPoNameEng() {
+		return poNameEng;
+	}
+	public void setPoNameEng(String poNameEng) {
+		this.poNameEng = poNameEng;
+	}
+	public String getPoNameKor() {
+		return poNameKor;
+	}
+	public void setPoNameKor(String poNameKor) {
+		this.poNameKor = poNameKor;
 	}
 	public String getPoContact(){
 		return poContact;
