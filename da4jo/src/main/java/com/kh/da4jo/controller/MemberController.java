@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dto.MemberDto;
@@ -75,12 +76,94 @@ public class MemberController {
 	public String mypage(HttpSession session, Model model) {
 		//로그인 아이디 추출
 		String loginId = (String) session.getAttribute("loginId");
-		//아이디 정보 조회
+		//아이디로 정보 조회
 		MemberDto memberDto = memberDao.selectOne(loginId);
 		//화면으로 전달
 		model.addAttribute("memberDto", memberDto);
 		
 		return "/WEB-INF/views/member/mypage.jsp";
+	}
+	
+	//회원 정보 수정 페이지
+	@GetMapping("/mypage/change")
+	public String change(Model model, HttpSession session) {
+		//로그인 아이디 추출
+		String loginId = (String)session.getAttribute("loginId");
+		//아이디로 정보 조회
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		//모델에 정보 추가
+		model.addAttribute("memberDto", memberDto);
+		
+		return"/WEB-INF/views/member/mypage/change.jsp"; 
+	}
+	@PostMapping("/mypage/change")
+	public String change(@ModelAttribute MemberDto memberDto, HttpSession session) {
+		//로그인 아이디 추출
+		String loginId = (String)session.getAttribute("loginId");
+		//memberDto에 아이디 설정
+		memberDto.setMemberId(loginId);
+		//DB정보 조회
+		MemberDto findDto = memberDao.selectOne(loginId);
+		//판정
+		boolean isValid = memberDto.getMemberPw().equals(findDto.getMemberPw());
+		
+		//변경 (판정문이 맞다면 == 현재 입력된 비밀번호와 원래 비밀번호 일치 여부 확인)
+		if(isValid) {
+			memberDao.updateMember(memberDto);
+			return "redirect:mypage";
+		} else {
+			return "redirect:mypage/change?error";
+		}
+	}
+	
+	//회원 비밀번호 변경 페이지
+	@GetMapping("/password")
+	public String password() {
+		return "/WEB-INF/views/member/mypage/password.jsp";
+	}
+	@PostMapping("/password")
+	public String password(@RequestParam String originPw,
+						@RequestParam String changePw,
+						HttpSession session) {
+		//로그인 아이디 추출
+		String loginId = (String) session.getAttribute("loginId");
+		
+		//비밀번호 검사
+		MemberDto findDto = memberDao.selectOne(loginId);
+		boolean isValid = findDto.getMemberPw().equals(originPw);
+		
+		if(isValid) {
+			MemberDto memberDto = new MemberDto();
+			memberDto.setMemberId(loginId);
+			memberDto.setMemberPw(changePw);
+			memberDao.updateMemberPw(memberDto);
+			
+			return "redirect:mypage";
+		}
+		else {
+			return "redirect:mypage?error";
+		}
+	}
+	
+	//회원 탈퇴 페이지
+	@GetMapping("/mypage/exit")
+	public String exit() {
+		return "/WEB-INF/views/member/mypage/exit.jsp";
+	}
+	@PostMapping("/mypage/exit")
+	public String exit(@RequestParam String memberPw,
+					@ModelAttribute MemberDto memberDto,
+					HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		MemberDto findDto = memberDao.selectOne(loginId);
+		boolean isValid = findDto.getMemberPw().equals(memberPw);
+		
+		if(isValid) {
+			try {
+				int 
+			}
+		}
 	}
 	
 	

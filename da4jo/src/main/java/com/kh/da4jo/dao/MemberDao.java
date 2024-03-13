@@ -36,6 +36,7 @@ public class MemberDao {
 		};
 		jdbcTemplate.update(sql,data);
 	}
+	
 	//회원 목록 조회
 	public List<MemberDto>selectList(){
 		String sql = "select * from member order by member_id asc";
@@ -63,6 +64,7 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
 	//최종로그인 시각 변경
 	public boolean updateMemberLoginDate(String memberId) {
 		String sql = "update member "
@@ -71,7 +73,8 @@ public class MemberDao {
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	//회원 본인 정보 수정
+	
+	//회원 본인 정보 수정(비밀번호 제외)
 	public boolean updateMember(MemberDto memberDto) {
 		String sql = "update member set "
 				+ "member_name_kor=?, member_name_eng=?, "
@@ -90,5 +93,59 @@ public class MemberDao {
 		};
 		return jdbcTemplate.update(sql,data) > 0;
 	}
+	//회원 비밀번호 수정
+	public boolean updateMemberPw(MemberDto memberDto){
+		String sql = "update member set memeber_pw=? where memeber_id=?";
+		Object[] data = { memberDto.getMemberPw(), memberDto.getMemberId() };
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
+	//회원탈퇴
+	public boolean deleteMember(String memberId) {
+		String sql = "delete member where member_id=?";
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
+	//돈 충전
+	public boolean chargeCredit(String memberId, int credit) {
+		String sql = "update member set member_credit = member_credit + ? "
+				+ "where member_id=?";
+		Object[] data = {credit, memberId};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	//돈 사용(차감)
+	public boolean payCredit(String memberId, int credit) {
+		String sql = "update member set member_credit = member_credit - ? "
+				+ "where member_id=?";
+		Object[] data = {credit, memberId};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//포인트 충전
+	public boolean chargePoint(String memberId, int point) {
+		String sql = "update member set member_point = member_point + ? "
+				+ "where member_id=?";
+		Object[] data = {memberId, point};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	//포인트 차감
+	public boolean minusPoint(String memberId, int point) {
+		String sql = "update member set member_point = member_point - ? "
+				+ "where member_id=?";
+		Object[] data = {memberId, point};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//이미지 번호 찾기
+	public int findImgNo(String memberId) {
+		String sql = "select img_no from "
+	}
 }
