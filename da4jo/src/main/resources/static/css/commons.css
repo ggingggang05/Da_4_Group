@@ -707,11 +707,11 @@ textarea.tool.tool-fixed {
 
 /* flex container 비율 설정*/
 .flex-container>.container:nth-child(1) {
-    flex-grow: 1;
+    width: 20%;
 }
 
 .flex-container>.container:nth-child(2) {
-    flex-grow: 8;
+    width: 80%;
 }
 
 /* 요소 컨테이너 padding설정*/
