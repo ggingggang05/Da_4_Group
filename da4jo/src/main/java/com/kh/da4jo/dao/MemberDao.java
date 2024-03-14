@@ -65,6 +65,13 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	//회원 상세 조회(한글이름)
+	public MemberDto selectNameKor(String memberNameKor) {
+		String sql = "select * from member where member_name_kor = ?";
+		Object[] data = {memberNameKor};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 	
 	//최종로그인 시각 변경
 	public boolean updateMemberLoginDate(String memberId) {
