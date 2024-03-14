@@ -5,28 +5,38 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dto.PoDto;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping("/member/po")
+@RequestMapping("/member")
 public class PoController {
 
 	@Autowired
 	private PoDao poDao;
 	
 	
-	@RequestMapping("/request")
+	// 주문서 작성
+	@GetMapping("/po/request")
 	public String request() {
-		
 		return "/WEB-INF/views/member/po/request.jsp";
 	}
-	
-	
-	@RequestMapping("/list")
-	public String list() {
-		return "/WEB-INF/views/member/po/list.jsp";
+	@PostMapping("/po/request")
+	public String request(@ModelAttribute PoDto poDto, HttpSession session) {
+		// 세션에서 로그인 한 사용자 ID 추출
+		String loginId = (String)session.getAttribute("loginId");
+		// 아이디를 PO테이블에 저장
+		poDto.setPoCustomerId(loginId);
+		int sequence = poDao.getSequence(); // 시퀀스 정보도 PO로 넘겨주기
+		poDto.setPoNo(sequence);
+		poDao.insert(poDto);
+		return "redirect:/member/mypage";
 	}
 }
