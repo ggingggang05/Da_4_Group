@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.da4jo.dao.CreditDao;
 import com.kh.da4jo.dao.ImgDao;
 import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dto.MemberDto;
@@ -32,6 +33,8 @@ public class MemberController {
 	private ImgService imgService;
 	@Autowired
 	private ImgDao imgDao;
+	@Autowired
+	private CreditDao creditDao;
 	
 	
 	//회원가입
@@ -108,6 +111,9 @@ public class MemberController {
 		MemberDto memberDto = memberDao.selectOne(loginId);
 		//화면으로 전달
 		model.addAttribute("memberDto", memberDto);
+		
+		//로그인한 사용자의 캐시 내역을 첨부
+		model.addAttribute("creditList", creditDao.selectList(loginId));
 		
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
