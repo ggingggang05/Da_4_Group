@@ -25,7 +25,6 @@ public class PoDto{
 	private Date poSdate; // 주문서 작성시각
 	private Date poEdate; // 배송완료 시각
 	private String poCountry; // 국가
-
 	private String poCurrency; // 통화
 	private double poFxRate; // 환율
 	private double poFx; // 외화금액
