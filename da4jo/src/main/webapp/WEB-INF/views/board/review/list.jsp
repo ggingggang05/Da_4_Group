@@ -38,7 +38,8 @@
 	<c:forEach var="reviewDto" items="${list}">
 		<ul class="menu list">
 			<li>${reviewDto.reviewNo}</li>
-			<li>???</li>
+			<%-- <li><img src="download?imgNo=${reviewDto}"></li> --%>
+			<li><img src="img"></li>
 			<li><a href="detail?reviewNo=${reviewDto.reviewNo}">${reviewDto.reviewTitle}</a>
 			</li>
 			<li>${reviewDto.reviewWriter}</li>
