@@ -222,7 +222,7 @@
 
 					<li><a href="/board/review/list">이용후기</a></li>
 
-					<li><a href="/member/po/list"><button class="btn delivery">배송대행
+					<li><a href="/member/po/request"><button class="btn delivery">배송대행
 								신청하기</button></a></li>
 
 				</ul>
