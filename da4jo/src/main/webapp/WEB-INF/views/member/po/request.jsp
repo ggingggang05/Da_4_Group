@@ -156,7 +156,7 @@
 
 		<div class="box_form">
 			<form name="form_agency_buy_write" id="form_agency_buy_write"
-				method="post" action="/request">
+				method="post" action="/member/po/request">
 				<h3>신청서 작성시 유의사항</h3>
 
 				<div class="area step step-agreement w-100">
@@ -260,9 +260,9 @@
 							일본(선박) 센터에서만 구매진행이 가능하오니 일본(선박)센터를 이용 부탁드립니다.</p>
 					</div>
 					<div class="checkbox text-right">
-						<label><input name="agreement" type="checkbox"
-							id="agreement" class="type_checkbox" value="1" />위의 주의사항을 모두
-							확인하였으며, 위 사항에 동의합니다.</label>
+						<label><input name="poAgree" type="checkbox"
+							class="type_checkbox" value="Y"/>
+							위의 주의사항을 모두 확인하였으며, 위 사항에 동의합니다.</label>
 					</div>
 				</div>
 
@@ -273,72 +273,72 @@
 						<ul>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_130" class="type_radio" value="130"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="USD"
 										data-currency="USD" checked /> 오리건 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_100" class="type_radio" value="100"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="USD"
 										data-currency="USD" /> 뉴저지 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_200" class="type_radio" value="200"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="GBP"
 										data-currency="GBP" /> 영국 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_401" class="type_radio" value="401"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="EUR"
 										data-currency="EUR" /> 독일 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_600" class="type_radio" value="600"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="JPY"
 										data-currency="JPY" /> 일본(항공)-오사카 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_501" class="type_radio" value="501"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="CNY"
 										data-currency="CNY" /> 중국(항공) 
 								</div>
 							</li>
 							<br>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_800" class="type_radio" value="800"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="EUR"
 										data-currency="EUR" /> 스페인 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_1402" class="type_radio" value="1402"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="AUD"
 										data-currency="AUD" /> 호주 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_601" class="type_radio" value="601"
+									<label><input name="poCurrency" type="radio"
+										 class="type_radio" value="JPY"
 										data-currency="JPY" /> 일본(선박)-후쿠오카 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="agencyCode" type="radio"
-										id="agencyCode_510" class="type_radio" value="510"
+									<label><input name="poCurrency" type="radio"
+										class="type_radio" value="CNY"
 										data-currency="CNY" /> 중국(선박) 
 								</div>
 							</li>
@@ -346,7 +346,7 @@
 						<script>
 							$(function() {
 								$(
-										"input:radio[name='agencyCode']:radio[value='130']")
+										"input:radio[name='poCurrency']:radio[value='USD']")
 										.prop('checked', false);
 							});
 						</script>
@@ -357,33 +357,15 @@
 					<div class="display-japan color-red" style="display: none;">※
 						일본 구매대행 불가 쇼핑몰 : 메루카리, 라쿠마(프릴), 오타마트 등 어플기반 사이트, 토호 애니매이션, 아미아미,
 						cos, Levi's 등</div>
-					<script>
-						$(function() {
-							$('input[name=agencyCode]').on('click', function() {
-								$('.display-japan').css('display', 'none');
-								$('.display-china').css('display', 'none');
-							});
-							$('#agencyCode_510').on('click', function() {
-								$('.display-china').css('display', 'block');
-								$('.display-japan').css('display', 'none');
-							});
-							$('#agencyCode_602').on('click', function() {
-								$('.display-japan').css('display', 'block');
-								$('.display-china').css('display', 'none');
-							});
-
-						});
-					</script>
-				</div>
+					</div>
 
 				<h3>
 					구매대행 상품정보 입력
 					<p class="right red " style="font-size: 13px; margin: 5px 0 0;">
 						단가는 상품 1개의 개별 가격을 의미합니다.</p>
 				</h3>
-				<input name="contentData" type="hidden" />
 				<div class="container w-800 left" style="border: solid 1px;">
-					<div class="cell w-50">
+					<div class="cell">
 						구매자(한글)<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
 						<input type="text" name="poNameKor" class="tool w-100"
 							placeholder="한글이름">
@@ -394,9 +376,14 @@
 							placeholder="영어이름">
 					</div>
 					<div class="cell">
-						연락처<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poContact" class="tool w-100"
-							placeholder="전화번호">
+						통관고유번호<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
+						<input type="text" name="poClearanceId" class="tool w-100"
+							placeholder="P로시작">
+					</div>
+					<div class="cell">
+						상품이름(영문)<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
+						<input type="text" name="poItemEngName" class="tool w-100"
+							placeholder="영어로 입력해주세요">
 					</div>
 					<div class="cell">
 						구매링크<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
@@ -410,14 +397,29 @@
 							min="1" max="100">
 					</div>
 					<div class="cell">
-						구매요청사항<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poRcomment" class="tool w-100"
-							placeholder="요청내용을 입력하세요(ex:하얀색 기본옵션 L사이즈)">
+						옵션/색상
+						<input type="text" name="poItemOption1" class="tool w-100"
+							placeholder="ex)red">
 					</div>
 					<div class="cell">
-						배송요청사항<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poDcomment" class="tool w-100"
-							placeholder="배송요청사항을 입력하세요(ex:경비실에 맡겨주세요)">
+						옵션/사이즈
+						<input type="text" name="poItemOption2" class="tool w-100"
+							placeholder="ex)라지">
+					</div>
+					<div class="cell">
+						기타요청사항
+						<input type="text" name="poItemOption3" class="tool w-100"
+							placeholder="ex)고양이 프린팅된걸로 부탁드려요">
+					</div>
+					<div class="cell">
+						금액(외화)
+						<input type="text" name="poFx" class="tool w-100"
+							placeholder="">
+					</div>
+					<div class="cell">
+						연락처<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
+						<input type="text" name="poContact" class="tool w-100"
+							placeholder="전화번호">
 					</div>
 					<div class="cell">
 						우편번호<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
@@ -434,21 +436,13 @@
 						<input type="text" name="poAddress2" class="tool w-100"
 							placeholder="상세주소">
 					</div>
-
 					<div class="cell">
-						통관번호<input type="text" name="memberClearanceId" class="tool w-100">
-						<div class="success-feedback">
-							<label><i class="fa-solid fa-circle-check"></i></label>
-						</div>
-						<div class="fail-feedback">잘못된 형식입니다.</div>
+						배송요청사항<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
+						<input type="text" name="poDcomment" class="tool w-100"
+							placeholder="배송요청사항을 입력하세요(ex:경비실에 맡겨주세요)">
 					</div>
-				</div>
-
 				<div class="button_area text-center">
-					<a href="/" class="bt_close btn btn-lg btn-default"
-						onclick="history.go(-1);">취소</a>
-					<a href="#"	class="bt_submit submitLoadingArea btn">
-						신청서 작성하기</a>
+					<button type="submit" class="btn">신청서 작성하기</button>	
 				</div>
 			</form>
 		</div>
