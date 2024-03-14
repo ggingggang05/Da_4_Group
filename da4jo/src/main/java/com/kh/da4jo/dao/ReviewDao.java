@@ -90,4 +90,8 @@ public class ReviewDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	//connect
+	
+	//이미지
+	
 }

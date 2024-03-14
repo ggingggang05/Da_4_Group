@@ -156,7 +156,7 @@
 
 							for (var i = 0; i < response.length; i++) {
 								var tag = $("<img>").attr("src",
-										"/download?attachNo=" + response[i])
+										"/download?imgNo=" + response[i])
 										.attr("data-key", response[i])
 										.addClass("server-img");
 								$(editor).summernote("insertNode", tag[0]);
