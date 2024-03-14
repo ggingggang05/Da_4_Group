@@ -226,7 +226,7 @@ public class MemberController {
 			return "redirect:/download?imgNo=" + imgNo;
 		}
 		catch(Exception e) {
-			return "redirect:/image/로고템플릿.png";
+			return "redirect:/image/logotemplate.png";
 		}
 	}
 	
