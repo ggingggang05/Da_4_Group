@@ -59,9 +59,9 @@ public class MemberDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	//회원 상세 조회(이메일)
-	public MemberDto selectEmail(String memberEamil) {
+	public MemberDto selectEmail(String memberEmail) {
 		String sql = "select * from member where member_email = ?";
-		Object[] data = {memberEamil};
+		Object[] data = {memberEmail};
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
