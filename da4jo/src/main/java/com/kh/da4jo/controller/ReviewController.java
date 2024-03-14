@@ -1,5 +1,7 @@
 package com.kh.da4jo.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.da4jo.dao.ImgDao;
 import com.kh.da4jo.dao.ReviewDao;
 import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.service.ImgService;
@@ -23,6 +27,8 @@ public class ReviewController {
 	private ReviewDao reviewDao;
 	@Autowired
 	private ImgService imgService;
+	@Autowired
+	private ImgDao imgDao;
 	
 	//리뷰 글 작성
 	@GetMapping("/review/write")
@@ -31,7 +37,8 @@ public class ReviewController {
 	}
 
 	@PostMapping("/review/write")
-	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session) {
+	public String write(@ModelAttribute ReviewDto reviewDto, 
+								@ModelAttribute MultipartFile img, HttpSession session) throws IllegalStateException, IOException {
 		String loginId = (String)session.getAttribute("loginId");
 		reviewDto.setReviewWriter(loginId);
 		
@@ -39,13 +46,13 @@ public class ReviewController {
 		reviewDto.setReviewNo(sequence);
 		reviewDao.insert(reviewDto);
 		
-//		if(!img.isEmpty()) {
-//			int imgNo = imgService.save(img);
-//			
-//			//연결
-//			reviewDao.connect(reviewNo, imgNo);
-//		}
-//		
+		if(!img.isEmpty()) {
+			int imgNo = imgService.save(img);
+			
+			//연결
+			reviewDao.connect(reviewDto.getReviewNo(), imgNo);
+		}
+		
 		return "redirect:detail?reviewNo="+sequence;
 
 	}
@@ -99,15 +106,16 @@ public class ReviewController {
 	}
 	
 	//이미지
-	//	@RequestMapping("/image")
-	//	public String image(HttpSession session) {
-	//		try {
-	//			int attachNo = reviewDao.();
-	//			return "redirect:/download?attachNo="+attachNo;
-	//		}
-	//		catch(Exception e) {
-	//			return "redirect:/image/user.png";
-	//		}
-	//	}
+	@RequestMapping("/image")
+	public String image(@RequestParam int reviewNo) {
+		try {
+			int imgNo = reviewDao.findImgNo(reviewNo);
+			return "redirect:/download?imgNo="+imgNo;
+		}
+		catch(Exception e) {
+			//기본이미지로
+			return "redirect:https://via.placeholder.com/200x100";
+		}
+	}
 	
 }
