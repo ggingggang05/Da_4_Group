@@ -90,8 +90,18 @@ public class ReviewDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	//connect
+	//연결
+	public void connect(int reviewNo, int imgNo) {
+		String sql = "insert into review_img(review_no, img_no) values(?, ?)";
+		Object[] data = {reviewNo, imgNo};
+		jdbcTemplate.update(sql, data);
+	}
 	
 	//이미지
+	public int findImgNo(int reviewNo) {
+		String sql = "select img_no from review_img where review_no = ?";
+		Object[] data = {reviewNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 	
 }

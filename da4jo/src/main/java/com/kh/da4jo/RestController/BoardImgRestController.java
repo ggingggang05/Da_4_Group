@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.da4jo.service.ImgService;
 
-public class ReviewImgRestController {
+public class BoardImgRestController {
 
 	@CrossOrigin
 	@RestController
