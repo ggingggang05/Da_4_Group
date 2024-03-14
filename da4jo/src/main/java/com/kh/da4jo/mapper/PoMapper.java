@@ -14,20 +14,32 @@ public class PoMapper implements RowMapper<PoDto>{
 	@Override
 	public PoDto mapRow(ResultSet rs, int rowNum) throws SQLException{
 		PoDto poDto = new PoDto();
-		poDto.setPoNo(rs.getInt("Po_no"));
-		poDto.setPoCustomer(rs.getString("po_customer"));
-		poDto.setPoNameEng(rs.getString("po_name_eng"));
-		poDto.setPoNameKor(rs.getString("po_name_kor"));
-		poDto.setPoContact(rs.getString("po_contact"));
-		poDto.setPoLink(rs.getString("po_link"));
-		poDto.setPoQty(rs.getInt("po_qty"));
-		poDto.setPoRcomment(rs.getString("po_rcomment"));
-		poDto.setPoZipcode(rs.getString("po_zipcode"));
-		poDto.setPoAddress1(rs.getString("po_address1"));
-		poDto.setPoAddress2(rs.getString("po_address2"));
-		poDto.setPoDcomment(rs.getString("po_dcomment"));
-		poDto.setPoStatus(rs.getString("po_status"));
-		poDto.setPoTotalPrice(rs.getDouble("po_total_price"));
+		poDto.setPoNo(rs.getInt("PO_NO"));
+		poDto.setPoCustomerId(rs.getString("PO_CUSTOMER_ID"));
+		poDto.setPoNameKor(rs.getString("PO_NAME_KOR"));
+		poDto.setPoNameEng(rs.getString("PO_NAME_ENG"));
+		poDto.setPoClearanceId(rs.getString("PO_CLEARANCE_ID"));
+		poDto.setPoItemEngName(rs.getString("PO_ITEM_ENG_NAME"));
+		poDto.setPoLink(rs.getString("PO_LINK"));
+		poDto.setPoQty(rs.getInt("PO_QTY"));
+		poDto.setPoItemOption1(rs.getString("PO_ITEM_OPTION1"));
+		poDto.setPoItemOption2(rs.getString("PO_ITEM_OPTION2"));
+		poDto.setPoItemOption3(rs.getString("PO_ITEM_OPTION3"));
+		poDto.setPoContact(rs.getString("PO_CONTACT"));
+		poDto.setPoZipcode(rs.getString("PO_ZIPCODE"));
+		poDto.setPoAddress1(rs.getString("PO_ADDRESS1"));
+		poDto.setPoAddress2(rs.getString("PO_ADDRESS2"));
+		poDto.setPoDcomment(rs.getString("PO_DCOMMENT"));
+		poDto.setPoStatus(rs.getString("PO_STATUS"));
+		poDto.setPoAwbNumber(rs.getString("PO_AWB_NUMBER"));
+		poDto.setPoSdate(rs.getDate("PO_SDATE"));
+		poDto.setPoEdate(rs.getDate("PO_EDATE"));
+		poDto.setPoCountry(rs.getString("PO_COUNTRY"));
+		poDto.setPoCurrency(rs.getString("PO_CURRENCY"));
+		poDto.setPoFxRate(rs.getDouble("PO_FX_RATE"));
+		poDto.setPoFx(rs.getDouble("PO_FX"));
+		poDto.setPoTotalPrice(rs.getDouble("PO_TOTAL_PRICE"));
+		poDto.setPoAgree(rs.getString("PO_AGREE"));
 		
 		return poDto;
 	}

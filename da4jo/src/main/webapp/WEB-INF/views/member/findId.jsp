@@ -16,9 +16,9 @@
 	<div class="cell">
 		<input type="email" name="memberEmail" required class="tool w-100" placeholder="이메일을 입력하세요">
 	</div>	
-	 <div>
+	 <div class="cell">
     	<c:if test="${param.error != null}">
-			<h4 style= "color:red"> 입력하신 정보가 일치하지 않습니다.</h4>
+			<h4 style= "color:red"> 입력하신 정보가 일치하지 않습니다!</h4>
 		</c:if>
     </div>
 	<div class="cell">

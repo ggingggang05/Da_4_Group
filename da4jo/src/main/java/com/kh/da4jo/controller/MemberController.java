@@ -55,13 +55,14 @@ public class MemberController {
 		//가입 환영 메일 발송
 		emailService.welcomSendMail(memberDto.getMemberEmail());
 		
-		return "redirect:login";
+		//return "redirect:login";
+		return "/WEB-INF/views/member/joinFinish.jsp";
 	}
 	
-//	@RequestMapping("/joinFinish")
-//	public String joinFinish() {
-//		return "/WEB-INF/views/member/joinFinish.jsp";
-//	}
+	@RequestMapping("/joinFinish")
+	public String joinFinish() {
+		return "/WEB-INF/views/member/joinFinish.jsp";
+	}
 	
 	//로그인
 	@GetMapping("/login")
@@ -244,7 +245,7 @@ public class MemberController {
 
 	@PostMapping("/findId")
 	public String findId(@ModelAttribute MemberDto memberDto) {
-		MemberDto findDto = memberDao.selectOne(memberDto.getMemberNameKor());
+		MemberDto findDto = memberDao.selectEmail(memberDto.getMemberEmail());
 		
 		boolean isValid = findDto != null && findDto.getMemberEmail().equals(memberDto.getMemberEmail());
 		if(isValid) {//이메일 존재

@@ -6,13 +6,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.da4jo.dao.CertDao;
 import com.kh.da4jo.dao.MemberDao;
+import com.kh.da4jo.dto.CertDto;
 import com.kh.da4jo.dto.MemberDto;
+import com.kh.da4jo.service.EmailService;
 import com.kh.da4jo.service.ImgService;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,10 +27,16 @@ import jakarta.servlet.http.HttpSession;
 public class MemberRestController {
 	@Autowired
 	private MemberDao memberDao;
+	
 	@Autowired
 	private ImgService imgService;
 
 	// 회원가입 아이디 검사
+	private EmailService emailService;
+	@Autowired
+	private CertDao certDao;
+	
+	//회원가입 아이디 검사
 	@RequestMapping("/checkJoinId")
 	public String checkJoinId(@RequestParam String memberId) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
@@ -88,6 +98,20 @@ public class MemberRestController {
 		
 		memberDao.connect(loginId, imgNo);
 		return numbers;
+	}
+	//이메일 인증 서비스 
+	@RequestMapping("/sendCert")
+		public void sendCert(@RequestParam String memberEmail){
+			//emailService를 이용해서 인증번호를 보내는 코드
+			emailService.sendCert(memberEmail);
+	}
+	@RequestMapping("/checkCert")
+	public boolean checkCert(@ModelAttribute CertDto certDto) {
+		boolean isValid = certDao.checkValid(certDto);
+		if(isValid) {//인증 성공 시 인증번호 삭제
+			certDao.delete(certDto.getCertEmail());
+		}
+		return isValid;
 	}
 
 }
