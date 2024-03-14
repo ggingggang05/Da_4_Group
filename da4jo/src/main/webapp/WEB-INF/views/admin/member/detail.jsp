@@ -50,11 +50,16 @@
 	padding-left: 15px;
 	text-align: left;
 }
-
-.contact-wrapper {
-	display: flex;
-}
 </style>
+<script type="text/javascript">
+	$(function() {
+		if ($(".isBlock").text().trim() === "N") {
+			$(".isBlock").css("color", "rgb(71, 163, 255)");
+		} else if ($(".isBlock").text().trim() === "Y") {
+			$(".isBlock").css("color", "#D1180B");
+		}
+	});
+</script>
 <form action="detail" method="get" autocomplete="off">
 	<div class="container container-body">
 		<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
@@ -95,11 +100,9 @@
 					</div>
 					<div class="info-group">
 						<div class="info-label">연락처</div>
-						<div class="info-content-wrapper contact-wrapper">
-							<div class="info-content contact1">
-								${memberDto.memberContact1}</div>
-							<div class="info-content contact2">
-								${memberDto.memberContact2}</div>
+						<div class="info-content-wrapper">
+							<div class="info-content">${memberDto.memberContact1}</div>
+							<div class="info-content">${memberDto.memberContact2}</div>
 						</div>
 					</div>
 					<div class="info-group">
@@ -176,6 +179,36 @@
 							<div class="info-content">
 								<fmt:formatDate value="${memberDto.memberLoginDate}"
 									pattern="y년 M월 d일 E H시 m분 s초" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content content-body">
+				<div class="info-head w-100">
+					<strong>회원 차단</strong>
+				</div>
+				<div class="info-body">
+					<div class="info-group">
+						<div class="info-label">차단 여부</div>
+						<div class="info-content-wrapper">
+							<div class="info-content isBlock">
+								<strong>${memberDto.memberBlock}</strong>
+							</div>
+							<div class="info-content">
+								<a class="link" href="block?memberId=?">
+									<c:choose>
+										<c:when test="
+										
+										
+										">
+											
+										</c:when>
+										<c:otherwise>
+											
+										</c:otherwise>
+									</c:choose>
+								</a>
 							</div>
 						</div>
 					</div>
