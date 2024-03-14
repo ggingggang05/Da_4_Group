@@ -642,7 +642,7 @@ textarea.tool.tool-fixed {
 }
 
 /* 진행바 디자인(차후 수정 예정)*/
-.progressbar {
+/* .progressbar {
     box-shadow: 0 0 1px 0 #000000;
 }
 .progressbar > .guage {
@@ -653,7 +653,7 @@ textarea.tool.tool-fixed {
     transition: width 0.1s linear;
     border: 1px solid none;
     border-radius: 5px;
-}
+} */
 
 /* select 디자인 업그레이드*/
 .select2-selection__rendered {

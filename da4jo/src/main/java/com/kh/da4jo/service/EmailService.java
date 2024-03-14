@@ -59,23 +59,22 @@ public class EmailService {
 		Random r = new Random();//랜덤 도구
 		StringBuffer buffer = new StringBuffer();//문자열 합성 도구
 		
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<3; i++) {//lower 3개 추출
 			int pos = r.nextInt(lower.length())+0;//lower에서의 랜덤 위치
 			buffer.append(lower.charAt(pos));//버퍼에 추가
 		}
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<3; i++) {//upper 3개 추출
 			int pos = r.nextInt(upper.length())+0;//upper에서의 랜덤 위치
 			buffer.append(upper.charAt(pos));//버퍼에 추가
 		}
-		for(int i=0; i<1; i++) {
+		for(int i=0; i<1; i++) {//number 1개 추출
 			int pos = r.nextInt(number.length())+0;//number에서의 랜덤 위치
 			buffer.append(number.charAt(pos));//버퍼에 추가
 		}
-		for(int i=0; i<1; i++) {
+		for(int i=0; i<1; i++) {//special 1개 추출
 			int pos = r.nextInt(special.length())+0;//special에서의 랜덤 위치
 			buffer.append(special.charAt(pos));//버퍼에 추가
 		}
-		
 		//생성한 비밀번호로 DB를 변경
 		memberDto.setMemberPw(buffer.toString());//비밀번호 설정 후
 		memberDao.updateMemberPw(memberDto);//변경 처리
@@ -98,7 +97,7 @@ public class EmailService {
 		//메일 발송
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(memberEmail);
-		message.setSubject("[KH정보교육원] 인증번호 안내");
+		message.setSubject("[다사조] 인증번호 안내");
 		message.setText("인증번호는 [" + fmt.format(number) + "] 입니다.");
 		
 		sender.send(message);
