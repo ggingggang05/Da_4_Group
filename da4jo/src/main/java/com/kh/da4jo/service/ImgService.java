@@ -22,7 +22,7 @@ public class ImgService
 		File dir = new File(System.getProperty("user.home"), "upload");
 		dir.mkdirs();//폴더가 없다면 생성(있으면 pass)
 		File target = new File(dir, String.valueOf(imgNo));
-		img.transferTo(target);//실물파일저장	}
+		img.transferTo(target);//실물파일저장	
 		
 		ImgDto imgDto = new ImgDto();
 		imgDto.setImgNo(imgNo);

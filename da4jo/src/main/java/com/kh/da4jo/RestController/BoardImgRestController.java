@@ -14,12 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.da4jo.service.ImgService;
 
+@CrossOrigin
+@RestController
+@RequestMapping("/rest/board_attach")
 public class BoardImgRestController {
-
-	@CrossOrigin
-	@RestController
-	@RequestMapping("/rest/board_attach")
-	public class BoardAttachRestController {
 
 	@Autowired
 	private ImgService imgService;
@@ -38,8 +36,7 @@ public class BoardImgRestController {
 		for (MultipartFile attach : attachList) {
 			int attachNo = imgService.save(attach);
 			numbers.add(attachNo);
-			}
-		return numbers;
 		}
+		return numbers;
 	}
 }
