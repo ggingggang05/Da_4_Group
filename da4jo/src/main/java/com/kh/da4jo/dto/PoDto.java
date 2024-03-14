@@ -24,7 +24,7 @@ public class PoDto{
 	private String poAwbNumber; // 송장번호
 	private Date poSdate; // 주문서 작성시각
 	private Date poEdate; // 배송완료 시각
-	private String PoCountry; // 국가
+	private String poCountry; // 국가
 
 	private String poCurrency; // 통화
 	private double poFxRate; // 환율
@@ -153,10 +153,10 @@ public class PoDto{
 		this.poEdate = poEdate;
 	}
 	public String getPoCountry() {
-		return PoCountry;
+		return poCountry;
 	}
 	public void setPoCountry(String poCountry) {
-		PoCountry = poCountry;
+		this.poCountry = poCountry;
 	}
 	public String getPoCurrency() {
 		return poCurrency;
