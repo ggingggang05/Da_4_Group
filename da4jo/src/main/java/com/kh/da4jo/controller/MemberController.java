@@ -33,6 +33,7 @@ public class MemberController {
 	@Autowired
 	private ImgDao imgDao;
 	
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
@@ -185,8 +186,7 @@ public class MemberController {
 	@GetMapping("/mypage/exit")
 	public String exit() {
 		return "/WEB-INF/views/member/mypage/exit.jsp";
-	}
-	
+	}	
 	@PostMapping("/mypage/exit")
 	public String exit(@RequestParam String memberPw,
 					@ModelAttribute MemberDto memberDto,
@@ -229,8 +229,8 @@ public class MemberController {
 		catch(Exception e) {
 			return "redirect:/image/logotemplate.png";
 		}
-	}	
-
+	}
+			
 	//구매 신청서 리스트 페이지
 //	@RequestMapping("/mypage/list")
 //	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {

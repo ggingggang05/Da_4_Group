@@ -37,7 +37,6 @@ public class MemberDao {
 		jdbcTemplate.update(sql,data);
 	}
 	
-	
 	//회원 목록 조회
 	public List<MemberDto>selectList(){
 		String sql = "select * from member order by member_id asc";
@@ -159,7 +158,7 @@ public class MemberDao {
 		
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
-	
+		
 	//프로필 이미지 연결
 	public void connect(String memberId, int imgNo) {
 		String sql = "insert into member_img(member_id, img_no) values(?, ?)";

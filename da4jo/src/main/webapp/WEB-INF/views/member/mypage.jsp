@@ -6,7 +6,6 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
 <style>
 .boxInfo{
 	border-color: #6c6e6e33;
@@ -29,7 +28,43 @@
 	padding: 5px;
 }
 
+.profileEdit{
+	display : none;
+}
+
 </style>
+
+<!-- 프로필 변경 -->
+<script>
+$(function(){
+	$(".profileEdit").on("input", function(){
+		//파일이 없으면 리턴(전송 X)
+		if(this.files.length == 0) return;
+		//console.log(this.files);
+		
+		var formData = new FormData();
+		formData.append("img", this.files[0]);
+		
+		//비동기 통신
+		$.ajax({
+			url : "/rest/member/editProfile", //이미지 업로드를 처리하는 서버
+			method : "post",
+			data : formData, //이미지 파일 데이터 (전송해주기)
+			processData : false,
+			contentType : false,
+			success : function(response) {
+				//서버에서 응답 받은 후 실행되는 함수
+				if (response == null) return;
+				
+				//기존에 있는 img 태그에 넣기!!!
+				$(".newProfile").attr("src", "img");
+			}
+		});
+			
+	});		
+  	
+});
+</script>
 
 
 <!-- 마이페이지 -->
@@ -50,9 +85,10 @@
 			<!-- 회원 정보 -->
 			<div class="boxInfo">
 				<div class="cell center memberInfo">
-					<img src="img" width="100%">
+					<img src="img" width="100%" class="newProfile">
 					<div class="cell">
-						<a class="btn w-50 right" href="#"><i class="fa-solid fa-plus">수정</i></a>
+						<label for="edit-profile"><i class="fa-solid fa-plus">수정</i></label>
+						<input type="file" name="img" class="tool w-100 profileEdit" id="edit-profile">
 					</div>
 					<p><b>'${memberDto.memberId}'</b> 회원님</p>
 				</div>

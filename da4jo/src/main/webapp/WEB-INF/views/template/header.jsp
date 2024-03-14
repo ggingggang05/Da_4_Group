@@ -136,21 +136,26 @@
 			maxHeight : 300,
 			//안내문구 설정
 			callbacks : {
+				//이미지 업로드 시 실행되는 콜백 함수 정의
 				onImageUpload : function(files) {
 					var editor = this;
 
 					var formData = new FormData();
 					for (var i = 0; i < files.length; i++) {
-						formData.append("attachList", files[i]);
+						formData.append("imgList", files[i]);
 					}
 
 					$.ajax({
-						url : "/rest/board_attach/upload",
+						url : "/rest/board_attach/upload", //이미지 업로드를 처리하는 서버
 						method : "post",
-						data : formData,
+						data : formData, //이미지 파일 데이터
 						processData : false,
 						contentType : false,
 						success : function(response) {
+							//서버에서 응답 받은 후 실행되는 함수
+							console.log(response);
+							console.log(response[0]);
+							console.log(response[1]);
 							if (response == null)
 								return;
 
@@ -159,13 +164,14 @@
 										"/download?imgNo=" + response[i])
 										.attr("data-key", response[i])
 										.addClass("server-img");
-								$(editor).summernote("insertNode", tag[0]);
+								$("<img>").attr("insertNode", tag[0]);
 							}
 						}
 					});
 				}
 			}
 		};
+		
 		$("[name=reviewContent]").summernote(options);
 		$("[name=qnaContent]").summernote(options);
 		$("[name=noticeContent]").summernote(options);
