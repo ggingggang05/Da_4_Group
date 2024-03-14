@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<!-- jquery cdn -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 <style>
 .asterisk {
 	font-size: 8px;
@@ -261,8 +264,8 @@
 					</div>
 					<div class="checkbox text-right">
 						<label><input name="poAgree" type="checkbox"
-							class="type_checkbox" value="Y"/>
-							위의 주의사항을 모두 확인하였으며, 위 사항에 동의합니다.</label>
+							class="type_checkbox" value="Y" /> 위의 주의사항을 모두 확인하였으며, 위 사항에
+							동의합니다.</label>
 					</div>
 				</div>
 
@@ -273,81 +276,80 @@
 						<ul>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="USD"
-										data-currency="USD" checked /> 오리건 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="오리건" data-currency="USD" checked />
+										오리건 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="USD"
-										data-currency="USD" /> 뉴저지 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="뉴저지" data-currency="USD" /> 뉴저지 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="GBP"
-										data-currency="GBP" /> 영국 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="영국" data-currency="GBP" /> 영국 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="EUR"
-										data-currency="EUR" /> 독일 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="독일" data-currency="EUR" /> 독일 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="JPY"
-										data-currency="JPY" /> 일본(항공)-오사카 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="일본(항공)-오사카" data-currency="JPY" />
+										일본(항공)-오사카 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="CNY"
-										data-currency="CNY" /> 중국(항공) 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="중국(항공)" data-currency="CNY" />
+										중국(항공) 
 								</div>
 							</li>
 							<br>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="EUR"
-										data-currency="EUR" /> 스페인 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="스페인" data-currency="EUR" /> 스페인 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="AUD"
-										data-currency="AUD" /> 호주 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="호주" data-currency="AUD" /> 호주 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										 class="type_radio" value="JPY"
-										data-currency="JPY" /> 일본(선박)-후쿠오카 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="일본(선박)-후쿠오카" data-currency="JPY" />
+										일본(선박)-후쿠오카 
 								</div>
 							</li>
 							<li>
 								<div class="info radio">
-									<label><input name="poCurrency" type="radio"
-										class="type_radio" value="CNY"
-										data-currency="CNY" /> 중국(선박) 
+									<label><input name="poCountry" type="radio"
+										class="type_radio" value="중국(선박)" data-currency="CNY" />
+										중국(선박) 
 								</div>
 							</li>
 						</ul>
 						<script>
 							$(function() {
-								$(
-										"input:radio[name='poCurrency']:radio[value='USD']")
-										.prop('checked', false);
+								$('input[name=poCountry]').on('click',function() {
+									var currency = $(this).data('currency');
+									// 선택된 국가의 통화를 가져와서 변수에 저장
+									console.log('선택된 통화: ' + currency);
+									// 선택된 통화를 콘솔에 출력 (이 부분은 필요에 따라 백엔드로 전달하거나 다른 작업을 수행할 수 있음)
+									$('#Form').append('<input type="text" name="currency" value="' + currency + '">');		
+								});
 							});
 						</script>
 					</div>
@@ -357,7 +359,7 @@
 					<div class="display-japan color-red" style="display: none;">※
 						일본 구매대행 불가 쇼핑몰 : 메루카리, 라쿠마(프릴), 오타마트 등 어플기반 사이트, 토호 애니매이션, 아미아미,
 						cos, Levi's 등</div>
-					</div>
+				</div>
 
 				<h3>
 					구매대행 상품정보 입력
@@ -381,9 +383,9 @@
 							placeholder="P로시작">
 					</div>
 					<div class="cell">
-						상품이름(영문)<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poItemEngName" class="tool w-100"
-							placeholder="영어로 입력해주세요">
+						상품이름(영문)<label><i
+							class="fa-solid fa-asterisk red asterisk"></i></label> <input type="text"
+							name="poItemEngName" class="tool w-100" placeholder="영어로 입력해주세요">
 					</div>
 					<div class="cell">
 						구매링크<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
@@ -397,23 +399,19 @@
 							min="1" max="100">
 					</div>
 					<div class="cell">
-						옵션/색상
-						<input type="text" name="poItemOption1" class="tool w-100"
+						옵션/색상 <input type="text" name="poItemOption1" class="tool w-100"
 							placeholder="ex)red">
 					</div>
 					<div class="cell">
-						옵션/사이즈
-						<input type="text" name="poItemOption2" class="tool w-100"
+						옵션/사이즈 <input type="text" name="poItemOption2" class="tool w-100"
 							placeholder="ex)라지">
 					</div>
 					<div class="cell">
-						기타요청사항
-						<input type="text" name="poItemOption3" class="tool w-100"
+						기타요청사항 <input type="text" name="poItemOption3" class="tool w-100"
 							placeholder="ex)고양이 프린팅된걸로 부탁드려요">
 					</div>
 					<div class="cell">
-						금액(외화)
-						<input type="text" name="poFx" class="tool w-100"
+						금액(외화) <input type="text" name="poFx" class="tool w-100"
 							placeholder="">
 					</div>
 					<div class="cell">
@@ -441,9 +439,9 @@
 						<input type="text" name="poDcomment" class="tool w-100"
 							placeholder="배송요청사항을 입력하세요(ex:경비실에 맡겨주세요)">
 					</div>
-				<div class="button_area text-center">
-					<button type="submit" class="btn">신청서 작성하기</button>	
-				</div>
+					<div class="button_area text-center">
+						<button type="submit" class="btn">신청서 작성하기</button>
+					</div>
 			</form>
 		</div>
 	</div>
