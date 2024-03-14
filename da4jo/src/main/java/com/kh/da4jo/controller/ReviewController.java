@@ -46,7 +46,7 @@ public class ReviewController {
 
 	@PostMapping("/review/write")
 	public String write(@ModelAttribute ReviewDto reviewDto,
-					HttpSession session,@RequestParam("imgNo") int imgNo) {
+					HttpSession session,@RequestParam int imgNo) {
 		String loginId = (String)session.getAttribute("loginId");
 		reviewDto.setReviewWriter(loginId);
 		
