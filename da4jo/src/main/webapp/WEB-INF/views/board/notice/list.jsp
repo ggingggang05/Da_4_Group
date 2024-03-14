@@ -4,53 +4,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-.title {
-	border-top: 1px solid #bdc3c7;
-	border-bottom: 1px solid #bdc3c7;
-	background-color: #ecf0f1;
-}
 
-.list {
-	border-bottom: 1px solid #b2bec3;
-}
 </style>
-<div class="container w-1000">
-	<br> <br>
-	<div class="container container-body">
-		<div class="container flex-container">
-			<div class="container inner-container">
-				<div class="title title-head">
-					<div class="title-head-text">title-head</div>
-				</div>
-				<div class="title title-body">
-					<div class="title-body-main">
-						<div class="title-body-text">
-							<a class="link">title-body-main1</a>
-						</div>
-						<div class="title-body-sub"></div>
-					</div>
-					<div class="title-body-main">
-						<div class="title-body-text">
-							<a class="link">title-body-main2</a>
-						</div>
-						<div class="title-body-sub">
-							<div class="title-body-text">
-								<a class="link">title-body-sub2</a>
-							</div>
-						</div>
-					</div>
-					<div class="title-body-main">
-						<div class="title-body-text">
-							<a class="link">title-body-main3</a>
-						</div>
-						<div class="title-body-sub">
-							<div class="title-body-text">
-								<a class="link">title-body-sub3</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+	<br>
+		<div class="container container-body">
+		<jsp:include page="/WEB-INF/views/template/board-sidebar.jsp"></jsp:include>
 			<!-- 내용자리 -->
 			<div class="container inner-container">
 				<div class="content content-head">
@@ -103,7 +61,5 @@
 				</div>
 			</div>
 		</div>
-		<hr>
-	</div>
 
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
