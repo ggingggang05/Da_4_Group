@@ -26,14 +26,14 @@ public class PoDao {
 		String sql = "INSERT INTO PO(PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG,"
 				+ "	  PO_CLEARANCE_ID, PO_ITEM_ENG_NAME, PO_LINK, PO_QTY, PO_ITEM_OPTION1,"
 				+ "	  PO_ITEM_OPTION2, PO_ITEM_OPTION3, PO_CONTACT, PO_ZIPCODE,"
-				+ "	  PO_ADDRESS1, PO_ADDRESS2, PO_DCOMMENT, PO_CURRENCY, PO_FX, PO_AGREE ) "
-				+ "	  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "	  PO_ADDRESS1, PO_ADDRESS2, PO_DCOMMENT, PO_COUNTRY, PO_CURRENCY, PO_FX, PO_AGREE ) "
+				+ "	  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] data = { 
 				poDto.getPoNo(), poDto.getPoCustomerId(), poDto.getPoNameKor(), poDto.getPoNameEng(),
 				poDto.getPoClearanceId(), poDto.getPoItemEngName(), poDto.getPoLink(), poDto.getPoQty(),
 				poDto.getPoItemOption1(), poDto.getPoItemOption2(), poDto.getPoItemOption3(), poDto.getPoContact(),
 				poDto.getPoZipcode(), poDto.getPoAddress1(), poDto.getPoAddress2(), poDto.getPoDcomment(),
-				poDto.getPoCurrency(), poDto.getPoFx(), poDto.getPoAgree() 
+				poDto.getPoCountry(), poDto.getPoCurrency(), poDto.getPoFx(), poDto.getPoAgree() 
 				};
 		jdbcTemplate.update(sql, data);
 	}
