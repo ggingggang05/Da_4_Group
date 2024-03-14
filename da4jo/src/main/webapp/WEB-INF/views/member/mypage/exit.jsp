@@ -6,8 +6,15 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script type="text/javascript">
+    function validateForm() {
+		var choice = window.confirm("정말 탈퇴하시겠습니까?");
+		if(choice == false) return;
+    }
+</script>
+
 <!-- 회원 탈퇴 페이지 -->
-<form action="exit" method="post">
+<form action="exit" method="post" autocomplete="off" onsubmit="return validateForm()">
 	<div class="container w-500">
 		<div class="cell center">
 			<h1>회원 탈퇴</h1>

@@ -123,7 +123,8 @@ public class MemberController {
 		return"/WEB-INF/views/member/mypage/change.jsp"; 
 	}
 	@PostMapping("/mypage/change")
-	public String change(@ModelAttribute MemberDto memberDto, HttpSession session) {
+	public String change(@ModelAttribute MemberDto memberDto, HttpSession session,
+					@RequestParam MultipartFile img) throws IllegalStateException, IOException {
 		//로그인 아이디 추출
 		String loginId = (String)session.getAttribute("loginId");
 		//memberDto에 아이디 설정
@@ -136,6 +137,14 @@ public class MemberController {
 		//변경 (판정문이 맞다면 == 현재 입력된 비밀번호와 원래 비밀번호 일치 여부 확인)
 		if(isValid) {
 			memberDao.updateMember(memberDto);
+			
+			//첨부파일 등록
+			if(!img.isEmpty()) {
+				int imgNo = imgService.save(img);//파일저장 + DB저장
+				
+				memberDao.connect(memberDto.getMemberId(), imgNo);//연결
+			}
+			
 			return "redirect:/member/mypage";
 		} else {
 			return "redirect:/member/mypage/change?error";
@@ -177,21 +186,36 @@ public class MemberController {
 		return "/WEB-INF/views/member/mypage/exit.jsp";
 	}
 	
-//	@PostMapping("/mypage/exit")
-//	public String exit(@RequestParam String memberPw,
-//					@ModelAttribute MemberDto memberDto,
-//					HttpSession session) {
-//		String loginId = (String)session.getAttribute("loginId");
-//		
-//		MemberDto findDto = memberDao.selectOne(loginId);
-//		boolean isValid = findDto.getMemberPw().equals(memberPw);
-//		
-//		if(isValid) {
-//			try {
-//				int 
-//			}
-//		}
-//	}
+	@PostMapping("/mypage/exit")
+	public String exit(@RequestParam String memberPw,
+					@ModelAttribute MemberDto memberDto,
+					HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		MemberDto findDto = memberDao.selectOne(loginId);
+		boolean isValid = findDto.getMemberPw().equals(memberPw);
+		
+		if(isValid) {
+			try {
+				//프로필 삭제
+				int imgNo = memberDao.findImgNo(loginId);
+				imgService.removeFile(imgNo);
+			} 
+			catch(Exception e) {
+				//e.printStackTrace();
+			}
+			finally {
+				//회원 탈퇴
+				memberDao.deleteMember(loginId);
+				//로그아웃
+				session.removeAttribute("loginId");
+			}
+			return "redirect:/";
+		}
+		else {
+			return "redirect:exit?error";
+		}
+	}
 	
 	//프로필 다운로드
 	@RequestMapping("/img")
@@ -205,6 +229,8 @@ public class MemberController {
 			return "redirect:/image/로고템플릿.png";
 		}
 	}
+	
+	
 	
 	
 	
