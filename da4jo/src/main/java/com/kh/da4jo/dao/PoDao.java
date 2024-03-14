@@ -28,11 +28,13 @@ public class PoDao {
 				+ "	  PO_ITEM_OPTION2, PO_ITEM_OPTION3, PO_CONTACT, PO_ZIPCODE,"
 				+ "	  PO_ADDRESS1, PO_ADDRESS2, PO_DCOMMENT, PO_CURRENCY, PO_FX, PO_AGREE ) "
 				+ "	  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] data = { poDto.getPoNo(), poDto.getPoCustomerId(), poDto.getPoNameKor(), poDto.getPoNameEng(),
+		Object[] data = { 
+				poDto.getPoNo(), poDto.getPoCustomerId(), poDto.getPoNameKor(), poDto.getPoNameEng(),
 				poDto.getPoClearanceId(), poDto.getPoItemEngName(), poDto.getPoLink(), poDto.getPoQty(),
 				poDto.getPoItemOption1(), poDto.getPoItemOption2(), poDto.getPoItemOption3(), poDto.getPoContact(),
 				poDto.getPoZipcode(), poDto.getPoAddress1(), poDto.getPoAddress2(), poDto.getPoDcomment(),
-				poDto.getPoCurrency(), poDto.getPoFx(), poDto.getPoAgree() };
+				poDto.getPoCurrency(), poDto.getPoFx(), poDto.getPoAgree() 
+				};
 		jdbcTemplate.update(sql, data);
 	}
 
