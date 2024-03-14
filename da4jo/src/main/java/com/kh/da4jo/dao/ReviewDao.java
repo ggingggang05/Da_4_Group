@@ -92,8 +92,8 @@ public class ReviewDao {
 	
 	//연결
 	public void connect(int reviewNo, int imgNo) {
-		String sql = "insert into review_img(review_no, img_no) values(?, ?)";
-		Object[] data = {reviewNo, imgNo};
+		String sql = "insert into review_img(img_no, review_no) values(?, ?)";
+		Object[] data = {imgNo, reviewNo};
 		jdbcTemplate.update(sql, data);
 	}
 	

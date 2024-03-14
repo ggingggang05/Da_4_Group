@@ -38,20 +38,13 @@ public class ReviewController {
 
 	@PostMapping("/review/write")
 	public String write(@ModelAttribute ReviewDto reviewDto, 
-								@ModelAttribute MultipartFile img, HttpSession session) throws IllegalStateException, IOException {
+					HttpSession session) throws IllegalStateException, IOException {
 		String loginId = (String)session.getAttribute("loginId");
 		reviewDto.setReviewWriter(loginId);
 		
 		int sequence = reviewDao.getSequence();
 		reviewDto.setReviewNo(sequence);
 		reviewDao.insert(reviewDto);
-		
-		if(!img.isEmpty()) {
-			int imgNo = imgService.save(img);
-			
-			//연결
-			reviewDao.connect(reviewDto.getReviewNo(), imgNo);
-		}
 		
 		return "redirect:detail?reviewNo="+sequence;
 

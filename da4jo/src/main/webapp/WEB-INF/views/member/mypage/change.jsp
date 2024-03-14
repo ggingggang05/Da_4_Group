@@ -182,7 +182,7 @@ $(function(){
 	});
 });
 </script>
-
+ ㅜㅡ ㅠ
 <!-- 개인정보 수정 페이지 -->
 <!-- <form action="/member/mypage/change" method="post" autocomplete="off"> -->
 <form action="change" method="post" autocomplete="off" onsubmit="return validateForm()">
