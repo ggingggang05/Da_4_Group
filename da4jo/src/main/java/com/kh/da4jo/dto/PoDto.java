@@ -23,12 +23,13 @@ public class PoDto{
 	private String poStatus; // 주문상태
 	private String poAwbNumber; // 송장번호
 	private Date poSdate; // 주문서 작성시각
-	private Date poEDate; // 배송완료 시각
+	private Date poEdate; // 배송완료 시각
 	private String poCurrency; // 통화
 	private double poFxRate; // 환율
 	private double poFx; // 외화금액
 	private double poTotalPrice; // 원화금액
 	private String poAgree; // 약관동의
+	
 	public int getPoNo() {
 		return poNo;
 	}
@@ -143,11 +144,11 @@ public class PoDto{
 	public void setPoSdate(Date poSdate) {
 		this.poSdate = poSdate;
 	}
-	public Date getPoEDate() {
-		return poEDate;
+	public Date getPoEdate() {
+		return poEdate;
 	}
-	public void setPoEDate(Date poEDate) {
-		this.poEDate = poEDate;
+	public void setPoEdate(Date poEdate) {
+		this.poEdate = poEdate;
 	}
 	public String getPoCurrency() {
 		return poCurrency;
@@ -179,6 +180,7 @@ public class PoDto{
 	public void setPoAgree(String poAgree) {
 		this.poAgree = poAgree;
 	}
+
 	public PoDto() {
 		super();
 	}
