@@ -34,6 +34,7 @@ public class PoMapper implements RowMapper<PoDto>{
 		poDto.setPoAwbNumber(rs.getString("PO_AWB_NUMBER"));
 		poDto.setPoSdate(rs.getDate("PO_SDATE"));
 		poDto.setPoEdate(rs.getDate("PO_EDATE"));
+		poDto.setPoCountry(rs.getString("PO_COUNTRY"));
 		poDto.setPoCurrency(rs.getString("PO_CURRENCY"));
 		poDto.setPoFxRate(rs.getDouble("PO_FX_RATE"));
 		poDto.setPoFx(rs.getDouble("PO_FX"));
