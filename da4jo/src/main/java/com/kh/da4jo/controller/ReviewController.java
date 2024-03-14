@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.da4jo.dao.ReviewDao;
 import com.kh.da4jo.dto.ReviewDto;
+import com.kh.da4jo.service.ImgService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +21,8 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewDao reviewDao;
+	@Autowired
+	private ImgService imgService;
 	
 	//리뷰 글 작성
 	@GetMapping("/review/write")
@@ -36,6 +39,13 @@ public class ReviewController {
 		reviewDto.setReviewNo(sequence);
 		reviewDao.insert(reviewDto);
 		
+//		if(!img.isEmpty()) {
+//			int imgNo = imgService.save(img);
+//			
+//			//연결
+//			reviewDao.connect(reviewNo, imgNo);
+//		}
+//		
 		return "redirect:detail?reviewNo="+sequence;
 
 	}
@@ -89,16 +99,15 @@ public class ReviewController {
 	}
 	
 	//이미지
-//	@RequestMapping("/image")
-//	public String image(HttpSession session) {
-//		try {
-//			String loginId = (String) session.getAttribute("loginId");
-//			int attachNo = reviewDao.findAttachNo(loginId);
-//			return "redirect:/download?attachNo="+attachNo;
-//		}
-//		catch(Exception e) {
-//			return "redirect:/image/user.png";
-//		}
-//	}
+	//	@RequestMapping("/image")
+	//	public String image(HttpSession session) {
+	//		try {
+	//			int attachNo = reviewDao.();
+	//			return "redirect:/download?attachNo="+attachNo;
+	//		}
+	//		catch(Exception e) {
+	//			return "redirect:/image/user.png";
+	//		}
+	//	}
 	
 }
