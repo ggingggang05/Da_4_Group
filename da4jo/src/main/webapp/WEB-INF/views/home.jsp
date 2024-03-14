@@ -34,6 +34,10 @@
 			direction : 'horizontal',
 			loop : true,
 			speed : 2000,
+			autoplay : {
+				delay : 5000,
+				disableOnInteraction: false,
+			},
 			navigation : {
 				nextEl : '.swiper-button-next',//다음버튼 선택자
 				prevEl : '.swiper-button-prev',//이전버튼 선택자
