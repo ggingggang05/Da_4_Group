@@ -67,7 +67,6 @@ $(function(){
 </script>
 
 
-
 <!-- 마이페이지 -->
 <br>
 <br>
