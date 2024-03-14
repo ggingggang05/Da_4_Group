@@ -348,7 +348,7 @@
 									// 선택된 국가의 통화를 가져와서 변수에 저장
 									console.log('선택된 통화: ' + currency);
 									// 선택된 통화를 콘솔에 출력 (이 부분은 필요에 따라 백엔드로 전달하거나 다른 작업을 수행할 수 있음)
-									$('#Form').append('<input type="text" name="currency" value="' + currency + '">');		
+									$('Form').append('<input type="hidden" name="poCurrency" value="' + currency + '">');		
 								});
 							});
 						</script>
