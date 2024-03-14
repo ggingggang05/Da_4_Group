@@ -2,10 +2,14 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <script type="text/javascript">
-	$(funcion(){
-		var firstImg = $(".server-img").eq(0).data("key");
-		$("input[name='imgNo']").val(firstImg);
-	});
+$(function(){
+	var firstImgNo = parseInt($(".server-img").eq(0).data("key"));
+	$('<input>').attr({
+        type: 'hidden',
+        name: 'imgNo',
+        value: firstImgNo
+    }).appendTo('form');
+});
 </script>
 <form action="write" method="post" autocapitalize="off">
 <div class="container w-800">
@@ -29,7 +33,6 @@
 		<input type="file" name="img" accept="image/*" class="tool w-100">
 	</div>
 	--%>
-	<input type="hidden" name="imgNo">
 		<button class="btn">등록</button>
 	</div>
 	
