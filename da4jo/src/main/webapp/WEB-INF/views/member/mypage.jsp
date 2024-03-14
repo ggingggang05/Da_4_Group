@@ -135,7 +135,7 @@ $(function(){
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link">내가 쓴 리뷰</a>
+						<a class="link" href="/member/board/review">내가 쓴 리뷰</a>
 					</div>
 				</div>
 			</div>

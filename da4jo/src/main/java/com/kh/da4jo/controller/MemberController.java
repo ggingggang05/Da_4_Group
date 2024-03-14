@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.da4jo.dao.CreditDao;
 import com.kh.da4jo.dao.ImgDao;
 import com.kh.da4jo.dao.MemberDao;
+import com.kh.da4jo.dao.ReviewDao;
 import com.kh.da4jo.dto.MemberDto;
+import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.service.EmailService;
 import com.kh.da4jo.service.ImgService;
 
@@ -35,6 +37,8 @@ public class MemberController {
 	private ImgDao imgDao;
 	@Autowired
 	private CreditDao creditDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	
 	//회원가입
@@ -248,7 +252,6 @@ public class MemberController {
 	public String findId() {
 		return "/WEB-INF/views/member/findId.jsp";
 	}
-
 	@PostMapping("/findId")
 	public String findId(@ModelAttribute MemberDto memberDto) {
 		MemberDto findDto = memberDao.selectEmail(memberDto.getMemberEmail());
@@ -276,8 +279,7 @@ public class MemberController {
 	@GetMapping("/findPw")
 	public String findPw() {
 		return "/WEB-INF/views/member/findPw.jsp";
-	}
-	
+	}	
 	@PostMapping("/findPw")
 	public String findPw(
 			@ModelAttribute MemberDto memberDto) {
@@ -293,16 +295,31 @@ public class MemberController {
 	    	return "redirect:findPw?error";
 	    	//return "redirect:findPwFail";
 	    }
-	}
-	
+	}	
 	@RequestMapping("/findPwSuccess")
 	public String findPwSuccess() {
 		return "/WEB-INF/views/member/findPwSuccess.jsp";
 	}
-	
 	@RequestMapping("/findPwFail")
 	public String findPwFail() {
 		return "/WEB-INF/views/member/findPwFail.jsp";
+	}
+	
+	
+	//내가 쓴 리뷰글 페이지
+	@RequestMapping("/board/review")
+	public String review(@ModelAttribute ReviewDto reviewDto, HttpSession session,
+						Model model) {
+		//로그인 아이디 추출
+		String loginId = (String) session.getAttribute("loginId");
+		//아이디로 정보 조회
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		//화면으로 전달
+		model.addAttribute("memberDto", memberDto);
+		//내가 쓴 리뷰 글 가져오기
+		model.addAttribute("reviewList", reviewDao.selectOne(reviewDto.getReviewNo()));
+		
+		return "/WEB-INF/views/member/board/review.jsp";
 	}
 	
 	
