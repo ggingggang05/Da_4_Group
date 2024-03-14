@@ -28,7 +28,7 @@
 						<a class="link">배송대행목록</a>
 					</div>
 					<div class="title-body-text">
-						<a class="link">구매대행목록</a>
+						<a href="/admin/po/list" class="link">구매대행목록</a>
 					</div>
 					<div class="title-body-text">
 						<a class="link">취소/반품/미수취</a>
