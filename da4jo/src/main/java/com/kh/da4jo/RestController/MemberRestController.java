@@ -38,6 +38,7 @@ public class MemberRestController {
 		}
 	}
 
+	
 	// 이메일 검사
 	@RequestMapping("/checkEmail")
 	public String checkEmail(@RequestParam String memberEmail) {

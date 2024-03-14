@@ -6,7 +6,6 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
 <style>
 .boxInfo{
 	border-color: #6c6e6e33;

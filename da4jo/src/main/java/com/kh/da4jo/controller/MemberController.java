@@ -33,6 +33,7 @@ public class MemberController {
 	@Autowired
 	private ImgDao imgDao;
 	
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
