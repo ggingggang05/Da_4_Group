@@ -87,7 +87,7 @@ $(function(){
 			<!-- 회원 정보 -->
 			<div class="boxInfo">
 				<div class="cell center memberInfo">
-					<img src="/image/logotemplate.png" width="100%" class="newProfile">
+					<img src="img" width="100%" class="newProfile">
 					<div class="cell">
 						<label for="edit-profile"><i class="fa-solid fa-plus">수정</i></label>
 						<input type="file" name="img" class="tool w-100 profileEdit" id="edit-profile">
