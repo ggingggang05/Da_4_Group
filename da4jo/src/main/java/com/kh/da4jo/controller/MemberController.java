@@ -228,27 +228,79 @@ public class MemberController {
 		catch(Exception e) {
 			return "redirect:/image/logotemplate.png";
 		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
+
 	//구매 신청서 리스트 페이지
 //	@RequestMapping("/mypage/list")
 //	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {
 //		
 //	}
+
+	//아이디 찾기
+	@GetMapping("/findId")
+	public String findId() {
+		return "/WEB-INF/views/member/findId.jsp";
+	}
+
+	@PostMapping("/findId")
+	public String findId(@ModelAttribute MemberDto memberDto) {
+		MemberDto findDto = memberDao.selectOne(memberDto.getMemberNameKor());
+		
+		boolean isValid = findDto != null && findDto.getMemberEmail().equals(memberDto.getMemberEmail());
+		if(isValid) {//이메일 존재
+			emailService.sendMemberId(findDto.getMemberEmail());
+			return "redirect:findIdSuccess";
+		}
+		else {//이메일 없음
+			//return "redirect:findIdFail";
+			return "redirect:findId?error";
+		}
+	}
+	@RequestMapping("/findIdSuccess")
+	public String findIdSuccess() {
+		return "/WEB-INF/views/member/findIdSuccess.jsp";
+	}
+//	@RequestMapping("/findIdFail")
+//	public String findIdFail() {
+//		return "/WEB-INF/views/member/findIdFail.jsp";
+//	}
+	
+	//비밀번호 찾기
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	
+	@PostMapping("/findPw")
+	public String findPw(
+			@ModelAttribute MemberDto memberDto) {
+		MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
+		
+		boolean isValid = findDto != null && findDto.getMemberEmail().equals(memberDto.getMemberEmail());
+		if(isValid) {
+			emailService.sendTempPassword(findDto);
+			return "redirect:findPwSuccess";
+		}
+	
+	    else {
+	    	return "redirect:findPw?error";
+	    	//return "redirect:findPwFail";
+	    }
+	}
+	
+	@RequestMapping("/findPwSuccess")
+	public String findPwSuccess() {
+		return "/WEB-INF/views/member/findPwSuccess.jsp";
+	}
+	
+	@RequestMapping("/findPwFail")
+	public String findPwFail() {
+		return "/WEB-INF/views/member/findPwFail.jsp";
+	}
 	
 	
 }
+
 
 
 
