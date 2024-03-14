@@ -37,10 +37,10 @@ public class AdminMemberController
 		}
 		return "/WEB-INF/views/admin/member/search.jsp";
 	}
-//	@RequestMapping("/detail")
-//	public String detail(@RequestParam String memberId, Model model) {
-//		MemberDto memberDto = memberDao.selectOne(memberId);
-//		model.addAttribute("memberDto", memberDto);
-//		return "/WEB-INF/views/admin/member/detail.jsp";
-//	}
+	@RequestMapping("/detail")
+	public String detail(@RequestParam String memberId, Model model) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/admin/member/detail.jsp";
+	}
 }

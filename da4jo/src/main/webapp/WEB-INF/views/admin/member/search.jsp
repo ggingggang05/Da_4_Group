@@ -47,7 +47,7 @@
 					<li>${memberDto.memberEmail}</li>
 					<li>${memberDto.memberClearanceId}</li>
 					<li>${memberDto.memberBlock}</li>
-					<li><a href="mypage?${memberDto.memberId}"><i
+					<li><a href="detail?memberId=${memberDto.memberId}"><i
 							class="fa-solid fa-list"></i></a></li>
 				</ul>
 			</c:forEach>
