@@ -4,11 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.kh.da4jo.dao.NoticeDao;
-import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dao.QnaDao;
-import com.kh.da4jo.dao.ReviewDao;
-import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.dto.QnaDto;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,16 +14,11 @@ import jakarta.servlet.http.HttpSession;
 
 
 @Service
-public class OwnerInterceptor implements HandlerInterceptor{
-	@Autowired
-	private NoticeDao noticeDao;
-	@Autowired
-	private PoDao poDao;
+public class QnaOwnerInterceptor implements HandlerInterceptor{
+
 	@Autowired
 	private QnaDao qnaDao;
-	@Autowired
-	private ReviewDao reviewDao;
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -50,6 +41,7 @@ public class OwnerInterceptor implements HandlerInterceptor{
 			//나머지 차단
 			response.sendError(403);
 			return false;
-			
 	}
+	
+	
 }
