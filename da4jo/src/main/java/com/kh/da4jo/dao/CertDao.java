@@ -40,7 +40,7 @@ public class CertDao {
 		String sql = "select * from cert "
 								+ "where cert_email = ? "
 									+ "and cert_number = ? "
-									+ "and  cert_time >= sysdate - 5/24/60";
+									+ "and  cert_time >= sysdate-5/24/60";
 		Object[] data = {certDto.getCertEmail(), certDto.getCertNumber()};
 		List<CertDto> list = jdbcTemplate.query(sql, certMapper, data);
 		return list.isEmpty() ? false : true;

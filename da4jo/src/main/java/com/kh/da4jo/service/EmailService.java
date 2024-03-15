@@ -97,7 +97,7 @@ public class EmailService {
 		//메일 발송
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(memberEmail);
-		message.setSubject("[다사조] 인증번호 안내");
+		message.setSubject("[다사조] 회원가입 인증번호");
 		message.setText("인증번호는 [" + fmt.format(number) + "] 입니다.");
 		
 		sender.send(message);

@@ -185,12 +185,11 @@
 	        var address1 = $("[name=memberAddress1]").val();
 	        var address2 = $("[name=memberAddress2]").val();
 
-	        var isAddress1Null = address1.length == 0;
-	        var isAddress2Null = address2.length == 0;
-		
-	    	 // "zipcode", "address1", "address2" 모두 null이거나
-	        // "zipcode", "address1"이 모두 null이 아니면서 "address2"가 null인 경우 valid
-	        state.memberAddressValid = (zipcode.length == 0 && isAddress1Null && isAddress2Null) || (!isAddress1Null && isAddress2Null);
+	        var isClear = zipcode.length == 0 && address1.length == 0 && address2.length == 0;
+	        var isFill = zipcode.length > 0 && address1.length > 0 && address2.length > 0;
+	        var address2Null = zipcode.length > 0 && address1.length > 0 && address2.length == 0;
+	        
+	        state.memberAddressValid = isClear || isFill || address2Null;
 	        
 	        $("[name=memberZipcode], [name=memberAddress1], [name=memberAddress2]")
 				            .removeClass("success fail")
@@ -202,6 +201,45 @@
 	    //인증메일
     	$(function(){
     		
+            var state = {
+                    memberEmailValid: false
+                };
+            
+            var timer;
+    	    var minutes = 5;
+    	    var seconds = 0;
+    	
+    	    function startTimer() {
+    	        timer = setInterval(updateTimer, 1000);
+    	    }
+    	
+    	    function updateTimer() {
+    	        if (seconds > 0) {
+    	            seconds--;
+    	        } else {
+    	            if (minutes > 0) {
+    	                minutes--;
+    	                seconds = 59;
+    	            } else {
+    	                clearInterval(timer);
+    	                $(".timer").hide(); // 타이머 숨기기
+    	                return;
+    	            }
+    	        }
+    	
+    	        var timerText = ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
+    	        $(".timer").text(timerText);
+    	    }
+    	
+    	    startTimer();
+    	
+    	    // 인증번호 입력 시 타이머 숨기기
+    	    $("input[name='verificationCode']").on("input", function() {
+    	        if ($(this).val().length > 0) {
+    	            clearInterval(timer);
+    	            $(".timer").hide(); // 타이머 숨기기
+    	        }
+    	    });
     		
     		//인증메일 보내기
             var memberEmail;
@@ -263,6 +301,12 @@
                             //$(".btn-check-cert").remove();
                             $(".btn-check-cert").prop("disabled", true);
                             state.memberEmailValid = true;
+                            
+                            // 인증번호 입력 후 타이머를 멈추고 숨기기
+                            clearInterval(timer);
+                            $(".timer").text("인증완료").css("color", "green");
+                            $(".timer").fadeOut(1000); // 1초 후 타이머 숨기기
+
                         }
                         else{
                         	state.memberEmailValid =false;
@@ -274,14 +318,17 @@
                     //complete:function(){}
                 });
             });
-    	});
+
+    });
     </script>
+
     <script type="text/template" id="cert-template">
         <div>
 			<div class="cell plex-cell">
            		<input type="text" class="tool cert-input" 
                                         placeholder="인증번호">
             	<button type= "button" class="btn btn-check-cert">확인</button>
+				<div class="timer"></div>
 			</div>
             <div class="success-feedback">이메일 인증 완료</div>
             <div class="fail-feedback">인증번호 불일치</div>
@@ -314,6 +361,42 @@
 		}
 	});
 	</script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    $(function(){
+        $(".btn-address-search").click(function(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var addr = ''; // 주소 변수
+
+                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        addr = data.roadAddress;
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        addr = data.jibunAddress;
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    $("[name=memberZipcode]").val(data.zonecode);
+                    $("[name=memberAddress1]").val(addr);
+                    
+                    // 커서를 상세주소 필드로 이동한다.
+                    $("[name=memberAddress2]").focus();
+                }
+            }).open();
+        });
+        
+        $(".btn-address-clear").click(function(){
+        	$("[name=memberZipcode]").val("");
+        	$("[name=memberAddress1]").val("");
+        	$("[name=memberAddress2]").val("");
+        });
+    });
+</script>
 
 	<style>
 	/* 프로그레스 바 스타일 */
@@ -322,7 +405,7 @@
 	  height: 30px;
 	  background-color: #f2f2f2;
 	  margin-bottom: 20px;
-      border-color: black 2px;
+/*       border-color: 2px solid black; */
 
 	}
 	
@@ -335,11 +418,16 @@
 	  font-weight: bold;
       border-color: black 2px;
 	}
+	.timer{
+	color: red;
+	}
 </style>
+
     
 </head>
 <body>
-	<form action="join" method="post" autocomplete="off" enctype="multipart/form-data">
+	<form action="join" method="post" autocomplete="off" enctype="multipart/form-data" 
+									class="check-form">
 		<div class="container w-500">
 			<div class="cell center">
 				<h1>회원가입 화면</h1>
@@ -489,17 +577,23 @@
 				</div>
 				
 				<div class="cell">
-					<input type="text" name="memberZipcode" class= "tool w-20" placeholder="우편번호">
+					<input type="text" name="memberZipcode" class= "tool w-20" placeholder="우편번호" readonly>
+		            <button type="button" class="btn btn-address-search">
+                		<i class="fa-solid fa-magnifying-glass"></i>
+            		</button>      
+     		            <button type="button" class="btn btn-address-clear">
+			            	<i class="fa-solid fa-xmark"></i>
+			            </button>
 				</div>
 				<div class="cell">
-					<input type="text" name="memberAddress1" class= "tool w-50" placeholder= "기본주소">
+					<input type="text" name="memberAddress1" class= "tool w-50" placeholder= "기본주소" readonly>
 				</div>
 				<div class="cell">
 					<input type="text" name="memberAddress2" class= "tool" placeholder="상세주소">
 						<div class="success-feedback">
 							<label><i class="fa-solid fa-circle-check"></i></label>
 						</div>
-					<div class="fail-feedback">주소를 모두 작성하세요</div>
+					<div class="fail-feedback">주소를 검색하여 우편번호를 입력해주세요.</div>
 				</div>
 				
 
