@@ -40,6 +40,7 @@ public class PoMapper implements RowMapper<PoDto>{
 		poDto.setPoCurrency(rs.getString("PO_CURRENCY"));
 		poDto.setPoFxRate(rs.getDouble("PO_FX_RATE"));
 		poDto.setPoFx(rs.getDouble("PO_FX"));
+		poDto.setPoItemPriceKrw(rs.getDouble("PO_ITEM_PRICE_KRW"));
 		poDto.setPoItemVat(rs.getDouble("PO_ITEM_VAT"));
 		poDto.setPoServiceFee(rs.getInt("PO_SERVICE_FEE"));
 		poDto.setPoTotalPriceKrw(rs.getInt("PO_TOTAL_PRICE_KRW"));

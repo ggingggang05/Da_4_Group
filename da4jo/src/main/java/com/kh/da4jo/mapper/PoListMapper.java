@@ -21,6 +21,7 @@ public class PoListMapper implements RowMapper<PoDto> {
 		poDto.setPoSdate(rs.getDate("PO_SDATE"));
 		poDto.setPoFx(rs.getDouble("PO_FX"));
 		poDto.setPoServiceFee(rs.getInt("PO_SERVICE_FEE"));
+		poDto.setPoItemPriceKrw(rs.getDouble("PO_ITEM_PRICE_KRW"));
 		poDto.setPoTotalPriceKrw(rs.getInt("PO_TOTAL_PRICE_KRW"));
 		
 		return poDto;
