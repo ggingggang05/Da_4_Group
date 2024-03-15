@@ -8,7 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.kh.da4jo.interceptor.AdminInterceptor;
 import com.kh.da4jo.interceptor.BlockInterceptor;
 import com.kh.da4jo.interceptor.MemberInterceptor;
-import com.kh.da4jo.interceptor.OwnerInterceptor;
+import com.kh.da4jo.interceptor.QnaOwnerInterceptor;
+import com.kh.da4jo.interceptor.ReviewOwnerInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
@@ -20,7 +21,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	@Autowired
 	private BlockInterceptor blockInterceptor;
 	@Autowired
-	private OwnerInterceptor ownerInterceptor;
+	private QnaOwnerInterceptor QnaOwnerInterceptor;
+	@Autowired
+	private ReviewOwnerInterceptor reviewOwnerInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -48,12 +51,20 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/board/review/write",
 						"/member/po/request"
 						);
-		//본인 글만 작성하게	
-		registry.addInterceptor(ownerInterceptor)
-						.addPathPatterns(
+		//QnA 본인 글만 수정, 삭제
+		registry.addInterceptor(QnaOwnerInterceptor)
+						.addPathPatterns( 
 								"/board/qna/edit"
-								
 						);
-	
+		//Review 본인 글만 수정, 삭제
+		registry.addInterceptor(reviewOwnerInterceptor)
+						.addPathPatterns( 
+								"/board/review/edit"
+						);
 	}
+	
+
+	
+	//조회수 방지
+	
 }
