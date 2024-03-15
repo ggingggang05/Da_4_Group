@@ -84,5 +84,10 @@ public class QnaDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	
+	//Qna 조회수 증가
+	public boolean updateQnaReadcount(int qnaNo) {
+		String sql = "update qna set qna_vcount = qna_vcount + 1 where qna_no = ?";
+		Object[] data = {qnaNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 }

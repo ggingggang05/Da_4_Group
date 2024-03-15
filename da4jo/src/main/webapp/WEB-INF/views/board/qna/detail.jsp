@@ -42,7 +42,7 @@
 	
 		<div class="cell right">
 			<div class="cell">
-				<label>작성일 : ${qnaDto.qnaWdate} </label>
+				<label>작성일 : ${qnaDto.qnaWdate}</label>
 				<label>조회수 : ${qnaDto.qnaVcount}</label>
 			</div>
 		</div>
