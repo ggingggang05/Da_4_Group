@@ -255,6 +255,38 @@ public class PoDto {
 		this.poAgree = poAgree;
 	}
 
+	/* 가상의 변수를 만들어서 금액 계산해줘야함
+	poItemPriceKrw(상품금액)
+	poItemVat(부가세)
+	poServiceFee(결제수수료)
+	poTotalPriceKrw(총결제금액)
+	
+	poFx * poFxRate = poItemPriceKrw 상품금액
+	--
+	만약 부가세가 20만원이 넘으면 계산값을 보여주게
+	poItemPriceKrw * 0.1 = poItemVat
+	--
+	(poItemPriceKrw * 0.05) + 10000 = poServiceFee
+	수수료는 결제금액의 5%+1만원
+	--
+	poItemPriceKrw + poItemVat + poServiceFee = poTotalPriceKrw
+	총 결제금액
+	*/
+	public double getItemPrice() {
+		return poFx*poFxRate;
+	}// 원화금액 계산 환율이랑 외화 곱해서
+	public double getVat() {
+		return  poItemPriceKrw*0.1;
+	}
+	public double getFee() {
+		return (poItemPriceKrw*0.05)+10000;
+	}
+	public int getTotalPrice() {
+		return (int)(poItemPriceKrw+poItemVat+poServiceFee);
+	}
+	
+	
+	
 	public PoDto() {
 		super();
 	}
