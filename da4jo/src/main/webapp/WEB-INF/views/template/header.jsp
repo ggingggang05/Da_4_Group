@@ -164,17 +164,15 @@
 										"/download?imgNo=" + response[i])
 										.attr("data-key", response[i])
 										.addClass("server-img");
-								$("<img>").attr("insertNode", tag[0]);
+								$(".imgArea").summernote("insertNode", tag[0]);
 							}
 						}
 					});
 				}
 			}
 		};
-		
-		$("[name=reviewContent]").summernote(options);
-		$("[name=qnaContent]").summernote(options);
-		$("[name=noticeContent]").summernote(options);
+		$(".imgArea").summernote(options);
+
 	});
 </script>
 
