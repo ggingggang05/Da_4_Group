@@ -66,11 +66,12 @@ public class PoDao {
 	// U(update) 상품가격만 알려주는 업데이트
 	public boolean update(PoDto poDto) {
 		String sql = "update po "
-						+ "set PO_ITEM_VAT=?, PO_SERVICE_FEE=?, PO_TOTAL_PRICE_KRW=? "
+						+ "set PO_ITEM_VAT=?, PO_SERVICE_FEE=?, PO_TOTAL_PRICE_KRW=?, PO_ITEM_PRICE_KRW=? "
 						+ "where po_no = ?";
 		Object[] data = {
 			poDto.getPoItemVat(), poDto.getPoServiceFee(),
-			poDto.getPoTotalPriceKrw()
+			poDto.getPoTotalPriceKrw(), poDto.getPoItemPriceKrw(),
+			poDto.getPoNo()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}

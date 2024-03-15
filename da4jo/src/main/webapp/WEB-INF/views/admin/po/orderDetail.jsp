@@ -204,13 +204,41 @@
 				<div class="info-head w-100">
 					<strong>결제정보</strong>
 				</div>
+				<!-- 사용자에게 결제금액 전달해주는 창인데 자동계산되게 함
+				원래 200달러 이상만 부가세 대상인데 우리는 다른 통화가 있어서..
+				그것까지 고려하면 너무 어려워서 그냥 20만원 이상이면 부가세 내게 함
+				수수료는 상품금액(원화)의 5%에 기본수수료 1만원 더해서 출력 -->
 				<form action="orderDetail" method="post" autocomplete="off">
 					<div class="info-body">
 						<div class="info-group">
-							<div class="info-label">상품금액</div>
+							<div class="info-label">상품금액(원화)</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poServiceFee">
+									<fmt:formatNumber type="number"
+										value="${poDto.poFx * poDto.poFxRate}" pattern="######"
+										var="formattedPrice" />
+									<input type="text" name="poItemPriceKrw"
+										value="${formattedPrice}" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">부가세</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									<c:choose>
+										<c:when test="${poDto.poFx * poDto.poFxRate >= 200000}">
+											<fmt:formatNumber type="number"
+												value="${(poDto.poFx * poDto.poFxRate) * 0.1}"
+												pattern="######" var="formattedVat" />
+										</c:when>
+										<c:otherwise>
+											<fmt:formatNumber type="number" value="0" pattern="###,###"
+												var="formattedVat" />
+										</c:otherwise>
+									</c:choose>
+									<input type="text" name="poItemVat" value="${formattedVat}"
+										readonly>
 								</div>
 							</div>
 						</div>
@@ -218,7 +246,11 @@
 							<div class="info-label">수수료</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poServiceFee">
+									<fmt:formatNumber type="number"
+										value="${(poDto.poFx * poDto.poFxRate * 0.05) + 10000}"
+										pattern="######" var="formattedCommission" />
+									<input type="text" name="poServiceFee"
+										value="${formattedCommission}" readonly>
 								</div>
 							</div>
 						</div>
@@ -226,23 +258,26 @@
 							<div class="info-label">결제금액</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poTotalPriceKrw">
+									<fmt:formatNumber type="number"
+										value="${(poDto.poFx * poDto.poFxRate) + ((poDto.poFx * poDto.poFxRate) * 0.1) + ((poDto.poFx * poDto.poFxRate) * 0.05) + 10000}"
+										pattern="######" var="formattedTotalPrice" />
+									<input type="text" name="poTotalPriceKrw"
+										value="${formattedTotalPrice}" readonly>
 								</div>
 							</div>
 						</div>
-					</div>
+						<input type="hidden" name="poNo" value="${poDto.poNo}">
+						<div class="cell right"><button type="submit" class="btn">사용자에게 전송</button></div>
 				</form>
-					<div class="cell center">
-						<a href="/admin/po/orderList" class="link">
-							<button class="btn">목록으로</button>
-						</a> <a href="#"
-							class="link">
-							<button class="btn">수정</button>
-						</a> <a href="#"
-							class="link">
-							<button class="btn">삭제</button>
-						</a>
-					</div>
+				<div class="cell center">
+					<a href="/admin/po/orderList" class="link">
+						<button class="btn">목록으로</button>
+					</a> <a href="#" class="link">
+						<button class="btn">수정</button>
+					</a> <a href="#" class="link">
+						<button class="btn">삭제</button>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
