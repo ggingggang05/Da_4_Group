@@ -782,7 +782,7 @@ textarea.tool.tool-fixed {
 .container.container-body{
 	width: 1140px;
 }
-.container.container-body.container-body-admin {
+.container.container-body.container-body-long {
 	width: 1570px
 }
 /* ul 타입(분류)*/
@@ -804,11 +804,17 @@ textarea.tool.tool-fixed {
 
 /* flex container 비율 설정*/
 .flex-container>.container:nth-child(1) {
-    width: 15%;
+    width: 20%;
 }
 
 .flex-container>.container:nth-child(2) {
-    width: 85%;
+    width: 80%;
+}
+.container-body-long>.flex-container>.inner-container:nth-child(1) {
+	width: 15%;
+}
+.container-body-long>.flex-container>.inner-container:nth-child(2) {
+	width: 85%;
 }
 
 /* 요소 컨테이너 padding설정*/
