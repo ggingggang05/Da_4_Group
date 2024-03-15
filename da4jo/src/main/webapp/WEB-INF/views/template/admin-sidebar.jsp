@@ -15,7 +15,7 @@
 						<a href="/admin/member/search" class="link">회원목록검색</a>
 					</div>
 					<div class="title-body-text">
-						<a class="link">차단회원관리</a>
+						<a href="/admin/member/block/searchList" class="link">차단회원관리</a>
 					</div>
 				</div>
 			</div>
