@@ -32,6 +32,7 @@ public class MemberRestController {
 	private ImgService imgService;
 
 	// 회원가입 아이디 검사
+	@Autowired
 	private EmailService emailService;
 	@Autowired
 	private CertDao certDao;
