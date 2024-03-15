@@ -26,16 +26,16 @@ public class BoardImgRestController {
 	// - 사용자가 summernote를 이용해서 드래그 또는 선택한 이미지들을 업로드
 	// - 업로드가 완료되면 summernote가 이미지를 표시할 수 있도록 이미지 번호를 반환
 	@PostMapping("/upload")
-	public List<Integer> upload(@RequestParam List<MultipartFile> attachList)
+	public List<Integer> upload(@RequestParam List<MultipartFile> imgList)
 			throws IllegalStateException, IOException {
 		// 올린 내용이 없으면 중지
-		if (attachList.isEmpty())
+		if (imgList.isEmpty())
 			return null;
 
 		List<Integer> numbers = new ArrayList<>();
-		for (MultipartFile attach : attachList) {
-			int attachNo = imgService.save(attach);
-			numbers.add(attachNo);
+		for (MultipartFile img : imgList) {
+			int imgNo = imgService.save(img);
+			numbers.add(imgNo);
 		}
 		return numbers;
 	}

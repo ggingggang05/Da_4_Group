@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<script type="text/javascript">
-$(function(){
-	var firstImgNo = parseInt($(".server-img").eq(0).data("key"));
-	$('<input>').attr({
-        type: 'hidden',
-        name: 'imgNo',
-        value: firstImgNo
-    }).appendTo('form');
-});
-</script>
+
 <form action="write" method="post" autocapitalize="off">
 <div class="container w-800">
 	<div>

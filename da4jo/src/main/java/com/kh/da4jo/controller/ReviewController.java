@@ -46,7 +46,7 @@ public class ReviewController {
 
 	@PostMapping("/review/write")
 	public String write(@ModelAttribute ReviewDto reviewDto,
-					HttpSession session,@RequestParam int imgNo) {
+					HttpSession session) {
 		String loginId = (String)session.getAttribute("loginId");
 		reviewDto.setReviewWriter(loginId);
 		
@@ -54,7 +54,7 @@ public class ReviewController {
 		reviewDto.setReviewNo(sequence);
 		reviewDao.insert(reviewDto);
 		
-		reviewDao.connect(reviewDto.getReviewNo(), imgNo);
+//		reviewDao.connect(reviewDto.getReviewNo(), imgNo);
 		
 		return "redirect:detail?reviewNo="+sequence;
 
