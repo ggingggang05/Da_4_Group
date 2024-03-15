@@ -196,16 +196,13 @@
 								<strong>${memberDto.memberBlock}</strong>
 							</div>
 							<div class="info-content">
-								<a class="link" href="block?memberId=?">
+								<a class="link" href="block/add?memberId=${memberDto.memberId}">
 									<c:choose>
-										<c:when test="
-										
-										
-										">
-											
+										<c:when test="${memberDto.memberBlock == 'N'}">
+											<p>멤버 차단</p>
 										</c:when>
 										<c:otherwise>
-											
+											<p>차단 해제</p>
 										</c:otherwise>
 									</c:choose>
 								</a>

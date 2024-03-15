@@ -5,10 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.da4jo.dao.MemberBlockDao;
 import com.kh.da4jo.dao.MemberDao;
+import com.kh.da4jo.dto.MemberBlockDto;
 import com.kh.da4jo.dto.MemberDto;
 
 @Controller
@@ -17,6 +22,8 @@ public class AdminMemberController
 {
 	@Autowired
 	MemberDao memberDao;
+	@Autowired
+	MemberBlockDao memberBlockDao;
 	
 	@RequestMapping("/search")
 	public String search(
@@ -42,5 +49,31 @@ public class AdminMemberController
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto", memberDto);
 		return "/WEB-INF/views/admin/member/detail.jsp";
+	}
+	
+	//회원 차단
+	@GetMapping("/block/add")
+	public String add(@RequestParam String memberId, Model model) {
+		model.addAttribute("memberId", memberId);
+		return "/WEB-INF/views/admin/member/block/add.jsp";
+	}
+	@PostMapping("/block/add")
+	public String add(@RequestParam String memberId,
+									@RequestParam String blockReason) {
+		//차단할 사용자의 Dto를 찾아서
+		MemberDto targetDto = memberDao.selectOne(memberId);
+		//차단 상태를 Y로 바꾸고
+		targetDto.setMemberBlock("Y");
+		//db에 업데이트
+		memberBlockDao.changeMemberStatus(targetDto);
+		//차단멤버 db에 추가
+		//dto생성
+		MemberBlockDto memberBlockDto = new MemberBlockDto();
+		//id와 이유 추가(시간은 sysdate 번호는 sequence로 부여)
+		memberBlockDto.setBlockMemberId(memberId);
+		memberBlockDto.setBlockReason(blockReason);
+		memberBlockDto.setBlockStatus("정지회원");
+		memberBlockDao.blockMember(memberBlockDto);
+		return "redirect:/admin/member/detail?memberId=" + memberId;
 	}
 }
