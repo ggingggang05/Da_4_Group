@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,10 +34,16 @@ public class AdminPoController {
 		return "/WEB-INF/views/admin/po/orderList.jsp";
 	}
 	
-	@RequestMapping("/orderDetail")
+	@GetMapping("/orderDetail")
 	public String orderDetail(@RequestParam int poNo, Model model) {
 		PoDto poDto = poDao.selectOne(poNo);
 		model.addAttribute("poDto",poDto);
 		return "/WEB-INF/views/admin/po/orderDetail.jsp";
+	}
+	@PostMapping("/orderDetail")
+	public String orderDetail(@ModelAttribute PoDto poDto) {
+		System.out.println(poDto.toString());
+		poDao.update(poDto);
+		return "redirect:orderList";
 	}
 }
