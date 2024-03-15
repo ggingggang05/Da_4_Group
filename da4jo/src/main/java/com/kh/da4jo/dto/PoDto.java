@@ -258,4 +258,17 @@ public class PoDto {
 	public PoDto() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "PoDto [poNo=" + poNo + ", poCustomerId=" + poCustomerId + ", poNameKor=" + poNameKor + ", poNameEng="
+				+ poNameEng + ", poClearanceId=" + poClearanceId + ", poLink=" + poLink + ", poItemEngName="
+				+ poItemEngName + ", poItemCategory=" + poItemCategory + ", poItemWeight=" + poItemWeight + ", poQty="
+				+ poQty + ", poItemOption1=" + poItemOption1 + ", poItemOption2=" + poItemOption2 + ", poItemOption3="
+				+ poItemOption3 + ", poContact=" + poContact + ", poZipcode=" + poZipcode + ", poAddress1=" + poAddress1
+				+ ", poAddress2=" + poAddress2 + ", poDcomment=" + poDcomment + ", poStatus=" + poStatus
+				+ ", poAwbNumber=" + poAwbNumber + ", poSdate=" + poSdate + ", poEdate=" + poEdate + ", poCountry="
+				+ poCountry + ", poCurrency=" + poCurrency + ", poFxRate=" + poFxRate + ", poFx=" + poFx
+				+ ", poItemPriceKrw=" + poItemPriceKrw + ", poItemVat=" + poItemVat + ", poServiceFee=" + poServiceFee
+				+ ", poTotalPriceKrw=" + poTotalPriceKrw + ", poAgree=" + poAgree + "]";
+	}
 }
