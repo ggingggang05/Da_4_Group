@@ -27,7 +27,7 @@
 			<div class="cell center my-50">
 
 
-			
+				<c:if test="${sessionScope.loginLevel == '일반회원'}">
 			
 				<%-- 일반회원일때 기능 --%> 
 				<ul class="menu menu-type">
@@ -48,8 +48,6 @@
 							<c:if test="${qnaDto.qnaSecreate == 'Y'}">
 							<li><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></li>
 							</c:if>
-							
-							
 <!-- 						<li><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></li> -->
 						
 						<li>${qnaDto.qnaWriter}</li>
@@ -62,6 +60,7 @@
 						<li>${qnaDto.qnaVcount}</li>
 					</ul>
 				</c:forEach>
+				</c:if>
 				
 				
 				<%-- 관리자 일때 --%>
