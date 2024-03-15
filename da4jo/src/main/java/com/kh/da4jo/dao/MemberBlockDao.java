@@ -16,7 +16,7 @@ public class MemberBlockDao
 	@Autowired
 	MemberBlockMapper memberBlockMapper;
 	
-	public void blockMember(MemberBlockDto memberBlockDto ) {
+	public void insertMemberBlock(MemberBlockDto memberBlockDto ) {
 		String sql = "INSERT INTO MEMBER_BLOCK(BLOCK_NO, BLOCK_MEMBER_ID, BLOCK_STATUS, BLOCK_REASON) "
 				+ "VALUES(MEMBER_BLOCK_SEQ.NEXTVAL, ?, ?, ?)";
 		Object[] datas = {memberBlockDto.getBlockMemberId(), memberBlockDto.getBlockStatus(), memberBlockDto.getBlockReason()};

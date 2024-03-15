@@ -72,8 +72,34 @@ public class AdminMemberController
 		//id와 이유 추가(시간은 sysdate 번호는 sequence로 부여)
 		memberBlockDto.setBlockMemberId(memberId);
 		memberBlockDto.setBlockReason(blockReason);
-		memberBlockDto.setBlockStatus("정지회원");
-		memberBlockDao.blockMember(memberBlockDto);
+		memberBlockDto.setBlockStatus("이용정지");
+		memberBlockDao.insertMemberBlock(memberBlockDto);
 		return "redirect:/admin/member/detail?memberId=" + memberId;
 	}
+	
+	//회원 차단 해제
+		@GetMapping("/block/cancel")
+		public String cancel(@RequestParam String memberId, Model model) {
+			model.addAttribute("memberId", memberId);
+			return "/WEB-INF/views/admin/member/block/cancel.jsp";
+		}
+		@PostMapping("/block/cancel")
+		public String cancel(@RequestParam String memberId,
+										@RequestParam String cancelReason) {
+			//차단 해제할 사용자의 Dto를 찾아서
+			MemberDto targetDto = memberDao.selectOne(memberId);
+			//차단 상태를 N으로 바꾸고
+			targetDto.setMemberBlock("N");
+			//db에 업데이트
+			memberBlockDao.changeMemberStatus(targetDto);
+			//차단멤버 db에 차단해제 상태로 추가
+			//dto생성
+			MemberBlockDto memberBlockDto = new MemberBlockDto();
+			//id와 이유 추가(시간은 sysdate 번호는 sequence로 부여)
+			memberBlockDto.setBlockMemberId(memberId);
+			memberBlockDto.setBlockReason(cancelReason);
+			memberBlockDto.setBlockStatus("차단해제");
+			memberBlockDao.insertMemberBlock(memberBlockDto);
+			return "redirect:/admin/member/detail?memberId=" + memberId;
+		}
 }
