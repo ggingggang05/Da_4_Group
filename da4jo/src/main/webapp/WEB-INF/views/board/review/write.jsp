@@ -15,7 +15,7 @@
 	
 	<h2>내용</h2>
 	<div>
-		<textarea name="reviewContent"></textarea>
+		<textarea class="imgArea"  name="reviewContent"></textarea>
 	</div>	
 	
 	<%-- 
