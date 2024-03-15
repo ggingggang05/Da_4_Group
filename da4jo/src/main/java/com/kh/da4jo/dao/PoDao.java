@@ -52,8 +52,33 @@ public class PoDao {
 		return jdbcTemplate.query(sql, poMapper, data);
 	}
 
-	// U(update)
+	//단일조회
+	public PoDto selectOne(int poNo) {
+		String sql = "select * from po where po_no = ?";
+		Object[] data = {poNo};
+		List<PoDto> list = jdbcTemplate.query(sql, poMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	// U(update) 상품가격만 알려주는 업데이트
+	public boolean update(PoDto poDto) {
+		String sql = "update po "
+						+ "set PO_ITEM_VAT=?, PO_SERVICE_FEE=?, PO_TOTAL_PRICE_KRW=? "
+						+ "where po_no = ?";
+		Object[] data = {
+			poDto.getPoItemVat(), poDto.getPoServiceFee(),
+			poDto.getPoTotalPriceKrw()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
+	
 
 	// D(delete)
+	public boolean delete(int poNo) {
+		String sql = "delete po where po_no = ?";
+		Object[] data = {poNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 
 }

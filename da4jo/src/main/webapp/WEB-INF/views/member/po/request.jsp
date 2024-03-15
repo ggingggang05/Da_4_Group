@@ -399,6 +399,10 @@
 							min="1" max="100">
 					</div>
 					<div class="cell">
+						카테고리 <input type="text" name="poItemCategory" class="tool w-100"
+							placeholder="ex)가방">
+					</div>
+					<div class="cell">
 						옵션/색상 <input type="text" name="poItemOption1" class="tool w-100"
 							placeholder="ex)red">
 					</div>
