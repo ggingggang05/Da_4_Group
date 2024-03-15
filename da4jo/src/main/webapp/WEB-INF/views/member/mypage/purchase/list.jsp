@@ -50,7 +50,7 @@
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
 <br>
 <br>
-<div class="container container-body">
+<div class="container container-body-long">
 	<!-- 마이페이지 헤더 -->
 	<div class="container inner-container">
 		<div class="content content-head">
@@ -159,7 +159,7 @@
 						<c:forEach var="poDto" items="${poList}">
 							<ul class="menu menu-list">
 								<li id="poNo">${poDto.poNo}</li>
-								<li id="poItemEngName"><a href="/mypage/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</li>
+								<li id="poItemEngName"><a href="mypage/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</li>
 								<li id="poItemCategory">${poDto.poItemCategory}</li>
 								<li id="poSdate">${poDto.poSdate}</li>
 								<li id="poStatus">${poDto.poStatus}</li>
