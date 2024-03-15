@@ -1,5 +1,7 @@
 package com.kh.da4jo.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,13 +16,13 @@ public class PoDao {
 	@Autowired
 	private PoMapper poMapper;
 
-
 	// poNo 미리 뽑기
 	public int getSequence() {
 		String sql = "select po_seq.nextval from dual";
 		// jdbcTemplate.queryForObject(구문, 결과자료형);
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+
 	// 주문서 등록
 	public void insert(PoDto poDto) {
 		String sql = "INSERT INTO PO(PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG,"
@@ -28,17 +30,27 @@ public class PoDao {
 				+ "	  PO_ITEM_OPTION2, PO_ITEM_OPTION3, PO_CONTACT, PO_ZIPCODE,"
 				+ "	  PO_ADDRESS1, PO_ADDRESS2, PO_DCOMMENT, PO_COUNTRY, PO_CURRENCY, PO_FX, PO_AGREE ) "
 				+ "	  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] data = { 
-				poDto.getPoNo(), poDto.getPoCustomerId(), poDto.getPoNameKor(), poDto.getPoNameEng(),
+		Object[] data = { poDto.getPoNo(), poDto.getPoCustomerId(), poDto.getPoNameKor(), poDto.getPoNameEng(),
 				poDto.getPoClearanceId(), poDto.getPoItemEngName(), poDto.getPoLink(), poDto.getPoQty(),
 				poDto.getPoItemOption1(), poDto.getPoItemOption2(), poDto.getPoItemOption3(), poDto.getPoContact(),
 				poDto.getPoZipcode(), poDto.getPoAddress1(), poDto.getPoAddress2(), poDto.getPoDcomment(),
-				poDto.getPoCountry(), poDto.getPoCurrency(), poDto.getPoFx(), poDto.getPoAgree() 
-				};
+				poDto.getPoCountry(), poDto.getPoCurrency(), poDto.getPoFx(), poDto.getPoAgree() };
 		jdbcTemplate.update(sql, data);
 	}
 
-	// R(read)
+	// R(read) 공지목록
+	public List<PoDto> selectList() {// 공지의 단순 목록만 나오게
+		String sql = "select * from po order by PO_NO desc";
+		return jdbcTemplate.query(sql, poMapper);
+	}
+
+	// 공지의 검색 목록이 나옴
+	public List<PoDto> selectList(String column, String keyword) {
+		String sql = "select PO_NO, PO_CUSTOMER_ID, PO_ITEM_ENG_NAME from po where instr(" + column + ", ?) > 0 "
+				+ " order by PO_NO desc";
+		Object[] data = { keyword };
+		return jdbcTemplate.query(sql, poMapper, data);
+	}
 
 	// U(update)
 
