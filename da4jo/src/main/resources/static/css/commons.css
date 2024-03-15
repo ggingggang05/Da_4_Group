@@ -782,6 +782,9 @@ textarea.tool.tool-fixed {
 .container.container-body{
 	width: 1140px;
 }
+.container.container-body.container-body-long {
+	width: 1570px
+}
 /* ul 타입(분류)*/
 .menu.menu-type {
 	background-color: #F1F3F5;
@@ -806,6 +809,12 @@ textarea.tool.tool-fixed {
 
 .flex-container>.container:nth-child(2) {
     width: 80%;
+}
+.container-body-long>.flex-container>.inner-container:nth-child(1) {
+	width: 15%;
+}
+.container-body-long>.flex-container>.inner-container:nth-child(2) {
+	width: 85%;
 }
 
 /* 요소 컨테이너 padding설정*/

@@ -19,8 +19,10 @@ public class PoMapper implements RowMapper<PoDto>{
 		poDto.setPoNameKor(rs.getString("PO_NAME_KOR"));
 		poDto.setPoNameEng(rs.getString("PO_NAME_ENG"));
 		poDto.setPoClearanceId(rs.getString("PO_CLEARANCE_ID"));
-		poDto.setPoItemEngName(rs.getString("PO_ITEM_ENG_NAME"));
 		poDto.setPoLink(rs.getString("PO_LINK"));
+		poDto.setPoItemEngName(rs.getString("PO_ITEM_ENG_NAME"));
+		poDto.setPoItemCategory(rs.getString("PO_ITEM_CATEGORY"));
+		poDto.setPoItemWeight(rs.getDouble("PO_ITEM_WEIGHT"));
 		poDto.setPoQty(rs.getInt("PO_QTY"));
 		poDto.setPoItemOption1(rs.getString("PO_ITEM_OPTION1"));
 		poDto.setPoItemOption2(rs.getString("PO_ITEM_OPTION2"));
@@ -38,7 +40,9 @@ public class PoMapper implements RowMapper<PoDto>{
 		poDto.setPoCurrency(rs.getString("PO_CURRENCY"));
 		poDto.setPoFxRate(rs.getDouble("PO_FX_RATE"));
 		poDto.setPoFx(rs.getDouble("PO_FX"));
-		poDto.setPoTotalPrice(rs.getDouble("PO_TOTAL_PRICE"));
+		poDto.setPoItemVat(rs.getDouble("PO_ITEM_VAT"));
+		poDto.setPoServiceFee(rs.getInt("PO_SERVICE_FEE"));
+		poDto.setPoTotalPriceKrw(rs.getInt("PO_TOTAL_PRICE_KRW"));
 		poDto.setPoAgree(rs.getString("PO_AGREE"));
 		
 		return poDto;
