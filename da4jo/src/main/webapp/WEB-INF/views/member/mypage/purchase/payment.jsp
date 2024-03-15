@@ -219,6 +219,7 @@
 					<input type="hidden" name="poNo" value="${poDto.poNo}">
 					<a href="#" class="link">
 						<button class="btn">결제하기</button>
+						
 					</a> 
 				</form>
 			</div>
