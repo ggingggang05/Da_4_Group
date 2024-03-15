@@ -24,11 +24,11 @@ public class QnaDao {
 	//작성
 	public void insert(QnaDto qnaDto) {
 		String sql = "insert into qna("
-				+ "qna_no, qna_title, qna_content, "
+				+ "qna_no,qna_secreat, qna_title, qna_content, "
 				+ "qna_writer, qna_vcount) "
-				+ "values(?, ?, ?, ?, ?)";
+				+ "values(?, ?, ?, ?, ?, ?)";
 		Object[] data = {
-					qnaDto.getQnaNo(), 
+					qnaDto.getQnaNo(), qnaDto.getQnaSecreate(),
 					qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
 					qnaDto.getQnaWriter(), qnaDto.getQnaVcount()				
 				};
