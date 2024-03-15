@@ -61,7 +61,7 @@
 	});
 </script>
 <form action="detail" method="get" autocomplete="off">
-	<div class="container container-body container-body-admin">
+	<div class="container container-body">
 		<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 		<div class="container inner-container">
 			<div class="content content-head">
