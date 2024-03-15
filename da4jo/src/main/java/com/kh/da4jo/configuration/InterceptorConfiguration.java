@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.kh.da4jo.interceptor.AdminInterceptor;
 import com.kh.da4jo.interceptor.BlockInterceptor;
 import com.kh.da4jo.interceptor.MemberInterceptor;
+import com.kh.da4jo.interceptor.OwnerInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
@@ -18,6 +19,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	private AdminInterceptor adminInterceptor;
 	@Autowired
 	private BlockInterceptor blockInterceptor;
+	@Autowired
+	private OwnerInterceptor ownerInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -42,7 +45,14 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(blockInterceptor)
 						.addPathPatterns(
 						"/board/qna/write",
+						"/board/review/write",
 						"/member/po/request"
+						);
+		//본인 글만 작성하게	
+		registry.addInterceptor(ownerInterceptor)
+						.addPathPatterns(
+								"/board/qna/edit"
+								
 						);
 	
 	}
