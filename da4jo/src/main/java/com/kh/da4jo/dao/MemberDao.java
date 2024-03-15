@@ -107,6 +107,13 @@ public class MemberDao {
 
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	// 회원 돈 수정
+	public void updateCredit(MemberDto memberDto) {
+		String sql = "update member set member_credit=? where member_id=?";
+		Object[] data = { memberDto.getMemberCredit(), memberDto.getMemberId()};
+		jdbcTemplate.update(sql, data);
+	}
 
 	// 회원탈퇴
 	public boolean deleteMember(String memberId)

@@ -170,43 +170,43 @@
 					<div class="info-group">
 						<div class="info-label">주문번호</div>
 						<div class="info-content-wrapper">
-							<div class="info-content">${poDto.poNo}</div>
+							<div class="info-content">${paymentVO.poNo}</div>
 						</div>
 					</div>
 					<div class="info-group">
 						<div class="info-label">구매자</div>
 						<div class="info-content-wrapper">
-							<div class="info-content">${poDto.poNameKor}(${poDto.poNameEng})</div>
+							<div class="info-content">${paymentVO.poNameKor}(${paymentVO.poNameEng})</div>
 						</div>
 					</div>
 					<div class="info-group">
 						<div class="info-label">환율</div>
 						<div class="info-content-wrapper">
-							<div class="info-content">${poDto.poFxRate}</div>
+							<div class="info-content">${paymentVO.poFxRate}</div>
 						</div>
 					</div>
 					<div class="info-group">
 						<div class="info-label">상품금액(외화)</div>
 						<div class="info-content-wrapper">
-							<div class="info-content">${poDto.poFx}</div>
+							<div class="info-content">${paymentVO.poFx}</div>
 						</div>
 					</div>
 					<div class="info-group">
 						<div class="info-label">상품금액(원화)</div>
 						<div class="info-content-wrapper">
-							<div class="info-content">${poDto.poItemPriceKrw}</div>
+							<div class="info-content">${paymentVO.poItemPriceKrw}</div>
 						</div>
 					</div>
 					<div class="info-group">
 						<div class="info-label">수수료</div>
 						<div class="info-content-wrapper">
-							<div class="info-content">${poDto.poServiceFee}</div>
+							<div class="info-content">${paymentVO.poServiceFee}</div>
 						</div>
 					</div>
 					<div class="info-group">
 						<div class="info-label">총 결제금액</div>
 						<div class="info-content-wrapper">
-							<div class="info-content">${poDto.poTotalPriceKrw}</div>
+							<div class="info-content">${paymentVO.poTotalPriceKrw}</div>
 						</div>
 					</div>
 				</div>
@@ -215,12 +215,9 @@
 				<a href="list" class="link">
 					<button class="btn">목록으로</button>
 				</a>
-				<form>
-					<input type="hidden" name="poNo" value="${poDto.poNo}">
-					<a href="#" class="link">
-						<button class="btn">결제하기</button>
-						
-					</a> 
+				<form action="payment" method="post">
+					<input type="hidden" name="poNo" value="${paymentVO.poNo}">
+					<button type="submit" class="btn">결제하기</button> 
 				</form>
 			</div>
 

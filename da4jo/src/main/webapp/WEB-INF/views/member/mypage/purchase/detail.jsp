@@ -39,13 +39,6 @@
 <!-- 구매서 상세 페이지 -->
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style> /* 레이아웃 디자인 */
 .content-body {
@@ -110,35 +103,6 @@
 	padding-left: 15px;
 	text-align: left;
 }
-</style>
-
-
-<style>
-.boxInfo{
-	border-color: #6c6e6e33;
-	border-width: 1px;
-    border-style: solid;
-	boarder-radius: 2px;
-	font-size: 14px;
-}
-
-.memberInfo{
-	font-size:14px;
-	border-bottom-color: #6c6e6e33;
-	border-bottom-width: 1px;
-    border-bottom-style: solid;
-}
-
-.detailInfo,
-.btn {
-	font-size: 12px;
-	padding: 5px;
-}
-
-.profileEdit{
-	display : none;
-}
-
 </style>
 
 

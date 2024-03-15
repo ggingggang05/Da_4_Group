@@ -16,6 +16,7 @@ import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dto.MemberDto;
 import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.vo.PageVO;
+import com.kh.da4jo.vo.PaymentVO;
 
 import jakarta.servlet.http.HttpSession;
 import net.sf.jsqlparser.util.validation.validator.ShowIndexStatementValidator;
@@ -62,24 +63,33 @@ public class MemberPoController {
 			model.addAttribute("memberDto", memberDto);
 		}
 		
-		return "/WEB-INF/views/member/mypage/detail.jsp";	
+		return "/WEB-INF/views/member/mypage/purchase/detail.jsp";	
 	}
 	
 	//구매 대행 신청서에 대한 결제 페이지
 	@GetMapping("/payment")
-	public String payment(Model model, int poNo) {
-		PoDto poDto = poDao.selectOne(poNo);
-		model.addAttribute("poDto", poDto);
-		model.addAttribute("list", poDao.selectOne(poNo));
+	public String payment(Model model, int poNo, HttpSession session) {
+		PaymentVO paymentVO = poDao.getPaymentInfo(poNo);
+		model.addAttribute("paymentVO", paymentVO);
+		
+		String loginId = (String)session.getAttribute("loginId");
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		model.addAttribute("memberDto", memberDto);
+		
 		return "/WEB-INF/views/member/mypage/purchase/payment.jsp";
 		
 	}
 	//포인트 결제 미구현
 	@PostMapping("/payment")
-	public String payment(HttpSession session, int poNo) {
+	public String payment(HttpSession session, int poNo, Model model) {
 		String loginId = (String)session.getAttribute("loginId");
-		PoDto poDto = poDao.selectOne(poNo);
 		MemberDto memberDto = memberDao.selectOne(loginId);
+		model.addAttribute("memberDto", memberDto);
+		
+		PaymentVO paymentVO = poDao.getPaymentInfo(poNo);
+		model.addAttribute("paymentVO", paymentVO);
+		
+		PoDto poDto = poDao.selectOne(poNo);
 		
 		//결제 진행
 		//1.결제 금액과 회원의 돈/포인트 정보 가져오기
@@ -99,6 +109,9 @@ public class MemberPoController {
 			//po_status를 결제 완료로 변경
 			poDto.setPoStatus("결제완료");
 			
+			//DB에 저장
+			memberDao.updateCredit(memberDto);//크레딧 바꾸는 dao로 추가
+			poDao.updateStatus(poDto);
 			return "redirect:paymentFinish";
 		}
 		else { //잔액이 부족하다면

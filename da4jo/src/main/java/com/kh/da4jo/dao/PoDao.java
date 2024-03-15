@@ -2,14 +2,17 @@ package com.kh.da4jo.dao;
 
 import java.util.List;
 
+import org.eclipse.tags.shaded.org.apache.bcel.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.PoDto;
+import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
 import com.kh.da4jo.vo.PageVO;
+import com.kh.da4jo.vo.PaymentVO;
 
 @Repository
 public class PoDao {
@@ -19,6 +22,8 @@ public class PoDao {
 	private PoMapper poMapper;
 	@Autowired
 	private PoListMapper poListMapper;
+	@Autowired
+	private PaymentVOMapper paymentVOMapper;
 
 	// poNo 미리 뽑기
 	public int getSequence() {
@@ -75,6 +80,29 @@ public class PoDao {
 			poDto.getPoNo()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//PO+크레딧/포인트 연결 구매서
+	public PaymentVO getPaymentInfo(int poNo) {
+		String sql = "SELECT "
+					+ " PO.PO_NO, PO.PO_NAME_KOR, PO.PO_NAME_ENG, PO.PO_STATUS, "
+					+ " PO.PO_FX_RATE, PO.PO_FX, PO.PO_ITEM_PRICE_KRW, "
+					+ " PO.PO_ITEM_VAT, PO.PO_SERVICE_FEE, PO.PO_TOTAL_PRICE_KRW, "
+					+ " MEMBER.MEMBER_CREDIT, MEMBER.MEMBER_POINT "
+				+ "FROM PO "
+				+ "JOIN MEMBER ON PO.PO_CUSTOMER_ID = MEMBER.MEMBER_ID "
+				+ "WHERE PO.PO_NO = ?";
+		Object[] data = {poNo};
+		List<PaymentVO> list = jdbcTemplate.query(sql, paymentVOMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
+	// 상태 변수 변경
+	public void updateStatus(PoDto poDto) {
+		String sql = "update po set po_status=? where po_no=?";
+		Object[] data = { poDto.getPoStatus(), poDto.getPoNo() };
+		jdbcTemplate.update(sql, data);	
 	}
 	
 	
