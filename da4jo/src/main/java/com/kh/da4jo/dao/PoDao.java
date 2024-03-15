@@ -63,6 +63,7 @@ public class PoDao {
 		List<PoDto> list = jdbcTemplate.query(sql, poMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
 	// U(update) 상품가격만 알려주는 업데이트
 	public boolean update(PoDto poDto) {
 		String sql = "update po "
@@ -77,8 +78,6 @@ public class PoDao {
 	}
 	
 	
-	
-
 	// D(delete)
 	public boolean delete(int poNo) {
 		String sql = "delete po where po_no = ?";
@@ -99,7 +98,7 @@ public class PoDao {
 						+ "select "
 							+ "po_no, po_item_eng_name, po_item_category, "
 							+ "po_sdate, po_status, po_awb_number, po_fx, "
-							+ "po_service_fee, po_total_price_krw "
+							+ "po_service_fee, po_total_price_krw, po_item_price_krw "
 						+ "from po "
 						+ "where po_customer_id=?"
 						+ "order by po_sdate desc"
@@ -109,5 +108,6 @@ public class PoDao {
 		
 		return jdbcTemplate.query(sql, poListMapper, data);
 	}
+
 
 }

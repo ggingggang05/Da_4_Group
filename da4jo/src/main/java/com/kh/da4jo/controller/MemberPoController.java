@@ -18,6 +18,7 @@ import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
+import net.sf.jsqlparser.util.validation.validator.ShowIndexStatementValidator;
 
 @Controller
 @RequestMapping("/member/mypage/purchase")
@@ -51,26 +52,61 @@ public class MemberPoController {
 	//구매 대행 신청서
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int poNo, Model model, HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
 		//구매서 테이블에서 구매서 번호로 조회 후 넘겨주기
 		PoDto poDto = poDao.selectOne(poNo);
 		model.addAttribute("poDto", poDto);
 		
 		if(poDto.getPoNameEng() != null) { //작성자가 탈퇴하지 않았다면
-			MemberDto memberDto = memberDao.selectOne(poDto.getPoCustomerId());//작성자 아이디로 조회
+			MemberDto memberDto = memberDao.selectOne(loginId);//작성자 아이디로 조회
 			model.addAttribute("memberDto", memberDto);
 		}
 		
-		return "/WEB-INF/views/member/mypage/purchase/detail.jsp";
-		
+		return "/WEB-INF/views/member/mypage/detail.jsp";	
 	}
 	
 	//구매 대행 신청서에 대한 결제 페이지
-//	@GetMapping("/payment")
-//	public String payment() {
-//		
-//	}
-//	@PostMapping("/payment")
-//	public String payment() {
-//		
-//	}
+	@GetMapping("/payment")
+	public String payment(Model model, int poNo) {
+		PoDto poDto = poDao.selectOne(poNo);
+		model.addAttribute("poDto", poDto);
+		model.addAttribute("list", poDao.selectOne(poNo));
+		return "/WEB-INF/views/member/mypage/purchase/payment.jsp";
+		
+	}
+	//포인트 결제 미구현
+	@PostMapping("/payment")
+	public String payment(HttpSession session, int poNo) {
+		String loginId = (String)session.getAttribute("loginId");
+		PoDto poDto = poDao.selectOne(poNo);
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		
+		//결제 진행
+		//1.결제 금액과 회원의 돈/포인트 정보 가져오기
+		int memberCash = memberDto.getMemberCredit(); //회원 돈
+		//int memberPoint = memberDto.getMemberPoint(); //회원 포인트
+		int totalPrice = poDto.getPoTotalPriceKrw(); //결제 금액
+		
+		//2. 결제 금액 
+		//boolean isPayment = memberCash - (totalPrice - memberPoint) >= 0;
+		boolean isPayment = memberCash - totalPrice >= 0;
+		if(isPayment) { //결제가 된다면
+			//결제 후 남은 잔액을 기록
+			memberDto.setMemberCredit(memberCash - totalPrice);
+			//memberDto.setMemberCredit(memberCash - (totalPrice - memberPoint));
+			//결제 후 남은 포인트를 기록
+			
+			//po_status를 결제 완료로 변경
+			poDto.setPoStatus("결제완료");
+			
+			return "redirect:paymentFinish";
+		}
+		else { //잔액이 부족하다면
+			return "redirect:/member/credit/charge"; //돈 충전 페이지로 이동
+		}
+	}
+	@RequestMapping("/paymentFinish")
+	public String paymentFinsih() {
+		return "/WEB-INF/views/member/mypage/purchase/paymentFinish.jsp";
+	}
 }
