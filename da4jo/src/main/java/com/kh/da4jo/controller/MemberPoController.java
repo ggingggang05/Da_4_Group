@@ -52,22 +52,24 @@ public class MemberPoController {
 	//구매 대행 신청서
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int poNo, Model model, HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
 		//구매서 테이블에서 구매서 번호로 조회 후 넘겨주기
 		PoDto poDto = poDao.selectOne(poNo);
 		model.addAttribute("poDto", poDto);
 		
 		if(poDto.getPoNameEng() != null) { //작성자가 탈퇴하지 않았다면
-			MemberDto memberDto = memberDao.selectOne(poDto.getPoCustomerId());//작성자 아이디로 조회
+			MemberDto memberDto = memberDao.selectOne(loginId);//작성자 아이디로 조회
 			model.addAttribute("memberDto", memberDto);
 		}
 		
-		return "/WEB-INF/views/member/mypage/purchase/detail.jsp";
-		
+		return "/WEB-INF/views/member/mypage/detail.jsp";	
 	}
 	
 	//구매 대행 신청서에 대한 결제 페이지
 	@GetMapping("/payment")
 	public String payment(Model model, int poNo) {
+		PoDto poDto = poDao.selectOne(poNo);
+		model.addAttribute("poDto", poDto);
 		model.addAttribute("list", poDao.selectOne(poNo));
 		return "/WEB-INF/views/member/mypage/purchase/payment.jsp";
 		
