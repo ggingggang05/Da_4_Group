@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+    pageEncoding="UTF-8"%>
+    
 <style>
 .boxInfo{
 	border-color: #6c6e6e33;
@@ -34,12 +29,10 @@
 
 </style>
 
-
-
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
 <br>
 <br>
-<div class="container container-body">
+<div class="container container-body"> <!-- 해당 태그의 닫는 태그는 각각의 마이페이지 jsp파일에 존재 -->
 	<!-- 마이페이지 헤더 -->
 	<div class="container inner-container">
 		<div class="content content-head">
@@ -105,64 +98,3 @@
 				</div>
 			</div>
 		</div><!-- 왼쪽 사이드 바 닫는 태그 -->
-		<!-- 오른쪽 내용 -->
-		<div class="container inner-container">
-			<div class="content content-body">
-				<c:if test="${empty poList}"><!-- 구매서 작성 내역이 없는 경우 -->
-					<div class="cell center mt-30">
-						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
-						<h2>구매서 작성 내역이 없습니다</h2>
-					</div>
-					<div class="cell center">
-						<h2>
-							<a href="/member/po/request" class="btn"> 
-								<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 작성하러 가기
-							</a>
-						</h2>
-					</div>
-				</c:if><!-- 구매서 작성 내역이 없는 경우 닫는 태그 -->
-				<c:if test="${!empty poList}"><!-- 구매서 작성 내역이 있는 경우 -->
-					<div class="right">
-						<h2><a class="btn" href="/member/po/request" style="color: #B2BC76;">구매서 작성하기</a></h2>
-					</div>
-					<ul class="menu title">
-						<li>주문번호</li>
-						<li>주문서</li> <!-- 아이템 이름 -->
-						<li>분류</li>
-						<li>작성일</li>
-						<li>상태</li>
-						<li>송장번호</li>
-						<li>외화금액</li>
-						<li>구매대행 이용료</li>
-						<li>최종 결제금액</li>
-						<li>결제하기</li>
-					</ul>
-				
-					<c:forEach var="poDto" items="${poList}">
-						<ul class="menu list">
-							<li>${poDto.poNo}</li>
-							<li><a href="/mypage/detail?poNo=${poDto.poNo}">${poDto.poItemEngName}</li>
-							<li>${poDto.poItemCategory}</li>
-							<li>${poDto.poSdate}</li>
-							<li>${poDto.poStatus}</li>
-							<li>${poDto.poAwbNumber}</li>
-							<li>${poDto.poFx}</li>
-							<li>${poDto.poServiceFee}</li>
-							<li>${poDto.poTotalPriceKrw}</li>
-							<li><a href="payment?poNo=${poDto.poNo}" style="color: #B2BC76;">이동</a>
-							</li>
-						</ul>
-					</c:forEach>
-					
-				</c:if><!-- 구매서 작성 내역이 있는 경우 닫는 태그 -->
-			</div>
-			</div>
-		</div><!-- 오른쪽 내용 닫는 태그 -->
-	</div><!-- 컨텐트 자리 닫는 태그 -->
-</div>
-
-	
-
-
-
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

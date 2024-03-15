@@ -30,14 +30,20 @@ public class MemberPoController {
 	
 	//구매 대행 신청서 목록
 	@RequestMapping("/list")
-	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {
+	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model,
+						HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		model.addAttribute(memberDto);
+		
 		//페이징을 PageVO에서 처리
 		//여기선 count 및 list만 처리함
-		int count = poDao.count(pageVO);
+		int count = poDao.count();
 		pageVO.setCount(count);
 		
-		List<PoDto> list = poDao.selectListByPaging(pageVO);
-		model.addAttributes("list", list);
+		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
+		model.addAttribute("poList", list);
 		
 		return "/WEB-INF/views/member/mypage/purchase/list.jsp";
 	}
@@ -59,12 +65,12 @@ public class MemberPoController {
 	}
 	
 	//구매 대행 신청서에 대한 결제 페이지
-	@GetMapping("/payment")
-	public String payment() {
-		
-	}
-	@PostMapping("/payment")
-	public String payment() {
-		
-	}
+//	@GetMapping("/payment")
+//	public String payment() {
+//		
+//	}
+//	@PostMapping("/payment")
+//	public String payment() {
+//		
+//	}
 }

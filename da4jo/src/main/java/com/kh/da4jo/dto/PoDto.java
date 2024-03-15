@@ -30,6 +30,7 @@ public class PoDto {
 	private String poCurrency; // 통화
 	private double poFxRate; // 환율
 	private double poFx; // 외화금액
+	private double poItemPriceKrw; //환율을 적용한 상품 원화 금액
 	private double poItemVat; // 상품에대한 부가세
 	private int poServiceFee; // 구매대행 이용료
 	private int poTotalPriceKrw; // 원화금액
@@ -218,6 +219,12 @@ public class PoDto {
 		this.poFx = poFx;
 	}
 
+	public double getPoItemPriceKrw() {
+		return poItemPriceKrw;
+	}
+	public void setPoItemPriceKrw(double poItemPriceKrw) {
+		this.poItemPriceKrw = poItemPriceKrw;
+	}
 	public double getPoItemVat() {
 		return poItemVat;
 	}
