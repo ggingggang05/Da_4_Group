@@ -141,7 +141,7 @@
 					<c:forEach var="poDto" items="${poList}">
 						<ul class="menu list">
 							<li>${poDto.poNo}</li>
-							<li>${poDto.poItemEngName}</li>
+							<li><a href="detail?poNo=${poDto.poNo}">${poDto.poItemEngName}</li>
 							<li>${poDto.poItemCategory}</li>
 							<li>${poDto.poSdate}</li>
 							<li>${poDto.poStatus}</li>
