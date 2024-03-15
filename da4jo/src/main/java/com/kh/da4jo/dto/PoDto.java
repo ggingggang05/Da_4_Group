@@ -2,15 +2,17 @@ package com.kh.da4jo.dto;
 
 import java.sql.Date;
 
-public class PoDto{
-	
+public class PoDto {
+
 	private int poNo;
 	private String poCustomerId; // 이용자 아이디 멤버외래키
 	private String poNameKor; // 주문자 한국이름(한국통관시필요)
 	private String poNameEng; // 주문자 영문이름(해외배송때필요)
 	private String poClearanceId; // 개인통관번호
-	private String poItemEngName; // 상품영문이름(통관시필요)
 	private String poLink; // 상품링크
+	private String poItemEngName; // 상품영문이름(통관시필요)
+	private String poItemCategory; // 상품카테고리(화장품, 완구, 가방 등)
+	private double poItemWeight; // 상품 무게
 	private int poQty; // 상품수량 디폴트1
 	private String poItemOption1; // 상품옵션(사이즈)
 	private String poItemOption2; // 상품옵션(색상)
@@ -28,9 +30,11 @@ public class PoDto{
 	private String poCurrency; // 통화
 	private double poFxRate; // 환율
 	private double poFx; // 외화금액
-	private double poTotalPrice; // 원화금액
+	private double poItemVat; // 상품에대한 부가세
+	private int poServiceFee; // 구매대행 이용료
+	private int poTotalPriceKrw; // 원화금액
 	private String poAgree; // 약관동의
-	
+
 	public int getPoNo() {
 		return poNo;
 	}
@@ -61,33 +65,52 @@ public class PoDto{
 	public void setPoClearanceId(String poClearanceId) {
 		this.poClearanceId = poClearanceId;
 	}
-	public String getPoItemEngName() {
-		return poItemEngName;
-	}
-	public void setPoItemEngName(String poItemEngName) {
-		this.poItemEngName = poItemEngName;
-	}
 	public String getPoLink() {
 		return poLink;
 	}
 	public void setPoLink(String poLink) {
 		this.poLink = poLink;
 	}
+	public String getPoItemEngName() {
+		return poItemEngName;
+	}
+	public void setPoItemEngName(String poItemEngName) {
+		this.poItemEngName = poItemEngName;
+	}
+	public String getPoItemCategory() {
+		return poItemCategory;
+	}
+	public void setPoItemCategory(String poItemCategory) {
+		this.poItemCategory = poItemCategory;
+	}
+	public double getPoItemWeight() {
+		return poItemWeight;
+	}
+
+	public void setPoItemWeight(double poItemWeight) {
+		this.poItemWeight = poItemWeight;
+	}
+
 	public int getPoQty() {
 		return poQty;
 	}
+
 	public void setPoQty(int poQty) {
 		this.poQty = poQty;
 	}
+
 	public String getPoItemOption1() {
 		return poItemOption1;
 	}
+
 	public void setPoItemOption1(String poItemOption1) {
 		this.poItemOption1 = poItemOption1;
 	}
+
 	public String getPoItemOption2() {
 		return poItemOption2;
 	}
+
 	public void setPoItemOption2(String poItemOption2) {
 		this.poItemOption2 = poItemOption2;
 	}
@@ -100,45 +123,58 @@ public class PoDto{
 	public String getPoContact() {
 		return poContact;
 	}
+
 	public void setPoContact(String poContact) {
 		this.poContact = poContact;
 	}
+
 	public String getPoZipcode() {
 		return poZipcode;
 	}
+
 	public void setPoZipcode(String poZipcode) {
 		this.poZipcode = poZipcode;
 	}
+
 	public String getPoAddress1() {
 		return poAddress1;
 	}
+
 	public void setPoAddress1(String poAddress1) {
 		this.poAddress1 = poAddress1;
 	}
+
 	public String getPoAddress2() {
 		return poAddress2;
 	}
+
 	public void setPoAddress2(String poAddress2) {
 		this.poAddress2 = poAddress2;
 	}
 	public String getPoDcomment() {
 		return poDcomment;
 	}
+
 	public void setPoDcomment(String poDcomment) {
 		this.poDcomment = poDcomment;
 	}
+
 	public String getPoStatus() {
 		return poStatus;
 	}
+
 	public void setPoStatus(String poStatus) {
 		this.poStatus = poStatus;
 	}
+
 	public String getPoAwbNumber() {
 		return poAwbNumber;
 	}
+
 	public void setPoAwbNumber(String poAwbNumber) {
 		this.poAwbNumber = poAwbNumber;
 	}
+
 	public Date getPoSdate() {
 		return poSdate;
 	}
@@ -151,21 +187,27 @@ public class PoDto{
 	public void setPoEdate(Date poEdate) {
 		this.poEdate = poEdate;
 	}
+
 	public String getPoCountry() {
 		return poCountry;
 	}
+
 	public void setPoCountry(String poCountry) {
 		this.poCountry = poCountry;
 	}
+
 	public String getPoCurrency() {
 		return poCurrency;
 	}
+
 	public void setPoCurrency(String poCurrency) {
 		this.poCurrency = poCurrency;
 	}
+
 	public double getPoFxRate() {
 		return poFxRate;
 	}
+
 	public void setPoFxRate(double poFxRate) {
 		this.poFxRate = poFxRate;
 	}
@@ -175,11 +217,29 @@ public class PoDto{
 	public void setPoFx(double poFx) {
 		this.poFx = poFx;
 	}
-	public double getPoTotalPrice() {
-		return poTotalPrice;
+
+	public double getPoItemVat() {
+		return poItemVat;
 	}
-	public void setPoTotalPrice(double poTotalPrice) {
-		this.poTotalPrice = poTotalPrice;
+
+	public void setPoItemVat(double poItemVat) {
+		this.poItemVat = poItemVat;
+	}
+
+	public int getPoServiceFee() {
+		return poServiceFee;
+	}
+
+	public void setPoServiceFee(int poServiceFee) {
+		this.poServiceFee = poServiceFee;
+	}
+
+	public int getPoTotalPriceKrw() {
+		return poTotalPriceKrw;
+	}
+
+	public void setPoTotalPriceKrw(int poTotalPriceKrw) {
+		this.poTotalPriceKrw = poTotalPriceKrw;
 	}
 	public String getPoAgree() {
 		return poAgree;
