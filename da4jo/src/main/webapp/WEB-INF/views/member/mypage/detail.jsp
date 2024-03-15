@@ -120,7 +120,6 @@
 						<li>상태</li>
 						<li>송장번호</li>
 						<li>외화금액</li>
-						<li>구매대행 이용료</li>
 						<li>최종 결제금액</li>
 						<li>결제하기</li>
 					</ul>
@@ -133,7 +132,6 @@
 						<li>${poDto.poStatus}</li>
 						<li>${poDto.poAwbNumber}</li>
 						<li>${poDto.poFx}</li>
-						<li>${poDto.poServiceFee}</li>
 						<li>${poDto.poTotalPriceKrw}</li>
 						<li><a href="payment?poNo=${poDto.poNo}" style="color: #B2BC76;">이동</a>
 						</li>
