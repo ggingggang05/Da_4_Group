@@ -6,6 +6,36 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+.boxInfo{
+	border-color: #6c6e6e33;
+	border-width: 1px;
+    border-style: solid;
+	boarder-radius: 2px;
+	font-size: 14px;
+}
+
+.memberInfo{
+	font-size:14px;
+	border-bottom-color: #6c6e6e33;
+	border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.detailInfo,
+.btn {
+	font-size: 12px;
+	padding: 5px;
+}
+
+.profileEdit{
+	display : none;
+}
+
+</style>
+
+
+
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
 <br>
 <br>
@@ -86,14 +116,14 @@
 					<div class="cell center">
 						<h2>
 							<a href="/member/po/request" class="btn"> 
-								<i class="fa-solid fa-paper"style="color: #dbdd7e;"></i> 작성하러 가기
+								<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 작성하러 가기
 							</a>
 						</h2>
 					</div>
 				</c:if><!-- 구매서 작성 내역이 없는 경우 닫는 태그 -->
 				<c:if test="${!empty poList}"><!-- 구매서 작성 내역이 있는 경우 -->
 					<div class="right">
-						<h2><a href="/member/po/request">구매서 작성하기</a></h2>
+						<h2><a class="btn" href="/member/po/request" style="color: #B2BC76;">구매서 작성하기</a></h2>
 					</div>
 					<ul class="menu title">
 						<li>주문번호</li>
@@ -113,12 +143,13 @@
 							<li>${poDto.poNo}</li>
 							<li>${poDto.poItemEngName}</li>
 							<li>${poDto.poItemCategory}</li>
+							<li>${poDto.poSdate}</li>
 							<li>${poDto.poStatus}</li>
 							<li>${poDto.poAwbNumber}</li>
 							<li>${poDto.poFx}</li>
 							<li>${poDto.poServiceFee}</li>
 							<li>${poDto.poTotalPriceKrw}</li>
-							<li><a href="payment?poNo=${poDto.poNo}">이동</a>
+							<li><a href="payment?poNo=${poDto.poNo}" style="color: #B2BC76;">이동</a>
 							</li>
 						</ul>
 					</c:forEach>

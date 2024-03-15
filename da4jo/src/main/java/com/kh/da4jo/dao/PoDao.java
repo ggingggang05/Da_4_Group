@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.PoDto;
+import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
+import com.kh.da4jo.vo.PageVO;
 
 @Repository
 public class PoDao {
@@ -15,6 +17,8 @@ public class PoDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private PoMapper poMapper;
+	@Autowired
+	private PoListMapper poListMapper;
 
 	// poNo 미리 뽑기
 	public int getSequence() {
@@ -79,6 +83,30 @@ public class PoDao {
 		String sql = "delete po where po_no = ?";
 		Object[] data = {poNo};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+
+	//목록일 경우 카운트
+	public int count() {
+		String sql = "select count(*) from po";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+
+	//목록 페이징
+	public List<PoDto> selectListByPaging(PageVO pageVO, String loginId) {
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ( "
+						+ "select "
+							+ "po_no, po_item_eng_name, po_item_category, "
+							+ "po_sdate, po_status, po_awb_number, po_fx, "
+							+ "po_service_fee, po_total_price_krw "
+						+ "from po "
+						+ "where po_customer_id=?"
+						+ "order by po_sdate desc"
+						+ ")TMP"
+					+ ") where rn between ? and ?";
+		Object[] data = {loginId, pageVO.getBeginRow(), pageVO.getEndRow()};
+		
+		return jdbcTemplate.query(sql, poListMapper, data);
 	}
 
 }
