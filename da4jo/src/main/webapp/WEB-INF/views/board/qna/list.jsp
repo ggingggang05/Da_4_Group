@@ -69,8 +69,8 @@
 				<%-- 목록 --%>
 				<ul class="menu menu-type">
 					<li>번호</li>
-					<li>잠금상태</li>
-					<li>제목</li>
+					<li>잠금</li>
+					<li class="w-30">제목</li>
 					<li>작성자</li>
 					<li>작성일</li>
 					<li>조회수</li>

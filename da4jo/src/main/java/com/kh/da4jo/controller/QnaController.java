@@ -39,7 +39,6 @@ public class QnaController {
 	
 	}
 
-
 	//리뷰 목록
 	@RequestMapping("/qna/list")
 	public String list(@RequestParam(required = false) String column,
@@ -58,12 +57,13 @@ public class QnaController {
 	//상세조회
 	@RequestMapping("/qna/detail")
 	public String detail(@RequestParam int qnaNo, Model model) {
+		qnaDao.updateQnaReadcount(qnaNo);
+		
 		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
 		model.addAttribute("qnaDto", qnaDto);
 		
 		return "/WEB-INF/views/board/qna/detail.jsp";
 	}
-
 
 	//수정
 	@GetMapping("/qna/edit") 
@@ -79,12 +79,10 @@ public class QnaController {
 		return "redirect:detail?qnaNo=" + qnaDto.getQnaNo();
 	}
 
-
 	//삭제
 	@RequestMapping("/qna/delete")
 	public String delete(@RequestParam int qnaNo) {
 		qnaDao.delete(qnaNo);
 		return "redirect:/board/qna/list";
 	}
-
 }
