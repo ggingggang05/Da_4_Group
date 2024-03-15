@@ -58,9 +58,9 @@
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
 							<li id="poCustomerId">${poDto.poCustomerId}</li>
-							<li id="poClearanceId">${poDto.poItemEngName}</li>
-							<li id="poContact">${poDto.poItemEngName}</li>
-							<li id="poAddress1">${poDto.poItemEngName}</li>
+							<li id="poClearanceId">${poDto.poClearanceId}</li>
+							<li id="poContact">${poDto.poContact}</li>
+							<li id="poAddress1">${poDto.poAddress1}</li>
 							<li id="poDetail"><a
 								href="orderDetail?poNo=${poDto.poNo}"><i
 									class="fa-solid fa-list"></i></a></li>
