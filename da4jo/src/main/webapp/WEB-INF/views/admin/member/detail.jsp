@@ -55,6 +55,7 @@
 	$(function() {
 		if ($(".isBlock").text().trim() === "N") {
 			$(".isBlock").css("color", "rgb(71, 163, 255)");
+			$(".blockMember").css("color", "#D1180B");
 		} else if ($(".isBlock").text().trim() === "Y") {
 			$(".isBlock").css("color", "#D1180B");
 		}
@@ -196,19 +197,18 @@
 								<strong>${memberDto.memberBlock}</strong>
 							</div>
 							<div class="info-content">
-								<a class="link" href="block?memberId=?">
-									<c:choose>
-										<c:when test="
-										
-										
-										">
-											
-										</c:when>
-										<c:otherwise>
-											
-										</c:otherwise>
-									</c:choose>
-								</a>
+								<c:choose>
+									<c:when test="${memberDto.memberBlock == 'N'}">
+										<a class="link blockMember"
+											href="block/add?memberId=${memberDto.memberId}"><p>멤버
+												차단</p></a>
+									</c:when>
+									<c:otherwise>
+										<a class="link blockCancel"
+											href="block/cancel?memberId=${memberDto.memberId}"><p>차단
+												해제</p></a>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
