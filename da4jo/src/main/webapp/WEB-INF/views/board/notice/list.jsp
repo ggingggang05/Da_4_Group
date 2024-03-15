@@ -38,7 +38,7 @@
 							</ul>
 						</c:forEach>
 						<div class="cell right">
-							<c:if test="${sessionScope.loginLevel == '관리자' || '총관리자'}">
+							<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 								<a href="/board/notice/write" class="link">글쓰기</a>
 							</c:if>
 						</div>
