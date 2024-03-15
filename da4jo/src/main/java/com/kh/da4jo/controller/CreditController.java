@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.da4jo.dao.CreditDao;
+import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dto.CreditDto;
+import com.kh.da4jo.dto.MemberDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +23,8 @@ public class CreditController
 {	
 	@Autowired
 	CreditDao creditDao;
+	@Autowired
+	MemberDao memberDao;
 	
 	@GetMapping("/charge")
 	public String charge() {
@@ -37,6 +41,12 @@ public class CreditController
 		creditDto.setMemberId(loginId);
 		creditDto.setCreditCharge(creditCharge);
 		creditDao.insert(creditDto);
+		int chargedCredit = creditDto.getCreditCharge();
+		
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		memberDto.setMemberCredit(memberDto.getMemberCredit() + chargedCredit);
+		
+		memberDao.updateCredit(memberDto);
 		
 		return "redirect:/member/credit/chargeList";
 	}
