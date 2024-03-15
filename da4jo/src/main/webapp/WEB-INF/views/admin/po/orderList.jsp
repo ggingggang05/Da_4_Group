@@ -36,7 +36,7 @@
 	width: 9%;
 }
 </style>
-	<div class="container container-body contariner-body-admin">
+	<div class="container container-body container-body-long">
 		<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 		<div class="container inner-container">
 			<div class="content content-head">
