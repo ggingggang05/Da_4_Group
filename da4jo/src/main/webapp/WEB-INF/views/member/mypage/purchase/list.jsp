@@ -85,15 +85,15 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="#" class="btn"> <i class="fa-solid fa-paper"
-								style="color: #dbdd7e;"></i> 작성하러 가기
+							<a href="/member/po/request" class="btn"> 
+								<i class="fa-solid fa-paper"style="color: #dbdd7e;"></i> 작성하러 가기
 							</a>
 						</h2>
 					</div>
 				</c:if><!-- 구매서 작성 내역이 없는 경우 닫는 태그 -->
 				<c:if test="${!empty poList}"><!-- 구매서 작성 내역이 있는 경우 -->
 					<div class="right">
-						<h2><a href="#">구매서 작성하기</a></h2>
+						<h2><a href="/member/po/request">구매서 작성하기</a></h2>
 					</div>
 					<ul class="menu title">
 						<li>주문번호</li>
@@ -102,7 +102,8 @@
 						<li>작성일</li>
 						<li>상태</li>
 						<li>송장번호</li>
-						<li>환율금액</li>
+						<li>외화금액</li>
+						<li>구매대행 이용료</li>
 						<li>최종 결제금액</li>
 						<li>결제하기</li>
 					</ul>
@@ -115,7 +116,8 @@
 							<li>${poDto.poStatus}</li>
 							<li>${poDto.poAwbNumber}</li>
 							<li>${poDto.poFx}</li>
-							<li>${poDto.poTotalPrice}</li>
+							<li>${poDto.poServiceFee}</li>
+							<li>${poDto.poTotalPriceKrw}</li>
 							<li><a href="payment?poNo=${poDto.poNo}">이동</a>
 							</li>
 						</ul>
