@@ -57,7 +57,11 @@ $(function(){
 				if (response == null) return;
 				
 				//기존에 있는 img 태그에 넣기!!!
-				$(".newProfile").attr("src", "img");
+				$(".newProfile").attr({
+				    src: "img",
+				    name: "imgChanged"
+				});
+			
 			}
 		});
 			
@@ -131,7 +135,7 @@ $(function(){
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link">내가 쓴 리뷰</a>
+						<a class="link" href="/member/board/review">내가 쓴 리뷰</a>
 					</div>
 				</div>
 			</div>
@@ -181,25 +185,25 @@ $(function(){
 				
 				<!-- 캐쉬 충전 내역 테이블 -->
 				<div>
-				<c:if test="${empty CashList}"> <!-- 캐쉬 내역이 없는 경우 -->
+				<c:if test="${empty creditList}"> <!-- 캐쉬 내역이 없는 경우 -->
 					<div class="cell center mt-30">
 						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
 						<h2>구매내역이 없습니다</h2>
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/credit/charge" class="btn"> 
+							<a href="credit/charge" class="btn"> 
 							<i class="fa-solid fa-sack-dollar" style="color: #dbdd7e;"></i>
 							구매하러 가기
 							</a>
 						</h2>
 					</div>
 				</c:if><!-- 캐쉬 내역이 없는 경우 닫는 태그 -->
-				<c:if test="${!empty CashList}"><!-- 캐쉬 내역이 있는 경우 -->
+				<c:if test="${!empty creditList}"><!-- 캐쉬 내역이 있는 경우 -->
 					<div>
 						<h2>
 							캐쉬 구매 내역 &nbsp;&nbsp;&nbsp; 
-							<a href="/point/charge" class="btn">
+							<a href="credit/charge" class="btn">
 							<i class="fa-solid fa-sack-dollar" style="color: #dbdd7e;"></i>
 							추가 구매
 							</a>
@@ -208,22 +212,30 @@ $(function(){
 					<table class="table table-horizontal">
 						<thead>
 							<tr>
-								<th>상품명</th>
-								<th>구매금액</th>
+								<th>충전금액</th>
+								<th>충전일시</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th>상품명</th>
-								<th>구매금액</th>
-							</tr>
+							<c:forEach var="creditDto" items="${creditList}">
+								<tr>
+									<td align="center">
+										<fmt:formatNumber value="${creditDto.creditCharge}"
+											pattern="#,##0" />
+									</td>
+									<td align="center"><fmt:formatDate value="${creditDto.creditTimeDate}"
+											pattern="yyyy-MM-dd HH:mm" />
+									</td>
+								</tr>
+							</c:forEach>
+							
 						</tbody>
 					</table>
 				</c:if><!-- 캐쉬 내역이 있는 경우 닫는 태그 -->
 				
 				
 				<!-- 회원 탈퇴 페이지 이동 -->
-				<div class="cell center" style="font-size:10px;">
+				<div class="cell right" style="font-size:10px;">
 					<a class="link" href="/member/mypage/exit">회원 탈퇴</a>
 				</div>
 				</div>
