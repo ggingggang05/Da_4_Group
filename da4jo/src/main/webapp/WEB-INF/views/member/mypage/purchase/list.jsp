@@ -6,51 +6,11 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<style> /* 레이아웃 디자인 */
-.menu-type {margin: 0px !important;}
-.menu-list {margin: 0px !important;}
-.listArea {border: 1px solid #ced3d6;}
-#memberId {width: 23%;}
-#memerName {width: 13%;}
-#memberEmail {width: 50%;}
-#memberCode {width: 32%;}
-#isBlock, #memberDetail {width: 9%;}
-</style>
-
-<style>
-.boxInfo{
-	border-color: #6c6e6e33;
-	border-width: 1px;
-    border-style: solid;
-	boarder-radius: 2px;
-	font-size: 14px;
-}
-
-.memberInfo{
-	font-size:14px;
-	border-bottom-color: #6c6e6e33;
-	border-bottom-width: 1px;
-    border-bottom-style: solid;
-}
-
-.detailInfo,
-.btn {
-	font-size: 12px;
-	padding: 5px;
-}
-
-.profileEdit{
-	display : none;
-}
-
-</style>
-
-
 
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
 <br>
 <br>
-<div class="container container-body-long">
+<div class="container container-body">
 	<!-- 마이페이지 헤더 -->
 	<div class="container inner-container">
 		<div class="content content-head">
@@ -59,63 +19,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="container flex-container">
-		<!-- 왼쪽 사이드 바 -->
-		<div class="container inner-container">
-			<!-- 회원 정보 -->
-			<div class="boxInfo">
-				<div class="cell center memberInfo">
-					<img src="img" width="100%" class="newProfile">
-					<div class="cell">
-						<label for="edit-profile"><i class="fa-solid fa-plus">수정</i></label>
-						<input type="file" name="img" class="tool w-100 profileEdit" id="edit-profile">
-					</div>
-					<p><b>'${memberDto.memberId}'</b> 회원님</p>
-				</div>
-				<div class="cell center detailInfo">
-					<p><b>'${memberDto.memberLevel}'</b> 입니다</p>
-					<div class="cell pt-10">
-						<a class="btn w-50" href="/member/mypage/change">개인정보 변경</a>
-					</div>
-					<div class="cell">
-						<a class="btn w-150" href="/member/mypage/password">비밀번호 변경</a>
-					</div>
-				</div>
-			</div>
-			<br><br>
-			<!-- 메뉴바 -->
-			<div class="title title-head">
-				<div>MENU</div>
-			</div>
-			<div class="title title-body">
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link">구매대행</a>
-					</div>
-					<div class="title-body-sub">
-						<div class="title-body-text">
-							<a class="link">구매대행 신청서 작성</a>
-						</div>
-						<div class="title-body-text">
-							<a class="link">구매대행 결제대기</a>
-						</div>
-						<div class="title-body-text">
-							<a class="link">구매대행 신청 내역</a>
-						</div>
-					</div>
-				</div>
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link">QNA</a>
-					</div>
-				</div>
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link" href="/member/board/review">내가 쓴 리뷰</a>
-					</div>
-				</div>
-			</div>
-		</div><!-- 왼쪽 사이드 바 닫는 태그 -->
+	<!-- 왼쪽 내용 -->
+	<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
+	
 		<!-- 오른쪽 내용 -->
 		<div class="container inner-container">
 			<div class="content content-head">
@@ -142,6 +48,7 @@
 						<div class="right">
 							<h2><a class="btn" href="/member/po/request" style="color: #B2BC76;">구매서 작성하기</a></h2>
 						</div>
+						
 						<ul class="menu menu-type">
 							<li id="poNo"><strong>주문번호</strong></li>
 							<li id="poItemEngName"><strong>주문서</strong></li><!-- 아이템 이름 -->
@@ -149,8 +56,6 @@
 							<li id="poSdate"><strong>작성일</strong></li>
 							<li id="poStatus"><strong>상태</strong></li>
 							<li id="poAwbNumber"><strong>송장번호</strong></li>
-							<li id="poFx"><strong>외화금액</strong></li>
-							<li id="poServiceFee"><strong>구매대행 이용료</strong></li>
 							<li id="poTotalPriceKrw"><strong>최종 결제금액</strong></li>
 							<li id="poPayment"><strong>결제하기</strong></li>
 						</ul>
@@ -164,8 +69,6 @@
 								<li id="poSdate">${poDto.poSdate}</li>
 								<li id="poStatus">${poDto.poStatus}</li>
 								<li id="poAwbNumber">${poDto.poAwbNumber}</li>
-								<li id="poFx">${poDto.poFx}</li>
-								<li id="poServiceFee">${poDto.poServiceFee}</li>
 								<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
 								<li id="poPayment"><a href="payment?poNo=${poDto.poNo}" style="color: #B2BC76;"><i
 									class="fa-solid fa-wallet"></i></a> <!-- 결제 -->
