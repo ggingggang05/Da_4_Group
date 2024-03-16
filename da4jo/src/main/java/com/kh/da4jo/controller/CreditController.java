@@ -48,7 +48,7 @@ public class CreditController
 		
 		memberDao.updateCredit(memberDto);
 		
-		return "redirect:/member/credit/chargeList";
+		return "redirect:/member/mypage";
 	}
 	
 	@RequestMapping("/chargeList")
