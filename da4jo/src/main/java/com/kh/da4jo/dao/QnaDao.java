@@ -90,4 +90,12 @@ public class QnaDao {
 		Object[] data = {qnaNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	//회원 각자의 구매서 총 개수 구하기
+	public int countEachMember(String memberId) {
+		String sql = "select count(*) from qna where qna_writer=?";
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 }
