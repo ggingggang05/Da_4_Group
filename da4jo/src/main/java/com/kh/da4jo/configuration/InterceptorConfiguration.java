@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.kh.da4jo.interceptor.AdminInterceptor;
 import com.kh.da4jo.interceptor.BlockInterceptor;
 import com.kh.da4jo.interceptor.MemberInterceptor;
+import com.kh.da4jo.interceptor.NoticeVcountInterceptor;
 import com.kh.da4jo.interceptor.QnaOwnerInterceptor;
 import com.kh.da4jo.interceptor.ReviewOwnerInterceptor;
 
@@ -24,6 +25,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	private QnaOwnerInterceptor QnaOwnerInterceptor;
 	@Autowired
 	private ReviewOwnerInterceptor reviewOwnerInterceptor;
+	@Autowired
+	private NoticeVcountInterceptor noticeVcountInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -60,6 +63,11 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(reviewOwnerInterceptor)
 						.addPathPatterns( 
 								"/board/review/edit"
+						);
+		//공지글 조회수 중복방지
+		registry.addInterceptor(noticeVcountInterceptor)
+						.addPathPatterns(
+								"/board/notice/detail"
 						);
 	}
 	
