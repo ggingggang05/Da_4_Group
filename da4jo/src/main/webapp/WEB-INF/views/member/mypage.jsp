@@ -34,6 +34,19 @@
 
 </style>
 
+<style>
+.chargeList {
+	margin-left: auto;
+	margin-right: auto;
+}
+.chargeList li {
+	width: 30%;
+}
+.chargeList .chargeTime {
+	width: 70%;
+}
+</style>
+
 <!-- 프로필 변경 -->
 <script>
 $(function(){
@@ -200,37 +213,29 @@ $(function(){
 					</div>
 				</c:if><!-- 캐쉬 내역이 없는 경우 닫는 태그 -->
 				<c:if test="${!empty creditList}"><!-- 캐쉬 내역이 있는 경우 -->
-					<div>
+					<div class="cell center">
 						<h2>
-							캐쉬 구매 내역 &nbsp;&nbsp;&nbsp; 
-							<a href="credit/charge" class="btn">
-							<i class="fa-solid fa-sack-dollar" style="color: #dbdd7e;"></i>
-							추가 구매
-							</a>
+							캐쉬 충전내역
 						</h2>
 					</div>
-					<table class="table table-horizontal">
-						<thead>
-							<tr>
-								<th>충전금액</th>
-								<th>충전일시</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="creditDto" items="${creditList}">
-								<tr>
-									<td align="center">
-										<fmt:formatNumber value="${creditDto.creditCharge}"
-											pattern="#,##0" />
-									</td>
-									<td align="center"><fmt:formatDate value="${creditDto.creditTimeDate}"
-											pattern="yyyy-MM-dd HH:mm" />
-									</td>
-								</tr>
-							</c:forEach>
-							
-						</tbody>
-					</table>
+					<div class="cell right">
+						<a href="charge" class="btn">
+							<i class="fa-solid fa-sack-dollar" style="color: #dbdd7e;"></i>크레딧 충전
+						</a>
+					</div>
+					<div class="cell center">
+						<ul class="menu chargeList">
+							<li>충전금액</li>
+							<li class="chargeTime">충전일시</li>
+						</ul>
+						<c:forEach var="creditDto" items="${creditList}">
+							<ul class="menu chargeList">
+								<li>${creditDto.creditCharge}</li>
+								<li class="chargeTime"><fmt:formatDate value="${creditDto.creditTimeDate}"
+										pattern="y년 M월 d일 H시 m분 s초" /></li>
+							</ul>
+						</c:forEach>
+					</div>
 				</c:if><!-- 캐쉬 내역이 있는 경우 닫는 태그 -->
 				
 				
