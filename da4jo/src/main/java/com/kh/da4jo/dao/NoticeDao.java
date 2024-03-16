@@ -56,6 +56,13 @@ public class NoticeDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 
+	// 조회수 증가
+	public boolean updateNoticeVcount(int noticeNo) {
+		String sql = "update notice " + "set notice_vcount = notice_vcount + 1 " + "where notice_no = ?";
+		Object[] data = { noticeNo };
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+
 	// 수정
 	public boolean update(NoticeDto noticeDto) {
 		String sql = "update notice " + "set " + "notice_title=?, notice_content=? " + "where notice_no=?";
