@@ -1,6 +1,7 @@
 package com.kh.da4jo.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,11 @@ import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dao.QnaDao;
 import com.kh.da4jo.dao.ReviewDao;
 import com.kh.da4jo.dto.MemberDto;
+import com.kh.da4jo.dto.QnaDto;
 import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.service.EmailService;
 import com.kh.da4jo.service.ImgService;
+import com.kh.da4jo.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -334,7 +337,23 @@ public class MemberController {
 		return "/WEB-INF/views/member/board/review.jsp";
 	}
 	
-	
+	//내가 쓴 QNA 페이지
+	@RequestMapping("/board/qna")
+	public String qna(@ModelAttribute(value = "pageVO") PageVO pageVO,
+					 HttpSession session, Model model) {
+		String loginId = (String) session.getAttribute("loginId");
+
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		model.addAttribute("memberDto", memberDto);
+		
+		int count = qnaDao.count();
+		pageVO.setCount(count);
+		
+		List<QnaDto> list = qnaDao.selectListByPaging(pageVO, loginId);
+		model.addAttribute("qnaList", list); 
+		
+		return "/WEB-INF/views/member/board/qna.jsp";
+	}
 }
 
 

@@ -180,7 +180,7 @@ $(function(){
 						<div class="title title-body mt-10">
 							<div>
 								<h3> ${countQna} 건</h3>
-								<a class="btn w-100 btnMypage " href="#">내 문의내역</a>
+								<a class="btn w-100 btnMypage " href="board/qna">내 문의내역</a>
 							</div>
 						</div>
 					</div>
