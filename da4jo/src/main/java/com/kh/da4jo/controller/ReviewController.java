@@ -1,6 +1,8 @@
 package com.kh.da4jo.controller;
 
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.jsoup.Jsoup;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.da4jo.dao.ImgDao;
 import com.kh.da4jo.dao.MemberDao;
@@ -45,37 +48,48 @@ public class ReviewController {
 	}
 
 	@PostMapping("/review/write")
-	public String write(@ModelAttribute ReviewDto reviewDto,
-					HttpSession session) {
+	public String write(@ModelAttribute ReviewDto reviewDto, @RequestParam MultipartFile img,
+					HttpSession session) throws IllegalStateException, IOException {
 		String loginId = (String)session.getAttribute("loginId");
 		reviewDto.setReviewWriter(loginId);
 		
-		int sequence = reviewDao.getSequence();
-		reviewDto.setReviewNo(sequence);
+		//등록
+		int reviewNo = reviewDao.getSequence();
+		reviewDto.setReviewNo(reviewNo);
 		reviewDao.insert(reviewDto);
 		
-//		reviewDao.connect(reviewDto.getReviewNo(), imgNo);
-		
-		return "redirect:detail?reviewNo="+sequence;
-
+		if(!img.isEmpty()) {
+			int imgNo = imgService.save(img);
+			
+			//연결
+			reviewDao.connect(reviewNo, imgNo);
+		}
+		return "redirect:list";
 	}
 	
 	
 	
 	//리뷰 목록
 	@RequestMapping("/review/list")
-	public String list(@RequestParam(required = false) String column,
-							@RequestParam(required = false) String keyword, Model model) {
-		boolean isSearch = column != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("list", reviewDao.selectList(column, keyword));
-		}
-		else {
-			model.addAttribute("list", reviewDao.selectList());
-		}
+	public String list(Model model) {
+		List<ReviewDto> list = reviewDao.selectList();
+		model.addAttribute("list", list);
 		return "/WEB-INF/views/board/review/list.jsp";
 	}
+	
 
+	//상품번호를 전달하면 파일번호를 찾아서 리다이렉트하는 페이지
+	@RequestMapping("/review/image")
+	public String image(@RequestParam int reviewNo) {
+		try {
+			int imgNo = reviewDao.findImgNo(reviewNo);
+			return "redirect:/download?imgNo="+imgNo;
+		}
+		catch(Exception e) {
+			//기본이미지로
+			return "redirect:https://via.placeholder.com/200x100";
+		}
+	}
 	
 	@RequestMapping("/review/detail")
 	public String detail(@RequestParam int reviewNo, Model model) {
@@ -149,18 +163,4 @@ public class ReviewController {
 
 		return "redirect:/board/review/list";
 	}
-	
-	
-	@RequestMapping("/image")
-	public String image(@RequestParam int reviewNo) {
-		try {
-			int imgNo = reviewDao.findImgNo(reviewNo);
-			return "redirect:/download?imgNo="+imgNo;
-		}
-		catch(Exception e) {
-			//기본이미지로
-			return "redirect:https://via.placeholder.com/200x100";
-		}
-	}
-	
 }
