@@ -287,13 +287,13 @@ public class PoDto {
 	총 결제금액
 	*/
 	public double getItemPrice() {
-		return poFx*poFxRate;
+		return poFx*poFxRate*poQty;
 	}// 원화금액 계산 환율이랑 외화 곱해서
 	public double getVat() {
 		return  poItemPriceKrw*0.1;
 	}
-	public double getFee() {
-		return (poItemPriceKrw*0.05)+10000;
+	public int getFee() {
+		return (int)((poItemPriceKrw*0.05)+10000);
 	}
 	public int getTotalPrice() {
 		return (int)(poItemPriceKrw+poItemVat+poServiceFee);
