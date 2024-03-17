@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.NoticeDto;
 import com.kh.da4jo.mapper.NoticeMapper;
+import com.kh.da4jo.mapper.NoticeVOMapper;
+import com.kh.da4jo.vo.NoticeVO;
 
 @Repository
 public class NoticeDao {
@@ -75,6 +77,18 @@ public class NoticeDao {
 		String sql = "delete notice where notice_no = ?";
 		Object[] data = { noticeNo };
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Autowired
+	private NoticeVOMapper noticeVOMapper;
+
+    // 풋터에 나올 목록 조회
+	public List<NoticeVO> getNoticeList(){
+		String sql = "SELECT notice_title, notice_wdate, notice_no FROM "
+				+ "(SELECT notice_title, notice_wdate, notice_no FROM notice "
+				+ "ORDER BY notice_wdate DESC) WHERE ROWNUM <= 2";
+		
+		return jdbcTemplate.query(sql, noticeVOMapper);
 	}
 
 }
