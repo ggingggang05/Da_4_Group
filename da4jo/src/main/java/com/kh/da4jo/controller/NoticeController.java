@@ -78,6 +78,7 @@ public class NoticeController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int noticeNo, Model model) {
 		NoticeDto noticeDto = noticeDao.selectOne(noticeNo); // 게시글 번호 주면 상세 페이지
+		
 		model.addAttribute("noticeDto", noticeDto); // noticeDto라는 이름으로 jsp에 객체 전달(게시글번호)
 
 		return "/WEB-INF/views/board/notice/detail.jsp";
@@ -89,4 +90,13 @@ public class NoticeController {
 		noticeDao.delete(noticeNo);
 		return "redirect:list";
 	}
+	
+	// 풋터 리스트
+	@GetMapping("/footer")
+	public String footer(Model model){
+		List<NoticeDto> noticeDto = noticeDao.selectList();
+		model.addAttribute("noticeDto",noticeDto);
+		return "/WEB-INF/views/notice.jsp";
+	}
+
 }
