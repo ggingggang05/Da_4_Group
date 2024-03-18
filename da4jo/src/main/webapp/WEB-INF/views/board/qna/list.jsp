@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
+.menu.menu-list {
+	border-bottom: 1px solid #DEE2E6;
+}
+#qnaTitle {
+	width: 40%;
+}
 </style>
 
 
@@ -31,11 +37,11 @@
 			
 				<%-- 일반회원일때 기능 --%> 
 				<ul class="menu menu-type">
-					<li>번호</li>
-					<li>제목</li>
-					<li>작성자</li>
-					<li>작성일</li>
-					<li>조회수</li>
+					<li id="">번호</li>
+					<li id="qnaTitle">제목</li>
+					<li id="">작성자</li>
+					<li id="">작성일</li>
+					<li id="">조회수</li>
 				</ul>
 				<c:forEach var="qnaDto" items="${list}">
 					<ul class="menu menu-list">
@@ -54,7 +60,7 @@
 						<%-- 글 작성자와 로그인한 아이디가 같으면  --%>
 						
 						<c:if test="${memberDto.memberId == qnaDto.qnaWriter}">
-						<li><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
+						<li class="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
 						</c:if>
 						<li>${qnaDto.qnaWdate}</li>
 						<li>${qnaDto.qnaVcount}</li>

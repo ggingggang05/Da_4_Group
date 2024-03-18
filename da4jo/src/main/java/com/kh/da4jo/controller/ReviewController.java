@@ -29,9 +29,8 @@ import com.kh.da4jo.service.ImgService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/board/review")
 public class ReviewController {
-
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
@@ -42,12 +41,12 @@ public class ReviewController {
 	private ImgDao imgDao;
 	
 	//리뷰 글 작성
-	@GetMapping("/review/write")
+	@GetMapping("/write")
 		public String write() {
 		return "/WEB-INF/views/board/review/write.jsp";
 	}
 
-	@PostMapping("/review/write")
+	@PostMapping("/write")
 	public String write(@ModelAttribute ReviewDto reviewDto, @RequestParam MultipartFile img,
 					HttpSession session) throws IllegalStateException, IOException {
 		String loginId = (String)session.getAttribute("loginId");
@@ -70,7 +69,7 @@ public class ReviewController {
 	
 	
 	//리뷰 목록
-	@RequestMapping("/review/list")
+	@RequestMapping("/list")
 	public String list(Model model) {
 		List<ReviewDto> list = reviewDao.selectList();
 		model.addAttribute("list", list);
@@ -79,7 +78,7 @@ public class ReviewController {
 	
 
 	//상품번호를 전달하면 파일번호를 찾아서 리다이렉트하는 페이지
-	@RequestMapping("/review/image")
+	@RequestMapping("/image")
 	public String image(@RequestParam int reviewNo) {
 		try {
 			int imgNo = reviewDao.findImgNo(reviewNo);
@@ -87,11 +86,11 @@ public class ReviewController {
 		}
 		catch(Exception e) {
 			//기본이미지로
-			return "redirect:https://via.placeholder.com/200x100";
+			return "redirect:https://via.placeholder.com/100x100?text=NO IMAGE";
 		}
 	}
 	
-	@RequestMapping("/review/detail")
+	@RequestMapping("/detail")
 	public String detail(@RequestParam int reviewNo, Model model) {
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
@@ -105,14 +104,14 @@ public class ReviewController {
 	
 	
 	//수정
-	@GetMapping("/review/edit") 
+	@GetMapping("/edit") 
 	public String edit(@RequestParam int reviewNo, Model model) {
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
 		return "/WEB-INF/views/board/review/edit.jsp";
 	}
 	
-	@PostMapping("/review/edit")
+	@PostMapping("/edit")
 	public String edit(@ModelAttribute ReviewDto reviewDto) {
 		//기존 글 조회하여 수정 전 이미지 그룹을 조사
 		Set<Integer> before = new HashSet<>();
@@ -146,7 +145,7 @@ public class ReviewController {
 	
 	
 	//삭제
-	@RequestMapping("/review/delete")
+	@RequestMapping("/delete")
 	public String delete(@RequestParam int reviewNo) {
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		
