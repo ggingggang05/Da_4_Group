@@ -52,19 +52,23 @@
 						<li id="poClearanceId"><strong>개인통관고유번호</strong></li>
 						<li id="poContact"><strong>전화번호</strong></li>
 						<li id="poAddress1"><strong>주소</strong></li>
+						<li id="poStatus"><strong>상태</strong></li>
 						<li id="poDetail"><strong>상세</strong></li>
 					</ul>
 					<c:forEach var="poDto" items="${poList}">
+						<c:if test="${poDto.poStatus == '주문정보 확인 중'}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
 							<li id="poCustomerId">${poDto.poCustomerId}</li>
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poContact">${poDto.poContact}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>
+							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poDetail"><a
 								href="orderDetail?poNo=${poDto.poNo}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
+						</c:if>			
 					</c:forEach>
 				</div>
 				<div class="cell searchArea center">
