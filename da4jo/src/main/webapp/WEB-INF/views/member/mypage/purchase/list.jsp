@@ -3,54 +3,58 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<style> /* 레이아웃 디자인 */
-.menu-type {margin: 0px !important;}
-.menu-list {margin: 0px !important;}
-.listArea {border: 1px solid #ced3d6;}
-#memberId {width: 23%;}
-#memerName {width: 13%;}
-#memberEmail {width: 50%;}
-#memberCode {width: 32%;}
-#isBlock, #memberDetail {width: 9%;}
-</style>
-
 <style>
-.boxInfo{
-	border-color: #6c6e6e33;
-	border-width: 1px;
-    border-style: solid;
-	boarder-radius: 2px;
-	font-size: 14px;
+.menu-type {
+	margin: 0px !important;
 }
 
-.memberInfo{
-	font-size:14px;
-	border-bottom-color: #6c6e6e33;
-	border-bottom-width: 1px;
-    border-bottom-style: solid;
+.menu-list {
+	margin: 0px !important;
 }
 
-.detailInfo,
-.btn {
-	font-size: 12px;
-	padding: 5px;
+.listArea {
+	border: 1px solid #ced3d6;
 }
 
-.profileEdit{
-	display : none;
+#memberId {
+	width: 23%;
+}
+
+#memerName {
+	width: 13%;
+}
+
+#memberEmail {
+	width: 50%;
+}
+
+#memberCode {
+	width: 32%;
+}
+
+#isBlock, #memberDetail {
+	width: 9%;
 }
 
 </style>
 
+
+<script type="text/javascript">    
+     $(function(){
+            $(".payAlert").on("click", function() {
+				var choice = window.alert("결제 단계가 아닙니다!");
+				if(choice == false) return;
+    		});
+        });
+</script>
 
 
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
 <br>
 <br>
-<div class="container container-body-long">
+<div class="container container-body">
 	<!-- 마이페이지 헤더 -->
 	<div class="container inner-container">
 		<div class="content content-head">
@@ -59,123 +63,97 @@
 			</div>
 		</div>
 	</div>
-	<div class="container flex-container">
-		<!-- 왼쪽 사이드 바 -->
-		<div class="container inner-container">
-			<!-- 회원 정보 -->
-			<div class="boxInfo">
-				<div class="cell center memberInfo">
-					<img src="img" width="100%" class="newProfile">
-					<div class="cell">
-						<label for="edit-profile"><i class="fa-solid fa-plus">수정</i></label>
-						<input type="file" name="img" class="tool w-100 profileEdit" id="edit-profile">
-					</div>
-					<p><b>'${memberDto.memberId}'</b> 회원님</p>
-				</div>
-				<div class="cell center detailInfo">
-					<p><b>'${memberDto.memberLevel}'</b> 입니다</p>
-					<div class="cell pt-10">
-						<a class="btn w-50" href="/member/mypage/change">개인정보 변경</a>
-					</div>
-					<div class="cell">
-						<a class="btn w-150" href="/member/mypage/password">비밀번호 변경</a>
-					</div>
-				</div>
+	<!-- 왼쪽 내용 -->
+	<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
+	
+	<!-- 오른쪽 내용 -->
+	<div class="container inner-container">
+		<div class="content content-head">
+			<div class="content-head-text">
+				<i class="fa-solid fa-pause"></i> 구매대행 신청서 목록
 			</div>
-			<br><br>
-			<!-- 메뉴바 -->
-			<div class="title title-head">
-				<div>MENU</div>
-			</div>
-			<div class="title title-body">
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link">구매대행</a>
+		</div>
+		<div class="content content-body">
+			<div class="cell listArea">
+				<c:if test="${empty poList}"><!-- 구매서 작성 내역이 없는 경우 -->
+					<div class="cell center mt-30">
+						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
+						<h2>구매서 작성 내역이 없습니다</h2>
 					</div>
-					<div class="title-body-sub">
-						<div class="title-body-text">
-							<a class="link">구매대행 신청서 작성</a>
-						</div>
-						<div class="title-body-text">
-							<a class="link">구매대행 결제대기</a>
-						</div>
-						<div class="title-body-text">
-							<a class="link">구매대행 신청 내역</a>
-						</div>
+					<div class="cell center">
+						<h2>
+							<a href="/member/po/request" class="btn"> 
+								<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 작성하러 가기
+							</a>
+						</h2>
 					</div>
-				</div>
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link">QNA</a>
-					</div>
-				</div>
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link" href="/member/board/review">내가 쓴 리뷰</a>
-					</div>
-				</div>
-			</div>
-		</div><!-- 왼쪽 사이드 바 닫는 태그 -->
-		<!-- 오른쪽 내용 -->
-		<div class="container inner-container">
-			<div class="content content-head">
-				<div class="content-head-text">
-					<i class="fa-solid fa-pause"></i> 구매대행 신청서 목록
-				</div>
-			</div>
-			<div class="content content-body">
-				<div class="cell listArea">
-					<c:if test="${empty poList}"><!-- 구매서 작성 내역이 없는 경우 -->
-						<div class="cell center mt-30">
-							<i class="fa-regular fa-face-sad-tear fa-3x"></i>
-							<h2>구매서 작성 내역이 없습니다</h2>
-						</div>
-						<div class="cell center">
-							<h2>
-								<a href="/member/po/request" class="btn"> 
-									<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 작성하러 가기
-								</a>
-							</h2>
-						</div>
-					</c:if><!-- 구매서 작성 내역이 없는 경우 닫는 태그 -->
-					<c:if test="${!empty poList}"><!-- 구매서 작성 내역이 있는 경우 -->
-						<div class="right">
+				</c:if><!-- 구매서 작성 내역이 없는 경우 닫는 태그 -->
+				<c:if test="${!empty poList}"><!-- 구매서 작성 내역이 있는 경우 -->
+					<div class="cell flex-cell">
+						<div class="cell searchArea w-75 left"><!-- 검색 기능 -->
+							<form action="list" method="get">
+								<select name="column" class="searchSelect">
+									<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''}>주문번호</option>
+									<option value="po_status" ${param.column == 'po_status' ? 'selected' : ''}>상태</option>
+									<option value="po_sdate" ${param.column == 'po_sdate' ? 'selected' : ''}>작성일</option>
+								</select> 
+								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar">
+								<button class="btn searchBtn">
+									<i class="fa-solid fa-search"></i>
+								</button>
+							</form>
+						</div><!-- 검색기능 닫는 태그 -->
+						<div class="cell w-25 right">
 							<h2><a class="btn" href="/member/po/request" style="color: #B2BC76;">구매서 작성하기</a></h2>
 						</div>
-						<ul class="menu menu-type">
-							<li id="poNo"><strong>주문번호</strong></li>
-							<li id="poItemEngName"><strong>주문서</strong></li><!-- 아이템 이름 -->
-							<li id="poItemCategory"><strong>분류</strong></li>
-							<li id="poSdate"><strong>작성일</strong></li>
-							<li id="poStatus"><strong>상태</strong></li>
-							<li id="poAwbNumber"><strong>송장번호</strong></li>
-							<li id="poFx"><strong>외화금액</strong></li>
-							<li id="poServiceFee"><strong>구매대행 이용료</strong></li>
-							<li id="poTotalPriceKrw"><strong>최종 결제금액</strong></li>
-							<li id="poPayment"><strong>결제하기</strong></li>
-						</ul>
-						
+					</div>
 					
-						<c:forEach var="poDto" items="${poList}">
-							<ul class="menu menu-list">
-								<li id="poNo">${poDto.poNo}</li>
-								<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</li>
-								<li id="poItemCategory">${poDto.poItemCategory}</li>
-								<li id="poSdate">${poDto.poSdate}</li>
-								<li id="poStatus">${poDto.poStatus}</li>
-								<li id="poAwbNumber">${poDto.poAwbNumber}</li>
-								<li id="poFx">${poDto.poFx}</li>
-								<li id="poServiceFee">${poDto.poServiceFee}</li>
-								<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
-								<li id="poPayment"><a href="payment?poNo=${poDto.poNo}" style="color: #B2BC76;"><i
-									class="fa-solid fa-wallet"></i></a> <!-- 결제 -->
-								</li>
-							</ul>
-						</c:forEach>					
-					</c:if><!-- 구매서 작성 내역이 있는 경우 닫는 태그 -->
-				</div>
-			</div><!-- 내용 바디 닫는 태그 -->
-		</div><!-- 오른쪽 내용 닫는 태그 -->	
+					<ul class="menu menu-type">
+						<li id="poNo"><strong>주문번호</strong></li>
+						<li id="poItemEngName"><strong>주문서</strong></li><!-- 아이템 이름 -->
+						<li id="poItemCategory"><strong>분류</strong></li>
+						<li id="poSdate"><strong>작성일</strong></li>
+						<li id="poStatus"><strong>상태</strong></li>
+						<li id="poAwbNumber"><strong>송장번호</strong></li>
+						<li id="poTotalPriceKrw"><strong>최종 결제금액</strong></li>
+						<li id="poPayment"><strong>결제하기</strong></li>
+					</ul>
+					
+				
+					<c:forEach var="poDto" items="${poList}">
+						<ul class="menu menu-list">
+							<li id="poNo">${poDto.poNo}</li>
+							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</li>
+							<li id="poItemCategory">${poDto.poItemCategory}</li>
+							<li id="poSdate">${poDto.poSdate}</li>
+							<li id="poStatus">${poDto.poStatus}</li>
+							<li id="poAwbNumber">${poDto.poAwbNumber}</li>
+							<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
+							<!-- 결제 -->
+							<c:choose>
+								<c:when test="${poStatus != '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->
+									<!-- 결제 창 이동 막기 -->
+									<li id="poPayment" class="payAlert">
+										<a href="#" style="color: #B2BC76;">
+											<i class="fa-solid fa-wallet"></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<!-- 결제 창으로 이동 -->
+									<li id="poPayment">
+										<a href="payment?poNo=${poDto.poNo}" style="color: #B2BC76;">
+											<i class="fa-solid fa-wallet"></i>
+										</a> 
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+					</c:forEach>					
+				</c:if><!-- 구매서 작성 내역이 있는 경우 닫는 태그 -->
+			</div><!-- 구매서 리스트 닫는 태그-->
+		</div><!-- 내용 바디 닫는 태그 -->
+	</div><!-- 오른쪽 내용 닫는 태그 -->	
 </div><!-- 컨테이너 자리 닫는 태그 -->
 
 	

@@ -104,4 +104,11 @@ public class ReviewDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
+	//회원 각자의 리뷰 개수 구하기
+	public int countEachMember(String memberId) {
+		String sql = "select count(*) from review where review_writer=?";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
 }

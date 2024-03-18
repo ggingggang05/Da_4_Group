@@ -118,6 +118,13 @@ public class PoDao {
 		String sql = "select count(*) from po";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	//회원 각자의 구매서 총 개수 구하기
+	public int countEachMember(String memberId) {
+		String sql = "select count(*) from po where po_customer_id=?";
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 
 	//목록 페이징
 	public List<PoDto> selectListByPaging(PageVO pageVO, String loginId) {
