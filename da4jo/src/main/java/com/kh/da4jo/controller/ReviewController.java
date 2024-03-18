@@ -47,14 +47,16 @@ public class ReviewController {
 	}
 
 	@PostMapping("/write")
-	public String write(@ModelAttribute ReviewDto reviewDto, @RequestParam MultipartFile img,
-					HttpSession session) throws IllegalStateException, IOException {
+	public String write(@ModelAttribute ReviewDto reviewDto, @RequestParam MultipartFile img, 
+			@RequestParam float score, HttpSession session) throws IllegalStateException, IOException {
 		String loginId = (String)session.getAttribute("loginId");
 		reviewDto.setReviewWriter(loginId);
 		
 		//등록
 		int reviewNo = reviewDao.getSequence();
+		int reviewStar = (int)score;
 		reviewDto.setReviewNo(reviewNo);
+		reviewDto.setReviewStar(reviewStar);
 		reviewDao.insert(reviewDto);
 		
 		if(!img.isEmpty()) {

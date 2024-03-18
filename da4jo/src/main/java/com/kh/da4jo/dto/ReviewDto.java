@@ -10,6 +10,7 @@ public class ReviewDto {
 	private String reviewWriter;
 	private Date reviewWdate;
 	private int reviewVcount;
+	private int reviewStar;
 	
 	public ReviewDto() {
 		super();
@@ -50,7 +51,11 @@ public class ReviewDto {
 	public void setReviewVcount(int reviewVcount) {
 		this.reviewVcount = reviewVcount;
 	}
-	
-	
+	public int getReviewStar() {
+		return reviewStar;
+	}
+	public void setReviewStar(int reviewStar) {
+		this.reviewStar = reviewStar;
+	}
 	
 }
