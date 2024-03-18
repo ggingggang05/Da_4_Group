@@ -187,12 +187,6 @@
 					</div>
 				</div>
 				<div class="info-group">
-					<div class="info-label">상품수량</div>
-					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poQty}</div>
-					</div>
-				</div>
-				<div class="info-group">
 					<div class="info-label">신청서 작성시간</div>
 					<div class="info-content-wrapper">
 						<div class="info-content">
