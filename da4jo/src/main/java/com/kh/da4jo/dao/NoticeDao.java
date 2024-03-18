@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.kh.da4jo.dto.NoticeDto;
 import com.kh.da4jo.mapper.NoticeMapper;
@@ -58,7 +59,7 @@ public class NoticeDao {
 									+ "select rownum rn, TMP.* from ("
 										+ "select "
 											+ "notice_no, notice_title, notice_content, "
-											+ "notice_writer, notice_wdate, notice_vcount, "
+											+ "notice_writer, notice_wdate, notice_vcount "
 										+ "from notice "
 										+ "where instr("+pageVO.getColumn()+", ?) > 0 "
 									+ ")TMP"

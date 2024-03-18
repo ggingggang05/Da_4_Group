@@ -2,9 +2,9 @@ package com.kh.da4jo.vo;
 
 //페이징에 필요한 클래스
 public class PageVO {
-	private String column, keyword; //검색항목, 검색어
+	private String column;
+	private String keyword; //검색항목, 검색어
 	private int count; //전체 글 수
-	
 	private int page=1; //현재 페이지
 	private int size=10;//한 페이지에 보여줄 게시글 개수
 	private int blockSize=10;//블럭 표시 개수
@@ -68,6 +68,7 @@ public class PageVO {
 	//계산을 위한 Getter메소드
 	public boolean isSearch() {
 		return column != null && keyword != null;
+
 	}
 	public int getBeginRow() { //페이징 시작 번호
 		//return getEndRow() - (page-1);
@@ -98,7 +99,13 @@ public class PageVO {
 	
 	//물음표 뒤에 붙는 데이터 중 공통된 부분(size, column, keyword)에 대한 문자열 반환
 	public String getQueryString() {
+		if(isSearch())
+		{
 		return "size=" + size + "&column=" + getColumn() + "&keyword=" + getKeyword();
+		}
+		else {
+			return "size=" + size;
+		}
 	}
 	
 	public boolean isCurrentPage(int i) { //현재 페이지
