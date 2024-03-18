@@ -28,7 +28,7 @@ public class NoticeDao {
 	}
 
 	// 공지사항 등록
-	public void insert(@ModelAttribute NoticeDto noticeDto) {
+	public void insert(NoticeDto noticeDto) {
 		String sql = "insert into notice(notice_no, notice_title, notice_content," + "notice_writer) "
 				+ "values(?, ?, ?, ?)";
 		Object[] data = { noticeDto.getNoticeNo(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContent(),
@@ -139,7 +139,7 @@ public class NoticeDao {
 	public List<NoticeVO> getNoticeList(){
 		String sql = "SELECT notice_title, notice_wdate, notice_no FROM "
 				+ "(SELECT notice_title, notice_wdate, notice_no FROM notice "
-				+ "ORDER BY notice_wdate DESC) WHERE ROWNUM <= 2";
+				+ "ORDER BY notice_wdate DESC) WHERE ROWNUM <= 10";
 		
 		return jdbcTemplate.query(sql, noticeVOMapper);
 	}
