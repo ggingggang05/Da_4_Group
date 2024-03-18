@@ -2,6 +2,8 @@ package com.kh.da4jo.dto;
 
 import java.sql.Date;
 
+import org.apache.logging.log4j.status.StatusData;
+
 public class PoDto {
 
 	private int poNo;
@@ -206,9 +208,36 @@ public class PoDto {
 	public void setPoCurrency(String poCurrency) {
 		this.poCurrency = poCurrency;
 	}
-
+//	poFxRate 를 poCurrency상태에 맞게 설정 환율 API로 데일리 정보도 받아 올 수 있지만 시간이...
+//	만약 poCurrency가 usd 라면 1340 원 
+//	만약 poCurrency가 jpy 라면 9 원
+//	만약 poCurrency가 eur 라면 1460 원
+//	만약 poCurrency가 aud 라면 890 원
+//	만약 poCurrency가 gbp 라면 1700 원
+//	만약 poCurrency가 cny 라면 190 원
 	public double getPoFxRate() {
-		return poFxRate;
+		if(poCurrency.equals("USD")) {
+			return 1340;
+		}
+		if(poCurrency.equals("JPY")) {
+			return 9;
+		}
+		if(poCurrency.equals("EUR")) {
+			return 1460;
+		}
+		if(poCurrency.equals("AUD")) {
+			return 890;
+		}
+		if(poCurrency.equals("GBP")) {
+			return 1700;
+		}
+		if(poCurrency.equals("CNY")) {
+			return 190;
+		}
+		else {
+			return 1;
+		}
+		
 	}
 
 	public void setPoFxRate(double poFxRate) {
@@ -280,26 +309,24 @@ public class PoDto {
 	만약 부가세가 20만원이 넘으면 계산값을 보여주게
 	poItemPriceKrw * 0.1 = poItemVat
 	--
-	(poItemPriceKrw * 0.05) + 10000 = poServiceFee
+	(getItemPrice() * 0.05) + 10000 = poServiceFee
 	수수료는 결제금액의 5%+1만원
 	--
 	poItemPriceKrw + poItemVat + poServiceFee = poTotalPriceKrw
 	총 결제금액
 	*/
 	public double getItemPrice() {
-		return poFx*poFxRate*poQty;
+		return poFx*getPoFxRate()*poQty;
 	}// 원화금액 계산 환율이랑 외화 곱해서
 	public double getVat() {
 		return  poItemPriceKrw*0.1;
 	}
 	public int getFee() {
-		return (int)((poItemPriceKrw*0.05)+10000);
+		return (int)((getItemPrice()*0.05)+10000);
 	}
 	public int getTotalPrice() {
-		return (int)(poItemPriceKrw+poItemVat+poServiceFee);
+		return (int)(getItemPrice()+getVat()+getFee());
 	}
-	
-	
 	
 	public PoDto() {
 		super();
