@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class QnaDto {
 	private int qnaNo;
-	private String qnaSecreat;
+	private String qnaSecret;
 	private String qnaTitle;
 	private String qnaContent;
 	private String qnaWriter;
@@ -21,11 +21,11 @@ public class QnaDto {
 	public void setQnaNo(int qnaNo) {
 		this.qnaNo = qnaNo;
 	}
-	public String getQnaSecreat() {
-		return qnaSecreat;
+	public String getQnaSecret() {
+		return qnaSecret;
 	}
-	public void setQnaSecreat(String qnaSecreate) {
-		this.qnaSecreat = qnaSecreate;
+	public void setQnaSecret(String qnaSecret) {
+		this.qnaSecret = qnaSecret;
 	}
 	public String getQnaTitle() {
 		return qnaTitle;

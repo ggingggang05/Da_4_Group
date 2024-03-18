@@ -41,11 +41,11 @@
 					<ul class="menu menu-list">
 						<li>${qnaDto.qnaNo}</li>
 						<%-- 잠금을 걸지 않았을때 --%>
-							<c:if test="${qnaDto.qnaSecreate == 'N'}">
+							<c:if test="${qnaDto.qnaSecret == 'N'}">
 							<li><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
 							</c:if>
 							
-							<c:if test="${qnaDto.qnaSecreate == 'Y'}">
+							<c:if test="${qnaDto.qnaSecret == 'Y'}">
 							<li><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></li>
 							</c:if>
 <!-- 						<li><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></li> -->
@@ -78,7 +78,7 @@
 				<c:forEach var="qnaDto" items="${list}">
 					<ul class="menu menu-list">
 						<li>${qnaDto.qnaNo}</li>
-						<li>${qnaDto.qnaSecreate}</li>
+						<li>${qnaDto.qnaSecret}</li>
 						<li><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
 						<li>${qnaDto.qnaWriter}</li>
 						<li>${qnaDto.qnaWdate}</li>
@@ -87,8 +87,7 @@
 				</c:forEach>
 			</c:if>
 
-
-				<%-- 검색창 
+				<%-- 검색창 --%>
 				<div class="cell center my-50">
 					<form action="list" method="get">
 						<select class="btn" name="column">
@@ -103,7 +102,6 @@
 						<button class="searchBtn">검색</button>
 					</form>
 				</div>
-				<%-- 검색창 --%>
 
 			
 				
