@@ -45,11 +45,14 @@ public class ReviewDao {
 			
 		}
 	 
-//	//목록 단순 리스트
-//	public List<ReviewDto> selectList() {
-//		String sql = "select * from review order by review_no desc";
-//		return jdbcTemplate.query(sql, reviewMapper);
-//	}
+	//목록 단순 리스트
+	//자신의 내역을 조회
+	public List<ReviewDto> selectList(String memberId) {
+		String sql = "select * from review where REVIEW_WRITER = ? "
+								+ "order by review_no desc";
+		Object[] data = {memberId};
+		return jdbcTemplate.query(sql, reviewMapper, data);
+	}
 	
 	//검색
 	public List<ReviewDto> selectList(String column, String keyword) {
