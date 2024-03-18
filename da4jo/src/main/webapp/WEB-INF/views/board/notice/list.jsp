@@ -14,6 +14,12 @@
 	text-align: center;
 }
 
+.notice-title2 {
+	width: 70%;
+	text-align: left;
+}
+
+
 .notice-date {
 	width: 20%;
 	text-align: center;
@@ -39,7 +45,7 @@
 			<c:forEach var="noticeDto" items="${noticeDto}">
 				<div class="cell flex-cell">
 					<div class="notice-number">${noticeDto.noticeNo}</div>
-					<div class="notice-title"><a class="link"
+					<div class="notice-title2"><a class="link"
 						href="detail?noticeNo=${noticeDto.noticeNo}">
 							${noticeDto.noticeTitle}</a></div>
 					<div class="notice-date wdate">${noticeDto.noticeWdate}</div>
