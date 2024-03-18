@@ -138,7 +138,7 @@ public class NoticeDao {
 	public List<NoticeVO> getNoticeList(){
 		String sql = "SELECT notice_title, notice_wdate, notice_no FROM "
 				+ "(SELECT notice_title, notice_wdate, notice_no FROM notice "
-				+ "ORDER BY notice_wdate DESC) WHERE ROWNUM <= 2";
+				+ "ORDER BY notice_wdate DESC) WHERE ROWNUM <= 10";
 		
 		return jdbcTemplate.query(sql, noticeVOMapper);
 	}

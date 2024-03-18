@@ -45,14 +45,14 @@
 							success : function(response) {// 읽어들이면 동작
 							 	for (var i = 0; i < response.length; i++) {
 									var notice = response[i];
-									  // 새로운 <li> 요소를 생성하여 공지사항 제목을 포함시킵니다.
-									var titleLink = $("<a>").attr("href", "/board/notice/detail?noticeNo=" + notice.noticeNo).text(notice.noticeTitle).css("font-size", "13px");;
+									  // 새로운 <a> 요소를 생성하여 공지사항 제목을 포함시킵니다.
+									var titleLink = $("<a class='link' id='linkNotice'>").attr("href", "/board/notice/detail?noticeNo=" + notice.noticeNo).text(notice.noticeTitle).css("font-size", "13px");;
 									    // <li> 요소를 생성하고 타이틀 링크를 하위 요소로 추가합니다.
-									    var listItem = $("<li class=link menu>").append(titleLink);
+									    var listItem = $("<div class='w-100 cell flex-cell'>").append(titleLink);
 									    // 작성일을 오른쪽에 보여줍니다.
-									    listItem.append($('<span class="wdate">').text(notice.noticeWdate));
+									    listItem.append($("<label class='wdate' for='linkNotice'>").text(notice.noticeWdate));
 									    // footer-notice-list 클래스를 가진 요소에 <li> 요소를 추가합니다.
-									    $(".footer-notice-list").append(listItem);
+									    $(".notice-wrapper").append(listItem);
 							 	} 
 							},
 							error : function(xhr, status, error) {// 엉키면...
@@ -66,10 +66,10 @@
 					<h3>
 						공지사항 <span>/ Notice</span> <a href="/board/notice/list"
 							class="link-notice"><i class="fa-solid fa-plus"></i></a>
+							<hr>
 					</h3>
-					<div class="cell center">
-						<ul class="menu footer-notice-list">
-						</ul>
+					<div class="cell center notice-wrapper">
+					
 					</div>
 				</div>
 			</div>
@@ -78,6 +78,15 @@
 		<div class="footer-bottom"></div>
 	</div>
 </div>
+<style>
+	.notice-wrapper div > a {
+	text-align: left;
+		width: 81%;
+	}
+	.wdate {
+		color: #2D3436;
+	}
+</style>
 </main>
 </body>
 </html>

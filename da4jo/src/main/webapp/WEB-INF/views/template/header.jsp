@@ -91,7 +91,7 @@
 	padding-right: 20px;
 }
 
-.cs span, .currency span, .notice span {
+.cs span, .currency span, .wdate {
 	color: #ACB8BD;
 	font-size: 12px;
 	font-weight: lighter;
