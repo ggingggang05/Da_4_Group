@@ -2,18 +2,47 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- jquery cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		//출력용
+		$(".score").score({
+			starColor : "#47a3ff", //별 색상
+			display : {//표시 옵션
+				showNumber : true,//숫자 표시 여부
+				textColor : "#47a3ff", //글자 색상
+				placeLimit : 2,//표시할 소수점 자리수
+			},
+		});
+	});
+</script>
+
+
+
 
 
 <%-- UL로 변경 --%>
 
 <div class="container w-1000">
 	<div class="cell my-50">
-		<h1>${reviewDto.reviewNo}번 리뷰 보기</h1>
+		<h1>${reviewDto.reviewNo}번 리뷰글</h1>
 	</div>
-	
+
 	<div class="cell">
 		<h2>제목 : ${reviewDto.reviewTitle}</h2>
+		<div class="cell">
+			<div class="score" data-max="5.0" data-rate="${reviewDto.reviewStar}">
+			</div>
+			<div></div>
+		</div>
 	</div>
+
+	<div class="cell">
+            <div class="score-edit" data-max="5.0"></div>
+        </div>
 
 	<div class="cell flex-cell auto-width">
 		<div class="cell">

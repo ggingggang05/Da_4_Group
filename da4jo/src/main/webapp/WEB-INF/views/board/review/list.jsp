@@ -3,15 +3,29 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<style>
-.title {
-	border-top: 1px solid #bdc3c7;
-	border-bottom: 1px solid #bdc3c7;
-	background-color: #ecf0f1;
-}
+<!-- jquery cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 
-.menu.menu-list {
-	border-bottom: 1px solid #b2bec3;
+<script>
+	$(function() {
+		//출력용
+		$(".score").score({
+			starColor : "#47a3ff", //별 색상
+			display : {//표시 옵션
+				showNumber : false,//숫자 표시 여부
+				textColor : "#47a3ff", //글자 색상
+				placeLimit : 0,//표시할 소수점 자리수
+			},
+		});
+	});
+</script>
+
+<style>
+.menu.menu-type {
+	border-bottom: 1px solid #CAE4FF;
+	border-top: 1px solid #CAE4FF;
+	background-color: #DEEEFF;
 }
 .py-60 { padding-top:60px !important; padding-bottom: 60px !important; }
 
@@ -20,11 +34,11 @@
 }
 
 #reviewNo {
-	width: 8% !important;
+	width: 15% !important;
 }
 
 #reviewImg {
-	width: 20% !important;
+	width: 25% !important;
 }
 
 #reviewTitle {
@@ -33,6 +47,7 @@
 
 
 </style>
+
 
 <br>
 <div class="container container-body">
@@ -49,16 +64,19 @@
 			<div class="cell center"></div>
 			<div class="cell center my-50">
 
-				<ul class="menu menu-type">
+				<ul class="menu menu-type center">
 					<li id="reviewNo">번호</li>
 					<li id="reviewImg">이미지</li>
 					<li id="reviewTitle">제목</li>
 					<li id="">작성자</li>
 					<li id="">작성일</li>
+					<li id="">별점</li>
 				</ul>
 
+<div class="score-edit" data-max="5.0">
+
 				<c:forEach var="reviewDto" items="${list}">
-					<ul class="menu menu-list py-60">
+					<ul class="menu menu-list center py-60">
 						<li id="reviewNo">${reviewDto.reviewNo}</li>
 						<!-- <li><img src="/download?imgNo=166"></li> -->
 						<li id="reviewImg"><img src="image?reviewNo=${reviewDto.reviewNo}"
@@ -67,6 +85,12 @@
 						</li>
 						<li>${reviewDto.reviewWriter}</li>
 						<li>${reviewDto.reviewWdate}</li>
+						<li>
+							<div class="cell">
+								<div class="score" data-max="5.0" data-rate="${reviewDto.reviewStar}">
+								</div>
+							</div>
+						</li>
 					</ul>
 				</c:forEach>
 

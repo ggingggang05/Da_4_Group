@@ -15,18 +15,18 @@ import com.kh.da4jo.dto.QnaDto;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/board/qna")
 public class QnaController {
 	
 	@Autowired
 	private QnaDao qnaDao;
 	
-	@GetMapping("/qna/write")
+	@GetMapping("/write")
 	public String write() {
 		return "/WEB-INF/views/board/qna/write.jsp";
 	}
 
-	@PostMapping("/qna/write")
+	@PostMapping("/write")
 	public String write(@ModelAttribute QnaDto qnaDto, HttpSession session) {
 		String loginId = (String)session.getAttribute("loginId");
 		qnaDto.setQnaWriter(loginId);
@@ -40,7 +40,7 @@ public class QnaController {
 	}
 
 	//리뷰 목록
-	@RequestMapping("/qna/list")
+	@RequestMapping("/list")
 	public String list(@RequestParam(required = false) String column,
 							@RequestParam(required = false) String keyword, Model model) {
 		boolean isSearch = column != null && keyword != null;
@@ -55,9 +55,8 @@ public class QnaController {
 	}
 
 	//상세조회
-	@RequestMapping("/qna/detail")
+	@RequestMapping("/detail")
 	public String detail(@RequestParam int qnaNo, Model model) {
-		qnaDao.updateQnaReadcount(qnaNo);
 		
 		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
 		model.addAttribute("qnaDto", qnaDto);
@@ -66,21 +65,21 @@ public class QnaController {
 	}
 
 	//수정
-	@GetMapping("/qna/edit") 
+	@GetMapping("/edit") 
 	public String edit(@RequestParam int qnaNo, Model model) {
 		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
 		model.addAttribute("qnaDto", qnaDto);
 		return "/WEB-INF/views/board/qna/edit.jsp";
 	}
 	
-	@PostMapping("/qna/edit")
+	@PostMapping("/edit")
 	public String edit(@ModelAttribute QnaDto qnaDto) {
 		qnaDao.update(qnaDto);
 		return "redirect:detail?qnaNo=" + qnaDto.getQnaNo();
 	}
 
 	//삭제
-	@RequestMapping("/qna/delete")
+	@RequestMapping("/delete")
 	public String delete(@RequestParam int qnaNo) {
 		qnaDao.delete(qnaNo);
 		return "redirect:/board/qna/list";

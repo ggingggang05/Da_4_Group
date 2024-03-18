@@ -25,11 +25,12 @@ public class ReviewDao {
 	public void insert(ReviewDto reviewDto) {
 		String sql = "insert into review("
 						+ "review_no, review_title, review_content, "
-						+ "review_writer, review_vcount) "
-						+ "values(?, ?, ?, ?, ?)";
+						+ "review_writer, review_vcount, review_star) "
+						+ "values(?, ?, ?, ?, ?, ?)";
 		Object[] data = {
 				reviewDto.getReviewNo(), reviewDto.getReviewTitle(), 
-				reviewDto.getReviewContent(), reviewDto.getReviewWriter(), reviewDto.getReviewVcount()
+				reviewDto.getReviewContent(), reviewDto.getReviewWriter(), 
+				reviewDto.getReviewVcount(), reviewDto.getReviewStar()
 		};
 		jdbcTemplate.update(sql, data);
 		
@@ -117,6 +118,13 @@ public class ReviewDao {
 		String sql = "select count(*) from review where review_writer=?";
 		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
+	//리뷰 조회수 증가
+	public boolean updateReviewReadcount(int reviewNo) {
+		String sql = "update review set review_vcount = review_vcount + 1 where review_no = ?";
+		Object[] data = {reviewNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 }

@@ -47,14 +47,16 @@ public class ReviewController {
 	}
 
 	@PostMapping("/write")
-	public String write(@ModelAttribute ReviewDto reviewDto, @RequestParam MultipartFile img,
-					HttpSession session) throws IllegalStateException, IOException {
+	public String write(@ModelAttribute ReviewDto reviewDto, @RequestParam MultipartFile img, 
+			@RequestParam float score, HttpSession session) throws IllegalStateException, IOException {
 		String loginId = (String)session.getAttribute("loginId");
 		reviewDto.setReviewWriter(loginId);
 		
 		//등록
 		int reviewNo = reviewDao.getSequence();
+		int reviewStar = (int)score;
 		reviewDto.setReviewNo(reviewNo);
+		reviewDto.setReviewStar(reviewStar);
 		reviewDao.insert(reviewDto);
 		
 		if(!img.isEmpty()) {
@@ -92,6 +94,7 @@ public class ReviewController {
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int reviewNo, Model model) {
+		
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
 		//조회한 게시글 정보에 있는 회원 아이디로 작성자 정보를 불러와서 첨부
