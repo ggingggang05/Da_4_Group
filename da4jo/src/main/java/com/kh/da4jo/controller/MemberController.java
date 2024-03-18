@@ -332,7 +332,7 @@ public class MemberController {
 		//화면으로 전달
 		model.addAttribute("memberDto", memberDto);
 		//내가 쓴 리뷰 글 가져오기
-		model.addAttribute("reviewList", reviewDao.selectOne(reviewDto.getReviewNo()));
+		model.addAttribute("reviewList", reviewDao.selectList(loginId));
 		
 		return "/WEB-INF/views/member/board/review.jsp";
 	}

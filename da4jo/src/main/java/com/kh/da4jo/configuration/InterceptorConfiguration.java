@@ -39,11 +39,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/board/notice/**"
 						)
 					.excludePathPatterns(//인터셉터에서 제외할 페이지
-				
+						"/board/notice/list",
+						"/board/notice/detail"
 					);
 		//관리자 외 접근 불가
 		registry.addInterceptor(adminInterceptor)
-						.addPathPatterns(
+						.addPathPatterns(	
 						"/admin/**",
 						"/board/notice/write"
 						);
@@ -76,3 +77,4 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	//조회수 방지
 	
 }
+
