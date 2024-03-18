@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
@@ -57,7 +58,10 @@
 					<c:forEach var="poDto" items="${poList}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
-							<li id="poContact">${poDto.poPayDate}</li>
+							<li id="poContact">
+							<fmt:formatDate value="${poDto.poPayDate}" 
+									pattern="Y-MM-DD HH:mm:ss"/>
+							</li>
 							<li id="poCustomerId">${poDto.poNameKor}</li>
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>

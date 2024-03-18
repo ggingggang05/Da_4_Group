@@ -98,10 +98,10 @@ public class PoDao {
 	}
 	
 	
-	// 상태 변수 변경
+	// 상태 변수 변경 , 결제시간 변경
 	public void updateStatus(PoDto poDto) {
-		String sql = "update po set po_status=? where po_no=?";
-		Object[] data = { poDto.getPoStatus(), poDto.getPoNo() };
+		String sql = "update po set po_status=?,po_pay_date = sysdate where po_no=?";
+		Object[] data = { poDto.getPoStatus(),  poDto.getPoNo() };
 		jdbcTemplate.update(sql, data);	
 	}
 	
@@ -143,6 +143,14 @@ public class PoDao {
 		
 		return jdbcTemplate.query(sql, poListMapper, data);
 	}
-
+	//결제 완료 목록 조회
+	
+	//결제시간 업데이트
+	public boolean poPayDate(int poNo) {
+		String sql = "update po set po_pay_date = sysdate where po_no";
+		Object[] data = {poNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 
 }
