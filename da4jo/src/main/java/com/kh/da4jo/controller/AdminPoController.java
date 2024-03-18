@@ -56,4 +56,17 @@ public class AdminPoController {
 		model.addAttribute("poList", poList); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
 		return "/WEB-INF/views/admin/po/processList.jsp";
 	}
+	
+	@GetMapping("/processDetail")
+	public String processDetail(@RequestParam int poNo, Model model) {
+		PoDto poDto = poDao.selectOne(poNo);
+		model.addAttribute("poDto",poDto);
+		return "/WEB-INF/views/admin/po/processDetail.jsp";
+	}
+	@PostMapping("/processDetail")
+	public String processDetail(@ModelAttribute PoDto poDto) {
+		System.out.println(poDto.toString());
+		poDao.update(poDto);
+		return "redirect:processList";
+	}
 }
