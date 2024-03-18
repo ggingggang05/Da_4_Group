@@ -16,6 +16,7 @@ public class PaymentVO {
 	private double poItemVat; // 상품에대한 부가세
 	private int poServiceFee; // 구매대행 이용료
 	private int poTotalPriceKrw; // 원화금액
+	private Date poPayDate; // 결제완료 시각
 	
 	private int memberCredit; //회원 캐시
 	private int memberPoint; //회원 포인트
@@ -116,6 +117,12 @@ public class PaymentVO {
 
 	public void setMemberPoint(int memberPoint) {
 		this.memberPoint = memberPoint;
+	}
+	public Date getPoPayDate() {
+		return poPayDate;
+	}
+	public void setPoPayDate(Date poPayDate) {
+		this.poPayDate = poPayDate;
 	}
 	
 	
