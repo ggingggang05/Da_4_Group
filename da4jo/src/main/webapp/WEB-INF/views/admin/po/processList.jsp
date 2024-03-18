@@ -58,11 +58,11 @@
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
 							<li id="poContact">${poDto.poPayDate}</li>
-							<li id="poCustomerId">${poDto.poCustomerId}</li>
+							<li id="poCustomerId">${poDto.poNameKor}</li>
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>
 							<li id="poDetail"><a
-								href="orderDetail?poNo=${poDto.poNo}"><i
+								href="processDetail?poNo=${poDto.poNo}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 					</c:forEach>
