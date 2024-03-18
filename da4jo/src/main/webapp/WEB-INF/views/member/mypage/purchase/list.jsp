@@ -123,7 +123,7 @@
 					<c:forEach var="poDto" items="${poList}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
-							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</li>
+							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</a></li>
 							<li id="poItemCategory">${poDto.poItemCategory}</li>
 							<li id="poSdate">${poDto.poSdate}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
