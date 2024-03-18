@@ -8,67 +8,138 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
+<style>
+.menu-type {
+	margin: 0px !important;
+}
+
+.menu-list {
+	margin: 0px !important;
+}
+
+.listArea {
+	border: 1px solid #ced3d6;
+}
+
+#memberId {
+	width: 23%;
+}
+
+#memerName {
+	width: 13%;
+}
+
+#memberEmail {
+	width: 50%;
+}
+
+#memberCode {
+	width: 32%;
+}
+
+#isBlock, #memberDetail {
+	width: 9%;
+}
+</style>
 
 
-<!-- 리뷰 페이지 -->
-	<div class="cell center">
-		<h2>${memberDto.memberId}님의 리뷰 내역</h2>
-	</div>
-
-<!-- 리뷰 충전 내역 테이블 -->
-		<div>
-		<c:if test="${empty reviewList}"> <!-- 내가 쓴 리뷰가 없을 경우 -->
-			<div class="cell center mt-30">
-				<i class="fa-regular fa-face-sad-tear fa-3x"></i>
-				<h2>작성한 리뷰가 없습니다</h2>
+<!-- 로그인 한 회원의 구매서 목록 페이지 -->
+<br>
+<br>
+<div class="container container-body">
+	<!-- 마이페이지 헤더 -->
+	<div class="container inner-container">
+		<div class="content content-head">
+			<div class="content-head-text">
+				<i class="fa-solid fa-pause"></i>${memberDto.memberId}님의 문의내역
 			</div>
-			<div class="cell center">
-				<h2>
-					<a href="/board/review/write" class="btn"> 
-					<i class="fa-solid fa-pen" style="color: #dbdd7e;"></i> 
-					리뷰 작성하기
-					</a>
-				</h2>
-			</div>
-		</c:if><!-- 내가 쓴 리뷰가 없는 태그 닫기 -->
 		</div>
+	</div>
+		<!-- 왼쪽 내용 -->
+	<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
 
-		<c:if test="${!empty reviewList}"><!-- 리뷰 내역이 있는 경우 -->
-			<div>
-				<h2>
-					리뷰 내역 &nbsp;&nbsp;&nbsp; 
-					<a href="/board/review/write" class="btn">
-					<i class="fa-solid fa-pen" style="color: #dbdd7e;"></i> 
-					작성 하기
-					</a>
-				</h2>
+	<!-- 오른쪽 내용 -->
+	<div class="container inner-container">
+		<div class="content content-head">
+			<div class="content-head-text">
+				<i class="fa-solid fa-pause"></i> 나의 문의내역
 			</div>
-			<table class="table table-horizontal">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성시간</th>
-					</tr>
-				</thead>
-				<tbody>
+		</div>
+		<div class="content content-body">
+			<div class="cell listArea">
+				<c:if test="${empty reviewList}">
+					<!-- 구매서 작성 내역이 없는 경우 -->
+					<div class="cell center mt-30">
+						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
+						<h2>남기신 후기가 없습니다</h2>
+					</div>
+					<div class="cell center">
+						<h2>
+							<a href="/member/board/review" class="btn"> <i
+								class="fa-solid fa-paper" style="color: #B2BC76;"></i> 리뷰 작성하러
+								가기
+							</a>
+						</h2>
+					</div>
+				</c:if>
+				<!-- 문의 내역이 없는 경우 닫는 태그 -->
+				<c:if test="${!empty reviewList}">
+					<!-- 문의 내역이 있는 경우 -->
+					<div class="cell flex-cell">
+						<div class="cell searchArea w-75 left">
+							<!-- 검색 기능 -->
+							<form action="list" method="get">
+								<select name="column" class="searchSelect">
+									<option value="review_title"
+										${param.column == 'review_title' ? 'selected' : ''}>제목</option>
+									<option value="review_content"
+										${param.column == 'review_content' ? 'selected' : ''}>내용</option>
+									<option value="review_wdate"
+										${param.column == 'review_wdate' ? 'selected' : ''}>작성일</option>
+								</select> <input type="search" name="keyword" placeholder=""
+									value="${param.keyword}" class="searchBar">
+								<button class="btn searchBtn">
+									<i class="fa-solid fa-search"></i>
+								</button>
+							</form>
+						</div>
+						<!-- 검색기능 닫는 태그 -->
+						<div class="cell w-25 right">
+							<h2>
+								<a class="btn" href="/board/review/write" style="color: #B2BC76;">리뷰
+									작성하기</a>
+							</h2>
+						</div>
+					</div>
+
+					<ul class="menu menu-type">
+						<li id="reviewNo"><strong>글번호</strong></li>
+						<li id="reviewTitle"><strong>제목</strong></li>
+						<!-- 아이템 이름 -->
+						<li id="reviewContent"><strong>내용</strong></li>
+						<li id="reviewWdate"><strong>작성일</strong></li>
+					</ul>
+
+
 					<c:forEach var="reviewDto" items="${reviewList}">
-						<tr>
-							<td align="center">
-								${reviewDto.reviewNo}
-							</td>
-							<td align="center">
-								${reviewDto.reviewTitle}
-							</td>
-							<td align="center"><fmt:formatDate value="${reviewDto.reviewWdate}"
-									pattern="yyyy-MM-dd HH:mm" />
-							</td>
-						</tr>
+						<ul class="menu menu-list">
+							<li id="reviewNo">${reviewDto.reviewNo}</li>
+							<li id="reviewTitle">${reviewDto.reviewTitle }</li>
+							<li id="reviewContent">${reviewDto.reviewContent}</li>
+							<li id="reviewWdate">${reviewDto.reviewWdate}</li>
+						</ul>
 					</c:forEach>
-					
-				</tbody>
-			</table>
-		</c:if><!-- 리뷰 내역이 있는 경우 닫는 태그 -->
+				</c:if>
+				<!-- 구매서 작성 내역이 있는 경우 닫는 태그 -->
+			</div>
+			<!-- 구매서 리스트 닫는 태그-->
+		</div>
+		<!-- 내용 바디 닫는 태그 -->
+	</div>
+	<!-- 오른쪽 내용 닫는 태그 -->
+</div>
+<!-- 컨테이너 자리 닫는 태그 -->		
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

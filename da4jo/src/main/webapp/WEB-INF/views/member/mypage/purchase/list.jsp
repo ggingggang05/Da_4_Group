@@ -123,7 +123,7 @@
 					<c:forEach var="poDto" items="${poList}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
-							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</li>
+							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</a></li>
 							<li id="poItemCategory">${poDto.poItemCategory}</li>
 							<li id="poSdate">${poDto.poSdate}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
@@ -131,7 +131,7 @@
 							<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
 							<!-- 결제 -->
 							<c:choose>
-								<c:when test="${poStatus != '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->
+								<c:when test="${poStatus == '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->
 									<!-- 결제 창 이동 막기 -->
 									<li id="poPayment" class="payAlert">
 										<a href="#" style="color: #B2BC76;">
