@@ -120,4 +120,11 @@ public class ReviewDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
+	//리뷰 조회수 증가
+	public boolean updateReviewReadcount(int reviewNo) {
+		String sql = "update review set review_vcount = review_vcount + 1 where review_no = ?";
+		Object[] data = {reviewNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 }

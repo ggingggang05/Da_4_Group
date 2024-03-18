@@ -94,6 +94,7 @@ public class ReviewController {
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int reviewNo, Model model) {
+		
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
 		//조회한 게시글 정보에 있는 회원 아이디로 작성자 정보를 불러와서 첨부

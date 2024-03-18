@@ -10,7 +10,9 @@ import com.kh.da4jo.interceptor.BlockInterceptor;
 import com.kh.da4jo.interceptor.MemberInterceptor;
 import com.kh.da4jo.interceptor.NoticeVcountInterceptor;
 import com.kh.da4jo.interceptor.QnaOwnerInterceptor;
+import com.kh.da4jo.interceptor.QnaVcountInterceptor;
 import com.kh.da4jo.interceptor.ReviewOwnerInterceptor;
+import com.kh.da4jo.interceptor.ReviewVcountInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
@@ -27,6 +29,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	private ReviewOwnerInterceptor reviewOwnerInterceptor;
 	@Autowired
 	private NoticeVcountInterceptor noticeVcountInterceptor;
+	@Autowired
+	private ReviewVcountInterceptor reviewVcountInterceptor;
+	@Autowired
+	private QnaVcountInterceptor qnaVcountInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -70,11 +76,17 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						.addPathPatterns(
 								"/board/notice/detail"
 						);
+		//리뷰글 조회수 중복방지
+				registry.addInterceptor(reviewVcountInterceptor)
+								.addPathPatterns(
+										"/board/review/detail"
+						);
+		//문의글 조회수 중복방지
+		registry.addInterceptor(qnaVcountInterceptor)
+						.addPathPatterns(
+								"/board/qna/detail"
+				);
 	}
-	
-
-	
-	//조회수 방지
 	
 }
 
