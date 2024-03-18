@@ -83,7 +83,6 @@ public class NoticeController {
 		int count = noticeDao.count(pageVO);
 		pageVO.setCount(count);
 		model.addAttribute("pageVO", pageVO);
-		
 		List<NoticeDto> noticeDto = noticeDao.selectListByPaging(pageVO);
 		model.addAttribute("noticeDto", noticeDto);
 		
