@@ -187,12 +187,6 @@
 					</div>
 				</div>
 				<div class="info-group">
-					<div class="info-label">상품수량</div>
-					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poQty}</div>
-					</div>
-				</div>
-				<div class="info-group">
 					<div class="info-label">신청서 작성시간</div>
 					<div class="info-content-wrapper">
 						<div class="info-content">
@@ -214,11 +208,8 @@
 							<div class="info-label">상품금액(원화)</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<fmt:formatNumber type="number"
-										value="${poDto.poFx * poDto.poFxRate}" pattern="######"
-										var="formattedPrice" />
 									<input type="text" name="poItemPriceKrw"
-										value="${formattedPrice}" readonly>
+										value="${poDto.itemPrice}" readonly>
 								</div>
 							</div>
 						</div>
@@ -227,18 +218,15 @@
 							<div class="info-content-wrapper">
 								<div class="info-content">
 									<c:choose>
-										<c:when test="${poDto.poFx * poDto.poFxRate >= 200000}">
-											<fmt:formatNumber type="number"
-												value="${(poDto.poFx * poDto.poFxRate) * 0.1}"
-												pattern="######" var="formattedVat" />
+										<c:when test="${poDto.itemPrice >= 200000}">
+											<input type="text" name="poItemVat"
+												value="${poDto.vat}" readonly>
 										</c:when>
 										<c:otherwise>
-											<fmt:formatNumber type="number" value="0" pattern="###,###"
-												var="formattedVat" />
+											<input type="text" name="poItemVat"
+												value="0" readonly>
 										</c:otherwise>
 									</c:choose>
-									<input type="text" name="poItemVat" value="${formattedVat}"
-										readonly>
 								</div>
 							</div>
 						</div>
@@ -246,11 +234,8 @@
 							<div class="info-label">수수료</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<fmt:formatNumber type="number"
-										value="${(poDto.poFx * poDto.poFxRate * 0.05) + 10000}"
-										pattern="######" var="formattedCommission" />
 									<input type="text" name="poServiceFee"
-										value="${formattedCommission}" readonly>
+										value="${poDto.fee}" readonly>
 								</div>
 							</div>
 						</div>
@@ -258,16 +243,15 @@
 							<div class="info-label">결제금액</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<fmt:formatNumber type="number"
-										value="${(poDto.poFx * poDto.poFxRate) + ((poDto.poFx * poDto.poFxRate) * 0.1) + ((poDto.poFx * poDto.poFxRate) * 0.05) + 10000}"
-										pattern="######" var="formattedTotalPrice" />
 									<input type="text" name="poTotalPriceKrw"
-										value="${formattedTotalPrice}" readonly>
+										value="${poDto.totalPrice}" readonly>
 								</div>
 							</div>
 						</div>
 						<input type="hidden" name="poNo" value="${poDto.poNo}">
-						<div class="cell right"><button type="submit" class="btn">사용자에게 전송</button></div>
+						<div class="cell right">
+							<button type="submit" class="btn">사용자에게 전송</button>
+						</div>
 				</form>
 				<div class="cell center">
 					<a href="/admin/po/orderList" class="link">

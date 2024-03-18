@@ -10,10 +10,10 @@
 
         <h2>공개여부</h2>
         <div class="cell">
-        	<input type="radio" name="qnaSecreate" value="N">
+        	<input type="radio" name="qnaSecret" value="N">
             <label>공개</label>
 
-            <input type="radio" name="qnaSecreate" value="Y">
+            <input type="radio" name="qnaSecret" value="Y">
             <label>비공개</label>
         </div>
 
@@ -24,7 +24,7 @@
         
         <h2>내용</h2>
         <div>
-            <textarea name="qnaContent"></textarea>
+            <textarea class="imgArea" name="qnaContent"></textarea>
         </div>
 
         <button type="submit" class="btn">등록</button>

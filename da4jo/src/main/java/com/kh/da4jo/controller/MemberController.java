@@ -1,6 +1,7 @@
 package com.kh.da4jo.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.da4jo.dao.CreditDao;
 import com.kh.da4jo.dao.ImgDao;
 import com.kh.da4jo.dao.MemberDao;
+import com.kh.da4jo.dao.PoDao;
+import com.kh.da4jo.dao.QnaDao;
 import com.kh.da4jo.dao.ReviewDao;
 import com.kh.da4jo.dto.MemberDto;
+import com.kh.da4jo.dto.QnaDto;
 import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.service.EmailService;
 import com.kh.da4jo.service.ImgService;
+import com.kh.da4jo.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -39,6 +44,10 @@ public class MemberController {
 	private CreditDao creditDao;
 	@Autowired
 	private ReviewDao reviewDao;
+	@Autowired
+	private PoDao poDao;
+	@Autowired
+	private QnaDao qnaDao;
 	
 	
 	//회원가입
@@ -118,6 +127,12 @@ public class MemberController {
 		
 		//로그인한 사용자의 캐시 내역을 첨부
 		model.addAttribute("creditList", creditDao.selectList(loginId));
+		//로그인한 사용자의 총 구매서 작성 개수를 첨부
+		model.addAttribute("countPo", poDao.countEachMember(loginId));
+		//로그인한 사용자의 리뷰 글 개수 첨부
+		model.addAttribute("countReview", reviewDao.countEachMember(loginId));
+		//로그인한 사용자의 QNA 글 개수 첨부
+		model.addAttribute("countQna", qnaDao.countEachMember(loginId));
 		
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
@@ -322,7 +337,23 @@ public class MemberController {
 		return "/WEB-INF/views/member/board/review.jsp";
 	}
 	
-	
+	//내가 쓴 QNA 페이지
+	@RequestMapping("/board/qna")
+	public String qna(@ModelAttribute(value = "pageVO") PageVO pageVO,
+					 HttpSession session, Model model) {
+		String loginId = (String) session.getAttribute("loginId");
+
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		model.addAttribute("memberDto", memberDto);
+		
+		int count = qnaDao.count();
+		pageVO.setCount(count);
+		
+		List<QnaDto> list = qnaDao.selectListByPaging(pageVO, loginId);
+		model.addAttribute("qnaList", list); 
+		
+		return "/WEB-INF/views/member/board/qna.jsp";
+	}
 }
 
 

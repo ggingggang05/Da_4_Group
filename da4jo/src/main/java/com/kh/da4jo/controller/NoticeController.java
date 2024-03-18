@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.da4jo.dao.NoticeDao;
 import com.kh.da4jo.dto.NoticeDto;
+import com.kh.da4jo.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -60,24 +61,40 @@ public class NoticeController {
 	}
 
 	// 공지 목록 + 검색
+//	@RequestMapping("/list")
+//	public String list(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword,
+//			Model model) {
+//		// 기본은 목록을 띄워주고 원하면 검색을 할 수 있게 구현
+//		boolean isSearch = column != null && keyword != null;
+//		// column 값과 keyword 값이 둘다 null이 아닌 경우는 검색 페이지를 보여주는 변수 설정
+//
+//		List<NoticeDto> noticeDto = isSearch ? noticeDao.selectList(column, keyword) : noticeDao.selectList();
+//
+//		model.addAttribute("noticeDto", noticeDto); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
+//
+//		return "/WEB-INF/views/board/notice/list.jsp";
+//	}
+	
 	@RequestMapping("/list")
-	public String list(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword,
+	public String list(
+			@ModelAttribute PageVO pageVO,
 			Model model) {
-		// 기본은 목록을 띄워주고 원하면 검색을 할 수 있게 구현
-		boolean isSearch = column != null && keyword != null;
-		// column 값과 keyword 값이 둘다 null이 아닌 경우는 검색 페이지를 보여주는 변수 설정
-
-		List<NoticeDto> noticeDto = isSearch ? noticeDao.selectList(column, keyword) : noticeDao.selectList();
-
-		model.addAttribute("noticeDto", noticeDto); // jsp에 list라는 이름으로 매개변수의 값을 객체에 담아 전달
-
+		//세부 계산은 클래스에서 수행하도록 하고 count, list만 처리
+		int count = noticeDao.count(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		List<NoticeDto> noticeDto = noticeDao.selectListByPaging(pageVO);
+		model.addAttribute("noticeDto", noticeDto);
+		
 		return "/WEB-INF/views/board/notice/list.jsp";
 	}
+	
 
 	// 공지 상세
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int noticeNo, Model model) {
 		NoticeDto noticeDto = noticeDao.selectOne(noticeNo); // 게시글 번호 주면 상세 페이지
+		
 		model.addAttribute("noticeDto", noticeDto); // noticeDto라는 이름으로 jsp에 객체 전달(게시글번호)
 
 		return "/WEB-INF/views/board/notice/detail.jsp";
@@ -89,4 +106,13 @@ public class NoticeController {
 		noticeDao.delete(noticeNo);
 		return "redirect:list";
 	}
+	
+	// 풋터 리스트
+	@GetMapping("/footer")
+	public String footer(Model model){
+		List<NoticeDto> noticeDto = noticeDao.selectList();
+		model.addAttribute("noticeDto",noticeDto);
+		return "/WEB-INF/views/notice.jsp";
+	}
+
 }

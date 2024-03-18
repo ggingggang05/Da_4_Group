@@ -36,22 +36,27 @@ public class ReviewDao {
 	}
 	
 	//목록 [페이징 구현 전까지 주석]
-		public List<ReviewDto> selectList() {
-			String sql = "select "
-					+ "review_no, review_title, review_content, "
-					+ "review_writer, review_wdate, review_vcount "
-					+ "from review order by review_no desc";
-			return jdbcTemplate.query(sql, reviewMapper);
-			
-		}
+//		public List<ReviewDto> selectList() {
+//			String sql = "select "
+//					+ "review_no, review_title, review_content, "
+//					+ "review_writer, review_wdate, review_vcount "
+//					+ "from review order by review_no desc";
+//			return jdbcTemplate.query(sql, reviewMapper);
+//			
+//		}
 	 
 	//목록 단순 리스트
+
 	//자신의 내역을 조회
 	public List<ReviewDto> selectList(String memberId) {
 		String sql = "select * from review where REVIEW_WRITER = ? "
 								+ "order by review_no desc";
 		Object[] data = {memberId};
 		return jdbcTemplate.query(sql, reviewMapper, data);
+	}
+	public List<ReviewDto> selectList() {
+		String sql = "select * from review order by review_no desc";
+		return jdbcTemplate.query(sql, reviewMapper);
 	}
 	
 	//검색
@@ -104,6 +109,13 @@ public class ReviewDao {
 	public int findImgNo(int reviewNo) {
 		String sql = "select img_no from review_img where review_no = ?";
 		Object[] data = {reviewNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
+	//회원 각자의 리뷰 개수 구하기
+	public int countEachMember(String memberId) {
+		String sql = "select count(*) from review where review_writer=?";
+		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	

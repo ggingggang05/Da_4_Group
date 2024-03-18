@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.kh.da4jo.dto.QnaDto;
-import com.kh.da4jo.dto.ReviewDto;
+import com.kh.da4jo.mapper.QnaListMapper;
 import com.kh.da4jo.mapper.QnaMapper;
+import com.kh.da4jo.vo.PageVO;
 
 @Repository
 public class QnaDao {
@@ -15,6 +17,8 @@ public class QnaDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private QnaMapper qnaMapper;
+	@Autowired
+	private QnaListMapper qnaListMapper;
 	
 	//시퀀스
 	public int getSequence() {
@@ -24,11 +28,11 @@ public class QnaDao {
 	//작성
 	public void insert(QnaDto qnaDto) {
 		String sql = "insert into qna("
-				+ "qna_no,qna_secreat, qna_title, qna_content, "
+				+ "qna_no, qna_secret, qna_title, qna_content, "
 				+ "qna_writer, qna_vcount) "
 				+ "values(?, ?, ?, ?, ?, ?)";
 		Object[] data = {
-					qnaDto.getQnaNo(), qnaDto.getQnaSecreate(),
+					qnaDto.getQnaNo(), qnaDto.getQnaSecret(),
 					qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
 					qnaDto.getQnaWriter(), qnaDto.getQnaVcount()				
 				};
@@ -39,7 +43,7 @@ public class QnaDao {
 	//목록
 	public List<QnaDto> selectList() {
 		String sql = "select "
-				+ "qna_no, qna_secreat, qna_title, qna_content, "
+				+ "qna_no, qna_secret, qna_title, qna_content, "
 				+ "qna_writer, qna_wdate, qna_vcount "
 				+ "from qna order by qna_no desc";
 		return jdbcTemplate.query(sql, qnaMapper);
@@ -48,7 +52,7 @@ public class QnaDao {
 	//검색
 	public List<QnaDto> selectList(String column, String keyword) {
 		String sql = "select "
-				+ "qna_no, qna_secreat, qna_title, qna_content, "
+				+ "qna_no, qna_secret, qna_title, qna_content, "
 				+ "qna_writer, qna_wdate, qna_vcount "
 				+ "from qna "
 				+ "where instr("+column+", ?) > 0 "
@@ -89,5 +93,34 @@ public class QnaDao {
 		String sql = "update qna set qna_vcount = qna_vcount + 1 where qna_no = ?";
 		Object[] data = {qnaNo};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//회원 각자의 구매서 총 개수 구하기
+	public int countEachMember(String memberId) {
+		String sql = "select count(*) from qna where qna_writer=?";
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
+	//목록일 경우 카운트
+	public int count() {
+		String sql = "select count(*) from qna";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	public List<QnaDto> selectListByPaging(PageVO pageVO, String loginId) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ( "
+					+ "select "
+						+ "qna_no, qna_secret, "
+						+ "qna_title, qna_wdate "
+					+ "from qna "
+					+ "where qna_writer=?"
+					+ "order by qna_wdate desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] data = {loginId, pageVO.getBeginRow(), pageVO.getEndRow()};
+
+		return jdbcTemplate.query(sql, qnaListMapper, data);
 	}
 }

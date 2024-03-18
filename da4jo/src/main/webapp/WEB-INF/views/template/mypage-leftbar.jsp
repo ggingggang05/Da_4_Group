@@ -29,18 +29,6 @@
 
 </style>
 
-<!-- 로그인 한 회원의 구매서 목록 페이지 -->
-<br>
-<br>
-<div class="container container-body"> <!-- 해당 태그의 닫는 태그는 각각의 마이페이지 jsp파일에 존재 -->
-	<!-- 마이페이지 헤더 -->
-	<div class="container inner-container">
-		<div class="content content-head">
-			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${session.loginId}님의 구매서 목록
-			</div>
-		</div>
-	</div>
 	<div class="container flex-container">
 		<!-- 왼쪽 사이드 바 -->
 		<div class="container inner-container">

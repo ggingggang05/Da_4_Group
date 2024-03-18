@@ -32,10 +32,12 @@ public class PoMapper implements RowMapper<PoDto>{
 		poDto.setPoAddress1(rs.getString("PO_ADDRESS1"));
 		poDto.setPoAddress2(rs.getString("PO_ADDRESS2"));
 		poDto.setPoDcomment(rs.getString("PO_DCOMMENT"));
+		poDto.setPoAdminComment(rs.getString("PO_ADMIN_COMMENT"));
 		poDto.setPoStatus(rs.getString("PO_STATUS"));
 		poDto.setPoAwbNumber(rs.getString("PO_AWB_NUMBER"));
 		poDto.setPoSdate(rs.getDate("PO_SDATE"));
 		poDto.setPoEdate(rs.getDate("PO_EDATE"));
+		poDto.setPoPayDate(rs.getDate("PO_PAY_DATE"));
 		poDto.setPoCountry(rs.getString("PO_COUNTRY"));
 		poDto.setPoCurrency(rs.getString("PO_CURRENCY"));
 		poDto.setPoFxRate(rs.getDouble("PO_FX_RATE"));

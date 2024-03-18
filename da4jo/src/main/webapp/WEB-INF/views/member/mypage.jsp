@@ -7,13 +7,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-.boxInfo{
-	border-color: #6c6e6e33;
-	border-width: 1px;
-    border-style: solid;
-	boarder-radius: 2px;
-	font-size: 14px;
-}
 
 .memberInfo{
 	font-size:14px;
@@ -23,7 +16,7 @@
 }
 
 .detailInfo,
-.btn {
+.btnMypage {
 	font-size: 12px;
 	padding: 5px;
 }
@@ -32,6 +25,31 @@
 	display : none;
 }
 
+</style>
+
+<style>
+.chargeList {
+	margin-left: auto;
+	margin-right: auto;
+}
+.chargeList li {
+	width: 30%;
+}
+.chargeList .chargeTime {
+	width: 70%;
+}
+</style>
+
+<style>
+.menuBox {
+	padding : 5px;
+	padding-bottom : 20px;
+	height : 200px;
+	margin-top : 0px !important;
+}
+.title-head {
+	background-color: #60A1F833;
+}
 </style>
 
 <!-- 프로필 변경 -->
@@ -99,10 +117,10 @@ $(function(){
 				<div class="cell center detailInfo">
 					<p><b>'${memberDto.memberLevel}'</b> 입니다</p>
 					<div class="cell pt-10">
-						<a class="btn w-50" href="/member/mypage/change">개인정보 변경</a>
+						<a class="btn w-50 btnMypage" href="/member/mypage/change">개인정보 변경</a>
 					</div>
 					<div class="cell">
-						<a class="btn w-150" href="/member/mypage/password">비밀번호 변경</a>
+						<a class="btn w-150 btnMypage" href="/member/mypage/password">비밀번호 변경</a>
 					</div>
 				</div>
 			</div>
@@ -118,24 +136,24 @@ $(function(){
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
-							<a class="link">구매대행 신청서 작성</a>
+							<a class="link" href="po/request">구매대행 신청서 작성</a>
 						</div>
 						<div class="title-body-text">
 							<a class="link">구매대행 결제대기</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/purchase/list">구매대행 신청 내역</a>
+							<a class="link" href="mypage/purchase/list">구매대행 신청 내역</a>
 						</div>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link">QNA</a>
+						<a class="link" href="/board/qna/list">QNA</a>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link" href="/member/board/review">내가 쓴 리뷰</a>
+						<a class="link" href="/member/board/review">리뷰 게시판</a>
 					</div>
 				</div>
 			</div>
@@ -145,44 +163,58 @@ $(function(){
 			<div class="content content-body">
 				<!-- 주요메뉴 -->
 				<div class="cell center flex-cell">
-					<div class="cell boxInfo"> <!-- 메뉴1 -->
-						<div> <!-- 제목 -->
-							<a class="link" href="/member/po/request">구매대행 신청서 작성</a>
-							<!-- <a class="btn w-100" href="/member/mypage/purchase/list">구매 신청서</a> -->
+					<div class="cell menuBox w-20"> <!-- 메뉴1 -->
+						<div class="title title-head">
+							구매대행 신청서
 						</div>
-						<div> <!-- 내용 -->
-						</div>
-					</div>
-					<div class="cell boxInfo"> <!-- 메뉴2 -->
-						<div> <!-- 제목 -->
-							 <a class="link" href="/member/mypage/purchase/list">구매대행 신청서 목록</a>
-						</div>
-						<div> <!-- 내용 -->
+						<div class="title title-body mt-10">
+							<h3>${countPo} 건</h3>
+							<a class="btn w-100 btnMypage " href="mypage/purchase/list">작성하기</a>
+							<a class="btn w-100 btnMypage " href="mypage/purchase/list">내 신청서 보기</a>
 						</div>
 					</div>
-					<div class="cell boxInfo"> <!-- 메뉴3 -->
-						<div> <!-- 제목 -->
-							 <a class="link">menu3</a>
+					<div class="cell menuBox w-20"> <!-- 메뉴2 -->
+						<div class="title title-head">
+							 나의 문의내역
 						</div>
-						<div> <!-- 내용 -->
-						</div>
-					</div>
-					<div class="cell boxInfo"> <!-- 메뉴4 -->
-						<div> <!-- 제목 -->
-							 <a class="link">menu4</a>
-						</div>
-						<div> <!-- 내용 -->
+						<div class="title title-body mt-10">
+							<div>
+								<h3> ${countQna} 건</h3>
+								<a class="btn w-100 btnMypage " href="board/qna">내 문의내역</a>
+							</div>
 						</div>
 					</div>
-					<div class="cell boxInfo"> <!-- 메뉴5 -->
-						<div> <!-- 제목 -->
+					<div class="cell menuBox w-20"> <!-- 메뉴3 -->
+						<div class="title title-head">
+							 나의 리뷰내역
+						</div>
+						<div class="title title-body mt-10">
+							<div>
+								<h3> ${countReview} 건</h3>
+								<a class="btn w-100 btnMypage " href="board/review">내가 쓴 리뷰</a>
+							</div>
+						</div>
+					</div>
+					<div class="cell menuBox w-20"> <!-- 메뉴4 -->
+						<div class="title title-head">
+							보유캐시
+						</div>
+						<div class="title title-body mt-10">
+							<div>
+								<h3> ${memberDto.memberCredit} 원</h3>	
+								<a class="btn btnMypage " href="credit/charge">충전하기</a>
+							</div>
+						</div>
+					</div>
+					<div class="cell menuBox w-20"> <!-- 메뉴5 -->
+						<div class="title title-head"> <!-- 제목 -->
 							 <a class="link">menu5</a>
 						</div>
-						<div> <!-- 내용 -->
+						<div class="title title-body mt-10"> <!-- 내용 -->
 						</div>
 					</div>
 				</div><!-- 주요 메뉴 닫는 태그 -->
-				
+				<hr>
 				<!-- 캐쉬 충전 내역 테이블 -->
 				<div>
 				<c:if test="${empty creditList}"> <!-- 캐쉬 내역이 없는 경우 -->
@@ -200,37 +232,29 @@ $(function(){
 					</div>
 				</c:if><!-- 캐쉬 내역이 없는 경우 닫는 태그 -->
 				<c:if test="${!empty creditList}"><!-- 캐쉬 내역이 있는 경우 -->
-					<div>
+					<div class="cell center">
 						<h2>
-							캐쉬 구매 내역 &nbsp;&nbsp;&nbsp; 
-							<a href="credit/charge" class="btn">
-							<i class="fa-solid fa-sack-dollar" style="color: #dbdd7e;"></i>
-							추가 구매
-							</a>
+							캐쉬 충전내역
 						</h2>
 					</div>
-					<table class="table table-horizontal">
-						<thead>
-							<tr>
-								<th>충전금액</th>
-								<th>충전일시</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="creditDto" items="${creditList}">
-								<tr>
-									<td align="center">
-										<fmt:formatNumber value="${creditDto.creditCharge}"
-											pattern="#,##0" />
-									</td>
-									<td align="center"><fmt:formatDate value="${creditDto.creditTimeDate}"
-											pattern="yyyy-MM-dd HH:mm" />
-									</td>
-								</tr>
-							</c:forEach>
-							
-						</tbody>
-					</table>
+					<div class="cell right">
+						<a href="credit/charge" class="btn btnCredit">
+							<i class="fa-solid fa-sack-dollar" style="color: #dbdd7e;"></i>크레딧 충전
+						</a>
+					</div>
+					<div class="cell center">
+						<ul class="menu chargeList">
+							<li>충전금액</li>
+							<li class="chargeTime">충전일시</li>
+						</ul>
+						<c:forEach var="creditDto" items="${creditList}">
+							<ul class="menu chargeList">
+								<li>${creditDto.creditCharge}</li>
+								<li class="chargeTime"><fmt:formatDate value="${creditDto.creditTimeDate}"
+										pattern="y년 M월 d일 H시 m분 s초" /></li>
+							</ul>
+						</c:forEach>
+					</div>
 				</c:if><!-- 캐쉬 내역이 있는 경우 닫는 태그 -->
 				
 				
