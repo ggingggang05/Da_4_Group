@@ -79,7 +79,12 @@
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a class="link">공지사항목록</a>
+						<a href="/board/notice/list" class="link">공지사항목록</a>
+					</div>
+				</div>
+				<div class="title-body-sub">
+					<div class="title-body-text">
+						<a href="/board/notice/write" class="link">공지사항작성</a>
 					</div>
 				</div>
 			</div>
