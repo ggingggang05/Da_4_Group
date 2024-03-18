@@ -248,6 +248,7 @@
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="poStatus" value="결제 대기 중">
 						<input type="hidden" name="poNo" value="${poDto.poNo}">
 						<div class="cell right">
 							<button type="submit" class="btn">사용자에게 전송</button>
