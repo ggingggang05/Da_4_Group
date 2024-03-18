@@ -16,7 +16,7 @@ public class QnaListMapper implements RowMapper<QnaDto>{
 	public QnaDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		QnaDto qnaDto = new QnaDto();
 		qnaDto.setQnaNo(rs.getInt("QNA_NO"));
-		qnaDto.setQnaSecreat(rs.getString("QNA_SECREAT"));
+		qnaDto.setQnaSecret(rs.getString("QNA_SECRET"));
 		qnaDto.setQnaTitle(rs.getString("QNA_TITLE"));
 		qnaDto.setQnaWdate(rs.getDate("QNA_WDATE"));
 		return qnaDto;

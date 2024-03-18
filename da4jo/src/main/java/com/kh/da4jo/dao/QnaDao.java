@@ -28,11 +28,11 @@ public class QnaDao {
 	//작성
 	public void insert(QnaDto qnaDto) {
 		String sql = "insert into qna("
-				+ "qna_no,qna_secreat, qna_title, qna_content, "
+				+ "qna_no, qna_secret, qna_title, qna_content, "
 				+ "qna_writer, qna_vcount) "
 				+ "values(?, ?, ?, ?, ?, ?)";
 		Object[] data = {
-					qnaDto.getQnaNo(), qnaDto.getQnaSecreat(),
+					qnaDto.getQnaNo(), qnaDto.getQnaSecret(),
 					qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
 					qnaDto.getQnaWriter(), qnaDto.getQnaVcount()				
 				};
@@ -43,7 +43,7 @@ public class QnaDao {
 	//목록
 	public List<QnaDto> selectList() {
 		String sql = "select "
-				+ "qna_no, qna_secreat, qna_title, qna_content, "
+				+ "qna_no, qna_secret, qna_title, qna_content, "
 				+ "qna_writer, qna_wdate, qna_vcount "
 				+ "from qna order by qna_no desc";
 		return jdbcTemplate.query(sql, qnaMapper);
@@ -52,7 +52,7 @@ public class QnaDao {
 	//검색
 	public List<QnaDto> selectList(String column, String keyword) {
 		String sql = "select "
-				+ "qna_no, qna_secreat, qna_title, qna_content, "
+				+ "qna_no, qna_secret, qna_title, qna_content, "
 				+ "qna_writer, qna_wdate, qna_vcount "
 				+ "from qna "
 				+ "where instr("+column+", ?) > 0 "
@@ -112,7 +112,7 @@ public class QnaDao {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ( "
 					+ "select "
-						+ "qna_no, qna_secreat, "
+						+ "qna_no, qna_secret, "
 						+ "qna_title, qna_wdate "
 					+ "from qna "
 					+ "where qna_writer=?"

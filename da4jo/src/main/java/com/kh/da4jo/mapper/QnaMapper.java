@@ -13,7 +13,7 @@ public class QnaMapper implements RowMapper<QnaDto>{
 	public QnaDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		QnaDto qnaDto = new QnaDto();
 		qnaDto.setQnaNo(rs.getInt("qna_no"));
-		qnaDto.setQnaSecreat(rs.getString("qna_secreat"));
+		qnaDto.setQnaSecret(rs.getString("qna_secret"));
 		qnaDto.setQnaTitle(rs.getString("qna_title"));
 		qnaDto.setQnaContent(rs.getString("qna_content"));
 		qnaDto.setQnaWriter(rs.getString("qna_writer"));
