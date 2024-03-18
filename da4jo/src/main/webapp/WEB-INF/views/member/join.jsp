@@ -105,7 +105,27 @@
 	        $(this).removeClass("success fail")
 	                    .addClass(state.memberNameEngValid ? "success" : "fail");
 	    });
+	    $("[name=memberEmail]").on("input", function(){
+			if(state.memberEmailValid){
+				state.memberEmailValid = false;
+				$(this).removeClass("success fail");
+				$(".cert-wrapper").empty();
+			}	    	
+	    });
+	    
 	    //이메일 검사
+   		//인증을 마쳤는데 추가 입력을 하는 경우는 모든 상태를 초기화
+		//- 이메일 판정 취소
+		//- 인증번호 입력창 제거
+		//- 이메일 피드백 제거
+	    $("[name=memberEmail]").on("input", function(){
+			if(state.memberEmailValid){
+				state.memberEmailValid = false;
+				$(this).removeClass("success fail");
+				$(".cert-wrapper").empty();
+			}	    	
+	    });
+	    
 	    $("[name=memberEmail]").blur(function(){
 	        var regex = /^[a-z0-9_]{5,20}@[a-z0-9.]{1,20}$/;
 	        var value = $(this).val();
@@ -135,6 +155,12 @@
 	            state.memberEmailValid = false;
 	        }
 	    });
+        //뒤에 있는 보내기 버튼을 활성화 또는 비활성화
+        $(this).next(".btn-send-cert").prop("disabled", !isValid)
+        				.removeClass("positive negative")
+        				.addClass(isValid ? "positive" : "negative");
+	    
+	    
 	        
 	    //연락처1* 검사
 	     $("[name=memberContact1]").blur(function(){
@@ -518,21 +544,19 @@
 						<div class="fail-feedback">잘못된 영어 이름입니다.</div>
 				</div>
 				<div class="cell">
-					<label>이메일*</label>
-				</div>
-				
-					<div class="flex-cell" style="flex-wrap:wrap;">
-						<input type="email" name="memberEmail" class= "tool w-100">
-							<div class="success-feedback">
-						<button type= "button" class="btn negative btn-send-cert">
-							<i class="fa-solid fa-paper-plane"></i>
+		            <label>이메일</label>
+		            
+		            <div class="flex-cell" style="flex-wrap:wrap;">
+			            <input type="email" name="memberEmail" 
+			                                class="tool width-fill">
+			            <button type= "button" class="btn btn-send-cert">
+		
 			            	<span>인증번호 받기</span>
 			            </button>
-							<label><i class="fa-solid fa-circle-check"></i></label>
-						</div>
-						<div class="fail-feedback">이메일 형식 오류</div>
-						<div class="fail2-feedback">사용중인 이메일입니다</div>
-					</div>
+			            <div class="fail-feedback w-100">잘못된 이메일 형식입니다</div>
+			            <div class="fail2-feedback w-100">사용중인 이메일입니다</div>
+		            </div>
+		        </div>
 				
 				<div class="cell cert-wrapper"></div>			
 				
