@@ -56,7 +56,7 @@
 					<li id="poStatus"><strong>상태</strong></li>
 					<li id="poDetail"><strong>상세</strong></li>
 				</ul>
-				<c:forEach var="poDto" items="${poList}">
+				<c:forEach var="poDto" items="${poDto}">
 					<c:if test="${poDto.poStatus == '결제완료'}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
@@ -86,7 +86,43 @@
 				</form>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
+		<div class="page-navigator">
+			<%-- 이전이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isFirstBlock()}">
+					<a class="off">&lt;이전</a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+				</c:otherwise>
+			</c:choose>
+
+			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
+				end="${pageVO.getEndBlock()}" step="1">
+				<%-- 다른 페이지일 경우만 링크를 제공 --%>
+				<c:choose>
+					<c:when test="${pageVO.isCurrentPage(i)}">
+						<a class="on">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="processList?page=${i}&${pageVO.getQueryString()}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 다음이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isLastBlock()}">
+					<a class="off">다음&gt;</a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="processList?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
