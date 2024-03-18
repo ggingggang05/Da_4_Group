@@ -2,7 +2,6 @@ package com.kh.da4jo.dto;
 
 import java.sql.Date;
 
-import org.apache.logging.log4j.status.StatusData;
 
 public class PoDto {
 
@@ -215,23 +214,25 @@ public class PoDto {
 //	만약 poCurrency가 aud 라면 890 원
 //	만약 poCurrency가 gbp 라면 1700 원
 //	만약 poCurrency가 cny 라면 190 원
+// if(poCurrency.equals("USD")) 로 하면 poCurrency에 
+//	null이 들어가면 null pointer exception발생
 	public double getPoFxRate() {
-		if(poCurrency.equals("USD")) {
+		if("USD".equals(poCurrency)) {
 			return 1340;
 		}
-		if(poCurrency.equals("JPY")) {
+		if("JPY".equals(poCurrency)) {
 			return 9;
 		}
-		if(poCurrency.equals("EUR")) {
+		if("EUR".equals(poCurrency)) {
 			return 1460;
 		}
-		if(poCurrency.equals("AUD")) {
+		if("AUD".equals(poCurrency)) {
 			return 890;
 		}
-		if(poCurrency.equals("GBP")) {
+		if("GBP".equals(poCurrency)) {
 			return 1700;
 		}
-		if(poCurrency.equals("CNY")) {
+		if("CNY".equals(poCurrency)) {
 			return 190;
 		}
 		else {
