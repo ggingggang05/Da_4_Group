@@ -25,6 +25,7 @@ public class PoDto {
 	private String poDcomment; // 배송당부사항
 	private String poAdminComment;
 	private String poStatus; // 주문상태
+	private String poShipper; // 배송회사
 	private String poAwbNumber; // 송장번호
 	private Date poSdate; // 주문서 작성시각
 	private Date poEdate; // 배송완료 시각
@@ -298,6 +299,13 @@ public class PoDto {
 	}
 	public void setPoPayDate(Date poPayDate) {
 		this.poPayDate = poPayDate;
+	}
+	
+	public String getPoShipper() {
+		return poShipper;
+	}
+	public void setPoShipper(String poShipper) {
+		this.poShipper = poShipper;
 	}
 	/* 가상의 변수를 만들어서 금액 계산해줘야함
 	poItemPriceKrw(상품금액)
