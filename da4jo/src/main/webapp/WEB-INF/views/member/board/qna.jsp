@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -7,12 +6,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <h2>${memberDto.memberId}님의 qna 내역</h2>
-=======
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
 .menu-type {
@@ -59,7 +53,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${session.loginId}님의 문의내역
+				<i class="fa-solid fa-pause"></i>${memberDto.memberId}님의 문의내역
 			</div>
 		</div>
 	</div>
@@ -131,7 +125,7 @@
 						<ul class="menu menu-list">
 							<li id="qnaNo">${qnaDto.qnaNo}</li>
 							<li id="qnaSecret"><a
-								href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</li>
+								href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</a></li>
 							<li id="qnaTitle">${qnaDto.qnaTitle}</li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 						</ul>
@@ -147,9 +141,5 @@
 </div>
 <!-- 컨테이너 자리 닫는 태그 -->
 
-
-
-
->>>>>>> refs/remotes/origin/main
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

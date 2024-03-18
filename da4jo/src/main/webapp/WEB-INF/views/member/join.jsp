@@ -396,6 +396,16 @@
         	$("[name=memberAddress2]").val("");
         });
     });
+    
+    $(".check-form").submit(function(){
+        //$(this).find("[name], #pw-reinput").blur();
+        //$(this).find(".tool").blur();//모든 창
+        
+        //입력창 중에서 success fail fail2가 없는 창
+        $(this).find(".tool").not(".success, .fail, .fail2").blur();
+        return state.ok();
+    });
+    
 </script>
 
 	<style>

@@ -153,7 +153,7 @@ $(function(){
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link" href="/member/board/review">리뷰 게시판</a>
+						<a class="link" href="/board/review/list">리뷰 게시판</a>
 					</div>
 				</div>
 			</div>
