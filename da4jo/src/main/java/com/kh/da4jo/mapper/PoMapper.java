@@ -47,6 +47,7 @@ public class PoMapper implements RowMapper<PoDto>{
 		poDto.setPoServiceFee(rs.getInt("PO_SERVICE_FEE"));
 		poDto.setPoTotalPriceKrw(rs.getInt("PO_TOTAL_PRICE_KRW"));
 		poDto.setPoAgree(rs.getString("PO_AGREE"));
+		poDto.setPoShipper(rs.getString("PO_SHIPPER"));
 		
 		return poDto;
 	}
