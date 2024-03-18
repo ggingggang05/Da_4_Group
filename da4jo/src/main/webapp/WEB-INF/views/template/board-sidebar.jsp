@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<style>
+.title.title-head{
+	border-bottom: 1px solid #CAE4FF;
+	border-top: 1px solid #CAE4FF;
+	background-color: #F2F9FF;
+}
+</style>
+
 <div class="container flex-container">
 	<div class="container inner-container">
 		<div class="title title-head">

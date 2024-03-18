@@ -20,13 +20,7 @@
 	});
 </script>
 
-<style>
 
-.menu.menu-type{
-
-}
-
-</style>
 
 
 

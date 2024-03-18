@@ -22,8 +22,10 @@
 </script>
 
 <style>
-.menu.menu-list {
-	border-bottom: 1px solid #b2bec3;
+.menu.menu-type {
+	border-bottom: 1px solid #CAE4FF;
+	border-top: 1px solid #CAE4FF;
+	background-color: #DEEEFF;
 }
 .py-60 { padding-top:60px !important; padding-bottom: 60px !important; }
 
