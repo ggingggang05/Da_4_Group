@@ -36,20 +36,20 @@ public class ReviewDao {
 	}
 	
 	//목록 [페이징 구현 전까지 주석]
-		public List<ReviewDto> selectList() {
-			String sql = "select "
-					+ "review_no, review_title, review_content, "
-					+ "review_writer, review_wdate, review_vcount "
-					+ "from review order by review_no desc";
-			return jdbcTemplate.query(sql, reviewMapper);
-			
-		}
+//		public List<ReviewDto> selectList() {
+//			String sql = "select "
+//					+ "review_no, review_title, review_content, "
+//					+ "review_writer, review_wdate, review_vcount "
+//					+ "from review order by review_no desc";
+//			return jdbcTemplate.query(sql, reviewMapper);
+//			
+//		}
 	 
-//	//목록 단순 리스트
-//	public List<ReviewDto> selectList() {
-//		String sql = "select * from review order by review_no desc";
-//		return jdbcTemplate.query(sql, reviewMapper);
-//	}
+	//목록 단순 리스트
+	public List<ReviewDto> selectList() {
+		String sql = "select * from review order by review_no desc";
+		return jdbcTemplate.query(sql, reviewMapper);
+	}
 	
 	//검색
 	public List<ReviewDto> selectList(String column, String keyword) {

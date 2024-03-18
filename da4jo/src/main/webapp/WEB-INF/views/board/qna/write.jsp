@@ -24,7 +24,7 @@
         
         <h2>내용</h2>
         <div>
-            <textarea name="qnaContent"></textarea>
+            <textarea class="imgArea" name="qnaContent"></textarea>
         </div>
 
         <button type="submit" class="btn">등록</button>
