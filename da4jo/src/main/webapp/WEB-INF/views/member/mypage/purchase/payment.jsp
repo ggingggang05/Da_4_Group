@@ -136,8 +136,8 @@
 				<div class="cell w-50 left p-20">
 					<form action="payment" method="post">
 						<input type="hidden" name="poNo" value="${paymentVO.poNo}">
+						<input type="hidden" name="poPayDate" value="sysdate">
 						<button type="submit" class="btn">결제하기</button> 
-					
 					</form>
 				</div>
 			</div>
