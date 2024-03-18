@@ -22,10 +22,12 @@ public class PoDto {
 	private String poAddress1; // 기본주소
 	private String poAddress2; // 상제주소
 	private String poDcomment; // 배송당부사항
+	private String poAdminComment;
 	private String poStatus; // 주문상태
 	private String poAwbNumber; // 송장번호
 	private Date poSdate; // 주문서 작성시각
 	private Date poEdate; // 배송완료 시각
+	private Date poPayDate; // 결제완료 시각
 	private String poCountry; // 국가
 	private String poCurrency; // 통화
 	private double poFxRate; // 환율
@@ -255,6 +257,18 @@ public class PoDto {
 		this.poAgree = poAgree;
 	}
 
+	public String getPoAdminComment() {
+		return poAdminComment;
+	}
+	public void setPoAdminComment(String poAdminComment) {
+		this.poAdminComment = poAdminComment;
+	}
+	public Date getPoPayDate() {
+		return poPayDate;
+	}
+	public void setPoPayDate(Date poPayDate) {
+		this.poPayDate = poPayDate;
+	}
 	/* 가상의 변수를 만들어서 금액 계산해줘야함
 	poItemPriceKrw(상품금액)
 	poItemVat(부가세)
@@ -273,13 +287,13 @@ public class PoDto {
 	총 결제금액
 	*/
 	public double getItemPrice() {
-		return poFx*poFxRate;
+		return poFx*poFxRate*poQty;
 	}// 원화금액 계산 환율이랑 외화 곱해서
 	public double getVat() {
 		return  poItemPriceKrw*0.1;
 	}
-	public double getFee() {
-		return (poItemPriceKrw*0.05)+10000;
+	public int getFee() {
+		return (int)((poItemPriceKrw*0.05)+10000);
 	}
 	public int getTotalPrice() {
 		return (int)(poItemPriceKrw+poItemVat+poServiceFee);
