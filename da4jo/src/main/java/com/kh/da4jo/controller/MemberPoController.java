@@ -112,6 +112,8 @@ public class MemberPoController {
 			//DB에 저장
 			memberDao.updateCredit(memberDto);//크레딧 바꾸는 dao로 추가
 			poDao.updateStatus(poDto);
+	
+			
 			return "redirect:paymentFinish";
 		}
 		else { //잔액이 부족하다면
