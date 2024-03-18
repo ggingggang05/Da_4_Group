@@ -3,18 +3,18 @@
 <div class="container flex-container">
 	<div class="container inner-container">
 		<div class="title title-head">
-			<div class="title-head-text">title-head</div>
+			<div class="title-head-text">고객센터</div>
 		</div>
 		<div class="title title-body">
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">title-body-main1</a>
+					<a href="/board/notice/list" class="link">공지사항</a>
 				</div>
 				<div class="title-body-sub"></div>
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">title-body-main2</a>
+					<a href="/board/qna/list" class="link">QnA 게시판</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
@@ -24,7 +24,7 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">title-body-main3</a>
+					<a class="link">이용후기</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
