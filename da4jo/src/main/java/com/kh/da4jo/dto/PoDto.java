@@ -30,6 +30,7 @@ public class PoDto {
 	private Date poSdate; // 주문서 작성시각
 	private Date poEdate; // 배송완료 시각
 	private Date poPayDate; // 결제완료 시각
+	private Date poShipDate; // 배송시작 시각
 	private String poCountry; // 국가
 	private String poCurrency; // 통화
 	private double poFxRate; // 환율
@@ -306,6 +307,13 @@ public class PoDto {
 	}
 	public void setPoShipper(String poShipper) {
 		this.poShipper = poShipper;
+	}
+	
+	public Date getPoShipDate() {
+		return poShipDate;
+	}
+	public void setPoShipDate(Date poShipDate) {
+		this.poShipDate = poShipDate;
 	}
 	/* 가상의 변수를 만들어서 금액 계산해줘야함
 	poItemPriceKrw(상품금액)
