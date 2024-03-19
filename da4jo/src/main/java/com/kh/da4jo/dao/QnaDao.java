@@ -29,25 +29,23 @@ public class QnaDao {
 	public void insert(QnaDto qnaDto) {
 		String sql = "insert into qna("
 				+ "qna_no, qna_secret, qna_title, qna_content, "
-				+ "qna_writer, qna_vcount) "
-				+ "values(?, ?, ?, ?, ?, ?)";
+				+ "qna_writer, qna_vcount, qna_group, qna_target) "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {
 					qnaDto.getQnaNo(), qnaDto.getQnaSecret(),
 					qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
-					qnaDto.getQnaWriter(), qnaDto.getQnaVcount()				
+					qnaDto.getQnaWriter(), qnaDto.getQnaVcount()	,
+					qnaDto.getQnaGroup(), qnaDto.getQnaTarget()
 				};
 		jdbcTemplate.update(sql, data);
 	}
 	
 	//정렬 기준 정하기
 	//목록
-	public List<QnaDto> selectList() {
-		String sql = "select "
-				+ "qna_no, qna_secret, qna_title, qna_content, "
-				+ "qna_writer, qna_wdate, qna_vcount "
-				+ "from qna order by qna_no desc";
-		return jdbcTemplate.query(sql, qnaMapper);
-	}
+//	public List<QnaDto> selectList() {
+//		String sql = "select * from qna order by qna_no desc";
+//		return jdbcTemplate.query(sql, qnaMapper);
+//	}
 	
 	//검색
 	public List<QnaDto> selectList(String column, String keyword) {
@@ -57,7 +55,7 @@ public class QnaDao {
 				+ "from qna "
 				+ "where instr("+column+", ?) > 0 "
 				+ "order by qna_no desc";
-		Object[] data = {keyword};
+		Object[] data = {keyword};  
 		return jdbcTemplate.query(sql, qnaMapper, data);
 	}
 	
@@ -108,6 +106,7 @@ public class QnaDao {
 		String sql = "select count(*) from qna";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	
 	public List<QnaDto> selectListByPaging(PageVO pageVO, String loginId) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ( "
@@ -117,6 +116,26 @@ public class QnaDao {
 					+ "from qna "
 					+ "where qna_writer=?"
 					+ "order by qna_wdate desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] data = {loginId, pageVO.getBeginRow(), pageVO.getEndRow()};
+
+		return jdbcTemplate.query(sql, qnaListMapper, data);
+	}
+	
+	//문의글 답변 달기위한 목록 [순서변경][
+	public List<QnaDto> selectListByQnaPaging(PageVO pageVO, String loginId) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ( "
+					+ "select "
+						+ "qna_no, qna_secret, "
+						+ "qna_title, qna_wdate "
+					+ "from qna "
+					+ "where qna_writer=?"
+					//+ "order by qna_wdate desc"
+					+ "connect by prior qna_no=qna_target "
+					+ "start with qna_target is null "
+					+ "order siblings by qna_no desc, qna_wdate asc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
 		Object[] data = {loginId, pageVO.getBeginRow(), pageVO.getEndRow()};

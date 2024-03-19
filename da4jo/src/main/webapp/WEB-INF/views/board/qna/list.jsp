@@ -7,9 +7,7 @@
 .menu.menu-list {
 	border-bottom: 1px solid #DEE2E6;
 }
-#qnaTitle {
-	width: 40%;
-}
+
 </style>
 
 
@@ -43,9 +41,14 @@
 					<li id="">작성일</li>
 					<li id="">조회수</li>
 				</ul>
-				<c:forEach var="qnaDto" items="${list}">
+				<c:forEach var="qnaDto" items="${qnaList}">
 					<ul class="menu menu-list">
 						<li>${qnaDto.qnaNo}</li>
+						
+						<c:forEach var="i" begin="1" end= "1" step="1">
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:forEach>
+						
 						<%-- 잠금을 걸지 않았을때 --%>
 							<c:if test="${qnaDto.qnaSecret == 'N'}">
 							<li><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
@@ -81,9 +84,14 @@
 					<li>작성일</li>
 					<li>조회수</li>
 				</ul>
-				<c:forEach var="qnaDto" items="${list}">
+				<c:forEach var="qnaDto" items="${qnaList}">
 					<ul class="menu menu-list">
 						<li>${qnaDto.qnaNo}</li>
+						
+						<c:forEach var="i" begin="1" end= "1" step="1">
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:forEach>
+						
 						<li>${qnaDto.qnaSecret}</li>
 						<li><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
 						<li>${qnaDto.qnaWriter}</li>
@@ -107,6 +115,8 @@
 							placeholder="검색어 입력" required value="${param.keyword}">
 						<button class="searchBtn">검색</button>
 					</form>
+					
+					<a href="write?qnaTarget=${qnaDto.qnaNo}">답글쓰기</a>
 				</div>
 
 			
