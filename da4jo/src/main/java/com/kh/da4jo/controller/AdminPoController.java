@@ -97,8 +97,7 @@ public class AdminPoController {
 	}
 	@PostMapping("/processDetail")
 	public String processDetail(@ModelAttribute PoDto poDto) {
-		System.out.println(poDto.toString());
-		poDao.update(poDto);
+		poDao.updateAWB(poDto);
 		return "redirect:processList";
 	}
 	
