@@ -63,7 +63,7 @@
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a href="/admin/Settlement/periodList" class="link">정산내역(일별)</a>
+						<a href="/admin/po/settlement" class="link">정산내역(일별)</a>
 					</div>
 					<div class="title-body-text">
 						<a href="/admin/Settlement/vatList" class="link">부가세 신고자료 조회</a>

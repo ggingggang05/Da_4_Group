@@ -10,8 +10,10 @@ import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
+import com.kh.da4jo.mapper.SettlementVOMapper;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
+import com.kh.da4jo.vo.SettlementVO;
 
 @Repository
 public class PoDao {
@@ -23,6 +25,8 @@ public class PoDao {
 	private PoListMapper poListMapper;
 	@Autowired
 	private PaymentVOMapper paymentVOMapper;
+	@Autowired
+	private SettlementVOMapper settlementVOMapper;
 
 	// poNo 미리 뽑기
 	public int getSequence() {
@@ -303,5 +307,18 @@ public class PoDao {
 		Object[] data = { poNo };
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	// 일자별 정산 내역 조회
+    public List<SettlementVO> getDailyPayments() {
+        String sql = "SELECT TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') AS PO_PAY_DATE, "
+				        		+ "COUNT(*) AS COUNT, "
+				        		+ "SUM(PO_TOTAL_PRICE_KRW) AS PO_TOTAL_PRICE_KRW "
+				        		+ "FROM PO "
+				        		+ "WHERE PO_PAY_DATE IS NOT NULL "
+				        		+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
+				        		+ "ORDER BY PO_PAY_DATE";
+        return jdbcTemplate.query(sql, settlementVOMapper);
+    }
+	
 
 }

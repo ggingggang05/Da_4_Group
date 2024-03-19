@@ -61,7 +61,7 @@
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
 							<li id="poContact"><fmt:formatDate
-									value="${poDto.poPayDate}" pattern="Y-MM-DD HH:mm:ss" /></li>
+									value="${poDto.poPayDate}" pattern="Y-MM-dd HH:mm:ss" /></li>
 							<li id="poCustomerId">${poDto.poNameKor}</li>
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>
