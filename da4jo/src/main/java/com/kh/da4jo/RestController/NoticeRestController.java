@@ -14,7 +14,7 @@ import com.kh.da4jo.vo.NoticeVO;
 @RestController
 @RequestMapping("/rest/notice")
 public class NoticeRestController {
-	
+	// 풋터에 비동기로 불러오기 위한 컨트롤러
 	@Autowired
 	private NoticeDao noticeDao;
 	 @GetMapping("/list")

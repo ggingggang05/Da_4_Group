@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .notice-date {
@@ -34,11 +35,16 @@
 		<div class="content content-head"></div>
 		<div class="cell">
 			<div class="cell flex-cell">
-				<div class="cell w-50"><button class="btn">목록으로</button></div>
-				<div class="cell w-50 right notice-date">조회수 ${noticeDto.noticeVcount}</div>
+				<div class="cell w-50">
+				<a href="/board/notice/list"><button class="btn">목록으로</button></a></div>
+				<div class="cell w-50 right notice-date">
+				<!-- 관리자만 삭제버튼 보이게, 인터셉터에도 주소로 못들어가게 하기 -->
+				<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
+				<a class="link-confirm me-20" data-message="정말 삭제하시겠습니까?" 
+				href="delete?noticeNo=${noticeDto.noticeNo}">
+				<button class="btn negative">삭제</button></a></c:if>조회수 ${noticeDto.noticeVcount}</div>
 			</div>
 		</div>
-
 	</div>
-
+</div>
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -20,23 +20,27 @@
 	});
 </script>
 <form action="write" method="post" autocapitalize="off">
-    <div class="container w-800">
-        <div>
-            <h1>공지사항 작성</h1>
-        </div>
-
-        <h2>제목</h2>
+    <div class="container container-body">
+      <jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
+        <div class="container inner-container">
+			<br>
+			<div class="content content-head">
+			<div class="content-head-text">
+				<i class="fa-solid fa-pause"></i> 공지사항
+			</div>
+		</div>
+		<br>
         <div>
             <input class="tool w-100" type="text" name="noticeTitle">
         </div>
-        
-        <h2>내용</h2>
+        <br>
         <div>
             <textarea class="textArea" name="noticeContent"></textarea>
         </div>
 		<br>
 		<div class="right">
         <button type="submit" class="btn">등록</button>
+        </div>
         </div>
     </div>
 </form>
