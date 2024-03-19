@@ -73,7 +73,7 @@
 				</c:forEach>
 			</div>
 			<div class="cell searchArea center">
-				<form action="list" method="get">
+				<form action="processList" method="get">
 					<select name="column" class="searchSelect">
 						<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''}>주문서</option>
 						<option value="po_customer_id"
@@ -94,7 +94,7 @@
 				</c:when>
 				<c:otherwise>
 					<a
-						href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+						href="processList?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
 				</c:otherwise>
 			</c:choose>
 
