@@ -115,8 +115,6 @@
 							placeholder="검색어 입력" required value="${param.keyword}">
 						<button class="searchBtn">검색</button>
 					</form>
-					
-					<a href="write?qnaTarget=${qnaDto.qnaNo}">답글쓰기</a>
 				</div>
 
 			
