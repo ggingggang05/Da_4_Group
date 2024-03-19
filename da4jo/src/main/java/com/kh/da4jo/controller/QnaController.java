@@ -42,9 +42,6 @@ public class QnaController {
 		qnaDto.setQnaNo(sequence);
 		qnaDao.insert(qnaDto);
 		
-		
-		
-		
 		return "redirect:detail?qnaNo="+sequence;
 	
 	}
@@ -65,7 +62,7 @@ public class QnaController {
 //	}
 	
 	@RequestMapping("/list")
-	public String qna(@ModelAttribute(value = "pageVO") PageVO pageVO,
+	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO,
 					 HttpSession session, Model model) {
 		String loginId = (String) session.getAttribute("loginId");
 
@@ -75,8 +72,8 @@ public class QnaController {
 		int count = qnaDao.count();
 		pageVO.setCount(count);
 		
-		List<QnaDto> list = qnaDao.selectListByQnaPaging(pageVO, loginId);
-		model.addAttribute("qnaList", list); 
+		List<QnaDto> list = qnaDao.selectListByQnaPaging(pageVO);
+		model.addAttribute("list", list); 
 		
 		return "/WEB-INF/views/board/qna/list.jsp";
 	}

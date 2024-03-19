@@ -27,11 +27,11 @@
         <div>
         <c:choose>
         	<c:when test="${param.qnaTarget == null}">
-	            <input class="tool w-100" type="text" name="qnaTitle">
+	            <input class="tool w-100" type="text" name="qnaTitle" value="[Q]">
         	</c:when>
  			<c:otherwise>
  			<input class="tool w-100" type="text" name="qnaTitle" required
-					value="[Re] ${targetDto.qnaTitle}">
+					value="[A] ${targetDto.qnaTitle}">
  			</c:otherwise>
         </c:choose>
         </div>
