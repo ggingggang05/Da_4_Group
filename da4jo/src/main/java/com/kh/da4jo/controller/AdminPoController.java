@@ -59,7 +59,6 @@ public class AdminPoController {
 	}
 	@PostMapping("/orderDetail")
 	public String orderDetail(@ModelAttribute PoDto poDto) {
-		System.out.println(poDto.toString());
 		poDao.update(poDto);
 		return "redirect:orderList";
 	}
