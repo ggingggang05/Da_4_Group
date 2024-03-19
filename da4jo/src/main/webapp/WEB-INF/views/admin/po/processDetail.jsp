@@ -196,59 +196,42 @@
 					</div>
 				</div>
 				<div class="info-head w-100">
-					<strong>결제정보</strong>
+					<strong>배송정보입력</strong>
 				</div>
-				<form action="orderDetail" method="post" autocomplete="off">
+				<form action="processDetail" method="post" autocomplete="off">
 					<div class="info-body">
 						<div class="info-group">
-							<div class="info-label">상품금액(원화)</div>
+							<div class="info-label">배송사</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poItemPriceKrw"
-										value="${poDto.itemPrice}" readonly>
+									<input type="text" name="poShipper" value="${poDto.poShipper}">
 								</div>
 							</div>
 						</div>
 						<div class="info-group">
-							<div class="info-label">부가세</div>
+							<div class="info-label">송장번호</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<c:choose>
-										<c:when test="${poDto.itemPrice >= 200000}">
-											<input type="text" name="poItemVat"
-												value="${poDto.vat}" readonly>
-										</c:when>
-										<c:otherwise>
-											<input type="text" name="poItemVat"
-												value="0" readonly>
-										</c:otherwise>
-									</c:choose>
+									<input type="text" name="poAwbNumber"
+										value="${poDto.poAwbNumber}">
 								</div>
 							</div>
 						</div>
 						<div class="info-group">
-							<div class="info-label">수수료</div>
+							<div class="info-label">메모</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poServiceFee"
-										value="${poDto.fee}" readonly>
+									<input type="text" name="poAdminComment"
+										value="${poDto.poAdminComment}">
 								</div>
 							</div>
 						</div>
-						<div class="info-group">
-							<div class="info-label">결제금액</div>
-							<div class="info-content-wrapper">
-								<div class="info-content">
-									<input type="text" name="poTotalPriceKrw"
-										value="${poDto.totalPrice}" readonly>
-								</div>
-							</div>
-						</div>
-						<input type="hidden" name="poStatus" value="결제 대기 중">
-						<input type="hidden" name="poNo" value="${poDto.poNo}">
+						<input type="hidden" name="poStatus" value="배송 중"> <input
+							type="hidden" name="poNo" value="${poDto.poNo}">
 						<div class="cell right">
 							<button type="submit" class="btn">사용자에게 전송</button>
 						</div>
+					</div>
 				</form>
 				<div class="cell center">
 					<a href="/admin/po/processList" class="link">
