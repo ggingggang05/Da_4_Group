@@ -1,7 +1,6 @@
 package com.kh.da4jo.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.vo.PageVO;
+import com.kh.da4jo.vo.SettlementVO;
 
 
 @Controller
@@ -104,7 +104,7 @@ public class AdminPoController {
 	}
 	
 
-	//정산내역
+
 
 	@RequestMapping("/completeList")
 	public String completeList(
@@ -119,5 +119,16 @@ public class AdminPoController {
 		
 		return "/WEB-INF/views/admin/po/completeList.jsp";
 	}
-
+	
+	
+	//일자별 정산 내역 컨트롤러
+	@GetMapping("/settlement")
+    public String getDailyPayments(Model model) {
+		// PoDao에서 일자별 정산 내역 조회
+        List<SettlementVO> dailyPayments = poDao.getDailyPayments(); 
+        // 모델에 결과 추가
+        model.addAttribute("dailyPayments", dailyPayments);
+        
+        return "/WEB-INF/views/admin/po/settlement.jsp"; 
+    }
 }
