@@ -56,7 +56,6 @@
 					<li id="poDetail"><strong>상세</strong></li>
 				</ul>
 				<c:forEach var="poDto" items="${poDto}">
-					<c:if test="${poDto.poStatus == '주문정보 확인 중'}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
 							<li id="poCustomerId">${poDto.poNameKor}</li>
@@ -67,15 +66,14 @@
 							<li id="poDetail"><a href="orderDetail?poNo=${poDto.poNo}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
-					</c:if>
 				</c:forEach>
 			</div>
 			<div class="cell searchArea center">
 				<form action="orderList" method="get">
 					<select name="column" class="searchSelect">
 						<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''}>주문번호</option>
-						<option value="po_customer_id"
-							${param.column == 'po_customer_id' ? 'selected' : ''}>주문자</option>
+						<option value="po_name_kor"
+							${param.column == 'po_name_kor' ? 'selected' : ''}>주문자</option>
 					</select> <input type="search" name="keyword" placeholder=""
 						value="${param.keyword}" class="searchBar">
 					<button class="btn searchBtn">
@@ -91,11 +89,9 @@
 					<a class="off">&lt;이전</a>
 				</c:when>
 				<c:otherwise>
-					<a
-						href="orderList?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+					<a href="orderList?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
 				</c:otherwise>
 			</c:choose>
-
 			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
 			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
 				end="${pageVO.getEndBlock()}" step="1">
@@ -109,7 +105,7 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-
+			
 			<%-- 다음이 있을 경우만 링크를 제공 --%>
 			<c:choose>
 				<c:when test="${pageVO.isLastBlock()}">
