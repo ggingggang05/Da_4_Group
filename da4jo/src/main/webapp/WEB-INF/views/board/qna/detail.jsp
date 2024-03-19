@@ -38,6 +38,7 @@
 			<a class ="btn" href="write">질문글작성</a> 
 			<a class="btn" href="/board/qna/edit?qnaNo=${qnaDto.qnaNo}">질문글수정</a>
 			<a class="btn negative" href="/board/qna/delete?qnaNo=${qnaDto.qnaNo}">질문글삭제</a>
+			<a class="btn" href="write?qnaTarget=${qnaDto.qnaNo}">답글쓰기</a>
 		</div>
 	
 		<div class="cell right">

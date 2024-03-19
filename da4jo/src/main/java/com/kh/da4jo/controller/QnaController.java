@@ -1,5 +1,7 @@
 package com.kh.da4jo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dao.QnaDao;
+import com.kh.da4jo.dto.MemberDto;
 import com.kh.da4jo.dto.QnaDto;
+import com.kh.da4jo.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +25,8 @@ public class QnaController {
 	
 	@Autowired
 	private QnaDao qnaDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	@GetMapping("/write")
 	public String write() {
@@ -35,21 +42,41 @@ public class QnaController {
 		qnaDto.setQnaNo(sequence);
 		qnaDao.insert(qnaDto);
 		
+		
+		
+		
 		return "redirect:detail?qnaNo="+sequence;
 	
 	}
 
-	//리뷰 목록
+	//목록
+//	@RequestMapping("/list")
+//	public String list(@RequestParam(required = false) String column,
+//							@RequestParam(required = false) String keyword, Model model) {
+//		boolean isSearch = column != null && keyword != null;
+//		if(isSearch) {
+//			model.addAttribute("list", qnaDao.selectList(column, keyword));
+//		}
+//		else {
+//			model.addAttribute("list", qnaDao.selectList());
+//		}
+//		
+//		return "/WEB-INF/views/board/qna/list.jsp";
+//	}
+	
 	@RequestMapping("/list")
-	public String list(@RequestParam(required = false) String column,
-							@RequestParam(required = false) String keyword, Model model) {
-		boolean isSearch = column != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("list", qnaDao.selectList(column, keyword));
-		}
-		else {
-			model.addAttribute("list", qnaDao.selectList());
-		}
+	public String qna(@ModelAttribute(value = "pageVO") PageVO pageVO,
+					 HttpSession session, Model model) {
+		String loginId = (String) session.getAttribute("loginId");
+
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		model.addAttribute("memberDto", memberDto);
+		
+		int count = qnaDao.count();
+		pageVO.setCount(count);
+		
+		List<QnaDto> list = qnaDao.selectListByQnaPaging(pageVO, loginId);
+		model.addAttribute("qnaList", list); 
 		
 		return "/WEB-INF/views/board/qna/list.jsp";
 	}

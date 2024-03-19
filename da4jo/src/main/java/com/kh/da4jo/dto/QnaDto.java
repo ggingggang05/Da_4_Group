@@ -11,6 +11,9 @@ public class QnaDto {
 	private Date qnaWdate;
 	private int qnaVcount;
 	
+	private int qnaGroup;
+	private Integer qnaTarget;
+	
 	public QnaDto() {
 		super();
 	}
@@ -56,6 +59,22 @@ public class QnaDto {
 	}
 	public void setQnaVcount(int qnaVcount) {
 		this.qnaVcount = qnaVcount;
+	}
+
+	public int getQnaGroup() {
+		return qnaGroup;
+	}
+
+	public void setQnaGroup(int qnaGroup) {
+		this.qnaGroup = qnaGroup;
+	}
+
+	public Integer getQnaTarget() {
+		return qnaTarget;
+	}
+
+	public void setQnaTarget(Integer qnaTarget) {
+		this.qnaTarget = qnaTarget;
 	}
 	
 	

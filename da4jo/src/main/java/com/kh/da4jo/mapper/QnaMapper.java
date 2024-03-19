@@ -19,6 +19,8 @@ public class QnaMapper implements RowMapper<QnaDto>{
 		qnaDto.setQnaWriter(rs.getString("qna_writer"));
 		qnaDto.setQnaWdate(rs.getDate("qna_wdate"));
 		qnaDto.setQnaVcount(rs.getInt("qna_vcount"));
+		qnaDto.setQnaGroup(rs.getInt("qna_group"));
+		qnaDto.setQnaTarget(rs.getInt("qna_target"));
 		
 		return qnaDto;
 	}
