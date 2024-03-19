@@ -4,8 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-.menu {
-	
+.menu, 
+.menu ul {
+    height: 40px;
 }
 .menu.menu-type {
 	border-bottom: 1px solid #CAE4FF;
@@ -18,26 +19,34 @@
 }
 
 #qnaRock {
-	width: 12% !important;
+	width: 15% !important;
 }
 
 #typeQnaTitle {
 	text-align: center;
-	width: 50% !important;
+	width: 70% !important;
 }
-
 #qnaTitle {
 	text-align: left;
-	width: 50% !important;
+	width: 70% !important;
 }
 
-#qnaWriter {
-	width: 10% !important;
+
+#qnaMember {
+	text-align: left;
+	width: 70% !important;
 }
+#qnaMember1 {
+	text-align: center;
+	width: 70% !important;
+}
+
 
 #qnaWdate {
-	width: 15% !important;
+	width: 20% !important;
 }
+
+
 </style>
 
 
@@ -54,69 +63,77 @@
 		</div>
 		<div class="content content-body right">
 			<div class="cell center">
-				<a class="btn" href="write">질문글작성</a>
+				
 			</div>
 			<div class="cell center">
 
 
-				<c:if test="${sessionScope.loginLevel == '일반회원'}">
+<%-- 				<c:if test="${sessionScope.loginLevel == '일반회원'}"> --%>
 
-					<%-- 일반회원일때 기능 --%>
-					<ul class="menu menu-type">
-						<li id="qnaNo">번호</li>
-						<li id="typeQnaTitle">제목</li>
-						<li id="qnaWriter">작성자</li>
-						<li id="qnaWdate">작성일</li>
-					</ul>
-					<c:forEach var="qnaDto" items="${qnaList}">
-						<ul class="menu menu-list">
-							<li id="qnaNo">${qnaDto.qnaNo}</li>
+<%-- 					일반회원일때 기능 --%>
+<!-- 					<ul class="menu menu-type"> -->
+<!-- 						<li id="qnaNo">번호</li> -->
+<!-- 						<li id="qnaMember1">제목</li> -->
+<!-- 						<li id="qnaWdate">작성일</li> -->
+<!-- 					</ul> -->
+<%-- 					<c:forEach var="qnaDto" items="${list}"> --%>
+<!-- 						<ul class="menu menu-list"> -->
+<%-- 							<li id="qnaNo">${qnaDto.qnaNo}</li> --%>
 
-							<%-- 잠금을 걸지 않았을때 --%>
-							<c:if test="${qnaDto.qnaSecret == 'N'}">
-								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
-							</c:if>
+<%-- 							잠금을 걸지 않았을때 --%>
+<%-- 							<c:if test="${qnaDto.qnaSecret == 'N'}"> --%>
+<%-- 								<li id="qnaMember"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li> --%>
+<%-- 							</c:if> --%>
 
-							<c:if test="${qnaDto.qnaSecret == 'Y'}">
-								<li><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></li>
-							</c:if>
+<%-- 							<c:if test="${qnaDto.qnaSecret == 'Y'}"> --%>
+<!-- 								<li id="qnaMember"><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></li> -->
+<%-- 							</c:if> --%>
 
-							<li id="qnaWriter">${qnaDto.qnaWriter}</li>
-							<%-- 글 작성자와 로그인한 아이디가 같으면  --%>
+<%-- 							글 작성자와 로그인한 아이디가 같으면  --%>
 
-							<c:if test="${memberDto.memberId == qnaDto.qnaWriter}">
-								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
-							</c:if>
-							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
-						</ul>
-					</c:forEach>
-				</c:if>
+<%-- 							<c:if test="${memberDto.memberId == qnaDto.qnaWriter}"> --%>
+<%-- 								<li><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li> --%>
+<%-- 							</c:if> --%>
+<%-- 							<li id="qnaWdate">${qnaDto.qnaWdate}</li> --%>
+<!-- 						</ul> -->
+<%-- 					</c:forEach> --%>
+<%-- 				</c:if> --%>
 
 
 				<%-- 관리자 일때 --%>
-				<c:if
-					test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 
 					<%-- 목록 --%>
 					<ul class="menu menu-type">
 						<li id="qnaNo">번호</li>
-						<li id="qnaRock">잠금상태</li>
+						<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
+							<li id="qnaRock">잠금상태</li>
+						</c:if>
 						<li id="typeQnaTitle">제목</li>
-						<li id="qnaWriter">작성자</li>
+						<li>작성자</li>
 						<li id="qnaWdate">작성일</li>
 					</ul>
 
-					<c:forEach var="qnaDto" items="${qnaList}">
+					<c:forEach var="qnaDto" items="${list}">
 						<ul class="menu menu-list">
 							<li id="qnaNo">${qnaDto.qnaNo}</li>
+							<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 							<li id="qnaRock">${qnaDto.qnaSecret}</li>
-							<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a>
-							</li>
-							<li id="qnaWriter">${qnaDto.qnaWriter}</li>
+							</c:if>
+							
+							<!-- 	비밀글일때 관리자 이외에 비밀글 표시 그 이외에는 -->
+							
+							<c:choose> 							
+ 							<c:when test="${qnaDto.qnaSecret == 'Y' && sessionScope.loginLevel != '관리자'}">
+ 							<li id="qnaTitle"><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></a>
+ 							</c:when>
+ 							<c:otherwise>
+ 							<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a>
+ 							</c:otherwise>
+ 							</c:choose>
+ 							<li>${qnaDto.qnaWriter}</li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 						</ul>
 					</c:forEach>
-				</c:if>
 
 				<%-- 검색창 --%>
 				<div class="cell center my-50">
