@@ -42,7 +42,7 @@ public class AdminPoController {
 		int count = poDao.count(pageVO);
 		pageVO.setCount(count);
 		model.addAttribute("pageVO", pageVO);
-		List<PoDto> poDto = poDao.selectListByPaging(pageVO);
+		List<PoDto> poDto = poDao.selectListByOrderListPaging(pageVO);
 		model.addAttribute("poDto", poDto);
 		
 		return "/WEB-INF/views/admin/po/orderList.jsp";
@@ -82,7 +82,7 @@ public class AdminPoController {
 		int count = poDao.count(pageVO);
 		pageVO.setCount(count);
 		model.addAttribute("pageVO", pageVO);
-		List<PoDto> poDto = poDao.selectListByPaging(pageVO);
+		List<PoDto> poDto = poDao.selectListByprocessListPaging(pageVO);
 		model.addAttribute("poDto", poDto);
 		
 		return "/WEB-INF/views/admin/po/processList.jsp";
@@ -100,5 +100,19 @@ public class AdminPoController {
 		System.out.println(poDto.toString());
 		poDao.update(poDto);
 		return "redirect:processList";
+	}
+	
+	@RequestMapping("/completeList")
+	public String completeList(
+			@ModelAttribute PageVO pageVO,
+			Model model) {
+		//세부 계산은 클래스에서 수행하도록 하고 count, list만 처리
+		int count = poDao.count(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		List<PoDto> poDto = poDao.selectListBycompleteListPaging(pageVO);
+		model.addAttribute("poDto", poDto);
+		
+		return "/WEB-INF/views/admin/po/completeList.jsp";
 	}
 }
