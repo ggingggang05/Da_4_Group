@@ -61,7 +61,7 @@ public class PoDao {
 	}
 
 	// 통합+페이징
-	public List<PoDto> selectListByPaging(PageVO pageVO) {
+	public List<PoDto> selectListByPagingAll(PageVO pageVO) {
 		if (pageVO.isSearch()) {// 검색
 			String sql = "select * from (" 
 					+ "select rownum rn, TMP.* from (" 
@@ -94,6 +94,106 @@ public class PoDao {
 		}
 	}
 
+	// 통합+페이징 인데 오더리스트에만 씀 status 때문에
+	public List<PoDto> selectListByOrderListPaging(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select * from (" 
+					+ "select rownum rn, TMP.* from (" 
+					+ "select "
+					+ "PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG, PO_CLEARANCE_ID,"
+					+ "PO_LINK,PO_ITEM_ENG_NAME,PO_ITEM_CATEGORY,PO_ITEM_WEIGHT,PO_QTY,"
+					+ "PO_ITEM_OPTION1,PO_ITEM_OPTION2,PO_ITEM_OPTION3,PO_CONTACT,PO_ZIPCODE,"
+					+ "PO_ADDRESS1,PO_ADDRESS2,PO_DCOMMENT,PO_ADMIN_COMMENT,PO_STATUS,PO_AWB_NUMBER,"
+					+ "PO_SHIPPER,PO_SDATE,PO_EDATE,PO_PAY_DATE,PO_COUNTRY,PO_CURRENCY,PO_FX_RATE,"
+					+ "PO_FX,PO_ITEM_PRICE_KRW,PO_ITEM_VAT,PO_SERVICE_FEE,PO_TOTAL_PRICE_KRW,PO_AGREE " 
+					+ "from po " + "where instr(" + pageVO.getColumn() + ", ?) > 0 " + ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
+			return jdbcTemplate.query(sql, poMapper, data);
+		} else {// 목록
+			String sql = "SELECT * FROM (" 
+					+ "SELECT ROWNUM RN, TMP.* FROM (" 
+					+ "SELECT "
+					+ "PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG, PO_CLEARANCE_ID,"
+					+ "PO_LINK,PO_ITEM_ENG_NAME,PO_ITEM_CATEGORY,PO_ITEM_WEIGHT,PO_QTY,"
+					+ "PO_ITEM_OPTION1,PO_ITEM_OPTION2,PO_ITEM_OPTION3,PO_CONTACT,PO_ZIPCODE,"
+					+ "PO_ADDRESS1,PO_ADDRESS2,PO_DCOMMENT,PO_ADMIN_COMMENT,PO_STATUS,PO_AWB_NUMBER,"
+					+ "PO_SHIPPER,PO_SDATE,PO_EDATE,PO_PAY_DATE,PO_COUNTRY,PO_CURRENCY,PO_FX_RATE,"
+					+ "PO_FX,PO_ITEM_PRICE_KRW,PO_ITEM_VAT,PO_SERVICE_FEE,PO_TOTAL_PRICE_KRW,PO_AGREE " 
+					+ "FROM PO WHERE PO_STATUS = '주문정보 확인 중' ORDER BY PO_NO DESC"
+					+ ")TMP" 
+					+ ") WHERE RN BETWEEN ? AND ?";
+			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, poMapper, data);
+		}
+	}
+	
+	// 얘는 상태가 결제완료 일때만 보이는 페이징
+	public List<PoDto> selectListByprocessListPaging(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select * from (" 
+					+ "select rownum rn, TMP.* from (" 
+					+ "select "
+					+ "PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG, PO_CLEARANCE_ID,"
+					+ "PO_LINK,PO_ITEM_ENG_NAME,PO_ITEM_CATEGORY,PO_ITEM_WEIGHT,PO_QTY,"
+					+ "PO_ITEM_OPTION1,PO_ITEM_OPTION2,PO_ITEM_OPTION3,PO_CONTACT,PO_ZIPCODE,"
+					+ "PO_ADDRESS1,PO_ADDRESS2,PO_DCOMMENT,PO_ADMIN_COMMENT,PO_STATUS,PO_AWB_NUMBER,"
+					+ "PO_SHIPPER,PO_SDATE,PO_EDATE,PO_PAY_DATE,PO_COUNTRY,PO_CURRENCY,PO_FX_RATE,"
+					+ "PO_FX,PO_ITEM_PRICE_KRW,PO_ITEM_VAT,PO_SERVICE_FEE,PO_TOTAL_PRICE_KRW,PO_AGREE " 
+					+ "from po " + "where instr(" + pageVO.getColumn() + ", ?) > 0 " + ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
+			return jdbcTemplate.query(sql, poMapper, data);
+		} else {// 목록
+			String sql = "SELECT * FROM (" 
+					+ "SELECT ROWNUM RN, TMP.* FROM (" 
+					+ "SELECT "
+					+ "PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG, PO_CLEARANCE_ID,"
+					+ "PO_LINK,PO_ITEM_ENG_NAME,PO_ITEM_CATEGORY,PO_ITEM_WEIGHT,PO_QTY,"
+					+ "PO_ITEM_OPTION1,PO_ITEM_OPTION2,PO_ITEM_OPTION3,PO_CONTACT,PO_ZIPCODE,"
+					+ "PO_ADDRESS1,PO_ADDRESS2,PO_DCOMMENT,PO_ADMIN_COMMENT,PO_STATUS,PO_AWB_NUMBER,"
+					+ "PO_SHIPPER,PO_SDATE,PO_EDATE,PO_PAY_DATE,PO_COUNTRY,PO_CURRENCY,PO_FX_RATE,"
+					+ "PO_FX,PO_ITEM_PRICE_KRW,PO_ITEM_VAT,PO_SERVICE_FEE,PO_TOTAL_PRICE_KRW,PO_AGREE " 
+					+ "FROM PO WHERE PO_STATUS = '결제완료' ORDER BY PO_NO DESC"
+					+ ")TMP" 
+					+ ") WHERE RN BETWEEN ? AND ?";
+			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, poMapper, data);
+		}
+	}
+	// 얘는 상태가 배송완료 일때만 보이는 페이징
+	public List<PoDto> selectListBycompleteListPaging(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select * from (" 
+					+ "select rownum rn, TMP.* from (" 
+					+ "select "
+					+ "PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG, PO_CLEARANCE_ID,"
+					+ "PO_LINK,PO_ITEM_ENG_NAME,PO_ITEM_CATEGORY,PO_ITEM_WEIGHT,PO_QTY,"
+					+ "PO_ITEM_OPTION1,PO_ITEM_OPTION2,PO_ITEM_OPTION3,PO_CONTACT,PO_ZIPCODE,"
+					+ "PO_ADDRESS1,PO_ADDRESS2,PO_DCOMMENT,PO_ADMIN_COMMENT,PO_STATUS,PO_AWB_NUMBER,"
+					+ "PO_SHIPPER,PO_SDATE,PO_EDATE,PO_PAY_DATE,PO_COUNTRY,PO_CURRENCY,PO_FX_RATE,"
+					+ "PO_FX,PO_ITEM_PRICE_KRW,PO_ITEM_VAT,PO_SERVICE_FEE,PO_TOTAL_PRICE_KRW,PO_AGREE " 
+					+ "from po where instr(" + pageVO.getColumn() + ", ?) > 0 " + ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
+			return jdbcTemplate.query(sql, poMapper, data);
+		} else {// 목록
+			String sql = "SELECT * FROM (" 
+					+ "SELECT ROWNUM RN, TMP.* FROM (" 
+					+ "SELECT "
+					+ "PO_NO, PO_CUSTOMER_ID, PO_NAME_KOR, PO_NAME_ENG, PO_CLEARANCE_ID,"
+					+ "PO_LINK,PO_ITEM_ENG_NAME,PO_ITEM_CATEGORY,PO_ITEM_WEIGHT,PO_QTY,"
+					+ "PO_ITEM_OPTION1,PO_ITEM_OPTION2,PO_ITEM_OPTION3,PO_CONTACT,PO_ZIPCODE,"
+					+ "PO_ADDRESS1,PO_ADDRESS2,PO_DCOMMENT,PO_ADMIN_COMMENT,PO_STATUS,PO_AWB_NUMBER,"
+					+ "PO_SHIPPER,PO_SDATE,PO_EDATE,PO_PAY_DATE,PO_COUNTRY,PO_CURRENCY,PO_FX_RATE,"
+					+ "PO_FX,PO_ITEM_PRICE_KRW,PO_ITEM_VAT,PO_SERVICE_FEE,PO_TOTAL_PRICE_KRW,PO_AGREE " 
+					+ "FROM PO WHERE PO_STATUS = '배송완료' ORDER BY PO_NO DESC"
+					+ ")TMP" 
+					+ ") WHERE RN BETWEEN ? AND ?";
+			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, poMapper, data);
+		}
+	}
 	
 	
 	// 카운트 - 목록일 경우와 검색일 경우를 각각 구현
@@ -168,10 +268,17 @@ public class PoDao {
 
 	// 목록 페이징
 	public List<PoDto> selectListByPaging(PageVO pageVO, String loginId) {
-		String sql = "select * from (" + "select rownum rn, TMP.* from ( " + "select "
-				+ "po_no, po_item_eng_name, po_item_category, " + "po_sdate, po_status, po_awb_number, po_fx, "
-				+ "po_service_fee, po_total_price_krw, po_item_price_krw " + "from po " + "where po_customer_id=?"
-				+ "order by po_sdate desc" + ")TMP" + ") where rn between ? and ?";
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ( " 
+				+ "select "
+				+ "po_no, po_item_eng_name, po_item_category, "
+				+ "po_sdate, po_status, po_awb_number, po_fx, "
+				+ "po_service_fee, po_total_price_krw, po_item_price_krw "
+				+ "from po "
+				+ "where po_customer_id=?"
+				+ "order by po_sdate desc" 
+				+ ")TMP" 
+				+ ") where rn between ? and ?";
 		Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
 
 		return jdbcTemplate.query(sql, poListMapper, data);
