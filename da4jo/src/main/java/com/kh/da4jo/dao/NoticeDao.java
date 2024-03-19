@@ -81,6 +81,7 @@ public class NoticeDao {
 									+ ")TMP"
 								+ ") where rn between ? and ?";
 				Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+				System.out.println(pageVO.getCount());
 				return jdbcTemplate.query(sql, noticeMapper, data);
 			}
 		}
