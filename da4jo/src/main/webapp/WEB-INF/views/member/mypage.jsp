@@ -142,7 +142,7 @@ $(function(){
 							<a class="link">구매대행 결제대기</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="mypage/purchase/list">구매대행 신청 내역</a>
+							<a class="link" href="/member/mypage/purchase/list">구매대행 신청 내역</a>
 						</div>
 					</div>
 				</div>
