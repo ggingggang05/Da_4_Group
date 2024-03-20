@@ -11,4 +11,8 @@ public class DocumentController
 	public String buyingInfo() {
 		return "/WEB-INF/views/document/buying-info.jsp";
 	}
+	@RequestMapping("/buying-step")
+	public String buyingStep() {
+		return "/WEB-INF/views/document/buying-step.jsp";
+	}
 }
