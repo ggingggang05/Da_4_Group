@@ -394,7 +394,7 @@ public class PoDao {
 				        		+ "FROM PO "
 				        		+ "WHERE PO_PAY_DATE IS NOT NULL "
 				        		+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
-				        		+ "ORDER BY PO_PAY_DATE";
+				        		+ "ORDER BY PO_PAY_DATE DESC";
         return jdbcTemplate.query(sql, settlementVOMapper);
     }
   //날짜 기간 선택 조회
@@ -407,7 +407,7 @@ public class PoDao {
 				    			+ "BETWEEN TO_DATE(?, 'YYYY-MM-DD') "
 				    			+ "AND TO_DATE(?, 'YYYY-MM-DD') + 1 "
 				    			+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
-				    			+ "ORDER BY PO_PAY_DATE";
+				    			+ "ORDER BY PO_PAY_DATE DESC";
     	Object[] data = { startDate, endDate };
     	return jdbcTemplate.query(sql, settlementVOMapper, data);
     }

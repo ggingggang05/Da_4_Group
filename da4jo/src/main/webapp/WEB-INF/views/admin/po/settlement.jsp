@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -75,21 +76,23 @@ section{
 
         // 각 항목의 금액 계산
         totalPriceElements.forEach(function(element) {
-            totalPrice += parseInt(element.textContent);
+            totalPrice += parseInt(element.textContent.replace(/,/g, ""));
         });
         //각 항목의 건수 계산
         totalCountElements.forEach(function(element) {
-            totalCount += parseInt(element.textContent);
+            totalCount += parseInt(element.textContent.replace(/,/g, ""));
         });
 
         // 총합을 출력하는 영역에 결과를 삽입
         var totalPriceDisplay = document.getElementById("totalPrice");
-        totalPriceDisplay.textContent = totalPrice;
+        totalPriceDisplay.textContent = totalPrice.toLocaleString();
     	
         // 총 건수를 출력하는 영역에 결과를 삽입
         var totalCountDisplay = document.getElementById("totalCount");
-        totalCountDisplay.textContent = totalCount;
+        totalCountDisplay.textContent = totalCount.toLocaleString();
     });
+    
+
 </script>
 
 <script>
@@ -123,26 +126,31 @@ section{
 				<ul class="menu menu-type">
 					<li><strong>날짜</strong></li>
 					<li><strong>건수</strong></li>
-					<li><strong>총 금액</strong></li>
+					<li><strong>총 금액(원)</strong></li>
 					<li><strong>상세</strong></li>
 				</ul>
 				
 				<c:forEach var="settlementVO" items="${list}">
 						<ul class="menu menu-list">
 							<li id="poPayDate">${settlementVO.poPayDate}</li>
-							<li id="count">${settlementVO.count}</li>
-							<li id="poTotalPrice">${settlementVO.poTotalPrice}</li>
+							<li id="count">
+								<fmt:formatNumber value="${settlementVO.count}"  pattern="#,##0"/>
+							</li>
+							<li id="poTotalPrice">
+								<fmt:formatNumber value="${settlementVO.poTotalPrice}"  pattern="#,##0"/>
+							</li>
 
 							<li id="poDetail"><a href="orderDetail?poPayDate=${settlementVO.poPayDate}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 				</c:forEach>
 				<ul class="menu menu-list">
-					<li id="poPayDate"><strong>합계</strong></li>
+					<li><strong>합계</strong></li>
 					<li><strong id= "totalCount"></strong></li>
 					<li><strong id="totalPrice"></strong></li>
 					<li id="poDetail"><strong></strong></li>
 				</ul>
+				
 			</div>
 		</div>
 		<div class="page-navigator">
