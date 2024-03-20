@@ -7,10 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.PoDto;
+import com.kh.da4jo.mapper.DailyDetailVOMapper;
 import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
 import com.kh.da4jo.mapper.SettlementVOMapper;
+import com.kh.da4jo.vo.DailyDetailVO;
 import com.kh.da4jo.mapper.VatListVOMapper;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
@@ -30,6 +32,7 @@ public class PoDao {
 	@Autowired
 	private SettlementVOMapper settlementVOMapper;
 	@Autowired
+	private DailyDetailVOMapper dailyDetailVOMapper;
 	private VatListVOMapper vatListVOMapper;
 
 	// poNo 미리 뽑기
@@ -442,7 +445,7 @@ public class PoDao {
 				        		+ "FROM PO "
 				        		+ "WHERE PO_PAY_DATE IS NOT NULL "
 				        		+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
-				        		+ "ORDER BY PO_PAY_DATE";
+				        		+ "ORDER BY PO_PAY_DATE DESC";
         return jdbcTemplate.query(sql, settlementVOMapper);
     }
   //날짜 기간 선택 조회
@@ -455,9 +458,25 @@ public class PoDao {
 				    			+ "BETWEEN TO_DATE(?, 'YYYY-MM-DD') "
 				    			+ "AND TO_DATE(?, 'YYYY-MM-DD') + 1 "
 				    			+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
-				    			+ "ORDER BY PO_PAY_DATE";
+				    			+ "ORDER BY PO_PAY_DATE DESC";
     	Object[] data = { startDate, endDate };
     	return jdbcTemplate.query(sql, settlementVOMapper, data);
+    }
+    //일자별 상세
+    public List<DailyDetailVO> dailyDetail(String poPayDate){
+    	String sql = "SELECT "
+    			+ "PO_PAY_DATE, PO_NO, PO_CUSTOMER_ID, "
+    			+ "PO_NAME_KOR, PO_ITEM_ENG_NAME, PO_TOTAL_PRICE_KRW, "
+    			+ "PO_QTY, PO_ITEM_VAT, PO_AWB_NUMBER, PO_SDATE "
+    			+ "FROM "
+    			+ "PO "
+    			+ "WHERE "
+    			+ "TRUNC(PO_PAY_DATE) = TO_DATE(?, 'YYYY-MM-DD') "
+    			+ "ORDER BY "
+    			+ "PO_PAY_DATE DESC	";
+    	Object[] data = {poPayDate};
+    	
+    	return jdbcTemplate.query(sql, dailyDetailVOMapper, data);
     }
     public List<VatListVO> getVatListByYear(String year) {
     	String sql = "SELECT TO_CHAR(PO_SDATE, 'YYYY-Q') AS QUARTER, "
@@ -467,12 +486,9 @@ public class PoDao {
     			+ "GROUP BY TO_CHAR(PO_SDATE, 'YYYY-Q')";
     	return jdbcTemplate.query(sql, vatListVOMapper, Integer.parseInt(year));
     }
-
     //배송중으로 바뀐 시점부터 7일뒤 배송완료로
 	public void compareDate(List<PoDto> dateList) {
 		String sql = "UPDATE po SET PO_STATUS = '배송완료' WHERE PO_SHIP_DATE + 7 < sysdate";
 		jdbcTemplate.update(sql);
 	}
-
-	
 }
