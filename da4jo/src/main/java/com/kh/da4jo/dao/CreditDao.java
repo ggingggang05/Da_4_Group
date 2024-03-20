@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.CreditDto;
+import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.mapper.CreditMapper;
+import com.kh.da4jo.vo.PageVO;
 
 @Repository
 public class CreditDao
@@ -17,11 +19,12 @@ public class CreditDao
 	@Autowired
 	CreditMapper creditMapper;
 	
+	
 	//캐쉬 구매 내역 등록
 	public void insert(CreditDto creditDto) {
-		String sql = "INSERT INTO CREDIT(MEMBER_ID, CREDIT_CHARGE) "
-				+ "VALUES(?, ?)";
-		Object[] datas = { creditDto.getMemberId(), creditDto.getCreditCharge()};
+		String sql = "INSERT INTO CREDIT(MEMBER_ID, CREDIT_CHARGE, CREDIT_STATUS) "
+				+ "VALUES(?, ?, ?)";
+		Object[] datas = { creditDto.getMemberId(), creditDto.getCreditCharge(), creditDto.getCreditStatus()};
 		jdbcTemplate.update(sql, datas);
 	}
 	//캐쉬 구매 내역 조회
@@ -29,5 +32,50 @@ public class CreditDao
 		String sql = "SELECT * FROM CREDIT WHERE MEMBER_ID = ? ORDER BY CREDIT_TIME DESC";
 		return jdbcTemplate.query(sql, creditMapper, memberId);
 	}
+	
+	//캐시 상태 변경
+	public void updateStatus(String status, String loginId) {
+		String sql = "update credit set credit_status=? where member_id=?";
+		Object[] data = {status, loginId};
+		jdbcTemplate.update(sql, data);
+	}
 	 
+	//카운트 -  credit_status가 '승인 요청'인 경우의 목록/검색 구현
+	public int creditCount(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select count(*) from credit where instr(" + pageVO.getColumn() +", ?) > 0 AND CREDIT_STATUS='승인 요청'";
+			Object[] data = { pageVO.getKeyword() };
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		} else {// 목록
+			String sql = "select count(*) from credit where CREDIT_STATUS='승인 요청'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+	// 목록 페이징
+	public List<CreditDto> selectListByPaging(PageVO pageVO) {
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ( " 
+					+ "select *"
+					+ "from credit "
+					+ "order by credit_time desc" 
+					+ ")TMP" 
+				+ ") where rn between ? and ?";
+		Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
+
+		return jdbcTemplate.query(sql, creditMapper, data);
+	}
+	public List<CreditDto> selectUnapprovedListByPaging(PageVO pageVO) {
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ( " 
+					+ "select *"
+					+ "from credit "
+					+ "where credit_status = '승인 요청' "
+					+ "order by credit_time desc" 
+					+ ")TMP" 
+				+ ") where rn between ? and ?";
+		Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
+
+		return jdbcTemplate.query(sql, creditMapper, data);
+	}
+	
 }

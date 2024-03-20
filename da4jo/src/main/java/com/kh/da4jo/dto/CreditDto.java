@@ -44,4 +44,11 @@ public class CreditDto
 	{
 		super();
 	}
+	@Override
+	public String toString() {
+		return "CreditDto [memberId=" + memberId + ", creditCharge=" + creditCharge + ", creditTimeDate="
+				+ creditTimeDate + ", creditStatus=" + creditStatus + "]";
+	}
+	
+	
 }
