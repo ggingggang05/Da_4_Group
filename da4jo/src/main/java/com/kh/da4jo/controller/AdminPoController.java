@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.da4jo.dao.CreditDao;
 import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dto.PoDto;
+import com.kh.da4jo.vo.DailyDetailVO;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.SettlementVO;
 
@@ -123,4 +124,14 @@ public class AdminPoController {
 			model.addAttribute("list", list);
 			return "/WEB-INF/views/admin/po/settlement.jsp";
 	}
+	//일자별 디테일 상세내역
+	@RequestMapping("/dailyDetail")
+	public String dailyDetail(Model model, 
+			@RequestParam(required = false) String poPayDate) {
+		
+		List<DailyDetailVO> list = poDao.dailyDetail(poPayDate);
+		model.addAttribute("list", list);
+		return "/WEB-INF/views/admin/po/dailyDetail.jsp";
+	}
+	
 }

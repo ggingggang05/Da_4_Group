@@ -7,10 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.PoDto;
+import com.kh.da4jo.mapper.DailyDetailVOMapper;
 import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
 import com.kh.da4jo.mapper.SettlementVOMapper;
+import com.kh.da4jo.vo.DailyDetailVO;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
 import com.kh.da4jo.vo.SettlementVO;
@@ -27,6 +29,8 @@ public class PoDao {
 	private PaymentVOMapper paymentVOMapper;
 	@Autowired
 	private SettlementVOMapper settlementVOMapper;
+	@Autowired
+	private DailyDetailVOMapper dailyDetailVOMapper;
 
 	// poNo 미리 뽑기
 	public int getSequence() {
@@ -411,5 +415,21 @@ public class PoDao {
     	Object[] data = { startDate, endDate };
     	return jdbcTemplate.query(sql, settlementVOMapper, data);
     }
+    //일자별 상세
+    public List<DailyDetailVO> dailyDetail(String poPayDate){
+    	String sql = "SELECT "
+    			+ "PO_PAY_DATE, PO_NO, PO_CUSTOMER_ID, "
+    			+ "PO_NAME_KOR, PO_ITEM_ENG_NAME, PO_TOTAL_PRICE_KRW, "
+    			+ "PO_QTY, PO_ITEM_VAT, PO_AWB_NUMBER, PO_SDATE "
+    			+ "FROM "
+    			+ "PO "
+    			+ "WHERE "
+    			+ "TRUNC(PO_PAY_DATE) = TO_DATE(?, 'YYYY-MM-DD') "
+    			+ "ORDER BY "
+    			+ "PO_PAY_DATE DESC	";
+    	Object[] data = {poPayDate};
+    	
+    	return jdbcTemplate.query(sql, dailyDetailVOMapper, data);
 
+    }
 }

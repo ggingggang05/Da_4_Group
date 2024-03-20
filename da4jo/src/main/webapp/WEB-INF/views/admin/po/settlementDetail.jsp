@@ -67,7 +67,7 @@ section{
 </style>
 
 <script>
-    // 총합 계산을 위한
+    // 총합 계산을 위한 JavaScript
     document.addEventListener("DOMContentLoaded", function() {
         var totalPriceElements = document.querySelectorAll("#poTotalPrice");
         var totalCountElements = document.querySelectorAll("#count");
@@ -101,7 +101,7 @@ section{
 	}
 </script>
 
-<div class="container container-body">
+<div class="container container-body container-body-long">
 	<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 	<div class="container inner-container">
 		<div class="content content-head">
@@ -112,7 +112,7 @@ section{
 		
 		<form action="settlement">
 	        <!-- 날짜 범위 선택을 위한 입력 상자 -->
-	        <div class="cell plex-cell right">
+	        <div class="cell plex-cell center">
 	        ㆍ기간별 검색
 		        <input type="text"  name="startDate" placeholder="시작일" value="$(settlementVO.poPayDate)"> &ensp;~&ensp;
 	         	<input type="text"  name="endDate" placeholder="종료일" value="$(settlementVO.poPayDate)">
@@ -140,7 +140,7 @@ section{
 								<fmt:formatNumber value="${settlementVO.poTotalPrice}"  pattern="#,##0"/>
 							</li>
 
-							<li id="dailyDetail"><a href="dailyDetail?poPayDate=${settlementVO.poPayDate}"><i
+							<li id="poDetail"><a href="orderDetail?poPayDate=${settlementVO.poPayDate}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 				</c:forEach>
