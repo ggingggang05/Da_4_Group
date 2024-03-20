@@ -153,6 +153,10 @@
 				</c:if><!-- 구매서 작성 내역이 있는 경우 닫는 태그 -->
 			</div><!-- 구매서 리스트 닫는 태그-->
 		</div><!-- 내용 바디 닫는 태그 -->
+		<div class="cell">
+			<%--네비게이터 --%>
+			<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
+		</div>
 	</div><!-- 오른쪽 내용 닫는 태그 -->	
 </div><!-- 컨테이너 자리 닫는 태그 -->
 
