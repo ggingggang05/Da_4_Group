@@ -212,6 +212,19 @@ public class PoDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	// 카운트 - 로그인한 사용자의 구매서 정보 조회를 위해 목록일 경우와 검색일 경우 각각 구현
+	public int loginIdcount(PageVO pageVO, String memberId) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select count(*) from po " + "where instr(" + pageVO.getColumn() + ", ?) > 0 and po_customer_id=?";
+			Object[] data = { pageVO.getKeyword(), memberId };
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		} else {// 목록
+			String sql = "select count(*) from po where po_customer_id=?";
+			Object[] data = {memberId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+	}
+	
 	// 카운트 - 주문정보 확인중의 목록일 경우와 검색일 경우를 각각 구현
 	public int orderCount(PageVO pageVO) {
 		if (pageVO.isSearch()) {// 검색

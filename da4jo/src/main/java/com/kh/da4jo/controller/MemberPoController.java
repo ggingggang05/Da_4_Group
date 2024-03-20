@@ -36,12 +36,9 @@ public class MemberPoController {
 						HttpSession session) {
 		String loginId = (String)session.getAttribute("loginId");
 		
-		MemberDto memberDto = memberDao.selectOne(loginId);
-		model.addAttribute(memberDto);
-		
 		//페이징을 PageVO에서 처리
 		//여기선 count 및 list만 처리함
-		int count = poDao.count();
+		int count = poDao.loginIdcount(pageVO, loginId);
 		pageVO.setCount(count);
 		
 		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
