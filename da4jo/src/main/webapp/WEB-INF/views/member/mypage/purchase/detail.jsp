@@ -63,6 +63,18 @@
 }
 </style>
 
+<script>
+	$(function(){
+		$(".cancelOrderFail").on("click", function(){
+			var choice = window.alert("주문서 취소 불가");
+			if(choice == false) return;
+		});
+		$(".cancelOrderSuccess").on("click", function(){
+			var choice = window.alert("주문서 취소 완료");
+			if(choice == false) return;
+		});
+	});
+</script>
 
 
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
@@ -275,10 +287,23 @@
 				<div class="cell center">
 					<a href="/mypage/purchase/list" class="link">
 						<button class="btn">목록으로</button>
-					</a> <a href="#"
-						class="link">
-						<button class="btn">주문취소</button>
 					</a>
+					<form action="detail" method="post">
+						<input name="poStatus" value="${poDto.poStatus}" type="hidden">
+						<c:choose>
+							<c:when test="${poDto.poStatus != '결제 대기 중' || poDto.poStatus !='주문 정보 확인 중'}">	
+								<a href="detail?poNo=${poDto.poNo}" class="link cancelOrderFail">
+									<button class="btn">주문취소</button>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/mypage/purchase/list" class="link cancelOrderSuccess">
+									<button class="btn">주문취소</button>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</form> 
+					
 				</div>
 			</div> <!-- 상품 정보 닫는 태그 -->			
 		</div><!-- 오른쪽 내용 닫는 태그 -->
