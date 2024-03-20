@@ -11,9 +11,11 @@ import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
 import com.kh.da4jo.mapper.SettlementVOMapper;
+import com.kh.da4jo.mapper.VatListVOMapper;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
 import com.kh.da4jo.vo.SettlementVO;
+import com.kh.da4jo.vo.VatListVO;
 
 @Repository
 public class PoDao {
@@ -27,6 +29,8 @@ public class PoDao {
 	private PaymentVOMapper paymentVOMapper;
 	@Autowired
 	private SettlementVOMapper settlementVOMapper;
+	@Autowired
+	private VatListVOMapper vatListVOMapper;
 
 	// poNo 미리 뽑기
 	public int getSequence() {
@@ -411,5 +415,12 @@ public class PoDao {
     	Object[] data = { startDate, endDate };
     	return jdbcTemplate.query(sql, settlementVOMapper, data);
     }
-
+    public List<VatListVO> getVatListByYear(String year) {
+    	String sql = "SELECT TO_CHAR(PO_SDATE, 'YYYY-Q') AS QUARTER, "
+    			+ "SUM(PO_ITEM_VAT) AS VAT_TOTAL "
+    			+ "FROM PO "
+    			+ "WHERE EXTRACT(YEAR FROM PO_SDATE) = ? "
+    			+ "GROUP BY TO_CHAR(PO_SDATE, 'YYYY-Q')";
+    	return jdbcTemplate.query(sql, vatListVOMapper, Integer.parseInt(year));
+    }
 }
