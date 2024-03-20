@@ -36,12 +36,9 @@ public class MemberPoController {
 						HttpSession session) {
 		String loginId = (String)session.getAttribute("loginId");
 		
-		MemberDto memberDto = memberDao.selectOne(loginId);
-		model.addAttribute(memberDto);
-		
 		//페이징을 PageVO에서 처리
 		//여기선 count 및 list만 처리함
-		int count = poDao.count();
+		int count = poDao.loginIdcount(pageVO, loginId);
 		pageVO.setCount(count);
 		
 		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
@@ -131,13 +128,11 @@ public class MemberPoController {
 							HttpSession session) {
 		String loginId = (String)session.getAttribute("loginId");
 		
-		MemberDto memberDto = memberDao.selectStatusShipping(loginId);
-		model.addAttribute("memberDto", memberDto);
-		
-		int count = poDao.count();
+		int count = poDao.shippingCount(pageVO, loginId);
+		System.out.println(count);
 		pageVO.setCount(count);
 		
-		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
+		List<PoDto> list = poDao.selectShippingListByPaging(pageVO, loginId);
 		model.addAttribute("poList", list);
 		
 		return "/WEB-INF/views/member/po/processList.jsp";

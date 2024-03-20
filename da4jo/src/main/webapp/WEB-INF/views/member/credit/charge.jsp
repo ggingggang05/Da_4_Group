@@ -29,7 +29,7 @@
 			<form action="charge" method="post" autocomplete="off">
 				<div class="cell center">
 					<label for="credit">충전금액(원) : </label>
-					<input type="text" name = creditCharge id="credit">
+					<input type="text" name = "creditCharge" id="credit">
 				</div>
 				<div class="cell center">
 					<button>충전하기</button>

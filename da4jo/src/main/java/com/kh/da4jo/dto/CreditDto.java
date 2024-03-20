@@ -7,6 +7,8 @@ public class CreditDto
 	private String memberId;
 	private int creditCharge;
 	private Date creditTimeDate;
+	private String creditStatus;
+	
 	public String getMemberId()
 	{
 		return memberId;
@@ -32,8 +34,21 @@ public class CreditDto
 		this.creditTimeDate = creditTimeDate;
 	}
 	
+	public String getCreditStatus() {
+		return creditStatus;
+	}
+	public void setCreditStatus(String creditStatus) {
+		this.creditStatus = creditStatus;
+	}
 	public CreditDto()
 	{
 		super();
 	}
+	@Override
+	public String toString() {
+		return "CreditDto [memberId=" + memberId + ", creditCharge=" + creditCharge + ", creditTimeDate="
+				+ creditTimeDate + ", creditStatus=" + creditStatus + "]";
+	}
+	
+	
 }

@@ -212,6 +212,19 @@ public class PoDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	// 카운트 - 로그인한 사용자의 구매서 정보 조회를 위해 목록일 경우와 검색일 경우 각각 구현
+	public int loginIdcount(PageVO pageVO, String memberId) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select count(*) from po " + "where instr(" + pageVO.getColumn() + ", ?) > 0 and po_customer_id=?";
+			Object[] data = { pageVO.getKeyword(), memberId };
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		} else {// 목록
+			String sql = "select count(*) from po where po_customer_id=?";
+			Object[] data = {memberId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+	}
+	
 	// 카운트 - 주문정보 확인중의 목록일 경우와 검색일 경우를 각각 구현
 	public int orderCount(PageVO pageVO) {
 		if (pageVO.isSearch()) {// 검색
@@ -233,6 +246,19 @@ public class PoDao {
 			} else {// 목록
 				String sql = "select count(*) from po where PO_STATUS='결제완료'";
 				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
+		
+		// 카운트 - 주문정보의 배송 상태가 '배송 중'이고 로그인한 사용자인 경우에 대해 목록과 검색일 경우를 각각 구현
+		public int shippingCount(PageVO pageVO, String memberId) {
+			if (pageVO.isSearch()) {// 검색
+				String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 AND PO_STATUS='배송 중' AND PO_CUSTOMER_ID=? ";
+				Object[] data = { pageVO.getKeyword(), memberId };
+				return jdbcTemplate.queryForObject(sql, int.class, data);
+			} else {// 목록
+				String sql = "select count(*) from po where po_status='배송 중' and po_customer_id=?";
+				Object[] data = {memberId};
+				return jdbcTemplate.queryForObject(sql, int.class, data);
 			}
 		}
 		
@@ -335,6 +361,22 @@ public class PoDao {
 
 		return jdbcTemplate.query(sql, poListMapper, data);
 	}
+	// 배송 중인 구매서에 대한 페이징
+		public List<PoDto> selectShippingListByPaging(PageVO pageVO, String loginId) {
+			String sql = "select * from (" 
+					+ "select rownum rn, TMP.* from ( " 
+					+ "select * "
+					+ "from po "
+					+ "where po_status='배송 중' and po_customer_id=? "
+					+ "order by po_sdate desc" 
+					+ ")TMP" 
+					+ ") where rn between ? and ?";
+			Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
+
+			return jdbcTemplate.query(sql, poListMapper, data);
+		}
+	
+	
 	// 결제 완료 목록 조회
 
 	// 결제시간 업데이트
