@@ -2,24 +2,26 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- jquery cdn -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 .asterisk {
 	font-size: 8px;
 	vertical-align: top !important;
 }
+
 #agency_buy_write fieldset {
 	width: 100%;
 }
 
 #agency_buy_write .top-guide {
-	border-top: 2px solid #999;
-	border-bottom: 3px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
 	padding-top: 25px;
 	padding-bottom: 20px;
 	line-height: 180%;
-	margin-bottom: 50px;
+	margin-bottom: 80px;
 }
 
 #agency_buy_write .top-guide h3 {
@@ -44,7 +46,7 @@
 #agency_buy_write .step-agreement {
 	padding: 24px 24px 0;
 	border: 1px solid #e0e0e0;
-	background: #fbfafa;
+	background: #fff;
 	margin-bottom: 50px;
 }
 
@@ -87,11 +89,12 @@
 
 #agency_buy_write .step-country {
 	margin-bottom: 50px;
+	background-color: #fff;
 }
 
 #agency_buy_write .step-country .box {
 	overflow: hidden;
-	padding: 30px 0 10px;
+	padding: 30px 0 20px;
 	border: 1px solid #ddd;
 	margin-bottom: 10px;
 }
@@ -147,10 +150,82 @@
 	padding: 2px 4px;
 	margin-left: 5px;
 }
+
+.info-head {
+	font-size: 18px;
+	text-align: left;
+	padding: 10px 0 12px 20px;
+	color: #7B8E9C;
+	border-bottom: 1.5px solid #7B8E9C;
+}
+
+.line {
+	border: none;
+	border-bottom: 1px solid #E6EFF2;
+}
+.btn{
+	background-color: white;
+	hover
+}
+.btn:hover{
+	filter:brightness(1);
+	color: #0984e3; 
+}
+.sfont{
+	font-size: 14px;
+}
 </style>
+<script>
+	$(function() {
+		$(".btn-address-search").click(function() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+					// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var addr = ''; // 주소 변수
+
+					//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+					if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						addr = data.roadAddress;
+					} else { // 사용자가 지번 주소를 선택했을 경우(J)
+						addr = data.jibunAddress;
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					$("[name=poZipcode]").val(data.zonecode);
+					$("[name=poAddress1]").val(addr);
+
+					// 커서를 상세주소 필드로 이동한다.
+					$("[name=poAddress2]").focus();
+				}
+			}).open();
+		});
+
+		$(".btn-address-clear").click(function() {
+			$("[name=poZipcode]").val("");
+			$("[name=poAddress1]").val("");
+			$("[name=poAddress2]").val("");
+		});
+	});
+
+	$(".check-form").submit(function() {
+		//$(this).find("[name], #pw-reinput").blur();
+		//$(this).find(".tool").blur();//모든 창
+
+		//입력창 중에서 success fail fail2가 없는 창
+		$(this).find(".tool").not(".success, .fail, .fail2").blur();
+		return state.ok();
+	});
+</script>
+<br>
+<br>
 <div id="agency_buy_write" class="section container center w-900">
 	<div class="wrap">
-		<h2>구매대행 신청</h2>
+		<div class="content content-head">
+			<div class="content-head-text">구매대행 신청</div>
+		</div>
 		<div class="area top-guide">
 			<h3>해외 온라인 사이트의 가입, 해외결제등의 절차가 어렵고 번거로우시다면, 구매대행 서비스를 이용해 주세요.</h3>
 			구매대행시 주의사항을 확인 및 동의하신 후 하단의 신청폼에 상품정보를 입력하고 신청해 주세요!
@@ -159,7 +234,9 @@
 		<div class="box_form">
 			<form name="form_agency_buy_write" id="form_agency_buy_write"
 				method="post" action="/member/po/request">
-				<h3>신청서 작성시 유의사항</h3>
+				<div class="content content-head" style="border-bottom: none;">
+					<div class="content-head-text">신청서 작성시 유의사항</div>
+				</div>
 
 				<div class="area step step-agreement w-100">
 					<div class="document_box left">
@@ -267,16 +344,17 @@
 							동의합니다.</label>
 					</div>
 				</div>
-
-
-				<h3>구매대행지 선택</h3>
+				<div class="content content-head">
+					<div class="content-head-text">구매대행지 선택</div>
+				</div>
+				<br>
 				<div class="area step step-country">
 					<div class="box">
 						<ul>
 							<li>
 								<div class="info radio">
 									<label><input name="poCountry" type="radio"
-										class="type_radio" value="오리건" data-currency="USD" checked />
+										class="type_radio" value="오리건" data-currency="USD" />
 										오리건 
 								</div>
 							</li>
@@ -342,12 +420,14 @@
 						</ul>
 						<script>
 							$(function() {
-								$('input[name=poCountry]').on('click',function() {
-									var currency = $(this).data('currency');
+								$('input[name=poCountry]')
+									.on('click',function() {
+										var currency = $(this)
+										.data('currency');
 									// 선택된 국가의 통화를 가져와서 변수에 저장
-									console.log('선택된 통화: ' + currency);
+									console.log('선택된 통화: '+ currency);
 									// 선택된 통화를 콘솔에 출력 (이 부분은 필요에 따라 백엔드로 전달하거나 다른 작업을 수행할 수 있음)
-									$('Form').append('<input type="hidden" name="poCurrency" value="' + currency + '">');		
+									$('Form').append('<input type="hidden" name="poCurrency" value="' + currency + '">');
 								});
 							});
 						</script>
@@ -359,97 +439,100 @@
 						일본 구매대행 불가 쇼핑몰 : 메루카리, 라쿠마(프릴), 오타마트 등 어플기반 사이트, 토호 애니매이션, 아미아미,
 						cos, Levi's 등</div>
 				</div>
-
-				<h3>
-					구매대행 상품정보 입력
-					<p class="right red " style="font-size: 13px; margin: 5px 0 0;">
-						단가는 상품 1개의 개별 가격을 의미합니다.</p>
-				</h3>
-				<div class="container w-800 left" style="border: solid 1px;">
+				<div class="container left" style="border-color: #e0e0e0;">
+					<div class="info-head w-100">구매대행 상품정보 입력</div>
+				</div>
 				<div class="flex-cell">
-				<div class="cell">
-						구매자(한글)<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poNameKor" class="tool w-100"
-							placeholder="한글이름">
+					<div class="cell sfont">
+						<label for="poItemEngName">상품이름(영문)</label> <input type="text"
+							name="poItemEngName" class="tool w-100 line" id="poItemEngName"
+							placeholder="영어로 입력해주세요">
 					</div>
-					<div class="cell">
-						구매자(영문)<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poNameEng" class="tool w-100"
-							placeholder="영어이름">
-					</div>
-					<div class="cell">
-						통관고유번호<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poClearanceId" class="tool w-100"
-							placeholder="P로시작">
-					</div></div>
-					
-					<div class="cell">
-						상품이름(영문)<label><i
-							class="fa-solid fa-asterisk red asterisk"></i></label> <input type="text"
-							name="poItemEngName" class="tool w-100" placeholder="영어로 입력해주세요">
-					</div>
-					<div class="cell">
-						구매링크<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poLink" class="tool w-100"
-							placeholder="URL을 입력하세요">
-					</div>
-					<div class="cell">
-						<!-- 최소수량 1개에서 최대 100개로 설정해둠 -->
-						구매수량<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="number" name="poQty" class="tool w-100" value="1"
-							min="1" max="100">
-					</div>
-					<div class="cell">
-						카테고리 <input type="text" name="poItemCategory" class="tool w-100"
+					<div class="cell sfont">
+						<label for="poItemCategory">카테고리</label> <input type="text"
+							name="poItemCategory" class="tool w-100 line" id="poItemCategory"
 							placeholder="ex)가방">
 					</div>
-					<div class="cell">
-						옵션/색상 <input type="text" name="poItemOption1" class="tool w-100"
+					<div class="cell sfont">
+						<label for="poItemOption1">옵션/색상</label> <input type="text"
+							name="poItemOption1" class="tool w-100 line" id="poItemOption1"
 							placeholder="ex)red">
 					</div>
-					<div class="cell">
-						옵션/사이즈 <input type="text" name="poItemOption2" class="tool w-100"
+					<div class="cell sfont">
+						<label for="poItemOption2">옵션/사이즈</label> <input type="text"
+							name="poItemOption2" class="tool w-100 line" id="poItemOption2"
 							placeholder="ex)라지">
 					</div>
-					<div class="cell">
-						기타요청사항 <input type="text" name="poItemOption3" class="tool w-100"
-							placeholder="ex)고양이 프린팅된걸로 부탁드려요">
+					<div class="cell sfont">
+						<label for="poFx">금액(외화)</label> <input type="text" name="poFx"
+							class="tool w-100 line" id="poFx" placeholder="">
 					</div>
-					<div class="cell">
-						금액(외화) <input type="text" name="poFx" class="tool w-100"
-							placeholder="">
+					<div class="cell sfont">
+						<!-- 최소수량 1개에서 최대 100개로 설정해둠 -->
+						<label for="poQty">구매수량</label> <input type="number" name="poQty"
+							class="tool w-100 line" value="1" id="poQty" min="1" max="100">
 					</div>
-					<div class="cell">
-						연락처<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poContact" class="tool w-100"
-							placeholder="전화번호">
-					</div>
-					<div class="cell">
-						우편번호<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poZipcode" class="tool w-100"
-							placeholder="우편번호">
-					</div>
-					<div class="cell">
-						기본주소<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poAddress1" class="tool w-100"
-							placeholder="기본주소">
-					</div>
-					<div class="cell">
-						상세주소<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poAddress2" class="tool w-100"
-							placeholder="상세주소">
-					</div>
-					<div class="cell">
-						배송요청사항<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
-						<input type="text" name="poDcomment" class="tool w-100"
-							placeholder="배송요청사항을 입력하세요(ex:경비실에 맡겨주세요)">
-					</div>
-					<div class="button_area text-center">
-						<button type="submit" class="btn">신청서 작성하기</button>
-					</div>
-			</form>
+				</div>
+				<div class="cell">
+					<input type="text" name="poLink" class="tool w-100 line"
+						placeholder="(필수) 상품 URL을 입력하세요">
+				</div>
+				<div class="cell left">
+					<h6 style="margin: auto;">기타요청사항</h6>
+					<input type="text" name="poItemOption3" class="tool w-100 line"
+						placeholder="상세 옵션을 적어주세요">
+				</div>
+				<div class="cell">
+					<input type="text" name="poDcomment" class="tool w-100 line"
+						placeholder="배송요청사항을 입력하세요 (ex:경비실에 맡겨주세요)">
+				</div>
+		</div>
+		<br>
+		<div class="container left">
+			<div class="info-head w-100">구매자 정보입력</div>
+		</div>
+		<div class="flex-cell">
+			<div class="cell sfont">
+				구매자(한글) <input type="text" name="poNameKor" class="tool w-100 line"
+					placeholder="한글이름">
+			</div>
+			<div class="cell sfont">
+				구매자(영문) <input type="text" name="poNameEng" class="tool w-100 line"
+					placeholder="영어이름">
+			</div>
+			<div class="cell sfont">
+				통관고유번호 <input type="text" name="poClearanceId"
+					class="tool w-100 line" placeholder="P로시작">
+			</div>
+			<div class="cell sfont">
+				연락처 <input type="text" name="poContact" class="tool w-100 line"
+					placeholder="전화번호">
+			</div>
+		</div>
+		<div class="cell left">
+			<div class="cell">
+				 <input type="text" name="poZipcode" class="tool w-20 line"
+					placeholder="우편번호">
+			<button type="button" class="btn btn-address-search">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</button>
+			</div>
+			<div class="cell">
+				 <input type="text" name="poAddress1" class="tool w-50 line"
+					placeholder="기본주소">
+			</div>
+			<div class="cell">
+				 <input type="text" name="poAddress2" class="tool w-50 line"
+					placeholder="상세주소">
+			</div>
+			<br>
+		</div>
+		<div class="button_area text-center" >
+			<button type="submit" class="btn mt-10">신청서 작성하기</button>
 		</div>
 	</div>
+	</form>
+	<br><br>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
