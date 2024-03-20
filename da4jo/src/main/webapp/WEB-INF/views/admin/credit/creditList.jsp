@@ -49,20 +49,21 @@
 				<c:forEach var="creditDto" items="${creditList}">
 					<form action="creditList" method="post">
 						<ul class="menu menu-list">
-								<input name="memberId" value="${creditDto.memberId}" type="hidden">
-								<input name="creditCharge" value="${creditDto.creditCharge}" type="hidden">
+							<input name="creditNo" value="${creditDto.creditNo}" type="hidden">
+							<input name="memberId" value="${creditDto.memberId}" type="hidden">
+							<input name="creditCharge" value="${creditDto.creditCharge}" type="hidden">
+						
+							<li id="memberId">${creditDto.memberId}</li>
+							<li id="creditCharge"><fmt:formatNumber value="${creditDto.creditCharge}" pattern="#,##0"></fmt:formatNumber>원</li>
 							
-								<li id="memberId">${creditDto.memberId}</li>
-								<li id="creditCharge"><fmt:formatNumber value="${creditDto.creditCharge}" pattern="#,##0"></fmt:formatNumber>원</li>
-								
-					            <li id="creditStatus">
-					            	<select name="creditStatus" class="tool w-75" >
-					                <option value="">선택하세요</option>
-					                <option value="승인 완료">승인 완료</option>
-					                <option value="승인 반려">승인 반려</option>
-					            	</select>
-					            <button class="w-25">상태변경</button>
-					            </li>
+				            <li id="creditStatus">
+				            	<select name="creditStatus" class="tool w-75" >
+				                <option value="">선택하세요</option>
+				                <option value="승인 완료">승인 완료</option>
+				                <option value="승인 반려">승인 반려</option>
+				            	</select>
+				            <button class="w-25">상태변경</button>
+				            </li>
 						</ul>
 					</form>
 				</c:forEach>

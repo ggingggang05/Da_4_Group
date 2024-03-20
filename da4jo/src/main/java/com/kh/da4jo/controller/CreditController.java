@@ -35,6 +35,7 @@ public class CreditController
 		String loginId = (String)session.getAttribute("loginId");
 		//새 크레딧 dto를 만들고
 		CreditDto creditDto = new CreditDto();
+		creditDto.setCreditNo(creditDao.getSequence());
 		creditDto.setMemberId(loginId);
 		creditDto.setCreditCharge(creditCharge);
 		creditDto.setCreditStatus("승인 요청");
