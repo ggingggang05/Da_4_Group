@@ -69,10 +69,6 @@
 			var choice = window.alert("주문서 취소 불가");
 			if(choice == false) return;
 		});
-		$(".cancelOrderSuccess").on("click", function(){
-			var choice = window.alert("주문서 취소 완료");
-			if(choice == false) return;
-		});
 	});
 </script>
 
@@ -289,7 +285,6 @@
 						<button class="btn">목록으로</button>
 					</a>
 					<form action="detail" method="post">
-						<input name="poStatus" value="${poDto.poStatus}" type="hidden">
 						<c:choose>
 							<c:when test="${poDto.poStatus != '결제 대기 중' || poDto.poStatus !='주문 정보 확인 중'}">	
 								<a href="detail?poNo=${poDto.poNo}" class="link cancelOrderFail">
@@ -297,7 +292,8 @@
 								</a>
 							</c:when>
 							<c:otherwise>
-								<a href="/mypage/purchase/list" class="link cancelOrderSuccess">
+								<input name="poStatus" value="주문 취소">
+								<a href="/mypage/purchase/cancelOrder" class="link cancelOrderSuccess">
 									<button class="btn">주문취소</button>
 								</a>
 							</c:otherwise>
