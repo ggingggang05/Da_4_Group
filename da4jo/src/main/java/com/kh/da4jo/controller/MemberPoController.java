@@ -131,13 +131,11 @@ public class MemberPoController {
 							HttpSession session) {
 		String loginId = (String)session.getAttribute("loginId");
 		
-		MemberDto memberDto = memberDao.selectStatusShipping(loginId);
-		model.addAttribute("memberDto", memberDto);
-		
-		int count = poDao.count();
+		int count = poDao.shippingCount(pageVO, loginId);
+		System.out.println(count);
 		pageVO.setCount(count);
 		
-		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
+		List<PoDto> list = poDao.selectShippingListByPaging(pageVO, loginId);
 		model.addAttribute("poList", list);
 		
 		return "/WEB-INF/views/member/po/processList.jsp";

@@ -152,7 +152,7 @@ $(function(){
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
-							<a class="link" href="po/processList">배송 진행 상황</a>
+							<a class="link" href="/member/mypage/purchase/processList">배송 진행 상황</a>
 						</div>
 					</div>
 				</div>

@@ -80,11 +80,6 @@
 				</c:if><!-- 배송 진행 중인 구매서가 없다면 닫는 태그 -->
 				<!-- 배송 진행 중인 구매서가 있다면 -->
 				<c:if test="${!empty poList}">
-					<div class="cell flex-cell">
-						<div class="cell w-25 right">
-							<h2><a class="btn" href="/member/po/request" style="color: #B2BC76;">구매서 작성하기</a></h2>
-						</div>
-					</div>
 					<ul class="menu menu-type">
 						<li id="poNo"><strong>주문번호</strong></li>
 						<li id="poItemEngName"><strong>주문서</strong></li><!-- 아이템 이름 -->
@@ -100,7 +95,8 @@
 							<li id="poItemEngName">${poDto.poItemEngName}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poAwbNumber">${poDto.poAwbNumber}</li>
-							<li id="poDetail"><a href="mypage/purchase/detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+							<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
+							<li id="poDetail"><a href="detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 배송 진행 중인 구매서가 있다면 닫는 태그 -->
