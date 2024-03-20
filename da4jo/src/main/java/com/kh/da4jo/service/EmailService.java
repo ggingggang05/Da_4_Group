@@ -109,6 +109,25 @@ public class EmailService {
 		certDto.setCertNumber(fmt.format(number));
 		certDao.insert(certDto);
 	}
+	
+	//캐시 충전 승인 완료 후 이메일 발송
+	public boolean sendApprove(String memberEmail) {
+		MemberDto memberDto = memberDao.selectEmail(memberEmail);
+		
+		if(memberDto != null) {//존재하는 이메일
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(memberDto.getMemberEmail());//받는 사람(분실자)
+			message.setSubject("[다사조] 캐시 충전 완료 ");//제목
+			message.setText(memberDto.getMemberNameKor()+"님의 캐시가 충전완료 되었습니다. "
+					+ "\n 현재 캐시는 "+ memberDto.getMemberCredit() +"원 입니다.");
+			sender.send(message);
+			return true;
+		}
+		else {//존재하지 않는 이메일
+			return false;		
+		}
+	}
+	
 }
 
 

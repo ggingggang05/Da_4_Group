@@ -16,6 +16,7 @@ public class CreditMapper implements RowMapper<CreditDto>
 	public CreditDto mapRow(ResultSet rs, int rowNum) throws SQLException
 	{
 		CreditDto creditDto = new CreditDto();
+		creditDto.setCreditNo(rs.getInt("CREDIT_NO"));
 		creditDto.setMemberId(rs.getString("MEMBER_ID"));
 		creditDto.setCreditCharge(rs.getInt("CREDIT_CHARGE"));
 		creditDto.setCreditTimeDate(rs.getDate("CREDIT_TIME"));
