@@ -27,7 +27,7 @@
 </style>
 <br>
 <div class="container container-body">
-	<jsp:include page="/WEB-INF/views/template/board-sidebar.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 	<!-- 내용자리 -->
 	<div class="container inner-container">
 		<div class="content content-head">
@@ -51,6 +51,12 @@
 					<div class="notice-date wdate">${noticeDto.noticeWdate}</div>
 				</div>
 			</c:forEach>
+			<div class="cell right">
+				<c:if
+					test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
+					<a href="/board/notice/write" class="link">글쓰기</a>
+				</c:if>
+			</div>
 			<%-- 검색창 --%>
 			<div class="cell center my-50">
 				<form action="list" method="get">
