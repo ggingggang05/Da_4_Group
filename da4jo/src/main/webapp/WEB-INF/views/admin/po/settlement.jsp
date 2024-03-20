@@ -1,8 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<!-- lightpick CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
+<script type="text/javascript">
+	// lightpick
+	$(function(){
+		var picker = new Lightpick({
+		    field: $("[name=startDate]")[0], // 시작일
+		    secondField: $("[name=endDate]")[0], // 종료일
+		    format: "YYYY-MM-DD",
+ 		    singleDate: false,
+	        numberOfMonths: 2,
+	        numberOfColumns: 2,
+	        selectForword: true,
+		});
+	});
+</script>
+
+
 <style>
 .menu-type {
 	margin: 0px !important;
@@ -15,6 +39,9 @@
 .listArea {
 	border: 1px solid #ced3d6;
 }
+section{
+	display: block;
+ }
 
 #memberId {
 	width: 23%;
@@ -35,7 +62,42 @@
 #isBlock, #memberDetail {
 	width: 9%;
 }
+
 </style>
+
+<script>
+    // 총합 계산을 위한 JavaScript
+    document.addEventListener("DOMContentLoaded", function() {
+        var totalPriceElements = document.querySelectorAll("#poTotalPrice");
+        var totalCountElements = document.querySelectorAll("#count");
+        var totalPrice = 0;
+        var totalCount = 0;
+
+        // 각 항목의 금액 계산
+        totalPriceElements.forEach(function(element) {
+            totalPrice += parseInt(element.textContent);
+        });
+        //각 항목의 건수 계산
+        totalCountElements.forEach(function(element) {
+            totalCount += parseInt(element.textContent);
+        });
+
+        // 총합을 출력하는 영역에 결과를 삽입
+        var totalPriceDisplay = document.getElementById("totalPrice");
+        totalPriceDisplay.textContent = totalPrice;
+    	
+        // 총 건수를 출력하는 영역에 결과를 삽입
+        var totalCountDisplay = document.getElementById("totalCount");
+        totalCountDisplay.textContent = totalCount;
+    });
+</script>
+
+<script>
+	function s_function() {
+		$('#settlement').submit();
+	}
+</script>
+
 <div class="container container-body container-body-long">
 	<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 	<div class="container inner-container">
@@ -44,37 +106,43 @@
 				<i class="fa-solid fa-pause"></i> 일자별 정산 내역
 			</div>
 		</div>
+		
+		<form action="settlement">
+	        <!-- 날짜 범위 선택을 위한 입력 상자 -->
+	        <div class="cell plex-cell center">
+	        ㆍ기간별 검색
+		        <input type="text"  name="startDate" placeholder="시작일" value="$(settlementVO.poPayDate)"> &ensp;~&ensp;
+	         	<input type="text"  name="endDate" placeholder="종료일" value="$(settlementVO.poPayDate)">
+		        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+	        </div>
+    	</form>
+    	
+    	
 		<div class="content content-body">
 			<div class="cell listArea">
 				<ul class="menu menu-type">
-					<li id="poNo"><strong>날짜</strong></li>
-					<li id="poCustomerId"><strong>건수</strong></li>
-					<li id="poClearanceId"><strong>총 금액</strong></li>
-
+					<li><strong>날짜</strong></li>
+					<li><strong>건수</strong></li>
+					<li><strong>총 금액</strong></li>
+					<li><strong>상세</strong></li>
 				</ul>
-				<c:forEach var="poDto" items="${poDto}">
+				
+				<c:forEach var="settlementVO" items="${list}">
 						<ul class="menu menu-list">
-							<li id="poNo">${poDto.poPayDate}</li>
-							<li id="poCustomerId">${poDto.Count}</li>
-							<li id="poClearanceId">${poDto.poTotalPriceKrw}</li>
+							<li id="poPayDate">${settlementVO.poPayDate}</li>
+							<li id="count">${settlementVO.count}</li>
+							<li id="poTotalPrice">${settlementVO.poTotalPrice}</li>
 
-							<li id="poDetail"><a href="orderDetail?poNo=${poDto.poNo}"><i
+							<li id="poDetail"><a href="orderDetail?poPayDate=${settlementVO.poPayDate}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 				</c:forEach>
-			</div>
-			<div class="cell searchArea center">
-				<form action="orderList" method="get">
-					<select name="column" class="searchSelect">
-						<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''}>주문번호</option>
-						<option value="po_name_kor"
-							${param.column == 'po_name_kor' ? 'selected' : ''}>주문자</option>
-					</select> <input type="search" name="keyword" placeholder=""
-						value="${param.keyword}" class="searchBar">
-					<button class="btn searchBtn">
-						<i class="fa-solid fa-search"></i>
-					</button>
-				</form>
+				<ul class="menu menu-list">
+					<li id="poPayDate"><strong>합계</strong></li>
+					<li><strong id= "totalCount"></strong></li>
+					<li><strong id="totalPrice"></strong></li>
+					<li id="poDetail"><strong></strong></li>
+				</ul>
 			</div>
 		</div>
 		<div class="page-navigator">
