@@ -33,7 +33,16 @@
 	<hr>
 
 	<div class="cell flex-cell auto-width">
+		
+	
 		<div class="cell">
+			<div class="cell">
+				<label>작성일 : ${qnaDto.qnaWdate}</label>
+				<label>조회수 : ${qnaDto.qnaVcount}</label>
+			</div>
+		</div>
+		
+		<div class="cell right">
 			<a class="btn" href="list">목록으로</a> 
 			<a class ="btn" href="write">질문글작성</a> 
 			<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
@@ -41,14 +50,6 @@
 				<a class="btn" href="/board/qna/edit?qnaNo=${qnaDto.qnaNo}">질문글수정</a>
 				<a class="btn negative" href="/board/qna/delete?qnaNo=${qnaDto.qnaNo}">질문글삭제</a>
 			</c:if>
-			
-		</div>
-	
-		<div class="cell right">
-			<div class="cell">
-				<label>작성일 : ${qnaDto.qnaWdate}</label>
-				<label>조회수 : ${qnaDto.qnaVcount}</label>
-			</div>
 		</div>
 	</div>
 

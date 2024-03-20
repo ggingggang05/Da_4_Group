@@ -80,7 +80,7 @@ color: #d63031 !important;
 						<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 							<li id="qnaRock">잠금상태</li>
 						</c:if>
-						<li id="typeQnaTitle">제목</li>
+						<li id="typeQnaTitle">제목 </li>
 						<li>작성자</li>
 						<li id="qnaWdate">작성일</li>
 					</ul>
@@ -91,6 +91,8 @@ color: #d63031 !important;
 							<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 							<li id="qnaRock">${qnaDto.qnaSecret}</li>
 							</c:if>
+							
+							
 							<c:choose>
  							<c:when test="${sessionScope.loginId == qnaDto.qnaWriter || sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자' || qnaDto.qnaSecret == 'N'}">
  								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a>

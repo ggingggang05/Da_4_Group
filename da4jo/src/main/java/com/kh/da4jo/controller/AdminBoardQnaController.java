@@ -30,7 +30,7 @@ public class AdminBoardQnaController {
 	
 	@GetMapping("/write")
 	public String write() {
-		return "/WEB-INF/views/board/qna/write.jsp";
+		return "/WEB-INF/views/admin/board/qna/write.jsp";
 	}
 
 	@PostMapping("/write")
