@@ -38,11 +38,7 @@
 				<div class="cell w-50">
 				<a href="/board/notice/list"><button class="btn">목록으로</button></a></div>
 				<div class="cell w-50 right notice-date">
-				<!-- 관리자만 삭제버튼 보이게, 인터셉터에도 주소로 못들어가게 하기 -->
-				<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
-				<a class="link-confirm me-20" data-message="정말 삭제하시겠습니까?" 
-				href="delete?noticeNo=${noticeDto.noticeNo}">
-				<button class="btn negative">삭제</button></a></c:if>조회수 ${noticeDto.noticeVcount}</div>
+				조회수 ${noticeDto.noticeVcount}</div>
 			</div>
 		</div>
 	</div>
