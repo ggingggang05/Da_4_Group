@@ -10,7 +10,6 @@
 	white-space: nowrap;
 	margin: 20px 0 20px 0;
 }
-
 .info-head {
 	font-size: 18px;
 	text-align: left;
@@ -220,6 +219,6 @@
 
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/admin-footer.jsp"></jsp:include>
 </body>
 </html>
