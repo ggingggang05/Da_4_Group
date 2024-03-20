@@ -9,7 +9,6 @@
 	font-size: 8px;
 	vertical-align: top !important;
 }
-/* ================== 구매대행 신청서 : buy_write.tpl ================== */
 #agency_buy_write fieldset {
 	width: 100%;
 }
@@ -367,7 +366,8 @@
 						단가는 상품 1개의 개별 가격을 의미합니다.</p>
 				</h3>
 				<div class="container w-800 left" style="border: solid 1px;">
-					<div class="cell">
+				<div class="flex-cell">
+				<div class="cell">
 						구매자(한글)<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
 						<input type="text" name="poNameKor" class="tool w-100"
 							placeholder="한글이름">
@@ -381,7 +381,8 @@
 						통관고유번호<label><i class="fa-solid fa-asterisk red asterisk"></i></label>
 						<input type="text" name="poClearanceId" class="tool w-100"
 							placeholder="P로시작">
-					</div>
+					</div></div>
+					
 					<div class="cell">
 						상품이름(영문)<label><i
 							class="fa-solid fa-asterisk red asterisk"></i></label> <input type="text"
