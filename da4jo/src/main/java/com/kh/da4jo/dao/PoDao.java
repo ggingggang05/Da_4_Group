@@ -422,12 +422,6 @@ public class PoDao {
 	}
 
 	// 일자별 정산 내역 조회
-	public List<SettlementVO> getDailyPayments() {
-		String sql = "SELECT TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') AS PO_PAY_DATE, " + "COUNT(*) AS COUNT, "
-				+ "SUM(PO_TOTAL_PRICE_KRW) AS PO_TOTAL_PRICE_KRW " + "FROM PO " + "WHERE PO_PAY_DATE IS NOT NULL "
-				+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') " + "ORDER BY PO_PAY_DATE";
-		return jdbcTemplate.query(sql, settlementVOMapper);
-	}
     public List<SettlementVO> getDailyPayments() {
         String sql = "SELECT TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') AS PO_PAY_DATE, "
 				        		+ "COUNT(*) AS COUNT, "
