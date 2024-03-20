@@ -46,6 +46,11 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
+					<a href="/document/fee-info" class="link main-title">수수료 및 요금표</a>
+				</div>
+			</div>
+			<div class="title-body-main">
+				<div class="title-body-text">
 					<a href="/document/clearance-code" class="link main-title">통관 안내</a>
 				</div>
 				<div class="title-body-sub">

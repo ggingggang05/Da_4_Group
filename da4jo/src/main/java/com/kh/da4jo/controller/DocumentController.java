@@ -39,4 +39,8 @@ public class DocumentController
 	public String prohibition() {
 		return "/WEB-INF/views/document/prohibition.jsp";
 	}
+	@RequestMapping("/fee-info")
+	public String feeInfo() {
+		return "/WEB-INF/views/document/fee-info.jsp";
+	}
 }

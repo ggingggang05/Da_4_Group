@@ -222,7 +222,7 @@
 
 					<li><a href="/document/buying-info">이용안내</a></li>
 
-					<li><a href="#">수수료 및 요금표</a></li>
+					<li><a href="/document/fee-info">수수료 및 요금표</a></li>
 
 					<li><a href="/board/notice/list">공지사항</a></li>
 
