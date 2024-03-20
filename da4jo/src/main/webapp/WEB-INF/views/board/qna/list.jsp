@@ -91,9 +91,6 @@ color: #d63031 !important;
 							<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 							<li id="qnaRock">${qnaDto.qnaSecret}</li>
 							</c:if>
-						
-						
-							
 							<c:choose>
  							<c:when test="${sessionScope.loginId == qnaDto.qnaWriter || sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자' || qnaDto.qnaSecret == 'N'}">
  								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a>
@@ -103,9 +100,16 @@ color: #d63031 !important;
  							</c:otherwise>
  							</c:choose>
  							
- 							<!-- 	비밀글일때 관리자 이외에 비밀글 표시 그 이외에는 -->
  							
+ 							<c:choose>
+ 							<c:when test="${qnaDto.qnaStatus == '답변용글'}">
+ 							<li></li>
+ 							</c:when>
+ 							<c:otherwise>
  							<li>${qnaDto.qnaWriter}</li>
+ 							</c:otherwise>
+ 							</c:choose>
+ 								
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 						</ul>
 					</c:forEach>
