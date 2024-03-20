@@ -165,11 +165,9 @@
 }
 .btn{
 	background-color: white;
-	hover
 }
 .btn:hover{
 	filter:brightness(1);
-	color: #0984e3; 
 }
 .sfont{
 	font-size: 14px;
