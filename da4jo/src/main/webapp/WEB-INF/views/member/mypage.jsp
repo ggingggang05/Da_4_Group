@@ -6,26 +6,6 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<style>
-
-.memberInfo{
-	font-size:14px;
-	border-bottom-color: #6c6e6e33;
-	border-bottom-width: 1px;
-    border-bottom-style: solid;
-}
-
-.detailInfo,
-.btnMypage {
-	font-size: 12px;
-	padding: 5px;
-}
-
-.profileEdit{
-	display : none;
-}
-
-</style>
 
 <style>
 .chargeList {
@@ -40,17 +20,7 @@
 }
 </style>
 
-<style>
-.menuBox {
-	padding : 5px;
-	padding-bottom : 20px;
-	height : 200px;
-	margin-top : 0px !important;
-}
-.title-head {
-	background-color: #60A1F833;
-}
-</style>
+
 
 <!-- 프로필 변경 -->
 <script>

@@ -29,6 +29,19 @@
 
 </style>
 
+<style>
+.menuBox {
+	padding : 5px;
+	padding-bottom : 20px;
+	height : 200px;
+	margin-top : 0px !important;
+}
+.title-head {
+	background-color: #60A1F833;
+}
+</style>
+
+
 	<div class="container flex-container">
 		<div class="container inner-container">
 			<!-- 회원 정보 -->
