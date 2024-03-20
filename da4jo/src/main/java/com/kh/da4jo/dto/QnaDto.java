@@ -10,9 +10,9 @@ public class QnaDto {
 	private String qnaWriter;
 	private Date qnaWdate;
 	private int qnaVcount;
-	
 	private int qnaGroup;
 	private Integer qnaTarget;
+	private String qnaStatus;
 	
 	public QnaDto() {
 		super();
@@ -76,6 +76,12 @@ public class QnaDto {
 	public void setQnaTarget(Integer qnaTarget) {
 		this.qnaTarget = qnaTarget;
 	}
-	
+
+	public String getQnaStatus() {
+		return qnaStatus;
+	}
+	public void setQnaStatus(String qnaStatus) {
+		this.qnaStatus = qnaStatus;
+	}
 	
 }

@@ -38,7 +38,7 @@
 .bottom-bar div:first-child {
 	width: 750px;
 }
-
+ 
 #reviewNo {
 	width: 15% !important;
 }
@@ -119,7 +119,7 @@
 							</form>
 						</div>
 						<div class="cell right">
-							<a href="write" class="btn">리뷰 글쓰기</a>
+							<a href="write" class="btn">리뷰글쓰기</a>
 						</div>
 					</div>
 				</div>
