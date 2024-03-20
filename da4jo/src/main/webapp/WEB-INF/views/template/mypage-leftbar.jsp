@@ -94,6 +94,25 @@
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
+						<a class="link main-title">배송대행</a>
+					</div>
+					<div class="title-body-sub">
+						<div class="title-body-text">
+							<a class="link" href="/member/shipsvc/request">배송대행 신청서 작성</a>
+						</div>
+						<div class="title-body-text">
+							<a class="link" href="/member/mypage/ship/pendingPayment">배송대행 결제대기</a>
+						</div>
+						<div class="title-body-text">
+							<a class="link" href="/member/mypage/ship/processList">배송 진행 상황</a>
+						</div>
+						<div class="title-body-text">
+							<a class="link" href="/member/mypage/ship/list">배송대행 신청 내역</a>
+						</div>
+					</div>
+				</div>
+				<div class="title-body-main">
+					<div class="title-body-text">
 						<a class="link main-title" href="/board/qna/list">QNA</a>
 					</div>
 				</div>
