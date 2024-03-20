@@ -5,8 +5,6 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h2>${memberDto.memberId}님의 qna 내역</h2>
-
 
 <style>
 .menu-type {
