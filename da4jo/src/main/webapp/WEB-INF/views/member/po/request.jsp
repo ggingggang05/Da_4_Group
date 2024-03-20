@@ -168,7 +168,6 @@
 }
 .btn:hover{
 	filter:brightness(1);
-	color: #; 
 }
 .sfont{
 	font-size: 14px;
