@@ -32,17 +32,23 @@ public class QnaDao {
 	public void insert(QnaDto qnaDto) {
 		String sql = "insert into qna("
 				+ "qna_no, qna_secret, qna_title, qna_content, "
-				+ "qna_writer, qna_vcount, qna_group, qna_target) "
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "qna_writer, qna_vcount, qna_group, qna_target, qna_status) "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {
 					qnaDto.getQnaNo(), qnaDto.getQnaSecret(),
 					qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
 					qnaDto.getQnaWriter(), qnaDto.getQnaVcount()	,
-					qnaDto.getQnaGroup(), qnaDto.getQnaTarget()
+					qnaDto.getQnaGroup(), qnaDto.getQnaTarget(),
+					qnaDto.getQnaStatus()
 				};
 		jdbcTemplate.update(sql, data);
 	}
 	
+	//답변 상태 업데이트
+	public void updateStatus(int qnaNo) {
+		String sql = "UPDATE QNA SET QNA_STATUS='답변완료' WHERE QNA_NO=?";
+		jdbcTemplate.update(sql, qnaNo);
+	}
 	//정렬 기준 정하기
 //	목록
 //	public List<QnaDto> selectList() {
@@ -107,6 +113,12 @@ public class QnaDao {
 	//목록일 경우 카운트
 	public int count() {
 		String sql = "select count(*) from qna";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	//미답변 글 페이징 용 카운트
+	public int countByStatus() {
+		String sql = "select count(*) from qna where qna_status = '미답변글'";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	

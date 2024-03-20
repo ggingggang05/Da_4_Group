@@ -38,6 +38,12 @@ public class QnaController {
 		String loginId = (String)session.getAttribute("loginId");
 		qnaDto.setQnaWriter(loginId);
 		
+		if(qnaDto.getQnaTarget() != null)
+		{
+			QnaDto targetDto = qnaDao.selectOne(qnaDto.getQnaTarget());
+			qnaDao.updateStatus(targetDto.getQnaNo());
+			qnaDto.setQnaSecret(targetDto.getQnaSecret());
+		}
 		int sequence = qnaDao.getSequence();
 		qnaDto.setQnaNo(sequence);
 		qnaDao.insert(qnaDto);
