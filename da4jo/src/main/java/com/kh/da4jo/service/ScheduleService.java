@@ -14,7 +14,7 @@ public class ScheduleService {
 	@Autowired
 	private CertDao certDao;
 	
-	@Scheduled(cron = "0 */5 * * * *")
+	@Scheduled(cron = "0 0 * * * *")
 	public void clearCert() {
 		System.out.println(LocalDateTime.now());
 		certDao.deleteLegacy();

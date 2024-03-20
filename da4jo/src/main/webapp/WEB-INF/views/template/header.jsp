@@ -210,7 +210,9 @@
 		</div>
 		<div class="container">
 			<div class="cell center">
-				<img src="/image/로고템플릿cut.png" width="100px">
+				<a href="/">
+					<img src="/image/로고템플릿cut.png" width="100px">
+				</a>
 			</div>
 		</div>
 		<div class="head-bottom">
@@ -218,7 +220,7 @@
 				<ul class="menu cell center">
 					<li class="home w-25"><a href="/"> 다사조 </a></li>
 
-					<li><a href="#">이용안내</a></li>
+					<li><a href="/document/buying-info">이용안내</a></li>
 
 					<li><a href="#">수수료 및 요금표</a></li>
 
