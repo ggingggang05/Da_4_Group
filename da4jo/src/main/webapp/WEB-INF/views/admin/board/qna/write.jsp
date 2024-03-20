@@ -30,19 +30,13 @@
 			</div>
 		</c:if>
 
-		<h2>제목</h2>
+		<h2>제목123</h2>
 		<div>
-			<c:choose>
-				<c:when test="${param.qnaTarget == null}">
-					<input class="tool w-100" type="text" name="qnaTitle" value="[Q]">
-				</c:when>
-				<c:otherwise>
-					<input class="tool w-100" type="text" name="qnaTitle" required
-						value="[A] ${targetDto.qnaTitle}">
-<!-- 						<input class="tool w-100" type="text" name="qnaWriter" required -->
-<%-- 						value=" ${targetDto.qnaWriter}"> --%>
-				</c:otherwise>
-			</c:choose>
+			<input class="tool w-100" type="text" name="qnaTitle"
+					value="[a] ${targetDto.qnaTitle}">
+			
+
+
 		</div>
 
 		<h2>내용</h2>
