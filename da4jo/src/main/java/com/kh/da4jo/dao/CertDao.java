@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.CertDto;
 import com.kh.da4jo.mapper.CertMapper;
+import com.kh.da4jo.vo.PageVO;
 
 @Repository
 public class CertDao {
