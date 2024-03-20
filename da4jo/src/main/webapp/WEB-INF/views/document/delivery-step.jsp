@@ -15,7 +15,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>구매대행 신청방법
+				<i class="fa-solid fa-pause"></i>배송대행 신청방법
 			</div>
 		</div>
 		<div class="cell">

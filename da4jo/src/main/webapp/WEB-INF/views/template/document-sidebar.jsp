@@ -33,33 +33,33 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a href="" class="link">배송대행 안내</a>
+					<a href="" class="link main-title">배송대행 안내</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a class="link">배송대행 이용안내</a>
+						<a href="/document/delivery-info" class="link">배송대행 이용안내</a>
 					</div>
 					<div class="title-body-text">
-						<a class="link">배송대행 신청방법</a>
+						<a href="/document/delivery-step" class="link">배송대행 신청방법</a>
 					</div>
 				</div>
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">통관 안내</a>
+					<a href="/document/clearance-code" class="link main-title">통관 안내</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a class="link">목록/일반통관</a>
+						<a href="/document/clearance-code" class="link">개인통관고유부호 발급</a>
 					</div>
 					<div class="title-body-text">
-						<a class="link">관/부가세 안내</a>
+						<a href="/document/tax" class="link">관/부가세 안내</a>
 					</div>
 					<div class="title-body-text">
-						<a class="link">품목별 과세율</a>
+						<a href="/document/tariff" class="link">품목별 과세율</a>
 					</div>
 					<div class="title-body-text">
-						<a class="link">수입금지품목</a>
+						<a href="/document/prohibition" class="link">수입금지품목</a>
 					</div>
 				</div>
 			</div>
