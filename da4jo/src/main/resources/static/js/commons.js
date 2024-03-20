@@ -78,3 +78,30 @@ $(function(){
     });
 });
 
+$(function () {
+	// 현재 URL 가져오기
+	var currentUrl = window.location.href;
+
+	// "/"를 기준으로 URL을 분할
+	var urlParts = currentUrl.split("/");
+
+	// 포트 번호 이후의 경로 추출
+	var path = "/" + urlParts.slice(3).join("/");
+
+	// 모든 <a> 태그 선택
+	var links = document.querySelectorAll("a");
+
+	// 링크를 반복하며 현재 URL과 비교하여 스타일을 적용
+	for (var i = 0; i < links.length; i++) {
+	    // href 속성을 가져옴
+	    var linkUrl = links[i].getAttribute("href");
+	    
+	    // 현재 URL과 비교
+	    if (linkUrl === path) {
+	        // 텍스트 색상을 변경
+	        links[i].style.color = "#0984e3";
+	     	// 부모 요소의 스타일도 변경
+            $(links[i]).parents(".title-body-main").find(".main-title").css("color", "#0984e3");
+	    }
+	}
+});
