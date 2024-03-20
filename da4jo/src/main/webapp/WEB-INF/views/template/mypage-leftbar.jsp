@@ -63,7 +63,7 @@
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
-							<a class="link" href="po/request">구매대행 신청서 작성</a>
+							<a class="link" href="/member/po/request">구매대행 신청서 작성</a>
 						</div>
 						<div class="title-body-text">
 							<a class="link">구매대행 결제대기</a>
