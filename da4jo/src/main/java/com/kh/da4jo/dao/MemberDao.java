@@ -76,6 +76,14 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	//회원 상태 '배송 중'인 경우만.
+	public MemberDto selectStatusShipping(String memberId) {
+		String sql = "select * from po where po_status='배송 중' and po_customer_id=?";
+		Object[] data = {memberId};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 	// 최종로그인 시각 변경
 	public boolean updateMemberLoginDate(String memberId)

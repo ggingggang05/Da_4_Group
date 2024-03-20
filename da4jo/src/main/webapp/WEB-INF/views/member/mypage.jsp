@@ -148,6 +148,16 @@ $(function(){
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
+						<a class="link">배송현황</a>
+					</div>
+					<div class="title-body-sub">
+						<div class="title-body-text">
+							<a class="link" href="po/processList">배송 진행 상황</a>
+						</div>
+					</div>
+				</div>
+				<div class="title-body-main">
+					<div class="title-body-text">
 						<a class="link" href="/board/qna/list">QNA</a>
 					</div>
 				</div>
@@ -174,6 +184,13 @@ $(function(){
 						</div>
 					</div>
 					<div class="cell menuBox w-20"> <!-- 메뉴2 -->
+						<div class="title title-head"> <!-- 제목 -->
+							 <a class="link">배송대행 신청서</a>
+						</div>
+						<div class="title title-body mt-10"> <!-- 내용 -->
+						</div>
+					</div>
+					<div class="cell menuBox w-20"> <!-- 메뉴3 -->
 						<div class="title title-head">
 							 나의 문의내역
 						</div>
@@ -184,7 +201,7 @@ $(function(){
 							</div>
 						</div>
 					</div>
-					<div class="cell menuBox w-20"> <!-- 메뉴3 -->
+					<div class="cell menuBox w-20"> <!-- 메뉴4 -->
 						<div class="title title-head">
 							 나의 리뷰내역
 						</div>
@@ -195,22 +212,15 @@ $(function(){
 							</div>
 						</div>
 					</div>
-					<div class="cell menuBox w-20"> <!-- 메뉴4 -->
+					<div class="cell menuBox w-20"> <!-- 메뉴5 -->
 						<div class="title title-head">
 							보유캐시
 						</div>
 						<div class="title title-body mt-10">
 							<div>
-								<h3> ${memberDto.memberCredit} 원</h3>	
+								<h3><fmt:formatNumber value="${memberDto.memberCredit}" pattern="#,##0"></fmt:formatNumber>원</h3>	
 								<a class="btn btnMypage " href="credit/charge">충전하기</a>
 							</div>
-						</div>
-					</div>
-					<div class="cell menuBox w-20"> <!-- 메뉴5 -->
-						<div class="title title-head"> <!-- 제목 -->
-							 <a class="link">menu5</a>
-						</div>
-						<div class="title title-body mt-10"> <!-- 내용 -->
 						</div>
 					</div>
 				</div><!-- 주요 메뉴 닫는 태그 -->
@@ -249,7 +259,7 @@ $(function(){
 						</ul>
 						<c:forEach var="creditDto" items="${creditList}">
 							<ul class="menu chargeList">
-								<li>${creditDto.creditCharge}</li>
+								<li><fmt:formatNumber value="${creditDto.creditCharge}" pattern="#,##0"></fmt:formatNumber>원</li>
 								<li class="chargeTime"><fmt:formatDate value="${creditDto.creditTimeDate}"
 										pattern="y년 M월 d일 H시 m분 s초" /></li>
 							</ul>
@@ -267,59 +277,6 @@ $(function(){
 		</div><!-- 오른쪽 내용 닫는 태그 -->
 	</div><!-- 컨텐트 자리 닫는 태그 -->
 </div>
-
-
-
-<!-- 사용 중인 코드 입니다!!!!!!! -->
-<%-- <div class="container w-1200">
-
-	<div class="cell floating-cell">
-		<!-- 화면 왼쪽 -->
-		<div class="start-wrapper">
-		</div> <!-- 화면 왼쪽 닫는 태그 -->		
-
-
-		<!-- 화면 오른쪽 -->
-		<div class="end-wrapper">
-			<!-- 정보 리스트 -->
-			<div class="cell center flex-cell">
-				<div class="cell center">
-						<h3>아이디</h3>
-						<h3>이름(한글)</h3>
-						<h3>이름(영문)</h3>
-						<h3>이메일</h3>
-						<h3>통관번호</h3>
-						<h3>연락처1</h3>
-						<h3>연락처2</h3>
-						<h3>주소</h3>
-						<h3>생년월일</h3>
-						<h3>회원등급</h3>
-						<h3>충전캐쉬</h3>
-						<h3>포인트</h3>
-					</div>
-				</div>	
-				<div class="cell center">
-					<div class="w-70">
-					<h5>${memberDto.memberId}</h5>
-					<h5>${memberDto.memberNameKor}</h5>
-					<h5>${memberDto.memberNameEng}</h5>
-					<h5>${memberDto.memberEmail}</h5>
-					<h5>${memberDto.memberClearanceId}</h5>
-					<h5>${memberDto.memberContact1}</h5>
-					<h5>${memberDto.memberContact2}</h5>
-					<h5>[${memberDto.memberZipcode}]<br>
-						${memberDto.memberAddress1}, ${memberDto.memberAddress2}
-					</h5>
-					<h5>${memberDto.memberBirth}</h5>
-					<h5>${memberDto.memberLevel}</h5>
-					<h5>${memberDto.memberCredit}</h5>
-					<h5>${memberDto.memberPoint}</h5>
-					</div>
-				</div>
-			</div><!-- 정보 리스트 닫는 태그 -->
-		</div> <!-- 화면 오른쪽 닫는 태그 -->
-	</div>
-</div> --%>
 
 
 
