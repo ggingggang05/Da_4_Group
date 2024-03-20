@@ -284,21 +284,21 @@
 					<a href="/mypage/purchase/list" class="link">
 						<button class="btn">목록으로</button>
 					</a>
-					<form action="detail" method="post">
-						<c:choose>
-							<c:when test="${poDto.poStatus != '결제 대기 중' || poDto.poStatus !='주문 정보 확인 중'}">	
-								<a href="detail?poNo=${poDto.poNo}" class="link cancelOrderFail">
-									<button class="btn">주문취소</button>
-								</a>
-							</c:when>
-							<c:otherwise>
-								<input name="poStatus" value="주문 취소">
-								<a href="/mypage/purchase/cancelOrder" class="link cancelOrderSuccess">
-									<button class="btn">주문취소</button>
-								</a>
-							</c:otherwise>
-						</c:choose>
-					</form> 
+					<form action="delete" method="post">
+					    <c:choose>
+					        <c:when test="${poDto.poStatus == '결제 대기 중' || poDto.poStatus == '주문정보 확인 중'}"> <!-- 주문 취소 가능한 상태일 때 -->
+					            <input type="hidden" name="poNo" value="${poDto.poNo}">
+					            <a href="/mypage/purchase/list" class="link cancelOrderSuccess">
+					                <button class="btn">주문취소</button>
+					            </a>
+					        </c:when>
+					        <c:otherwise> <!-- 주문 취소 불가능한 상태일 때 -->
+					            <a href="/mypage/purchase/list" class="link cancelOrderFail">
+					                <button class="btn">주문취소</button>
+					            </a>
+					        </c:otherwise>
+					    </c:choose>
+					</form>
 					
 				</div>
 			</div> <!-- 상품 정보 닫는 태그 -->			

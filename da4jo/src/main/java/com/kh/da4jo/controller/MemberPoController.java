@@ -136,4 +136,27 @@ public class MemberPoController {
 		
 		return "/WEB-INF/views/member/po/processList.jsp";
 	}
+	
+	//주문정보 확인 중, 결제 대기 중인 구매서만 보여질 페이지
+	@RequestMapping("/pendingPayment")
+	public String pendingPayment(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model,
+				HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+
+		int count = poDao.pendingPaymentCount(pageVO, loginId);
+		pageVO.setCount(count);
+
+		List<PoDto> list = poDao.selectpendingPaymentListByPaging(pageVO, loginId);
+		model.addAttribute("poList", list);
+
+		return "/WEB-INF/views/member/po/pendingPayment.jsp";
+	}
+	
+	@RequestMapping("/updateCancelStatus")
+	public String delete(@RequestParam int poNo,
+						@RequestParam String poStatus) {
+		//주문 취소 버튼을 누른 경우
+		poDao.updateCancelStatus(poNo); //상태 업데이트
+		return "redirect:list";
+	}
 }

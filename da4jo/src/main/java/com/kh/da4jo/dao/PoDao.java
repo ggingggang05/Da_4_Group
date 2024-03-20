@@ -352,6 +352,12 @@ public class PoDao {
 		Object[] data = { poDto.getPoStatus(), poDto.getPoNo() };
 		jdbcTemplate.update(sql, data);
 	}
+	
+	public void updateCancelStatus(int poNo) {
+		String sql = "update po set po_status='주문취소', po_pay_date = sysdate where po_no=?";
+		Object[] data = { poNo };
+		jdbcTemplate.update(sql, data);
+	}
 
 	// D(delete)
 	public boolean delete(int poNo) {
@@ -454,7 +460,6 @@ public class PoDao {
     			+ "GROUP BY TO_CHAR(PO_SDATE, 'YYYY-Q')";
     	return jdbcTemplate.query(sql, vatListVOMapper, Integer.parseInt(year));
     }
-
 
 	
 }
