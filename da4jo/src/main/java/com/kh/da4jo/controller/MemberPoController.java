@@ -19,7 +19,6 @@ import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
 
 import jakarta.servlet.http.HttpSession;
-import net.sf.jsqlparser.util.validation.validator.ShowIndexStatementValidator;
 
 @Controller
 @RequestMapping("/member/mypage/purchase")

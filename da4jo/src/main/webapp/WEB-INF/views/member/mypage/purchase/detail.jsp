@@ -63,6 +63,14 @@
 }
 </style>
 
+<script>
+	$(function(){
+		$(".cancelOrderFail").on("click", function(){
+			var choice = window.alert("주문서 취소 불가");
+			if(choice == false) return;
+		});
+	});
+</script>
 
 
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
@@ -229,13 +237,27 @@
 					<div class="info-head w-100">
 						<strong>결제정보</strong>
 					</div>	
-					<form action="orderDetail" method="post" autocomplete="off">
 						<div class="info-body">
 							<div class="info-group">
-								<div class="info-label">상품금액</div>
+								<div class="info-label">상품금액(원화)</div>
 								<div class="info-content-wrapper">
 									<div class="info-content">
-										<input type="text" name="poServiceFee">
+										${poDto.itemPrice}
+									</div>
+								</div>
+							</div>
+							<div class="info-group">
+								<div class="info-label">부가세</div>
+								<div class="info-content-wrapper">
+									<div class="info-content">
+										<c:choose>
+										<c:when test="${poDto.itemPrice >= 200000}">
+											${poDto.vat}
+										</c:when>
+										<c:otherwise>
+											0
+										</c:otherwise>
+									</c:choose>
 									</div>
 								</div>
 							</div>
@@ -243,7 +265,7 @@
 								<div class="info-label">수수료</div>
 								<div class="info-content-wrapper">
 									<div class="info-content">
-										<input type="text" name="poServiceFee">
+										${poDto.poServiceFee}
 									</div>
 								</div>
 							</div>
@@ -251,24 +273,33 @@
 								<div class="info-label">결제금액</div>
 								<div class="info-content-wrapper">
 									<div class="info-content">
-										<input type="text" name="poTotalPriceKrw">
+										${poDto.poTotalPriceKrw}
 									</div>
 								</div>
 							</div>
 						</div>
-					</form>
 				</div>
 				<!-- 메뉴 -->			
 				<div class="cell center">
-					<a href="/admin/po/orderList" class="link">
+					<a href="/mypage/purchase/list" class="link">
 						<button class="btn">목록으로</button>
-					</a> <a href="#"
-						class="link">
-						<button class="btn">수정</button>
-					</a> <a href="#"
-						class="link">
-						<button class="btn">삭제</button>
 					</a>
+					<form action="detail" method="post">
+						<c:choose>
+							<c:when test="${poDto.poStatus != '결제 대기 중' || poDto.poStatus !='주문 정보 확인 중'}">	
+								<a href="detail?poNo=${poDto.poNo}" class="link cancelOrderFail">
+									<button class="btn">주문취소</button>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<input name="poStatus" value="주문 취소">
+								<a href="/mypage/purchase/cancelOrder" class="link cancelOrderSuccess">
+									<button class="btn">주문취소</button>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</form> 
+					
 				</div>
 			</div> <!-- 상품 정보 닫는 태그 -->			
 		</div><!-- 오른쪽 내용 닫는 태그 -->

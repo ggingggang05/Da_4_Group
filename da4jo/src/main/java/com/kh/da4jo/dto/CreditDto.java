@@ -4,11 +4,19 @@ import java.sql.Date;
 
 public class CreditDto
 {
+	private int creditNo;
 	private String memberId;
 	private int creditCharge;
 	private Date creditTimeDate;
 	private String creditStatus;
 	
+	
+	public int getCreditNo() {
+		return creditNo;
+	}
+	public void setCreditNo(int creditNo) {
+		this.creditNo = creditNo;
+	}
 	public String getMemberId()
 	{
 		return memberId;

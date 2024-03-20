@@ -11,9 +11,11 @@ import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
 import com.kh.da4jo.mapper.SettlementVOMapper;
+import com.kh.da4jo.mapper.VatListVOMapper;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
 import com.kh.da4jo.vo.SettlementVO;
+import com.kh.da4jo.vo.VatListVO;
 
 @Repository
 public class PoDao {
@@ -27,6 +29,8 @@ public class PoDao {
 	private PaymentVOMapper paymentVOMapper;
 	@Autowired
 	private SettlementVOMapper settlementVOMapper;
+	@Autowired
+	private VatListVOMapper vatListVOMapper;
 
 	// poNo 미리 뽑기
 	public int getSequence() {
@@ -277,6 +281,18 @@ public class PoDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+		
+		// 카운트 - 주문정보 확인 중, 결제 대기 중인 구매서 목록/검색 각각 구현
+		public int pendingPaymentCount(PageVO pageVO, String loginId) {
+			if (pageVO.isSearch()) {// 검색
+				String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 AND ( PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중')";
+				Object[] data = { pageVO.getKeyword() };
+				return jdbcTemplate.queryForObject(sql, int.class, data);
+			} else {// 목록
+				String sql = "select count(*) from po where PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중'";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
 
 	// 카운트 - 주문정보 취소 목록일 경우와 검색일 경우를 각각 구현
 	public int cancelCount(PageVO pageVO) {
@@ -379,6 +395,23 @@ public class PoDao {
 		return jdbcTemplate.query(sql, poListMapper, data);
 	}
 
+		
+		// 주문정보 확인 중, 결제 대기 중인 구매서에 대해 페이징
+		public List<PoDto> selectpendingPaymentListByPaging(PageVO pageVO, String loginId) {
+			String sql = "select * from (" 
+					+ "select rownum rn, TMP.* from ( " 
+					+ "select * "
+					+ "from po "
+					+ "where (PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중') and po_customer_id=? "
+					+ "order by po_sdate desc" 
+					+ ")TMP" 
+					+ ") where rn between ? and ?";
+			Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
+
+			return jdbcTemplate.query(sql, poListMapper, data);
+		}
+	
+	
 	// 결제 완료 목록 조회
 
 	// 결제시간 업데이트
@@ -395,5 +428,39 @@ public class PoDao {
 				+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') " + "ORDER BY PO_PAY_DATE";
 		return jdbcTemplate.query(sql, settlementVOMapper);
 	}
+    public List<SettlementVO> getDailyPayments() {
+        String sql = "SELECT TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') AS PO_PAY_DATE, "
+				        		+ "COUNT(*) AS COUNT, "
+				        		+ "SUM(PO_TOTAL_PRICE_KRW) AS PO_TOTAL_PRICE_KRW "
+				        		+ "FROM PO "
+				        		+ "WHERE PO_PAY_DATE IS NOT NULL "
+				        		+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
+				        		+ "ORDER BY PO_PAY_DATE";
+        return jdbcTemplate.query(sql, settlementVOMapper);
+    }
+  //날짜 기간 선택 조회
+    public List<SettlementVO> periodPayments(String startDate, String endDate){
+    	String sql = "SELECT TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') AS PO_PAY_DATE, "
+				    			+ "COUNT(*) AS COUNT, "
+				    			+ "SUM(PO_TOTAL_PRICE_KRW) AS PO_TOTAL_PRICE_KRW "
+				    			+ "FROM PO "
+				    			+ "WHERE PO_PAY_DATE  "
+				    			+ "BETWEEN TO_DATE(?, 'YYYY-MM-DD') "
+				    			+ "AND TO_DATE(?, 'YYYY-MM-DD') + 1 "
+				    			+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
+				    			+ "ORDER BY PO_PAY_DATE";
+    	Object[] data = { startDate, endDate };
+    	return jdbcTemplate.query(sql, settlementVOMapper, data);
+    }
+    public List<VatListVO> getVatListByYear(String year) {
+    	String sql = "SELECT TO_CHAR(PO_SDATE, 'YYYY-Q') AS QUARTER, "
+    			+ "SUM(PO_ITEM_VAT) AS VAT_TOTAL "
+    			+ "FROM PO "
+    			+ "WHERE EXTRACT(YEAR FROM PO_SDATE) = ? "
+    			+ "GROUP BY TO_CHAR(PO_SDATE, 'YYYY-Q')";
+    	return jdbcTemplate.query(sql, vatListVOMapper, Integer.parseInt(year));
+    }
 
+
+	
 }
