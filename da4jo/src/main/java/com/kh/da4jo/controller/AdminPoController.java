@@ -16,6 +16,7 @@ import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.SettlementVO;
+import com.kh.da4jo.vo.VatListVO;
 
 @Controller
 @RequestMapping("/admin/po")
@@ -122,5 +123,15 @@ public class AdminPoController {
 			}
 			model.addAttribute("list", list);
 			return "/WEB-INF/views/admin/po/settlement.jsp";
+	}
+	
+	//분기별 VAT 내역 컨트롤러
+	@RequestMapping("/vatList")
+	public String vatList(Model model, @RequestParam(required = false) String year) {
+		if(year != null) {
+			List<VatListVO> list = poDao.getVatListByYear(year);
+			model.addAttribute("list", list);
+		}
+		return "/WEB-INF/views/admin/po/vatList.jsp";
 	}
 }
