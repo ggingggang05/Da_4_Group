@@ -69,7 +69,7 @@
 						<a href="/admin/Settlement/vatList" class="link">부가세 신고자료 조회</a>
 					</div>
 					<div class="title-body-text">
-						<a href="/admin/po/orderList" class="link">크레딧 충전관리</a>
+						<a href="/admin/credit/creditList" class="link">크레딧 충전관리</a>
 					</div>
 				</div>
 			</div>
