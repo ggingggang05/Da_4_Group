@@ -16,6 +16,7 @@ public class SettlementVOMapper implements RowMapper<SettlementVO>{
 	public SettlementVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		SettlementVO settlementVO = new SettlementVO();
 		settlementVO.setPoPayDate(rs.getDate("PO_PAY_DATE"));
+		settlementVO.setCount(rs.getInt("COUNT"));
 		settlementVO.setPoTotalPrice(rs.getInt("PO_TOTAL_PRICE_KRW"));
 		return settlementVO;
 	}
