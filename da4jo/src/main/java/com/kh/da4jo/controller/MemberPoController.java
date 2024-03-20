@@ -151,4 +151,12 @@ public class MemberPoController {
 
 		return "/WEB-INF/views/member/po/pendingPayment.jsp";
 	}
+	
+	@RequestMapping("/updateCancelStatus")
+	public String delete(@RequestParam int poNo,
+						@RequestParam String poStatus) {
+		//주문 취소 버튼을 누른 경우
+		poDao.updateCancelStatus(poNo); //상태 업데이트
+		return "redirect:list";
+	}
 }
