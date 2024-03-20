@@ -67,6 +67,13 @@ public class PoDao {
 		Object[] data = { keyword };
 		return jdbcTemplate.query(sql, poMapper, data);
 	}
+	// 아이디로 조회
+	public List<PoDto> selectList(String loginId) {
+		String sql = "select * from po where po_customer_id = ?";
+		Object[] data = { loginId };
+		return jdbcTemplate.query(sql, poMapper, data);
+	}
+	
 
 	// 통합+페이징
 	public List<PoDto> selectListByPagingAll(PageVO pageVO) {
@@ -306,7 +313,7 @@ public class PoDao {
 		}
 	}
 
-	// 단일조회
+	// 단일조회 - 번호로 조회
 	public PoDto selectOne(int poNo) {
 		String sql = "select * from po where po_no = ?";
 		Object[] data = { poNo };
@@ -460,6 +467,12 @@ public class PoDao {
     			+ "GROUP BY TO_CHAR(PO_SDATE, 'YYYY-Q')";
     	return jdbcTemplate.query(sql, vatListVOMapper, Integer.parseInt(year));
     }
+
+    //배송중으로 바뀐 시점부터 7일뒤 배송완료로
+	public void compareDate(List<PoDto> dateList) {
+		String sql = "UPDATE po SET PO_STATUS = '배송완료' WHERE PO_SHIP_DATE + 7 < sysdate";
+		jdbcTemplate.update(sql);
+	}
 
 	
 }
