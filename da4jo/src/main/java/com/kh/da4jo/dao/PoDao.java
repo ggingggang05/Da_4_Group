@@ -397,6 +397,19 @@ public class PoDao {
 				        		+ "ORDER BY PO_PAY_DATE";
         return jdbcTemplate.query(sql, settlementVOMapper);
     }
-	
+  //날짜 기간 선택 조회
+    public List<SettlementVO> periodPayments(String startDate, String endDate){
+    	String sql = "SELECT TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') AS PO_PAY_DATE, "
+				    			+ "COUNT(*) AS COUNT, "
+				    			+ "SUM(PO_TOTAL_PRICE_KRW) AS PO_TOTAL_PRICE_KRW "
+				    			+ "FROM PO "
+				    			+ "WHERE PO_PAY_DATE  "
+				    			+ "BETWEEN TO_DATE(?, 'YYYY-MM-DD') "
+				    			+ "AND TO_DATE(?, 'YYYY-MM-DD') + 1 "
+				    			+ "GROUP BY TO_CHAR(PO_PAY_DATE, 'YYYY-MM-DD') "
+				    			+ "ORDER BY PO_PAY_DATE";
+    	Object[] data = { startDate, endDate };
+    	return jdbcTemplate.query(sql, settlementVOMapper, data);
+    }
 
 }
