@@ -58,7 +58,7 @@
 				<c:forEach var="poDto" items="${poDto}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
-							<li id="poCustomerId">${poDto.poNameKor}</li>
+							<li id="poNameKor">${poDto.poNameKor}</li>
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poContact">${poDto.poContact}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>

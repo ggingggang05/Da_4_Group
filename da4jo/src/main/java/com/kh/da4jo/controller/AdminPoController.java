@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.da4jo.dao.CreditDao;
 import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.vo.PageVO;
@@ -108,7 +107,35 @@ public class AdminPoController {
 		return "/WEB-INF/views/admin/po/completeList.jsp";
 	}
 
-	// 일자별 정산 내역 컨트롤러
+	
+	@RequestMapping("/cancelList")
+	public String cancelList(
+			@ModelAttribute PageVO pageVO,
+			Model model) {
+		//세부 계산은 클래스에서 수행하도록 하고 count, list만 처리
+		int count = poDao.cancelCount(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		List<PoDto> poDto = poDao.selectListByCancelListPaging(pageVO);
+		model.addAttribute("poDto", poDto);
+		
+		return "/WEB-INF/views/admin/po/cancelList.jsp";
+	}
+	
+	
+	@GetMapping("/cancelDetail")
+	public String cancelDetail(@RequestParam int poNo, Model model) {
+		PoDto poDto = poDao.selectOne(poNo);
+		model.addAttribute("poDto",poDto);
+		return "/WEB-INF/views/admin/po/cancelDetail.jsp";
+	}
+	@PostMapping("/cancelDetail")
+	public String cancelDetail(@ModelAttribute PoDto poDto) {
+		poDao.updateAWB(poDto);
+		return "redirect:cancelList";
+	}
+	
+	
 	@GetMapping("/settlement")
 	    public String getDailyPayments(Model model,
 	    		@RequestParam(required = false) String startDate,
