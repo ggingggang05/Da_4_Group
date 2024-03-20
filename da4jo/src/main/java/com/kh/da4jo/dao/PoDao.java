@@ -277,6 +277,18 @@ public class PoDao {
 				return jdbcTemplate.queryForObject(sql, int.class);
 			}
 		}
+		
+		// 카운트 - 주문정보 확인 중, 결제 대기 중인 구매서 목록/검색 각각 구현
+		public int pendingPaymentCount(PageVO pageVO, String loginId) {
+			if (pageVO.isSearch()) {// 검색
+				String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 AND ( PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중')";
+				Object[] data = { pageVO.getKeyword() };
+				return jdbcTemplate.queryForObject(sql, int.class, data);
+			} else {// 목록
+				String sql = "select count(*) from po where PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중'";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
 
 
 	// 단일조회
@@ -379,6 +391,21 @@ public class PoDao {
 
 			return jdbcTemplate.query(sql, poListMapper, data);
 		}
+		
+		// 주문정보 확인 중, 결제 대기 중인 구매서에 대해 페이징
+		public List<PoDto> selectpendingPaymentListByPaging(PageVO pageVO, String loginId) {
+			String sql = "select * from (" 
+					+ "select rownum rn, TMP.* from ( " 
+					+ "select * "
+					+ "from po "
+					+ "where (PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중') and po_customer_id=? "
+					+ "order by po_sdate desc" 
+					+ ")TMP" 
+					+ ") where rn between ? and ?";
+			Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
+
+			return jdbcTemplate.query(sql, poListMapper, data);
+		}
 	
 	
 	// 결제 완료 목록 조회
@@ -423,4 +450,7 @@ public class PoDao {
     			+ "GROUP BY TO_CHAR(PO_SDATE, 'YYYY-Q')";
     	return jdbcTemplate.query(sql, vatListVOMapper, Integer.parseInt(year));
     }
+
+
+	
 }
