@@ -124,4 +124,22 @@ public class MemberPoController {
 	public String paymentFinsih() {
 		return "/WEB-INF/views/member/mypage/purchase/paymentFinish.jsp";
 	}
+	
+	//배송 진행 중인 구매서만 보여질 페이지
+	@RequestMapping("/processList")
+	public String processList(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model,
+							HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		MemberDto memberDto = memberDao.selectStatusShipping(loginId);
+		model.addAttribute("memberDto", memberDto);
+		
+		int count = poDao.count();
+		pageVO.setCount(count);
+		
+		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
+		model.addAttribute("poList", list);
+		
+		return "/WEB-INF/views/member/po/processList.jsp";
+	}
 }

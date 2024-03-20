@@ -125,10 +125,10 @@
 							<li id="poNo">${poDto.poNo}</li>
 							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</a></li>
 							<li id="poItemCategory">${poDto.poItemCategory}</li>
-							<li id="poSdate">${poDto.poSdate}</li>
+							<li id="poSdate"><fmt:formatDate value="${poDto.poSdate}" pattern="y년 M월 d일 H시 m분 s초" /></li>
 							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poAwbNumber">${poDto.poAwbNumber}</li>
-							<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
+							<li id="poTotalPriceKrw"><fmt:formatNumber value="${poDto.poTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
 							<!-- 결제 -->
 							<c:choose>
 								<c:when test="${poDto.poStatus != '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->
