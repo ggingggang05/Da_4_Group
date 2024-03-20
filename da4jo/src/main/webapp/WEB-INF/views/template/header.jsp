@@ -210,7 +210,9 @@
 		</div>
 		<div class="container">
 			<div class="cell center">
-				<img src="/image/로고템플릿cut.png" width="100px">
+				<a href="/">
+					<img src="/image/로고템플릿cut.png" width="100px">
+				</a>
 			</div>
 		</div>
 		<div class="head-bottom">
