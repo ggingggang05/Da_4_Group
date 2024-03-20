@@ -75,16 +75,16 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a href="/board/notice/list" class="link main-title">공지사항관리</a>
+					<a href="/admin/board/notice/list" class="link main-title">공지사항관리</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a href="/board/notice/list" class="link">공지사항목록</a>
+						<a href="/admin/board/notice/list" class="link">공지사항목록</a>
 					</div>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a href="/board/notice/write" class="link">공지사항작성</a>
+						<a href="/admin/board/notice/write" class="link">공지사항작성</a>
 					</div>
 				</div>
 			</div>
