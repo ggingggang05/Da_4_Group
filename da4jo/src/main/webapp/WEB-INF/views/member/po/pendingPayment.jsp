@@ -94,7 +94,7 @@
 							<li id="poItemEngName">${poDto.poItemEngName}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
-							<li id="poDetail"><a href="/purchase/detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+							<li id="poDetail"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 주문정보 확인 중, 결제 대기 중인 구매서가 있다면 닫는 태그 -->
