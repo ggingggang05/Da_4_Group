@@ -69,17 +69,10 @@
 							<a class="link">구매대행 결제대기</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/purchase/list">구매대행 신청 내역</a>
-						</div>
-					</div>
-				</div>
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link">배송현황</a>
-					</div>
-					<div class="title-body-sub">
-						<div class="title-body-text">
 							<a class="link" href="/member/mypage/purchase/processList">배송 진행 상황</a>
+						</div>
+						<div class="title-body-text">
+							<a class="link" href="/member/mypage/purchase/list">구매대행 신청 내역</a>
 						</div>
 					</div>
 				</div>
