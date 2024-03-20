@@ -72,38 +72,6 @@ color: #d63031 !important;
 			<div class="cell center">
 
 
-<%-- 				<c:if test="${sessionScope.loginLevel == '일반회원'}"> --%>
-
-<%-- 					일반회원일때 기능 --%>
-<!-- 					<ul class="menu menu-type"> -->
-<!-- 						<li id="qnaNo">번호</li> -->
-<!-- 						<li id="qnaMember1">제목</li> -->
-<!-- 						<li id="qnaWdate">작성일</li> -->
-<!-- 					</ul> -->
-<%-- 					<c:forEach var="qnaDto" items="${list}"> --%>
-<!-- 						<ul class="menu menu-list"> -->
-<%-- 							<li id="qnaNo">${qnaDto.qnaNo}</li> --%>
-
-<%-- 							잠금을 걸지 않았을때 --%>
-<%-- 							<c:if test="${qnaDto.qnaSecret == 'N'}"> --%>
-<%-- 								<li id="qnaMember"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li> --%>
-<%-- 							</c:if> --%>
-
-<%-- 							<c:if test="${qnaDto.qnaSecret == 'Y'}"> --%>
-<!-- 								<li id="qnaMember"><i class="fa-solid fa-lock">이 글은 비밀글 입니다.</i></li> -->
-<%-- 							</c:if> --%>
-
-<%-- 							글 작성자와 로그인한 아이디가 같으면  --%>
-
-<%-- 							<c:if test="${memberDto.memberId == qnaDto.qnaWriter}"> --%>
-<%-- 								<li><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li> --%>
-<%-- 							</c:if> --%>
-<%-- 							<li id="qnaWdate">${qnaDto.qnaWdate}</li> --%>
-<!-- 						</ul> -->
-<%-- 					</c:forEach> --%>
-<%-- 				</c:if> --%>
-
-
 				<%-- 관리자 일때 --%>
 
 					<%-- 목록 --%>
@@ -123,20 +91,20 @@ color: #d63031 !important;
 							<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 							<li id="qnaRock">${qnaDto.qnaSecret}</li>
 							</c:if>
+						
+						
 							
-							<!-- 	비밀글일때 관리자 이외에 비밀글 표시 그 이외에는 -->
-							
-							
-							
-							<c:choose> 							
- 							<c:when test="${ sessionScope.loginId == qnaDto.qnaWriter || sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자' }">
+							<c:choose>
+ 							<c:when test="${sessionScope.loginId == qnaDto.qnaWriter || sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자' || qnaDto.qnaSecret == 'N'}">
  								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a>
  							</c:when>
  							<c:otherwise>
  								<li id="qnaTitle" class="qnaTitlteLock"><i class="fa-solid fa-lock blue"> 이 글은 비밀글 입니다.</i></li>
- 						
  							</c:otherwise>
  							</c:choose>
+ 							
+ 							<!-- 	비밀글일때 관리자 이외에 비밀글 표시 그 이외에는 -->
+ 							
  							<li>${qnaDto.qnaWriter}</li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 						</ul>

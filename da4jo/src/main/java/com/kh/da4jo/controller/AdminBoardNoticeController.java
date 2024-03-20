@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin/board")
-public class AdminBoardController {
+public class AdminBoardNoticeController {
 	
 	@Autowired
 	private NoticeDao noticeDao;
