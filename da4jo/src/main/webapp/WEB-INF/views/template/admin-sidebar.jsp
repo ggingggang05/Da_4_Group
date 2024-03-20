@@ -66,7 +66,7 @@
 						<a href="/admin/po/settlement" class="link">정산내역(일별)</a>
 					</div>
 					<div class="title-body-text">
-						<a href="/admin/Settlement/vatList" class="link">부가세 신고자료 조회</a>
+						<a href="/admin/po/vatList" class="link">부가세 신고자료 조회</a>
 					</div>
 					<div class="title-body-text">
 						<a href="/admin/credit/creditList" class="link">크레딧 충전관리</a>
@@ -90,11 +90,11 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text ">
-					<a class="link main-title">QnA</a>
+					<a href="/admin/board/qna/list" class="link main-title">QnA</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a class="link">QnA답변</a>
+						<a href="/admin/board/qna/list" class="link">QnA목록</a>
 					</div>
 				</div>
 			</div>

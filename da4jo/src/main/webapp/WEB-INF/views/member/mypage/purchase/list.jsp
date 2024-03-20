@@ -18,25 +18,6 @@
 	border: 1px solid #ced3d6;
 }
 
-#memberId {
-	width: 23%;
-}
-
-#memerName {
-	width: 13%;
-}
-
-#memberEmail {
-	width: 50%;
-}
-
-#memberCode {
-	width: 32%;
-}
-
-#isBlock, #memberDetail {
-	width: 9%;
-}
 
 </style>
 
@@ -114,7 +95,6 @@
 						<li id="poItemCategory"><strong>분류</strong></li>
 						<li id="poSdate"><strong>작성일</strong></li>
 						<li id="poStatus"><strong>상태</strong></li>
-						<li id="poAwbNumber"><strong>송장번호</strong></li>
 						<li id="poTotalPriceKrw"><strong>최종 결제금액</strong></li>
 						<li id="poPayment"><strong>결제하기</strong></li>
 					</ul>
@@ -125,9 +105,8 @@
 							<li id="poNo">${poDto.poNo}</li>
 							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</a></li>
 							<li id="poItemCategory">${poDto.poItemCategory}</li>
-							<li id="poSdate"><fmt:formatDate value="${poDto.poSdate}" pattern="y년 M월 d일 H시 m분 s초" /></li>
+							<li id="poSdate"><fmt:formatDate value="${poDto.poSdate}" pattern="y년 M월 d일" /></li>
 							<li id="poStatus">${poDto.poStatus}</li>
-							<li id="poAwbNumber">${poDto.poAwbNumber}</li>
 							<li id="poTotalPriceKrw"><fmt:formatNumber value="${poDto.poTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
 							<!-- 결제 -->
 							<c:choose>

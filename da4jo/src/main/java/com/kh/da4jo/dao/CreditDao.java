@@ -22,9 +22,9 @@ public class CreditDao
 	
 	//캐쉬 구매 내역 등록
 	public void insert(CreditDto creditDto) {
-		String sql = "INSERT INTO CREDIT(MEMBER_ID, CREDIT_CHARGE, CREDIT_STATUS) "
-				+ "VALUES(?, ?, ?)";
-		Object[] datas = { creditDto.getMemberId(), creditDto.getCreditCharge(), creditDto.getCreditStatus()};
+		String sql = "INSERT INTO CREDIT(CREDIT_NO, MEMBER_ID, CREDIT_CHARGE, CREDIT_STATUS) "
+				+ "VALUES(?, ?, ?, ?)";
+		Object[] datas = { creditDto.getCreditNo(), creditDto.getMemberId(), creditDto.getCreditCharge(), creditDto.getCreditStatus()};
 		jdbcTemplate.update(sql, datas);
 	}
 	//캐쉬 구매 내역 조회
@@ -34,9 +34,9 @@ public class CreditDao
 	}
 	
 	//캐시 상태 변경
-	public void updateStatus(String status, String loginId) {
-		String sql = "update credit set credit_status=? where member_id=?";
-		Object[] data = {status, loginId};
+	public void updateStatus(String status, int creditNo) {
+		String sql = "update credit set credit_status=? where credit_no=?";
+		Object[] data = {status, creditNo};
 		jdbcTemplate.update(sql, data);
 	}
 	 
@@ -76,6 +76,12 @@ public class CreditDao
 		Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
 
 		return jdbcTemplate.query(sql, creditMapper, data);
+	}
+	
+	//시퀀스 번호 생성
+	public int getSequence() {
+		String sql = "select credit_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 }

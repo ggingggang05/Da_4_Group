@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
+<script>
+$(function(){
+    $(".chargeBtn").on("click", function() {
+		var choice = window.alert("캐시 신청 완료! \n이메일이 올 때까지 기다려주세요");
+		if(choice == false) return;
+	});
+});
+</script>
 
 <br>
 <br>
@@ -31,7 +38,7 @@
 					<label for="credit">충전금액(원) : </label>
 					<input type="text" name = "creditCharge" id="credit">
 				</div>
-				<div class="cell center">
+				<div class="cell center chargeBtn">
 					<button>충전하기</button>
 				</div>
 			</form>

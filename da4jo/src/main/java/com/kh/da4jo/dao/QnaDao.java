@@ -60,7 +60,7 @@ public class QnaDao {
 	public List<QnaDto> selectList(String column, String keyword) {
 		String sql = "select "
 				+ "qna_no, qna_secret, qna_title, qna_content, "
-				+ "qna_writer, qna_wdate, qna_vcount "
+				+ "qna_writer, qna_wdate, qna_vcount, qna_status "
 				+ "from qna "
 				+ "where instr("+column+", ?) > 0 "
 				+ "order by qna_no desc";
@@ -145,7 +145,7 @@ public class QnaDao {
 					+ "select rownum rn, TMP.* from ( "
 						+ "select "
 							+ "qna_no, qna_secret, "
-							+ "qna_title, qna_wdate, qna_writer "
+							+ "qna_title, qna_wdate, qna_writer, qna_status "
 						+ "from qna "
 						+ "where instr("+pageVO.getColumn()+", ?) > 0"
 						//+ "order by qna_wdate desc"
@@ -166,7 +166,7 @@ public class QnaDao {
 					+ "select rownum rn, TMP.* from ( "
 						+ "select "
 							+ "qna_no, qna_secret, "
-							+ "qna_title, qna_wdate, qna_writer "
+							+ "qna_title, qna_wdate, qna_writer, qna_status "
 						+ "from qna "
 						//+ "order by qna_wdate desc"
 						+ "connect by prior qna_no=qna_target "

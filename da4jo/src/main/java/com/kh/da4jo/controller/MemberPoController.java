@@ -19,7 +19,6 @@ import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
 
 import jakarta.servlet.http.HttpSession;
-import net.sf.jsqlparser.util.validation.validator.ShowIndexStatementValidator;
 
 @Controller
 @RequestMapping("/member/mypage/purchase")
@@ -41,8 +40,13 @@ public class MemberPoController {
 		int count = poDao.loginIdcount(pageVO, loginId);
 		pageVO.setCount(count);
 		
+		//배송중으로 바뀐 시점부터 7일뒤 배송완료로
+		List<PoDto> dateList = poDao.selectList(loginId);
+		poDao.compareDate(dateList);
+		
 		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
 		model.addAttribute("poList", list);
+		
 		
 		return "/WEB-INF/views/member/mypage/purchase/list.jsp";
 	}
@@ -136,5 +140,28 @@ public class MemberPoController {
 		model.addAttribute("poList", list);
 		
 		return "/WEB-INF/views/member/po/processList.jsp";
+	}
+	
+	//주문정보 확인 중, 결제 대기 중인 구매서만 보여질 페이지
+	@RequestMapping("/pendingPayment")
+	public String pendingPayment(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model,
+				HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+
+		int count = poDao.pendingPaymentCount(pageVO, loginId);
+		pageVO.setCount(count);
+
+		List<PoDto> list = poDao.selectpendingPaymentListByPaging(pageVO, loginId);
+		model.addAttribute("poList", list);
+
+		return "/WEB-INF/views/member/po/pendingPayment.jsp";
+	}
+	
+	@RequestMapping("/updateCancelStatus")
+	public String delete(@RequestParam int poNo,
+						@RequestParam String poStatus) {
+		//주문 취소 버튼을 누른 경우
+		poDao.updateCancelStatus(poNo); //상태 업데이트
+		return "redirect:list";
 	}
 }
