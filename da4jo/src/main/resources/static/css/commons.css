@@ -872,3 +872,41 @@ textarea.tool.tool-fixed {
 .content-head-text {
     margin: 10px 0;
 }
+.content-body-title h5{
+	position: relative;
+	padding-left:15px;
+	font-size: 16px;
+	margin: 15px 0 5px 0;
+}
+
+.content-body-title h5:before{
+	content: " ▶ ";
+    display: block;
+    font-size: 10px;
+    font-family: 'Glyphicons Halflings';
+    color: #444;
+    position: absolute;
+    left: 0;
+    top: 3px;
+}
+.content-body-text {
+	font-size: 14px;
+}
+.info-list {
+	padding: 0;
+	margin: 0;
+}
+.info-list>li {
+	list-style: none;
+	padding-left: 15px;
+	position: relative;
+}
+.info-list>li:before {
+	content: " - ";
+    display: block;
+    font-size: 16px;
+    color: #444;
+    position: absolute;
+    left: 5px;
+    top: -2px;
+}
