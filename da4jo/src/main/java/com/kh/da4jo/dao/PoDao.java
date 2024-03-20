@@ -111,7 +111,7 @@ public class PoDao {
 					+ "PO_ADDRESS1,PO_ADDRESS2,PO_DCOMMENT,PO_ADMIN_COMMENT,PO_STATUS,PO_AWB_NUMBER,"
 					+ "PO_SHIPPER,PO_SDATE,PO_EDATE,PO_PAY_DATE,PO_SHIP_DATE,PO_COUNTRY,PO_CURRENCY,PO_FX_RATE,"
 					+ "PO_FX,PO_ITEM_PRICE_KRW,PO_ITEM_VAT,PO_SERVICE_FEE,PO_TOTAL_PRICE_KRW,PO_AGREE " 
-					+ "from po " + "where instr(" + pageVO.getColumn() + ", ?) > 0 " + ")TMP"
+					+ "from po " + "where instr(" + pageVO.getColumn() + ", ?) > 0 AND PO_STATUS='주문정보 확인 중'" + ")TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
 			return jdbcTemplate.query(sql, poMapper, data);
@@ -212,6 +212,42 @@ public class PoDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	// 카운트 - 주문정보 확인중의 목록일 경우와 검색일 경우를 각각 구현
+	public int orderCount(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 AND PO_STATUS='주문정보 확인 중'";
+			Object[] data = { pageVO.getKeyword() };
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		} else {// 목록
+			String sql = "select count(*) from po where PO_STATUS='주문정보 확인 중'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+	
+	// 카운트 - 주문정보 배송대기의 목록일 경우와 검색일 경우를 각각 구현
+		public int processCount(PageVO pageVO) {
+			if (pageVO.isSearch()) {// 검색
+				String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 AND PO_STATUS='결제완료'";
+				Object[] data = { pageVO.getKeyword() };
+				return jdbcTemplate.queryForObject(sql, int.class, data);
+			} else {// 목록
+				String sql = "select count(*) from po where PO_STATUS='결제완료'";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
+		
+		// 카운트 - 주문정보 배송완료의 목록일 경우와 검색일 경우를 각각 구현
+		public int completeCount(PageVO pageVO) {
+			if (pageVO.isSearch()) {// 검색
+				String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 AND PO_STATUS='배송완료'";
+				Object[] data = { pageVO.getKeyword() };
+				return jdbcTemplate.queryForObject(sql, int.class, data);
+			} else {// 목록
+				String sql = "select count(*) from po where PO_STATUS='배송완료'";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
+
 
 	// 단일조회
 	public PoDto selectOne(int poNo) {

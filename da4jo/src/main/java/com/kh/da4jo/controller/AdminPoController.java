@@ -40,7 +40,7 @@ public class AdminPoController {
 			@ModelAttribute PageVO pageVO,
 			Model model) {
 		//세부 계산은 클래스에서 수행하도록 하고 count, list만 처리
-		int count = poDao.count(pageVO);
+		int count = poDao.orderCount(pageVO);
 		pageVO.setCount(count);
 		model.addAttribute("pageVO", pageVO);
 		List<PoDto> poDto = poDao.selectListByOrderListPaging(pageVO);
@@ -79,7 +79,7 @@ public class AdminPoController {
 			@ModelAttribute PageVO pageVO,
 			Model model) {
 		//세부 계산은 클래스에서 수행하도록 하고 count, list만 처리
-		int count = poDao.count(pageVO);
+		int count = poDao.processCount(pageVO);
 		pageVO.setCount(count);
 		model.addAttribute("pageVO", pageVO);
 		List<PoDto> poDto = poDao.selectListByprocessListPaging(pageVO);
@@ -109,7 +109,7 @@ public class AdminPoController {
 			@ModelAttribute PageVO pageVO,
 			Model model) {
 		//세부 계산은 클래스에서 수행하도록 하고 count, list만 처리
-		int count = poDao.count(pageVO);
+		int count = poDao.completeCount(pageVO);
 		pageVO.setCount(count);
 		model.addAttribute("pageVO", pageVO);
 		List<PoDto> poDto = poDao.selectListBycompleteListPaging(pageVO);
