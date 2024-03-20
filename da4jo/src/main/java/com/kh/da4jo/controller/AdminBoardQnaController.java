@@ -42,6 +42,7 @@ public class AdminBoardQnaController {
 		{
 			QnaDto targetDto = qnaDao.selectOne(qnaDto.getQnaTarget());
 			qnaDao.updateStatus(targetDto.getQnaNo());
+			qnaDto.setQnaWriter(targetDto.getQnaWriter());
 			qnaDto.setQnaSecret(targetDto.getQnaSecret());
 		}
 		int sequence = qnaDao.getSequence();

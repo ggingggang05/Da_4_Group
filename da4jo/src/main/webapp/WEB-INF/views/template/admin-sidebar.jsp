@@ -90,11 +90,11 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text ">
-					<a class="link main-title">QnA</a>
+					<a href="/admin/board/qna/list" class="link main-title">QnA</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
-						<a class="link">QnA답변</a>
+						<a href="/admin/board/qna/list" class="link">QnA목록</a>
 					</div>
 				</div>
 			</div>
