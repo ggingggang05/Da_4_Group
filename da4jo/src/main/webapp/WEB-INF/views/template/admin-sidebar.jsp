@@ -98,15 +98,5 @@
 					</div>
 				</div>
 			</div>
-			<div class="title-body-main">
-				<div class="title-body-text">
-					<a class="link main-title">리뷰</a>
-				</div>
-				<div class="title-body-sub">
-					<div class="title-body-text">
-						<a class="link">리뷰답변</a>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
