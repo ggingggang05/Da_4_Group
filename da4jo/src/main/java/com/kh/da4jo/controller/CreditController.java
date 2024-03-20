@@ -27,31 +27,8 @@ public class CreditController
 	
 	@GetMapping("/charge")
 	public String charge() {
-//		String loginId = (String)session.getAttribute("loginId");
-//		model.addAttribute("memberId", loginId);
 		return "/WEB-INF/views/member/credit/charge.jsp";
 	}
-	//자동 충전 코드
-//	@PostMapping("/charge")
-//	public String charge(
-//			@RequestParam int creditCharge, 
-//			HttpSession session) {
-//		String loginId = (String)session.getAttribute("loginId");
-//		CreditDto creditDto = new CreditDto();
-//		creditDto.setMemberId(loginId);
-//		creditDto.setCreditCharge(creditCharge);
-//		creditDao.insert(creditDto);
-//		int chargedCredit = creditDto.getCreditCharge();
-//		
-//		MemberDto memberDto = memberDao.selectOne(loginId);
-//		memberDto.setMemberCredit(memberDto.getMemberCredit() + chargedCredit);
-//		
-//		memberDao.updateCredit(memberDto);
-//		
-	
-	
-//		return "redirect:/member/mypage";
-//	}
 	@PostMapping("/charge")
 	public String charge(HttpSession session, @RequestParam int creditCharge) {
 		//로그인 아이디를 찾아서
