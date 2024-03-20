@@ -42,16 +42,15 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 배송완료목록
+				<i class="fa-solid fa-pause"></i> 주문취소목록
 			</div>
 		</div>
 		<div class="content content-body">
 			<div class="cell listArea">
 				<ul class="menu menu-type">
 					<li id="poNo"><strong>주문서번호</strong></li>
+					<li id="poContact"><strong>취소시간</strong></li>
 					<li id="poCustomerId"><strong>주문자</strong></li>
-					<li id="poContact"><strong>운송사</strong></li>
-					<li id="poContact"><strong>송장번호</strong></li>
 					<li id="poClearanceId"><strong>개인통관고유번호</strong></li>
 					<li id="poAddress1"><strong>주소</strong></li>
 					<li id="poStatus"><strong>상태</strong></li>
@@ -60,19 +59,19 @@
 				<c:forEach var="poDto" items="${poDto}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
+							<li id="poContact"><fmt:formatDate
+									value="${poDto.poPayDate}" pattern="Y-MM-dd HH:mm" /></li>
 							<li id="poCustomerId">${poDto.poNameKor}</li>
-							<li id="poShipper">${poDto.poShipper}</li>
-							<li id="poAwbNumber">${poDto.poAwbNumber}</li>
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
-							<li id="poDetail"><a href="processDetail?poNo=${poDto.poNo}"><i
+							<li id="poDetail"><a href="cancelDetail?poNo=${poDto.poNo}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 				</c:forEach>
 			</div>
 			<div class="cell searchArea center">
-				<form action="completeList" method="get">
+				<form action="cancelList" method="get">
 					<select name="column" class="searchSelect">
 						<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''}>주문서</option>
 						<option value="po_customer_id"
@@ -93,7 +92,7 @@
 				</c:when>
 				<c:otherwise>
 					<a
-						href="completeList?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+						href="cancelList?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
 				</c:otherwise>
 			</c:choose>
 
@@ -106,7 +105,7 @@
 						<a class="on">${i}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="completeList?page=${i}&${pageVO.getQueryString()}">${i}</a>
+						<a href="cancelList?page=${i}&${pageVO.getQueryString()}">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -118,12 +117,12 @@
 				</c:when>
 				<c:otherwise>
 					<a
-						href="completeList?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+						href="cancelList?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
 </div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/admin-footer.jsp"></jsp:include>
 </body>
 </html>
