@@ -29,6 +29,19 @@
 
 </style>
 
+<style>
+.menuBox {
+	padding : 5px;
+	padding-bottom : 20px;
+	height : 200px;
+	margin-top : 0px !important;
+}
+.title-head {
+	background-color: #60A1F833;
+}
+</style>
+
+
 	<div class="container flex-container">
 		<div class="container inner-container">
 			<!-- 회원 정보 -->
@@ -59,7 +72,7 @@
 			<div class="title title-body">
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link">구매대행</a>
+						<a class="link main-title">구매대행</a>
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
@@ -69,28 +82,21 @@
 							<a class="link">구매대행 결제대기</a>
 						</div>
 						<div class="title-body-text">
+							<a class="link" href="/member/mypage/purchase/processList">배송 진행 상황</a>
+						</div>
+						<div class="title-body-text">
 							<a class="link" href="/member/mypage/purchase/list">구매대행 신청 내역</a>
 						</div>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link">배송현황</a>
-					</div>
-					<div class="title-body-sub">
-						<div class="title-body-text">
-							<a class="link" href="/member/mypage/purchase/processList">배송 진행 상황</a>
-						</div>
+						<a class="link main-title" href="/board/qna/list">QNA</a>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link" href="/board/qna/list">QNA</a>
-					</div>
-				</div>
-				<div class="title-body-main">
-					<div class="title-body-text">
-						<a class="link" href="/board/review/list">리뷰 게시판</a>
+						<a class="link main-title" href="/board/review/list">리뷰 게시판</a>
 					</div>
 				</div>
 			</div>
