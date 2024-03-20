@@ -40,8 +40,13 @@ public class MemberPoController {
 		int count = poDao.loginIdcount(pageVO, loginId);
 		pageVO.setCount(count);
 		
+		//배송중으로 바뀐 시점부터 7일뒤 배송완료로
+		List<PoDto> dateList = poDao.selectList(loginId);
+		poDao.compareDate(dateList);
+		
 		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
 		model.addAttribute("poList", list);
+		
 		
 		return "/WEB-INF/views/member/mypage/purchase/list.jsp";
 	}

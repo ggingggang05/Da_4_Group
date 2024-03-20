@@ -284,7 +284,7 @@
 					<a href="/mypage/purchase/list" class="link">
 						<button class="btn">목록으로</button>
 					</a>
-					<form action="delete" method="post">
+					<form action="updateCancelStatus" method="post">
 					    <c:choose>
 					        <c:when test="${poDto.poStatus == '결제 대기 중' || poDto.poStatus == '주문정보 확인 중'}"> <!-- 주문 취소 가능한 상태일 때 -->
 					            <input type="hidden" name="poNo" value="${poDto.poNo}">
