@@ -19,6 +19,7 @@ public class CreditMapper implements RowMapper<CreditDto>
 		creditDto.setMemberId(rs.getString("MEMBER_ID"));
 		creditDto.setCreditCharge(rs.getInt("CREDIT_CHARGE"));
 		creditDto.setCreditTimeDate(rs.getDate("CREDIT_TIME"));
+		creditDto.setCreditStatus(rs.getString("CREDIT_STATUS"));
 		return creditDto;
 	}
 
