@@ -59,7 +59,7 @@
 			<div class="title title-body">
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link">구매대행</a>
+						<a class="link main-title">구매대행</a>
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
@@ -78,12 +78,12 @@
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link" href="/board/qna/list">QNA</a>
+						<a class="link main-title" href="/board/qna/list">QNA</a>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link" href="/board/review/list">리뷰 게시판</a>
+						<a class="link main-title" href="/board/review/list">리뷰 게시판</a>
 					</div>
 				</div>
 			</div>
