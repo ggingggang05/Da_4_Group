@@ -26,19 +26,13 @@
 					<a href="/board/qna/list" class="link">QnA 게시판</a>
 				</div>
 				<div class="title-body-sub">
-					<div class="title-body-text">
-						<a class="link">title-body-sub2</a>
-					</div>
 				</div>
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">이용후기</a>
+					<a href="/board/review/list" class="link">이용후기</a>
 				</div>
 				<div class="title-body-sub">
-					<div class="title-body-text">
-						<a class="link">title-body-sub3</a>
-					</div>
 				</div>
 			</div>
 		</div>

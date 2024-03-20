@@ -8,7 +8,7 @@
 		<div class="title title-body">
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a href="/admin/member/search" class="link">회원</a>
+					<a href="/admin/member/search" class="link main-title">회원</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
@@ -21,7 +21,7 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">구매대행 관리</a>
+					<a href="/admin/po/orderList" class="link main-title">구매대행 관리</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
@@ -40,7 +40,7 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">배송대행 관리</a>
+					<a href="/admin/ship/orderList" class="link main-title">배송대행 관리</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
@@ -59,7 +59,7 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">정산 관리</a>
+					<a href="/admin/po/settlement" class="link main-title">정산 관리</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
@@ -75,7 +75,7 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">공지사항관리</a>
+					<a href="/board/notice/list" class="link main-title">공지사항관리</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
@@ -89,8 +89,8 @@
 				</div>
 			</div>
 			<div class="title-body-main">
-				<div class="title-body-text">
-					<a class="link">QnA</a>
+				<div class="title-body-text ">
+					<a class="link main-title">QnA</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
@@ -100,7 +100,7 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a class="link">리뷰</a>
+					<a class="link main-title">리뷰</a>
 				</div>
 				<div class="title-body-sub">
 					<div class="title-body-text">
