@@ -44,14 +44,6 @@
 <br>
 <br>
 <div class="container container-body">
-	<!-- 마이페이지 헤더 -->
-	<div class="container inner-container">
-		<div class="content content-head">
-			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${session.loginId}님의 배송현황
-			</div>
-		</div>
-	</div>
 	<!-- 왼쪽 내용 -->
 	<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
 	
@@ -59,7 +51,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 구매대행 신청서 목록
+				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 배송현황
 			</div>
 		</div>
 		<div class="content content-body">
@@ -67,7 +59,7 @@
 				<!-- 배송 진행 중인 구매서가 없다면 -->
 				<c:if test="${empty poList}">
 					<div class="cell center mt-30">
-						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
+						<i class="fa-regular fa-circle-xmark fa-3x"></i>
 						<h2>배송 진행 중인 구매서가 없습니다</h2>
 					</div>
 					<div class="cell center">

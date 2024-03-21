@@ -44,14 +44,6 @@
 <br>
 <br>
 <div class="container container-body">
-	<!-- 마이페이지 헤더 -->
-	<div class="container inner-container">
-		<div class="content content-head">
-			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${session.loginId}님의 결제 대기 중인 주문서
-			</div>
-		</div>
-	</div>
 	<!-- 왼쪽 내용 -->
 	<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
 	
@@ -59,7 +51,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 결제 대기 주문서
+				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 결제 대기 중인 주문서
 			</div>
 		</div>
 		<div class="content content-body">
@@ -67,7 +59,7 @@
 				<!-- 주문정보 확인 중, 결제 대기 중인 구매서가 없다면 -->
 				<c:if test="${empty poList}">
 					<div class="cell center mt-30">
-						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
+						<i class="fa-regular fa-circle-xmark fa-3x"></i>
 						<h2>결제 대기 중인 구매서가 없습니다</h2>
 					</div>
 					<div class="cell center">
