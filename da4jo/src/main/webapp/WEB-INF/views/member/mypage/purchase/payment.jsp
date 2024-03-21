@@ -60,14 +60,6 @@
 <br>
 <br>
 <div class="container container-body">
-	<!-- 마이페이지 헤더 -->
-	<div class="container inner-container">
-		<div class="content content-head">
-			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${session.loginId}님의 구매서 목록
-			</div>
-		</div>
-	</div>
 	<div class="container flex-container">
 		<!-- 왼쪽 내용 -->
 		<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
@@ -75,7 +67,7 @@
 		<div class="container inner-container">
 			<div class="content content-head">
 				<div class="content-head-text">
-					<i class="fa-solid fa-user"></i>구매대행 신청서 목록
+					<i class="fa-solid fa-user"></i>${session.loginId}님의 구매대행 신청서 목록
 				</div>
 			</div>
 			<div class="content content-body">

@@ -5,6 +5,37 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- lightpick CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
+<!-- 기간별 검색 -->
+<!-- <script type="text/javascript">
+	// lightpick
+	$(function(){
+		var picker;
+
+		$(".searchSelect").on("input", function(){
+			console.log("input", $(this).val());
+			if($(this).val() == "po_sdate") {
+				//$(".DateInput").show();
+				picker = new Lightpick({
+				    field: $("[name=keyword]")[0], //검색일
+				    singleDate: true,
+				    format: "YYYY-MM-DD", //검색 형태
+				});
+			} 
+			else {
+				//$(".DateInput").hide();
+				if(picker) {
+					picker.destroy();				
+				}
+			}
+		});
+	});
+</script> -->
+
 <style>
 .menu-type {
 	margin: 0px !important;
@@ -21,7 +52,6 @@
 
 </style>
 
-
 <script type="text/javascript">    
      $(function(){
             $(".payAlert").on("click", function() {
@@ -36,14 +66,6 @@
 <br>
 <br>
 <div class="container container-body">
-	<!-- 마이페이지 헤더 -->
-	<div class="container inner-container">
-		<div class="content content-head">
-			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${session.loginId}님의 구매서 목록
-			</div>
-		</div>
-	</div>
 	<!-- 왼쪽 내용 -->
 	<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
 	
@@ -51,14 +73,14 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 구매대행 신청서 목록
+				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 구매대행 신청서 목록
 			</div>
 		</div>
 		<div class="content content-body">
 			<div class="cell listArea">
 				<c:if test="${empty poList}"><!-- 구매서 작성 내역이 없는 경우 -->
 					<div class="cell center mt-30">
-						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
+						<i class="fa-regular fa-circle-xmark fa-3x"></i>
 						<h2>구매서 작성 내역이 없습니다</h2>
 					</div>
 					<div class="cell center">
@@ -74,10 +96,13 @@
 						<div class="cell searchArea w-75 left"><!-- 검색 기능 -->
 							<form action="list" method="get">
 								<select name="column" class="searchSelect">
-									<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''}>주문번호</option>
+									<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''} >주문번호</option>
 									<option value="po_status" ${param.column == 'po_status' ? 'selected' : ''}>상태</option>
-									<option value="po_sdate" ${param.column == 'po_sdate' ? 'selected' : ''}>작성일</option>
+									<%-- <option value="po_sdate" ${param.column == 'po_sdate' ? 'selected' : ''}>일자별</option> --%>
 								</select> 
+								<!-- <div class="DateInput" style="display: none;">
+									<input type="text" name="startDate" placeholder="날짜 선택" value="$(settlementVO.poPayDate)">
+								</div> -->
 								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar">
 								<button class="btn searchBtn">
 									<i class="fa-solid fa-search"></i>
