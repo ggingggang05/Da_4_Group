@@ -42,24 +42,28 @@
 				<i class="fa-solid fa-pause"></i>배송완료 된 주문건이 있는 고객만 리뷰 작성이 가능합니다.
 			</div>
 		</div>
-	<div class="content content-body">
-		<div class="link-ship center">
-			<a class="link" href="/member/ship/request">
-				<button class="btn ship">
-					<strong>배송대행</strong><br>신청하기
-				</button>
-			</a>
-		</div>
-		<div class="link-buying center">
-			<a class="link" href="/member/po/request">
-				<button class="btn buying">
-					<strong>구매대행</strong><br>신청하기
-				</button>
-			</a>
+		<br>
+		<br>
+		<div class="content content-body">
+			<div class="cell flex-cell">
+				<div class="link-ship right">
+					<a class="link" href="/member/ship/request">
+						<button class="btn ship">
+							<strong>배송대행</strong><br>신청하기
+						</button>
+					</a>
+				</div>
+				<div class="link-buying left">
+					<a class="link" href="/member/po/request">
+						<button class="btn buying">
+							<strong>구매대행</strong><br>신청하기
+						</button>
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
-		</div>
-	</div>
+</div>
 </div>
 
 
