@@ -33,6 +33,7 @@ public class PoDao {
 	private SettlementVOMapper settlementVOMapper;
 	@Autowired
 	private DailyDetailVOMapper dailyDetailVOMapper;
+	@Autowired
 	private VatListVOMapper vatListVOMapper;
 
 	// poNo 미리 뽑기
