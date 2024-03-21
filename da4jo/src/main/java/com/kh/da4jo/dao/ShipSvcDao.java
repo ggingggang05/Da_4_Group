@@ -417,13 +417,26 @@ public class ShipSvcDao {
 	
 	// 목록 페이징
 	public List<ShipSvcDto> selectListByPaging(PageVO pageVO, String loginId) {
-		String sql = "select * from (" + "select rownum rn, TMP.* from ( " + "select "
-				+ "SHIPSVC_NO, SHIPSVC_ITEM_ENG_NAME, SHIPSVC_ITEM_CATEGORY, " + "SHIPSVC_SDATE, SHIPSVC_STATUS, SHIPSVC_AWB_NUMBER, SHIPSVC_FX, "
-				+ "SHIPSVC_SERVICE_FEE, SHIPSVC_TOTAL_PRICE_KRW, SHIPSVC_ITEM_PRICE_KRW " + "from SHIPSVC " + "where SHIPSVC_customer_id=?"
-				+ "order by SHIPSVC_sdate desc" + ")TMP" + ") where rn between ? and ?";
-		Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
-
-		return jdbcTemplate.query(sql, shipSvcListMapper, data);
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select * from (" + "select rownum rn, TMP.* from ( " 
+					+ "select "
+					+ "SHIPSVC_NO, SHIPSVC_ITEM_ENG_NAME, SHIPSVC_ITEM_CATEGORY, " + "SHIPSVC_SDATE, SHIPSVC_STATUS, SHIPSVC_AWB_NUMBER, SHIPSVC_FX, "
+					+ "SHIPSVC_SERVICE_FEE, SHIPSVC_TOTAL_PRICE_KRW, SHIPSVC_ITEM_PRICE_KRW "
+					+ "from SHIPSVC "
+					+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND SHIPSVC_customer_id=?"
+					+ "order by SHIPSVC_sdate desc"
+					+ ")TMP" 
+				+ ") where rn between ? and ?";
+			Object[] data = { pageVO.getKeyword(), loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
+			return jdbcTemplate.query(sql, shipSvcListMapper, data);
+		} else {// 목록
+			String sql = "select * from (" + "select rownum rn, TMP.* from ( " + "select "
+					+ "SHIPSVC_NO, SHIPSVC_ITEM_ENG_NAME, SHIPSVC_ITEM_CATEGORY, " + "SHIPSVC_SDATE, SHIPSVC_STATUS, SHIPSVC_AWB_NUMBER, SHIPSVC_FX, "
+					+ "SHIPSVC_SERVICE_FEE, SHIPSVC_TOTAL_PRICE_KRW, SHIPSVC_ITEM_PRICE_KRW " + "from SHIPSVC " + "where SHIPSVC_customer_id=?"
+					+ "order by SHIPSVC_sdate desc" + ")TMP" + ") where rn between ? and ?";
+			Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
+			return jdbcTemplate.query(sql, shipSvcListMapper, data);
+		}
 	}
 
 	// 배송 중인 구매서에 대한 페이징
