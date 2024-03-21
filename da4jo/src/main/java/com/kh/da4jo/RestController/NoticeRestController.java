@@ -18,7 +18,7 @@ public class NoticeRestController {
 	@Autowired
 	private NoticeDao noticeDao;
 	 @GetMapping("/list")
-	    public List<NoticeVO> getNoticeList(Model model) {
+	    public List<NoticeVO> getNoticeList() {
 	        return noticeDao.getNoticeList();
 	    }
 	
