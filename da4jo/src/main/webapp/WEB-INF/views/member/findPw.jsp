@@ -4,24 +4,68 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
+<style>
+	/*아이디,비밀번호 placeholder*/		
+	input.tool::placeholder {
+	    color: #b2bec3;
+	    font-size: 14px;
+	}
+	
+	/*입력창 (아이디,패스워드)*/
+	.flex-cell input.tool
+	{
+		border-left: none;
+	    border-right: none;
+	    border-top: none;
+	    padding-left: 0;
+	    padding-right: 0;
+        border-bottom: 1px solid rgb(224, 224, 224);
+        transition: border-color 0.3s;
+	}
+	.fa-regular,
+	.fa-solid
+	 {
+           width: 12%;
+           font-size: 24px;
+           padding: 0.5em;
+           border-bottom: 1px solid rgb(224, 224, 224);
+           color: #b2bec3;
+           transition: border-color 0.3s, color 0.3s;
+	}
+	button {
+		background-color: #74b9ff;
+	}
+</style>
+<!-- 비밀번호 입력창 -->
 <form action="findPw" method="post" autocomplete="off">
-	<div class="container w-400">
-		<div class= "cell center">
-			<h1>비밀번호 찾기</h1>
+	<div class="container w-500" style= "margin-top: 6em; margin-bottom: 6em;">
+		<div class="container w-400">
+			<div class= "cell center" style="margin-bottom: 2em;">
+				<h1 style= "color: #74b9ff;">비밀번호 찾기</h1>
+			</div>
+			<!-- 아이디 입력창 -->
+			<div class="cell flex-cell">
+	       		<i class="fa-solid fa-id-card-clip"></i>
+	           <input type="text" name="memberId" placeholder="아이디를 입력하세요" class="tool w-100">
+	       </div>
+      		<!-- 이메일 입력창 -->
+			<div class="cell flex-cell">
+	       		<i class="fa-solid fa-envelope"></i>
+	           <input type="email" name="memberEmail" placeholder="이메일을 입력하세요" class="tool w-100">
+	       </div>
+		   <div>
+			   <c:if test="${param.error != null}">
+					<h4 style= "color:red"> 입력하신 정보가 일치하지 않습니다.</h4>
+				</c:if>
+		   </div>
+		    
+		    <div class="cell" style="margin-top: 2em;">
+				<button type="submit" class="btn w-100" style="color: white; border-radius: 10px; "> 
+					<i class="fa-regular fa-eye" style= "border-bottom: none; color: white; font-size: 20px;"></i>
+					<label style= "font-size: 18px;">눈 크게 뜨고 찾아보기</label>
+				</button>
+			</div>
 		</div>
-		<div class="cell">
-			아이디 <input type="text" name="memberId" required>
-		</div>
-		<div class="cell">
-			이메일 <input type="email" name="memberEmail" required>
-		</div>
-	     <div>
-	    	<c:if test="${param.error != null}">
-				<h4 style= "color:red"> 입력하신 정보가 일치하지 않습니다.</h4>
-			</c:if>
-	    </div>
-		<button type="submit"> 찾기</button>
 	</div>
 </form>
 
