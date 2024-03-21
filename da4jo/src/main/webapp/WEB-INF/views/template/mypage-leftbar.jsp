@@ -98,7 +98,7 @@
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
-							<a class="link" href="/member/shipsvc/request">배송대행 신청서 작성</a>
+							<a class="link" href="/member/ship/request">배송대행 신청서 작성</a>
 						</div>
 						<div class="title-body-text">
 							<a class="link" href="/member/mypage/ship/pendingPayment">배송대행 결제대기</a>
