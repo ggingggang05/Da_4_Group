@@ -30,13 +30,11 @@
 			</div>
 		</c:if>
 
-		<h2>제목123</h2>
+		<h2>제목</h2>
 		<div>
-			<input class="tool w-100" type="text" name="qnaTitle"
-					value="[a] ${targetDto.qnaTitle}">
-			
-
-
+			<input class="tool w-100" type="hidden" name="qnaTitle"
+					value="↳">
+			<input class="tool w-100" type="text" name="qnaTitle" ${targetDto.qnaTitle}>
 		</div>
 
 		<h2>내용</h2>
