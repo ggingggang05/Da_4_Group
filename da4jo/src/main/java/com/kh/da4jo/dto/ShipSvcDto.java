@@ -295,7 +295,7 @@ public class ShipSvcDto {
 	}// 원화금액 계산 환율이랑 외화 곱해서 이건 사용자 측에서 입력해서 관세기준 넘는지 확인 할 수 있을듯 
 	// 그리고 위의 원화 금액이 있어야 아래의 VAT 금액이 나옴
 	public double getVat() {
-		return  shipSvcItemPriceKrw*0.1;
+		return  getItemPrice()*0.1;
 	}
 	// 키로그램에 11.2달러인거에 원화로 곱해서 수수료 산출 여기에 + 10000원
 	public int getFee(){

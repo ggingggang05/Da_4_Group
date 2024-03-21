@@ -36,7 +36,22 @@ public class AdminShipSvcController {
 
 		return "/WEB-INF/views/admin/ship/orderList.jsp";
 	}
+	
+	// 무게당 금액을 업데이트 해서 결제금액을 계산하는 페이지
+	@GetMapping("/orderInvoice")
+	public String orderInvoice(@RequestParam int shipSvcNo, Model model) {
+		ShipSvcDto shipSvcDto = shipSvcDao.selectOne(shipSvcNo);
+		model.addAttribute("shipSvcDto", shipSvcDto);
+		return "/WEB-INF/views/admin/ship/orderInvoice.jsp";
+	}
 
+	@PostMapping("/orderInvoice")
+	public String orderInvoice(@ModelAttribute ShipSvcDto shipSvcDto) {
+		shipSvcDao.update(shipSvcDto);
+		return "redirect:orderList";
+	}
+	
+	
 	@GetMapping("/orderDetail")
 	public String orderDetail(@RequestParam int shipSvcNo, Model model) {
 		ShipSvcDto shipSvcDto = shipSvcDao.selectOne(shipSvcNo);
@@ -49,6 +64,7 @@ public class AdminShipSvcController {
 		shipSvcDao.update(shipSvcDto);
 		return "redirect:orderList";
 	}
+	
 
 	@RequestMapping("/processList")
 	public String processList(@ModelAttribute PageVO pageVO, Model model) {
