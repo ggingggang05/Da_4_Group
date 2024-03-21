@@ -47,8 +47,7 @@ public class ShipSvcDao {
 		String sql = "INSERT INTO SHIPSVC(SHIPSVC_NO, SHIPSVC_CUSTOMER_ID, SHIPSVC_NAME_KOR, SHIPSVC_NAME_ENG,"
 				+ "	  SHIPSVC_CLEARANCE_ID, SHIPSVC_ITEM_ENG_NAME, SHIPSVC_LINK, SHIPSVC_QTY, SHIPSVC_ITEM_OPTION1,"
 				+ "	  SHIPSVC_CONTACT, SHIPSVC_ZIPCODE, SHIPSVC_ADDRESS1, SHIPSVC_ADDRESS2, SHIPSVC_DCOMMENT, "
-				+ "	  SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX, SHIPSVC_AGREE,SHIPSVC_USER_SHIPPER,SHIPSVC_USER_AWB_NUMBER,"
-				+ "	  SHIPSVC_ITEM_PRICE_KRW ) "
+				+ "	  SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX, SHIPSVC_AGREE,SHIPSVC_USER_SHIPPER,SHIPSVC_USER_AWB_NUMBER) "
 				+ "	  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] data = { shipSvcDto.getShipSvcNo(), shipSvcDto.getShipSvcCustomerId(), shipSvcDto.getShipSvcNameKor(),
 				shipSvcDto.getShipSvcNameEng(), shipSvcDto.getShipSvcClearanceId(), shipSvcDto.getShipSvcItemEngName(),
@@ -56,7 +55,7 @@ public class ShipSvcDao {
 				shipSvcDto.getShipSvcContact(), shipSvcDto.getShipSvcZipcode(), shipSvcDto.getShipSvcAddress1(),
 				shipSvcDto.getShipSvcAddress2(), shipSvcDto.getShipSvcDComment(), shipSvcDto.getShipSvcCountry(),
 				shipSvcDto.getShipSvcCurrency(), shipSvcDto.getShipSvcFx(), shipSvcDto.getShipSvcAgree(),
-				shipSvcDto.getShipSvcUserShipper(), shipSvcDto.getShipSvcUserAwbNumber(),shipSvcDto.getShipSvcItemPriceKrw() };
+				shipSvcDto.getShipSvcUserShipper(), shipSvcDto.getShipSvcUserAwbNumber()};
 		jdbcTemplate.update(sql, data);
 	}
 
@@ -152,7 +151,7 @@ public class ShipSvcDao {
 					+ "SHIPSVC_USER_AWB_NUMBER,SHIPSVC_USER_SHIPPER,SHIPSVC_SDATE,SHIPSVC_EDATE,SHIPSVC_PAY_DATE,SHIPSVC_SHIP_DATE, "
 					+ "SHIPSVC_USER_SHIP_DATE,SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX_RATE,SHIPSVC_FX, SHIPSVC_ITEM_PRICE_KRW, "
 					+ "SHIPSVC_ITEM_VAT,SHIPSVC_SERVICE_FEE,SHIPSVC_TOTAL_PRICE_KRW,SHIPSVC_AGREE " + "from SHIPSVC "
-					+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND SHIPSVC_STATUS='주문정보 확인 중'"
+					+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND SHIPSVC_STATUS='결제완료'"
 					+ ")TMP) where rn between ? and ?";
 			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
 			return jdbcTemplate.query(sql, shipSvcMapper, data);
@@ -165,7 +164,7 @@ public class ShipSvcDao {
 					+ "SHIPSVC_USER_AWB_NUMBER,SHIPSVC_USER_SHIPPER,SHIPSVC_SDATE,SHIPSVC_EDATE,SHIPSVC_PAY_DATE,SHIPSVC_SHIP_DATE, "
 					+ "SHIPSVC_USER_SHIP_DATE,SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX_RATE,SHIPSVC_FX, SHIPSVC_ITEM_PRICE_KRW, "
 					+ "SHIPSVC_ITEM_VAT,SHIPSVC_SERVICE_FEE,SHIPSVC_TOTAL_PRICE_KRW,SHIPSVC_AGREE "
-					+ "FROM SHIPSVC WHERE SHIPSVC_STATUS = '주문정보 확인 중' ORDER BY SHIPSVC_NO DESC" + ")TMP"
+					+ "FROM SHIPSVC WHERE SHIPSVC_STATUS = '결제완료' ORDER BY SHIPSVC_NO DESC" + ")TMP"
 					+ ") WHERE RN BETWEEN ? AND ?";
 			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
 			return jdbcTemplate.query(sql, shipSvcMapper, data);
@@ -183,7 +182,7 @@ public class ShipSvcDao {
 					+ "SHIPSVC_USER_AWB_NUMBER,SHIPSVC_USER_SHIPPER,SHIPSVC_SDATE,SHIPSVC_EDATE,SHIPSVC_PAY_DATE,SHIPSVC_SHIP_DATE, "
 					+ "SHIPSVC_USER_SHIP_DATE,SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX_RATE,SHIPSVC_FX, SHIPSVC_ITEM_PRICE_KRW, "
 					+ "SHIPSVC_ITEM_VAT,SHIPSVC_SERVICE_FEE,SHIPSVC_TOTAL_PRICE_KRW,SHIPSVC_AGREE " + "from SHIPSVC "
-					+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND SHIPSVC_STATUS='주문정보 확인 중'"
+					+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND SHIPSVC_STATUS='배송완료'"
 					+ ")TMP) where rn between ? and ?";
 			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
 			return jdbcTemplate.query(sql, shipSvcMapper, data);
@@ -196,7 +195,7 @@ public class ShipSvcDao {
 					+ "SHIPSVC_USER_AWB_NUMBER,SHIPSVC_USER_SHIPPER,SHIPSVC_SDATE,SHIPSVC_EDATE,SHIPSVC_PAY_DATE,SHIPSVC_SHIP_DATE, "
 					+ "SHIPSVC_USER_SHIP_DATE,SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX_RATE,SHIPSVC_FX, SHIPSVC_ITEM_PRICE_KRW, "
 					+ "SHIPSVC_ITEM_VAT,SHIPSVC_SERVICE_FEE,SHIPSVC_TOTAL_PRICE_KRW,SHIPSVC_AGREE "
-					+ "FROM SHIPSVC WHERE SHIPSVC_STATUS = '주문정보 확인 중' ORDER BY SHIPSVC_NO DESC" + ")TMP"
+					+ "FROM SHIPSVC WHERE SHIPSVC_STATUS = '배송완료' ORDER BY SHIPSVC_NO DESC" + ")TMP"
 					+ ") WHERE RN BETWEEN ? AND ?";
 			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
 			return jdbcTemplate.query(sql, shipSvcMapper, data);
@@ -214,7 +213,7 @@ public class ShipSvcDao {
 					+ "SHIPSVC_USER_AWB_NUMBER,SHIPSVC_USER_SHIPPER,SHIPSVC_SDATE,SHIPSVC_EDATE,SHIPSVC_PAY_DATE,SHIPSVC_SHIP_DATE, "
 					+ "SHIPSVC_USER_SHIP_DATE,SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX_RATE,SHIPSVC_FX, SHIPSVC_ITEM_PRICE_KRW, "
 					+ "SHIPSVC_ITEM_VAT,SHIPSVC_SERVICE_FEE,SHIPSVC_TOTAL_PRICE_KRW,SHIPSVC_AGREE " + "from SHIPSVC "
-					+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND SHIPSVC_STATUS='주문정보 확인 중'"
+					+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND SHIPSVC_STATUS='주문취소'"
 					+ ")TMP) where rn between ? and ?";
 			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
 			return jdbcTemplate.query(sql, shipSvcMapper, data);
@@ -227,7 +226,7 @@ public class ShipSvcDao {
 					+ "SHIPSVC_USER_AWB_NUMBER,SHIPSVC_USER_SHIPPER,SHIPSVC_SDATE,SHIPSVC_EDATE,SHIPSVC_PAY_DATE,SHIPSVC_SHIP_DATE, "
 					+ "SHIPSVC_USER_SHIP_DATE,SHIPSVC_COUNTRY, SHIPSVC_CURRENCY, SHIPSVC_FX_RATE,SHIPSVC_FX, SHIPSVC_ITEM_PRICE_KRW, "
 					+ "SHIPSVC_ITEM_VAT,SHIPSVC_SERVICE_FEE,SHIPSVC_TOTAL_PRICE_KRW,SHIPSVC_AGREE "
-					+ "FROM SHIPSVC WHERE SHIPSVC_STATUS = '주문정보 확인 중' ORDER BY SHIPSVC_NO DESC" + ")TMP"
+					+ "FROM SHIPSVC WHERE SHIPSVC_STATUS = '주문취소' ORDER BY SHIPSVC_NO DESC" + ")TMP"
 					+ ") WHERE RN BETWEEN ? AND ?";
 			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
 			return jdbcTemplate.query(sql, shipSvcMapper, data);

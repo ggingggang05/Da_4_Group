@@ -270,6 +270,6 @@
 
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/admin-footer.jsp"></jsp:include>
 </body>
 </html>

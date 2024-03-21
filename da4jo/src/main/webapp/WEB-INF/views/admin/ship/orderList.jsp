@@ -41,7 +41,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 구매대행목록
+				<i class="fa-solid fa-pause"></i> 배송대행목록
 			</div>
 		</div>
 		<div class="content content-body">
@@ -119,6 +119,6 @@
 		</div>
 	</div>
 </div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/admin-footer.jsp"></jsp:include>
 </body>
 </html>

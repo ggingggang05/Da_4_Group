@@ -65,7 +65,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-user"></i> ${poDto.poCustomerId} 님의 구매대행 신청서
+				<i class="fa-solid fa-user"></i> ${shipSvcDto.shipSvcCustomerId} 님의 구매대행 신청서
 			</div>
 		</div>
 		<div class="content content-body">
@@ -76,31 +76,31 @@
 				<div class="info-group">
 					<div class="info-label">아이디</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poCustomerId}</div>
+						<div class="info-content">${shipSvcDto.shipSvcCustomerId}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">이름(한글)</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poNameKor}</div>
+						<div class="info-content">${shipSvcDto.shipSvcNameKor}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">이름(영문)</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poNameEng}</div>
+						<div class="info-content">${shipSvcDto.shipSvcNameEng}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">개인통관고유번호</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poClearanceId}</div>
+						<div class="info-content">${shipSvcDto.shipSvcClearanceId}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">연락처</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poContact}</div>
+						<div class="info-content">${shipSvcDto.shipSvcContact}</div>
 					</div>
 				</div>
 			</div>
@@ -113,14 +113,14 @@
 				<div class="info-group">
 					<div class="info-label">주소</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poZipcode}</div>
-						<div class="info-content">${poDto.poAddress1}</div>
-						<div class="info-content">${poDto.poAddress2}</div>
+						<div class="info-content">${shipSvcDto.shipSvcZipcode}</div>
+						<div class="info-content">${shipSvcDto.shipSvcAddress1}</div>
+						<div class="info-content">${shipSvcDto.shipSvcAddress2}</div>
 					</div>
 					<div class="info-group"></div>
 					<div class="info-label">배송메모</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poDcomment}</div>
+						<div class="info-content">${shipSvcDto.shipSvcDComment}</div>
 					</div>
 				</div>
 			</div>
@@ -133,64 +133,52 @@
 				<div class="info-group">
 					<div class="info-label">구매대행정보</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">국가 ${poDto.poCountry}</div>
-						<div class="info-content">통화 ${poDto.poCurrency}</div>
-						<div class="info-content">환율 ${poDto.poFxRate}</div>
+						<div class="info-content">국가 ${shipSvcDto.shipSvcCountry}</div>
+						<div class="info-content">통화 ${shipSvcDto.shipSvcCurrency}</div>
+						<div class="info-content">환율 ${shipSvcDto.shipSvcFxRate}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">상품링크</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poLink}</div>
+						<div class="info-content">${shipSvcDto.shipSvcLink}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">상품금액(외화)</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poFx}</div>
+						<div class="info-content">${shipSvcDto.shipSvcFx}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">상품이름(영문)</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poNameEng}</div>
+						<div class="info-content">${shipSvcDto.shipSvcItemEngName}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">상품카테고리</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poItemCategory}</div>
+						<div class="info-content">${shipSvcDto.shipSvcItemCategory}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">상품옵션1</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poItemOption1}</div>
-					</div>
-				</div>
-				<div class="info-group">
-					<div class="info-label">상품옵션2</div>
-					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poItemOption2}</div>
-					</div>
-				</div>
-				<div class="info-group">
-					<div class="info-label">상품옵션3</div>
-					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poItemOption3}</div>
+						<div class="info-content">${shipSvcDto.shipSvcItemOption1}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">상품수량</div>
 					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poQty}</div>
+						<div class="info-content">${shipSvcDto.shipSvcQty}</div>
 					</div>
 				</div>
 				<div class="info-group">
 					<div class="info-label">신청서 작성시간</div>
 					<div class="info-content-wrapper">
 						<div class="info-content">
-							<fmt:formatDate value="${poDto.poSdate}"
+							<fmt:formatDate value="${shipSvcDto.shipSvcSDate}"
 								pattern="y년 M월 d일 E H시 m분 s초" />
 						</div>
 					</div>
@@ -204,7 +192,7 @@
 							<div class="info-label">배송사</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poShipper" value="${poDto.poShipper}">
+									<input type="text" name="shipSvcShipper" value="${shipSvcDto.shipSvcShipper}">
 								</div>
 							</div>
 						</div>
@@ -212,8 +200,8 @@
 							<div class="info-label">송장번호</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poAwbNumber"
-										value="${poDto.poAwbNumber}">
+									<input type="text" name="shipSvcAwbNumber"
+										value="${shipSvcDto.shipSvcAwbNumber}">
 								</div>
 							</div>
 						</div>
@@ -221,19 +209,19 @@
 							<div class="info-label">메모</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="poAdminComment"
-										value="${poDto.poAdminComment}">
+									<input type="text" name="shipSvcAdminComment"
+										value="${shipSvcDto.shipSvcAdminComment}">
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="poNo" value="${poDto.poNo}">
+						<input type="hidden" name="shipSvcNo" value="${shipSvcDto.shipSvcNo}">
 						<div class="cell right">
 							<button type="submit" class="btn">사용자에게 전송</button>
 						</div>
 					</div>
 				</form>
 				<div class="cell center">
-					<a href="/admin/po/processList" class="link">
+					<a href="/admin/ship/processList" class="link">
 						<button class="btn">목록으로</button></a>
 				</div>
 			</div>
