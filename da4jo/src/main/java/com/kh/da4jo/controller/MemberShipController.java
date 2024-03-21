@@ -71,6 +71,7 @@ public class MemberShipController {
 		
 		int count = shipSvcDao.shippingCount(pageVO, loginId);
 		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
 		
 		List<ShipSvcDto> list = shipSvcDao.selectShippingListByPaging(pageVO, loginId);
 		model.addAttribute("shipList", list);

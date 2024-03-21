@@ -18,24 +18,33 @@
 	border: 1px solid #ced3d6;
 }
 
-#memberId {
-	width: 23%;
+.menu-type {
+	background-color: #60A1F833 !important;
+	height : 42px;
 }
 
-#memerName {
+#poNo {
 	width: 13%;
 }
 
-#memberEmail {
-	width: 50%;
+#poItemEngName {
+	width: 31%;
 }
 
-#memberCode {
-	width: 32%;
+#poStatus {
+	width: 15%;
 }
 
-#isBlock, #memberDetail {
-	width: 9%;
+#poAwbNumber {
+	width: 20%;
+}
+
+#poTotalPriceKrw{
+	width: 20%;
+} 
+
+#poDetail {
+	width: 11%;
 }
 
 </style>
@@ -78,7 +87,7 @@
 						<li id="poStatus"><strong>상태</strong></li>
 						<li id="poAwbNumber"><strong>송장번호</strong></li>
 						<li id="poTotalPriceKrw"><strong>결제금액</strong></li>
-						<li id="poDetail"><strong>자세히 보기</strong></li>
+						<li id="poDetail"><strong>자세히</strong></li>
 					</ul>	
 				
 					<c:forEach var="poDto" items="${poList}">
@@ -87,17 +96,49 @@
 							<li id="poItemEngName">${poDto.poItemEngName}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poAwbNumber">${poDto.poAwbNumber}</li>
-							<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
-							<li id="poDetail"><a href="detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+							<li id="poTotalPriceKrw"><fmt:formatNumber value="${poDto.poTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
+							<li id="poDetail"><a href="detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 배송 진행 중인 구매서가 있다면 닫는 태그 -->
 			</div><!-- 구매서 리스트 닫는 태그-->
 		</div><!-- 내용 바디 닫는 태그 -->
-		<div class="cell">
-			<%--네비게이터 --%>
-			<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
-		</div>
+		<div class="page-navigator"> <!-- 네비게이터 태그 -->
+			<%-- 이전이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isFirstBlock()}">
+					<a class="off">&lt;이전</a>
+				</c:when>
+				<c:otherwise>
+					<a href="pendingPayment?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+				</c:otherwise>
+			</c:choose>
+
+			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
+				end="${pageVO.getEndBlock()}" step="1">
+				<%-- 다른 페이지일 경우만 링크를 제공 --%>
+				<c:choose>
+					<c:when test="${pageVO.isCurrentPage(i)}">
+						<a class="on">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="pendingPayment?page=${i}&${pageVO.getQueryString()}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 다음이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isLastBlock()}">
+					<a class="off">다음&gt;</a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="pendingPayment?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+				</c:otherwise>
+			</c:choose>
+		</div><!-- 네비게이터 닫는 태그 -->
 	</div><!-- 오른쪽 내용 닫는 태그 -->	
 </div><!-- 컨테이너 자리 닫는 태그 -->
 

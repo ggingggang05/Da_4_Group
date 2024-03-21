@@ -17,19 +17,19 @@
 	border: 1px solid #ced3d6;
 }
 
-#memberId {
+#poNo {
 	width: 23%;
 }
 
-#memerName {
+#poContact {
 	width: 13%;
 }
 
-#memberEmail {
+#poCustomerId {
 	width: 50%;
 }
 
-#memberCode {
+#poClearanceId {
 	width: 32%;
 }
 

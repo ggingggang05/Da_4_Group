@@ -139,6 +139,7 @@ public class MemberPoController {
 		
 		int count = poDao.shippingCount(pageVO, loginId);
 		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
 		
 		List<PoDto> list = poDao.selectShippingListByPaging(pageVO, loginId);
 		model.addAttribute("poList", list);
