@@ -43,7 +43,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 배송대행 신청서 목록
+				<i class="fa-solid fa-pause"></i> ${session.loginId}님의 배송대행 신청서 목록
 			</div>
 		</div>
 		<div class="content content-body">
