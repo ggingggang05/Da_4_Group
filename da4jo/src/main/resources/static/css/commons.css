@@ -575,6 +575,7 @@ textarea.tool.tool-fixed {
 }
 .nation-text {
 	font-size: 14px;
+	color: #2D3436 !important;
 }
 /* 메뉴 안에 있는 모든 ul 태그에 대한 디자인 초기화 */
 .menu, 
