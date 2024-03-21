@@ -60,7 +60,7 @@ public class MemberShipController {
 			model.addAttribute("memberDto", memberDto);
 		}
 		
-		return "/WEB-INF/veiws/member/mypage/ship/detail.jsp";
+		return "/WEB-INF/views/member/mypage/ship/detail.jsp";
 	}
 	
 	//배송 중인 구매서만 보여질 페이지

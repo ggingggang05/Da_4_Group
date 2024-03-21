@@ -57,7 +57,7 @@
 		<div class="content content-body">
 			<div class="cell listArea">
 				<!-- 주문정보 확인 중, 결제 대기 중인 구매서가 없다면 -->
-				<c:if test="${empty poList}">
+				<c:if test="${empty shipList}">
 					<div class="cell center mt-30">
 						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
 						<h2>결제 대기 중인 주문서가 없습니다</h2>
@@ -86,7 +86,7 @@
 							<li id="shipSvcItemEngName">${shipSvcDto.shipSvcItemEngName}</li>
 							<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 							<li id="shipSvcTotalPriceKrw">${shipSvcDto.shipSvcTotalPriceKrw}</li>
-							<li id="shipSvcDetail"><a href="/member/mypage/ship/detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+							<li id="shipSvcDetail"><a href="detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 주문정보 확인 중, 결제 대기 중인 구매서가 있다면 닫는 태그 -->

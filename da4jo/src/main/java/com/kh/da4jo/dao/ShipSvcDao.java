@@ -76,7 +76,7 @@ public class ShipSvcDao {
 
 	// 아이디로 조회
 	public List<ShipSvcDto> selectList(String loginId) {
-		String sql = "select * from ship where shipsvc_customer_id = ?";
+		String sql = "select * from shipsvc where shipsvc_customer_id = ?";
 		Object[] data = { loginId };
 		return jdbcTemplate.query(sql, shipSvcMapper, data);
 	}

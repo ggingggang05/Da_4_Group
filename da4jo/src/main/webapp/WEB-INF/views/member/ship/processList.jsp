@@ -88,7 +88,7 @@
 							<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 							<li id="shipSvcAwbNumber">${shipSvcDto.shipSvcAwbNumber}</li>
 							<li id="shipSvcTotalPriceKrw">${shipSvcDto.shipSvcTotalPriceKrw}</li>
-							<li id="shipSvcDetail"><a href="detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+							<li id="shipSvcDetail"><a href="/mypage/ship/detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 배송 진행 중인 구매서가 있다면 닫는 태그 -->

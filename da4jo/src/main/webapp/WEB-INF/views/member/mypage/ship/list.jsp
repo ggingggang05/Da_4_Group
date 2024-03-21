@@ -61,7 +61,7 @@
 						</h2>
 					</div>
 				</c:if><!-- 배송 대행서 작성 내역이 없는 경우 닫는 태그 -->
-				<c:if test="${!empty poList}"><!-- 배송 대행서 작성 내역이 있는 경우 -->
+				<c:if test="${!empty shipList}"><!-- 배송 대행서 작성 내역이 있는 경우 -->
 					<div class="cell flex-cell">
 						<div class="cell searchArea w-75 left"><!-- 검색 기능 -->
 							<form action="list" method="get">
@@ -92,12 +92,12 @@
 					</ul>
 					
 				
-					<c:forEach var="shipDto" items="${shipList}">
+					<c:forEach var="shipSvcDto" items="${shipList}">
 						<ul class="menu menu-list">
 							<li id="shipSvcNo">${shipSvcDto.shipSvcNo}</li>
 							<li id="shipSvcItemEngName"><a href="/member/mypage/purchase/detail?shipSvcNo=${shipSvcDto.shipSvcNo}" >${shipSvcDto.shipSvcItemEngName}</a></li>
 							<li id="shipSvcItemCategory">${shipSvcDto.shipSvcItemCategory}</li>
-							<li id="shipSvcSdate"><fmt:formatDate value="${shipSvcDto.shipSvcSdate}" pattern="y년 M월 d일" /></li>
+							<li id="shipSvcSdate"><fmt:formatDate value="${shipSvcDto.shipSvcSDate}" pattern="y년 M월 d일" /></li>
 							<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 							<li id="shipSvcTotalPriceKrw"><fmt:formatNumber value="${shipSvcDto.shipSvcTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
 							<!-- 결제 -->
