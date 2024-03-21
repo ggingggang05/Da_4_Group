@@ -627,7 +627,7 @@
 							<img src="/image/cn_shop/taobao.jpg">
 						</a>
 						</li>
-						<li class="image-wrapper">
+						<li class="">
 						<a class="link" href="" target="_blank">
 							<img src="">
 						</a>
@@ -697,7 +697,7 @@
 							<img src="/image/es_shop/camper.jpg">
 						</a>
 						</li>
-						<li class="image-wrapper">
+						<li class="">
 						<a class="link" href="" target="_blank">
 							<img src="">
 						</a>
