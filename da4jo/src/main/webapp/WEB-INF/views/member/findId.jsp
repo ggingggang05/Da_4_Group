@@ -59,7 +59,7 @@
 			</c:if>
 	   </div>
 		<div class="cell">
-			<button type="submit" class="btn w-100"  style= "color: white">
+			<button type="submit" class="btn w-100"  style= "color: white" >
 				<i class="fa-solid fa-glasses" style= "border-bottom: none; color: white;"></i>
 				안경쓰고 찾아보기
 			</button>
