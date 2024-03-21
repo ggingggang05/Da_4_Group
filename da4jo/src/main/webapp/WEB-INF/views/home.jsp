@@ -307,27 +307,146 @@
 			<div class="swiper-pagination-custom"></div>
 		</div>
 		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<div class="us-wrapper">
-					<ul class="menu">
-						<li>
+			<div class="swiper-slide us">
+				<div class="link-wrapper">
+					<ul class="menu line">
+						<li class="image-wrapper">
 						<a class="link" href="https://www.amazon.com/" target="_blank">
-							<div class="image-wrapper">
-								<img src="/image/amazon.jpg">
-							</div>
+							<img src="/image/us_shop/amazon.jpg">
 						</a>
 						</li>
-						<li>
+						<li class="image-wrapper">
 						<a class="link" href="https://www.ebay.com/" target="_blank">
-							<div class="image-wrapper">
-								<img src="/image/ebay.jpg">
-							</div>
+							<img src="/image/us_shop/ebay.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.shopbop.com/" target="_blank">
+							<img src="/image/us_shop/shopbop.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.6pm.com/" target="_blank">
+							<img src="/image/us_shop/6pm.jpg">
+						</a>
+						</li>
+					</ul>
+					<ul class="menu line">
+						<li class="image-wrapper">
+						<a class="link" href="https://www.target.com/" target="_blank">
+							<img src="/image/us_shop/target.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://athleta.gap.com/" target="_blank">
+							<img src="/image/us_shop/gap.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.yoox.com/us/women" target="_blank">
+							<img src="/image/us_shop/yoox.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="http://www.ralphlauren.com/" target="_blank">
+							<img src="/image/us_shop/ralph_lauren.jpg">
+						</a>
+						</li>
+					</ul>
+					<ul class="menu line">
+						<li class="image-wrapper">
+						<a class="link" href="https://www.walmart.com/" target="_blank">
+							<img src="/image/us_shop/walmart.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.zappos.com/" target="_blank">
+							<img src="/image/us_shop/zappos.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.footlocker.com/" target="_blank">
+							<img src="/image/us_shop/Foot_locker.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.gymboree.com/home?lang=en_KR" target="_blank">
+							<img src="/image/us_shop/gymboree.jpg">
 						</a>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="swiper-slide">영국</div>
+			<div class="swiper-slide uk">
+				<div class="link-wrapper">
+					<ul class="menu line">
+						<li class="image-wrapper">
+						<a class="link" href="https://www.asos.com/" target="_blank">
+							<img src="/image/uk_shop/asos.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.ebay.co.uk/" target="_blank">
+							<img src="/image/uk_shop/ebay.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.asos.com/topshop/?ctaref=ts|ww|gb|web" target="_blank">
+							<img src="/image/uk_shop/topshop.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.amazon.co.uk/" target="_blank">
+							<img src="/image/uk_shop/amazon.jpg">
+						</a>
+						</li>
+					</ul>
+					<ul class="menu line">
+						<li class="image-wrapper">
+						<a class="link" href="https://www.boots.com/" target="_blank">
+							<img src="/image/uk_shop/boots.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.nealsyardremedies.com/" target="_blank">
+							<img src="/image/uk_shop/nealsyardremedies1.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.nealsyardremedies.com/" target="_blank">
+							<img src="/image/uk_shop/nealsyardremedies2.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.lush.com/uk/en" target="_blank">
+							<img src="/image/uk_shop/lush.jpg">
+						</a>
+						</li>
+					</ul>
+					<ul class="menu line">
+						<li class="image-wrapper">
+						<a class="link" href="https://www.harrods.com/en-gb" target="_blank">
+							<img src="/image/uk_shop/harrods.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.next.co.uk/cath-kidston" target="_blank">
+							<img src="/image/uk_shop/next.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.cos.com/ko-kr/index.html" target="_blank">
+							<img src="/image/uk_shop/cos.jpg">
+						</a>
+						</li>
+						<li class="image-wrapper">
+						<a class="link" href="https://www.selfridges.com/GB/en/" target="_blank">
+							<img src="/image/uk_shop/selfrideges.jpg">
+						</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 			<div class="swiper-slide">독일</div>
 			<div class="swiper-slide">일본</div>
 			<div class="swiper-slide">중국</div>
@@ -365,9 +484,24 @@
 	border: none;
 }
 
-.image-wrapper {
-	border: 1px solid #d8d8d8;
+.link-wrapper {
+	justify-content: center;
+	flex-wrap: wrap;
 }
+
+.line {
+	margin:10px;
+}/* 세로 ul에 마진*/
+
+.image-wrapper {
+    border: 1px solid #d8d8d8;
+}/* 이미지 감싸는 li에 테두리*/
+
+.image-wrapper img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+}/* 이미지가 li태그 안으로 들어가도록*/
 </style>
 <%-- 템플릿 페이지를 불러오는 코드 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
