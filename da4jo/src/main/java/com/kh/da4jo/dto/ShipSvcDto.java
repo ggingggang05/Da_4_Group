@@ -295,11 +295,11 @@ public class ShipSvcDto {
 	}// 원화금액 계산 환율이랑 외화 곱해서 이건 사용자 측에서 입력해서 관세기준 넘는지 확인 할 수 있을듯 
 	// 그리고 위의 원화 금액이 있어야 아래의 VAT 금액이 나옴
 	public double getVat() {
-		return  getItemPrice()*0.1;
+		return  shipSvcItemPriceKrw*0.1;
 	}
 	// 키로그램에 11.2달러인거에 원화로 곱해서 수수료 산출 여기에 + 10000원
 	public int getFee(){
-		return (int)((shipSvcItemWeight*11.2)*getShipSvcFxRate())+ 10000;
+		return (int)((getShipSvcItemWeight()*11.2)*1340)+ 10000;
 	}
 	// 상품가격은 고객이 물건 구매처에서 직접 결제하기때문에 다사줘에 결제 할 금액은 배송대행 수수료와 부가세만 존재
 	public int getTotalPrice() {

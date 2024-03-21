@@ -192,7 +192,7 @@
 							<div class="info-label">배송사</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="shipSvcShipper" value="${shipSvcDto.shipSvcShipper}">
+									<input type="text" name="shipSvcShipper">
 								</div>
 							</div>
 						</div>
@@ -200,8 +200,7 @@
 							<div class="info-label">송장번호</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="shipSvcAwbNumber"
-										value="${shipSvcDto.shipSvcAwbNumber}">
+									<input type="text" name="shipSvcAwbNumber">
 								</div>
 							</div>
 						</div>
@@ -209,8 +208,7 @@
 							<div class="info-label">메모</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="shipSvcAdminComment"
-										value="${shipSvcDto.shipSvcAdminComment}">
+									<input type="text" name="shipSvcAdminComment">
 								</div>
 							</div>
 						</div>

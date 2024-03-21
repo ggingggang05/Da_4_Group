@@ -344,17 +344,28 @@ public class ShipSvcDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 
-	// 주문정보 확인중일때 해외 센터에 물건 도착해서 관리자가 무게 측정해서 금액 얼만지 알려주는 구문
-	public boolean update(ShipSvcDto shipSvcDto) {
+	// 주문정보 확인중일때 해외 센터에 물건 도착해서 관리자가 무게 측정해서 계산 할수있게 db에 저장
+	public boolean updateInvoice(ShipSvcDto shipSvcDto) {
 		String sql = "update SHIPSVC "
-				+ "set SHIPSVC_ITEM_VAT=?, SHIPSVC_SERVICE_FEE=?, SHIPSVC_TOTAL_PRICE_KRW=?, SHIPSVC_STATUS=? ,"
-				+ "SHIPSVC_ITEM_WEIGHT = ? where shipsvc_no = ?";
+				+ "set SHIPSVC_ITEM_WEIGHT = ?, SHIPSVC_ITEM_PRICE_KRW = ? where shipsvc_no = ?";
 		Object[] data = { 
-				shipSvcDto.getShipSvcItemVat(), shipSvcDto.getShipSvcServiceFee(),shipSvcDto.getShipSvcTotalPriceKrw(),
-				shipSvcDto.getShipSvcStatus(), shipSvcDto.getShipSvcItemWeight(),shipSvcDto.getShipSvcNo()
+				shipSvcDto.getShipSvcItemWeight(),shipSvcDto.getShipSvcItemPriceKrw(),shipSvcDto.getShipSvcNo()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	// 오더디테일에서 회원에게 견적서 전송하면서 상태 변경 
+	public boolean sendingInvoice(ShipSvcDto shipSvcDto) {
+		String sql = "update SHIPSVC "
+				+ "set SHIPSVC_STATUS= '결제 대기 중', SHIPSVC_ITEM_VAT=?, SHIPSVC_SERVICE_FEE=?,"
+				+ "SHIPSVC_TOTAL_PRICE_KRW=? where shipsvc_no = ?";
+		Object[] data = { 
+				shipSvcDto.getShipSvcItemVat(), shipSvcDto.getShipSvcServiceFee(),
+				shipSvcDto.getShipSvcTotalPriceKrw(),shipSvcDto.getShipSvcNo()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
 
 	// 한국으로 관리자가 보내는 송장번호 업데이트 구문
 	public boolean updateAWB(ShipSvcDto shipSvcDto) {
@@ -368,7 +379,7 @@ public class ShipSvcDao {
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-
+	
 	// SHIPSVC+크레딧/포인트 연결 구매서
 	public ShipPaymentVO getPaymentInfo(int shipSvcNo) {
 		String sql = "SELECT " + " SHIPSVC.SHIPSVC_no, SHIPSVC.SHIPSVC_NAME_KOR, SHIPSVC.SHIPSVC_NAME_ENG, SHIPSVC.SHIPSVC_STATUS, "
