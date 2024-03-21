@@ -103,7 +103,7 @@
 								<!-- <div class="DateInput" style="display: none;">
 									<input type="text" name="startDate" placeholder="날짜 선택" value="$(settlementVO.poPayDate)">
 								</div> -->
-								<input type="search" name="keyword" placeholder="" value="${param.keyword}">
+								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar">
 								<button class="btn searchBtn">
 									<i class="fa-solid fa-search"></i>
 								</button>
