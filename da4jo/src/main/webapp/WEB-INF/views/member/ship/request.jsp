@@ -237,7 +237,10 @@
 			게시판으로 입고 확인요청을하시기 바랍니다.
 		</div>
 	</div>
-
+	<div class="cell w-100">
+		<a class="link" href="/document/delivery-step"><button type="button" class="btn">배송대행 신청방법 보러가기</button></a>
+	</div>
+	<br><br>
 	<div class="box_form">
 		<form name="form_agency_buy_write" id="form_agency_buy_write"
 			method="post" action="/member/ship/request">
@@ -500,50 +503,44 @@
 		<div class="info-head w-100">배송대행 상품정보 입력</div>
 	</div>
 	<div class="flex-cell">
-		<div class="cell sfont">
+		<div class="cell sfont left"  style="margin-bottom: 0px;">
 			<label for="shipSvcItemEngName">상품이름(영문)</label> <input type="text"
 				name="shipSvcItemEngName" class="tool w-100 line" id="shipSvcItemEngName"
 				placeholder="영어로 입력해주세요">
 		</div>
-		<div class="cell sfont">
+		<div class="cell sfont left" style="margin-bottom: 0px;">
 			<label for="shipSvcItemCategory">카테고리</label> <input type="text"
 				name="shipSvcItemCategory" class="tool w-100 line" id="shipSvcItemCategory"
 				placeholder="ex)가방">
 		</div>
-		<div class="cell sfont">
-			<label for="shipSvcItemOption1">옵션/색상</label> <input type="text"
-				name="shipSvcItemOption1" class="tool w-100 line" id="shipSvcItemOption1"
-				placeholder="ex)red">
-		</div>
-		<div class="cell sfont">
-			<label for="shipSvcItemOption2">옵션/사이즈</label> <input type="text"
-				name="shipSvcItemOption2" class="tool w-100 line" id="shipSvcItemOption2"
-				placeholder="ex)라지">
-		</div>
-		<div class="cell sfont">
+		<div class="cell sfont left" style="margin-bottom: 0px;">
 			<label for="shipSvcFx">금액(외화)</label> <input type="text" name="shipSvcFx"
 				class="tool w-100 line" id="shipSvcFx" placeholder="배송비 포함금액">
 		</div>
-		<div class="cell sfont">
+		<div class="cell sfont left" style="margin-bottom: 0px;">
 			<!-- 최소수량 1개에서 최대 100개로 설정해둠 -->
 			<label for="shipSvcQty">구매수량</label> <input type="number" name="shipSvcQty"
 				class="tool w-100 line" value="1" id="shipSvcQty" min="1" max="100">
 		</div>
 	</div>
+	<div class="flex-cell" >
+	<div class="cell left w-50 sfont ">
+		<label for="shipSvcItemCategory">운송사(본인이 업체로부터 받은)</label><input type="text" name="shipSvcUserShipper" class="tool w-100 line"
+			placeholder="(필수) 운송사를 입력하세요">
+	</div>
+	<div class="cell left w-50 sfont">
+		<label for="shipSvcItemCategory">트레킹넘버</label><input type="text" name="shipSvcUserAwbNumber" class="tool w-100 line"
+			placeholder="(필수) 트레킹넘버를 입력하세요">
+	</div>
+	</div>
 	<div class="cell">
 		<input type="text" name="shipSvcLink" class="tool w-100 line"
 			placeholder="(필수) 상품 URL을 입력하세요">
 	</div>
-	<div class="flex-cell">
-	<div class="cell left w-50">
-		<input type="text" name="shipSvcUserShipper" class="tool w-100 line"
-			placeholder="(필수) 운송사를 입력하세요">
-	</div>
-	<div class="cell left w-50">
-		<input type="text" name="shipSvcUserAwbNumber" class="tool w-100 line"
-			placeholder="(필수) 트레킹넘버를 입력하세요">
-	</div>
-	</div>
+		<div class="cell sfont">
+			<input type="text" name="shipSvcItemOption1" class="tool w-100 line" 
+			id="shipSvcItemOption1"	placeholder="기타사항을 입력하세요">
+		</div>
 	<div class="cell">
 		<input type="text" name="shipSvcDComment" class="tool w-100 line"
 			placeholder="배송요청사항을 입력하세요 (ex:경비실에 맡겨주세요)">
