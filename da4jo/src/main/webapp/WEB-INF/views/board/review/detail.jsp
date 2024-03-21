@@ -32,6 +32,10 @@
 .t2.width-fill {
 	background-color: white;
 }
+
+.hr {
+	color: fuchsia;
+}
 </style>
 
 <!-- jquery cdn -->
@@ -58,8 +62,10 @@
 	<jsp:include page="/WEB-INF/views/template/board-sidebar.jsp"></jsp:include>
 	<!-- 내용자리 -->
 	<div class="container inner-container">
-		<div class="content-head-text">
-			<i class="fa-solid fa-pause"></i>${reviewDto.reviewNo}번 리뷰글
+		<div class="content content-head">
+			<div class="content-head-text">
+				<i class="fa-solid fa-pause"></i> ${reviewDto.reviewNo}번 ${reviewDto.reviewWriter}님의 글
+			</div>
 		</div>
 
 
@@ -78,36 +84,43 @@
 			<div class="t2 width-fill py-10 px-10"">${reviewDto.reviewWriter}</div>
 		</div>
 
-		<h2>내용</h2>
-		<hr>
+		<div class="content content-head">
+			<div class="content-head-text mt-50">
+				<i class="fa-solid fa-pause"></i> 글 내용
+			</div>
+		</div>
 		<div class="cell" style="min-height: 250px">
 			${reviewDto.reviewContent}</div>
-		<hr>
-
+			
+		<div class="content content-head">
+			<div class="content-head-text mt-50"></div>
+		</div>
 
 		<div class="cell flex-cell auto-width">
 			<div class="cell">
-				<c:if
-					test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
-					<a class="btn" href="list">목록으로</a>
-					<a class="btn" href="write">리뷰글작성</a>
-					<a class="btn"
-						href="/board/review/edit?reviewNo=${reviewDto.reviewNo}">리뷰글수정</a>
-					<a class="btn negative"
-						href="/board/review/delete?reviewNo=${reviewDto.reviewNo}">리뷰글삭제</a>
-				</c:if>
-
+				<div class="score" data-max="5.0"
+										data-rate="${reviewDto.reviewStar}" style="font-size: 24px;"> </div>
 			</div>
 
 			<div class="cell right">
 				<div class="cell">
 					<label>작성일 : ${reviewDto.reviewWdate} </label> <label>조회수 :
 						${reviewDto.reviewVcount}</label>
-
-
 				</div>
+				
 			</div>
+			
 		</div>
+
+		<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
+			<div class="cell right">
+				<a class="btn" href="list">목록으로</a> <a class="btn" href="write">리뷰글작성</a>
+				<a class="btn"
+					href="/board/review/edit?reviewNo=${reviewDto.reviewNo}">리뷰글수정</a>
+				<a class="btn negative"
+					href="/board/review/delete?reviewNo=${reviewDto.reviewNo}">리뷰글삭제</a>
+			</div>
+		</c:if>
 	</div>
 </div>
 

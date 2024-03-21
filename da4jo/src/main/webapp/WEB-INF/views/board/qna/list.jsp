@@ -107,7 +107,7 @@ color: #d63031 !important;
  							
  							<c:choose>
  							<c:when test="${qnaDto.qnaStatus == '답변용글'}">
- 							<li></li>
+ 							<li><span>답글[관리자]</span></li>
  							</c:when>
  							<c:otherwise>
  							<li>${qnaDto.qnaWriter}</li>
@@ -122,8 +122,8 @@ color: #d63031 !important;
 				<div class="cell center flex-cell my-50 bottom-bar">
 					<form action="list" method="get">
 						<select class="btn" name="column">
-							<option value="qna_title"
-								${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
+							<option value="qna_no"
+								${param.column == 'qna_no' ? 'selected' : ''}>글번호</option>
 							<option value="qna_writer"
 								${param.column == 'qna_writer' ? 'selected' : ''}>작성자</option>
 							<option value="qna_content"
@@ -136,6 +136,8 @@ color: #d63031 !important;
 							<a href="/board/qna/write" class="btn">질문글쓰기</a>
 						</div>
 				</div>
+				
+				
 				<div class="cell">
 					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 				</div>
