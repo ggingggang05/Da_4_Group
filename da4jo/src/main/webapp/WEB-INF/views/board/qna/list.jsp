@@ -133,7 +133,7 @@ color: #d63031 !important;
 						<button class="searchBtn">검색</button>
 					</form>
 					<div class="cell right">
-							<a href="write" class="btn">질문글쓰기</a>
+							<a href="/board/qna/write" class="btn">질문글쓰기</a>
 						</div>
 				</div>
 				<div class="cell">

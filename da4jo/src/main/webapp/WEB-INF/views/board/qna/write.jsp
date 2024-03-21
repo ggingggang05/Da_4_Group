@@ -31,14 +31,7 @@
 
 		<h2>제목</h2>
 		<div>
-			<c:choose>
-				<c:when test="${param.qnaTarget == null}">
-					<input class="tool w-100" type="text" name="qnaTitle">
-				</c:when>
-				<c:otherwise>
-					<input class="tool w-100" type="text" name="qnaTitle" value="ㄴ">
-				</c:otherwise>
-			</c:choose>
+			<input class="tool w-100" type="text" name="qnaTitle">
 		</div>
 
 		<h2>내용</h2>
