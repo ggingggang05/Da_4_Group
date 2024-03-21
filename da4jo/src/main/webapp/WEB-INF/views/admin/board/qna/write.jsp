@@ -30,14 +30,14 @@
 			</div>
 		</c:if>
 
-		<h2>제목</h2>
+		<h3>제목</h3>
 		<div>
 			<input class="tool w-100" type="hidden" name="qnaTitle"
-					value="↳">
+					value="➜">
 			<input class="tool w-100" type="text" name="qnaTitle" ${targetDto.qnaTitle}>
 		</div>
 
-		<h2>내용</h2>
+		<h3>내용</h3>
 		<div>
 			<textarea class="imgArea" name="qnaContent"></textarea>
 		</div>

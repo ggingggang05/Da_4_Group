@@ -11,9 +11,15 @@
 		<h1>${qnaDto.qnaNo}번 Q&A</h1>
 	</div>
 	
-	<div class="cell">
-		<h2>제목 : ${qnaDto.qnaTitle}</h2>
-	</div>
+	<c:choose>
+	<c:when test="${qnaDto.qnaTarget != null}">
+	<div class="cell"></div>
+	</c:when>
+	<c:otherwise>
+	<div class="cell"><h2>제목 : ${qnaDto.qnaTitle}</h2></div>
+	</c:otherwise>
+	</c:choose>
+	
 
 	<div class="cell flex-cell auto-width">
 		<div class="cell">
@@ -38,7 +44,6 @@
 			<a class ="btn" href="write">질문글작성</a> 
 			<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 				<a class="btn" href="write?qnaTarget=${qnaDto.qnaNo}">답글쓰기</a>
-				<a class="btn" href="/board/qna/edit?qnaNo=${qnaDto.qnaNo}">질문글수정</a>
 				<a class="btn negative" href="/board/qna/delete?qnaNo=${qnaDto.qnaNo}">질문글삭제</a>
 			</c:if>
 			
