@@ -137,7 +137,7 @@ public class MemberController {
 		//로그인한 사용자의 QNA 글 개수 첨부
 		model.addAttribute("countQna", qnaDao.countEachMember(loginId));
 		//로그인한 사용자의 총 배송대행 구매서 작성 개수를 첨부
-		model.addAttribute("countShip", shipSvcDao.countEachMember(loginId));
+//		model.addAttribute("countShip", shipSvcDao.countEachMember(loginId));
 		
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
