@@ -52,6 +52,30 @@
 }
 </style>
 <script type="text/javascript">
+	$(document).ready(function() {
+		$(".weightInput").on("blur", function() {
+			var weight = $(this).val();
+			$.ajax({
+				type : "POST",// 데이터를 줘야해서 POST로 보내야함
+				url : "/rest/ship/getFee",
+				data : {
+					weight : weight
+				},
+				success : function(response) {
+					console.log(response.length);
+					$(".itemPrice").text(response.itemPrice); // 물건원화가격
+					$(".vat").text(response.vat); // 물건의 부가세
+					$(".serviceFee").text(response.fee); // 물건의 수수료
+					$(".totalPrice").text(response.totalPrice); // 결제금액
+				},
+				error: function(xhr, status, error) { // 엉키면...
+		            console.error("띠로리...");
+		        }
+			});
+		});
+	});
+</script>
+<script type="text/javascript">
 	$(function() {
 		if ($(".isBlock").text().trim() === "N") {
 			$(".isBlock").css("color", "rgb(71, 163, 255)");
@@ -65,7 +89,8 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-user"></i> ${shipSvcDto.shipSvcCustomerId} 님의 구매대행 신청서
+				<i class="fa-solid fa-user"></i> ${shipSvcDto.shipSvcCustomerId} 님의
+				구매대행 신청서
 			</div>
 		</div>
 		<div class="content content-body">
@@ -193,10 +218,19 @@
 				<form action="orderDetail" method="post" autocomplete="off">
 					<div class="info-body">
 						<div class="info-group">
+							<div class="info-label">상품무게</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									<input type="text" name="shipSvcItemWeight" class="weightInput">
+									<label> kg</label>
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
 							<div class="info-label">상품금액(원화)</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="shipSvcItemPriceKrw"
+									<input type="text" name="shipSvcItemPriceKrw" class="itemPrice"
 										value="${shipSvcDto.shipSvcItemPriceKrw}" readonly>
 								</div>
 							</div>
@@ -206,13 +240,12 @@
 							<div class="info-content-wrapper">
 								<div class="info-content">
 									<c:choose>
-										<c:when test="${shipSvcDto.shipSvcItemPriceKrw >= 200000}">
-											<input type="text" name="shipSvcItemVat"
-												value="${shipSvcDto.vat}" readonly>
+										<c:when test="${shipSvcDto.itemPrice >= 200000}">
+											<input type="text" name="shipSvcItemVat" class="vat"
+												value="${shipSvcDto.shipSvcItemVat}" readonly>
 										</c:when>
 										<c:otherwise>
-											<input type="text" name="shipSvcItemVat"
-												value="0" readonly>
+											<input type="text" name="shipSvcItemVat" value="0" readonly>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -222,8 +255,8 @@
 							<div class="info-label">수수료</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="shipSvcServiceFee"
-										value="${shipSvcDto.fee}" readonly>
+									<input type="text" name="shipSvcServiceFee" class="serviceFee"
+										value="${shipSvcDto.shipSvcServiceFee}" readonly>
 								</div>
 							</div>
 						</div>
@@ -231,13 +264,14 @@
 							<div class="info-label">결제금액</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="shipSvcTotalPriceKrw"
-										value="${shipSvcDto.totalPrice}" readonly>
+									<input type="text" name="shipSvcTotalPriceKrw" class="totalPrice"
+										value="${shipSvcDto.shipSvcTotalPriceKrw}" readonly>
 								</div>
 							</div>
 						</div>
 						<input type="hidden" name="shipSvcStatus" value="결제 대기 중">
-						<input type="hidden" name="shipSvcNo" value="${shipSvcDto.shipSvcNo}">
+						<input type="hidden" name="shipSvcNo"
+							value="${shipSvcDto.shipSvcNo}">
 						<div class="cell right">
 							<button type="submit" class="btn">사용자에게 전송</button>
 						</div>
@@ -251,6 +285,7 @@
 						<button class="btn">삭제</button>
 					</a>
 				</div>
+				
 			</div>
 		</div>
 	</div>
