@@ -29,12 +29,12 @@ public class MemberPoController {
 	@Autowired
 	private PoDao poDao;
 	
-	//구매 대행 신청서 목록
+	//구매 대행 신청서 목록 //주석처리는 날짜 검색 부분
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model,
 						HttpSession session) {
 		String loginId = (String)session.getAttribute("loginId");
-		
+		//int SearchMark=0;
 		//페이징을 PageVO에서 처리
 		//여기선 count 및 list만 처리함
 		int count = poDao.loginIdcount(pageVO, loginId);
@@ -44,9 +44,14 @@ public class MemberPoController {
 		List<PoDto> dateList = poDao.selectList(loginId);
 		poDao.compareDate(dateList);
 		
+		/*
+		 * if(column.equals("po_sdate")) { SearchMark = 1; }
+		 */
+
+		//List<PoDto> list = poDao.selectListByPaging(pageVO, loginId, SearchMark);
 		List<PoDto> list = poDao.selectListByPaging(pageVO, loginId);
 		model.addAttribute("poList", list);
-		
+
 		
 		return "/WEB-INF/views/member/mypage/purchase/list.jsp";
 	}

@@ -409,7 +409,21 @@ public class PoDao {
 			Object[] data = { pageVO.getKeyword(), loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
 
 			return jdbcTemplate.query(sql, poListMapper, data);
-		} else {// 목록
+		} 
+		/* 날짜 검색 시
+		 * else if (pageVO.isSearch() && SearchMark == 1) { String sql = "SELECT * " +
+		 * "FROM ( " + "SELECT rownum rn, TMP.* FROM ( " + "SELECT " +
+		 * "po_no, po_item_eng_name, po_item_category, " +
+		 * "po_sdate, po_status, po_awb_number, po_fx, " +
+		 * "po_service_fee, po_total_price_krw, po_item_price_krw " + "FROM po " +
+		 * "WHERE TRUNC(po_sdate) = TO_DATE(?, 'YYYY-MM-DD') AND po_customer_id = ? " +
+		 * "ORDER BY po_sdate DESC " + ") TMP " + ") WHERE rn BETWEEN ? AND ?"; Object[]
+		 * data = { pageVO.getKeyword(), loginId, pageVO.getBeginRow(),
+		 * pageVO.getEndRow() };
+		 * 
+		 * return jdbcTemplate.query(sql, poListMapper, data); }
+		 */
+		else {// 목록
 			String sql = "select * from (" + "select rownum rn, TMP.* from ( " + "select "
 					+ "po_no, po_item_eng_name, po_item_category, " + "po_sdate, po_status, po_awb_number, po_fx, "
 					+ "po_service_fee, po_total_price_krw, po_item_price_krw " + "from po " + "where po_customer_id=?"

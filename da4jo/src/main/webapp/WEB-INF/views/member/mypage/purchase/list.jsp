@@ -11,12 +11,12 @@
 <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 
 <!-- 기간별 검색 -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	// lightpick
 	$(function(){
 		var picker;
 
-		$(".searchSelect").on("input", function(){
+		$(".searchOption").on("input", function(){
 			console.log("input", $(this).val());
 			if($(this).val() == "po_sdate") {
 				//$(".DateInput").show();
@@ -34,7 +34,7 @@
 			}
 		});
 	});
-</script> -->
+</script>
 
 <style>
 .menu-type {
@@ -95,16 +95,16 @@
 					<div class="cell flex-cell">
 						<div class="cell searchArea w-75 left"><!-- 검색 기능 -->
 							<form action="list" method="get">
-								<select name="column" class="searchSelect">
-									<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''} >주문번호</option>
+								<select name="column" class="searchSelect searchOption">
+									<option value="po_no" ${empty param.column || param.column == 'po_no' ? 'selected' : ''} >주문번호</option>
 									<option value="po_status" ${param.column == 'po_status' ? 'selected' : ''}>상태</option>
-									<%-- <option value="po_sdate" ${param.column == 'po_sdate' ? 'selected' : ''}>일자별</option> --%>
+									<option value="po_sdate" ${param.column == 'po_sdate' ? 'selected' : ''}>일자별</option>
 								</select> 
 								<!-- <div class="DateInput" style="display: none;">
 									<input type="text" name="startDate" placeholder="날짜 선택" value="$(settlementVO.poPayDate)">
 								</div> -->
-								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar">
-								<button class="btn searchBtn">
+								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar" autocomplete="off">
+								<button class="btn searchBtn" type="submit">
 									<i class="fa-solid fa-search"></i>
 								</button>
 							</form>
