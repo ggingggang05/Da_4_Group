@@ -20,8 +20,31 @@
                 }
             }
         }
-
     </script>
+	 <script>
+		function saveLogin() {
+		    var memberId = document.querySelector('input[name="memberId"]').value;
+		    var memberPw = document.querySelector('input[name="memberPw"]').value;
+		    var autoLogin = document.getElementById('autoLogin').checked;
+		    var rememberId = document.getElementById('rememberId').checked;
+		    
+		    if (autoLogin) {
+		        document.cookie = "savedId=" + memberId + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+		        document.cookie = "savedPw=" + memberPw + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+		    } else {
+		        // 자동 로그인을 해제하면 쿠키를 제거합니다.
+		        document.cookie = "savedId=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+		        document.cookie = "savedPw=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+		    }
+		    
+		    if (rememberId) {
+		        document.cookie = "savedId=" + memberId + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+		    } else {
+		        // 아이디를 기억하지 않으면 쿠키를 제거합니다.
+		        document.cookie = "savedId=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+		    }
+		}
+	</script>
     <style>
    	
 		/*a태그 회원가입,아이디 찾기, 비밀번호 찾기*/
@@ -122,20 +145,26 @@
 	                </c:if>
 	            </div>
 	            
-	            <div class="cell floating-cell" style="padding-top: 1em;">
-	                    <div class="w-50 center">
-	                     	<a href="findId" style= "font-size: 13px;">아이디 찾기</a>
-	                    </div>
-	                    <div class="w-50 center" style= "border-left: 1px solid rgb(224, 224, 224)">
-	                        <a href="findPw" style= "font-size: 13px;">비밀번호 찾기</a>
-	                    </div>
-	               </div>
+       	     	<div class="cell floating-cell" style="padding-top: 1em;">
+                    <div class="w-50 center">
+                     	<a href="findId" style= "font-size: 13px;">아이디 찾기</a>
+                    </div>
+                    <div class="w-50 center" style= "border-left: 1px solid rgb(224, 224, 224)">
+                        <a href="findPw" style= "font-size: 13px;">비밀번호 찾기</a>
+                    </div>
+               </div>
+	            
+
+ 
 	
 	            <div class="cell" style="margin-top: 2em;">
-	                <button type="submit" class= "login tool w-100">
+	                <button type="submit" class= "login tool w-100" onclick="saveLogin()">
 	                    Log in
 	                </button>
 	            </div>
+	            
+
+	            
 	            <div style= "font-size: 14px; color: black; padding: 0.4em;  margin-bottom: 3em; margin-top: 2em;"class="center">
 	            	 <a href="/member/join">계정이 없으신가요?</a>
 	            </div>
