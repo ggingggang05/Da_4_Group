@@ -47,7 +47,7 @@ public class AdminShipSvcController {
 
 	@PostMapping("/orderInvoice")
 	public String orderInvoice(@ModelAttribute ShipSvcDto shipSvcDto) {
-		shipSvcDao.update(shipSvcDto);
+		shipSvcDao.updateInvoice(shipSvcDto);
 		return "redirect:orderList";
 	}
 	
@@ -61,7 +61,7 @@ public class AdminShipSvcController {
 
 	@PostMapping("/orderDetail")
 	public String orderDetail(@ModelAttribute ShipSvcDto shipSvcDto) {
-		shipSvcDao.update(shipSvcDto);
+		shipSvcDao.sendingInvoice(shipSvcDto);
 		return "redirect:orderList";
 	}
 	

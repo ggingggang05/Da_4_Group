@@ -214,15 +214,14 @@
 				<!-- 사용자에게 결제금액 전달해주는 창인데 자동계산되게 함
 				원래 200달러 이상만 부가세 대상인데 우리는 다른 통화가 있어서..
 				그것까지 고려하면 너무 어려워서 그냥 20만원 이상이면 부가세 내게 함
-				수수료는 상품금액(원화)의 5%에 기본수수료 1만원 더해서 출력 -->
+				 -->
 				<form action="orderDetail" method="post" autocomplete="off">
 					<div class="info-body">
 						<div class="info-group">
 							<div class="info-label">상품무게</div>
 							<div class="info-content-wrapper">
 								<div class="info-content">
-									<input type="text" name="shipSvcItemWeight" class="weightInput">
-									<label> kg</label>
+									<div class="info-content">${shipSvcDto.shipSvcItemWeight}</div>
 								</div>
 							</div>
 						</div>
@@ -242,7 +241,7 @@
 									<c:choose>
 										<c:when test="${shipSvcDto.itemPrice >= 200000}">
 											<input type="text" name="shipSvcItemVat" class="vat"
-												value="${shipSvcDto.shipSvcItemVat}" readonly>
+												value="${shipSvcDto.vat}" readonly>
 										</c:when>
 										<c:otherwise>
 											<input type="text" name="shipSvcItemVat" value="0" readonly>
@@ -256,7 +255,7 @@
 							<div class="info-content-wrapper">
 								<div class="info-content">
 									<input type="text" name="shipSvcServiceFee" class="serviceFee"
-										value="${shipSvcDto.shipSvcServiceFee}" readonly>
+										value="${shipSvcDto.fee}" readonly>
 								</div>
 							</div>
 						</div>
@@ -265,7 +264,7 @@
 							<div class="info-content-wrapper">
 								<div class="info-content">
 									<input type="text" name="shipSvcTotalPriceKrw" class="totalPrice"
-										value="${shipSvcDto.shipSvcTotalPriceKrw}" readonly>
+										value="${shipSvcDto.totalPrice}" readonly>
 								</div>
 							</div>
 						</div>

@@ -123,17 +123,12 @@
 								<input type="text" name="shipSvcItemWeight">
 							</div>
 						</div>
-						<div class="info-group pt-15">
-							<div class="info-label">총 결제금액</div>
-							<div class="info-content-wrapper">
-								<div class="info-content">${shipSvcDto.shipSvcTotalPriceKrw}</div>
-							</div>
-						</div>
 						<div class="cell center pt-15">
 							<input type="hidden" name="shipSvcNo"
 								value="${shipSvcDto.shipSvcNo}">
 							<button type="submit" class="btn">계산하기</button>
 						</div>
+						
 					</form>
 				</div>
 			</div>
