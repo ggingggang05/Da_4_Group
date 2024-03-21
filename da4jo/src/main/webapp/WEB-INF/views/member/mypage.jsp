@@ -84,7 +84,7 @@ $(function(){
 						</div>
 						<div class="title title-body mt-10">
 							<h3>${countPo} 건</h3>
-							<a class="btn w-100 btnMypage " href="mypage/purchase/list">작성하기</a>
+							<a class="btn w-100 btnMypage " href="/member/po/request">작성하기</a>
 							<a class="btn w-100 btnMypage " href="mypage/purchase/list">내 신청서 보기</a>
 						</div>
 					</div>
@@ -93,6 +93,9 @@ $(function(){
 							 <a class="link">배송대행 신청서</a>
 						</div>
 						<div class="title title-body mt-10"> <!-- 내용 -->
+							<h3>${countShip} 건</h3>
+							<a class="btn w-100 btnMypage " href="/member/ship/request">작성하기</a>
+							<a class="btn w-100 btnMypage " href="mypage/ship/list">내 신청서 보기</a>
 						</div>
 					</div>
 					<div class="cell menuBox w-20"> <!-- 메뉴3 -->
