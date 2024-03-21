@@ -5,6 +5,37 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- lightpick CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
+<!-- 기간별 검색 -->
+<!-- <script type="text/javascript">
+	// lightpick
+	$(function(){
+		var picker;
+
+		$(".searchSelect").on("input", function(){
+			console.log("input", $(this).val());
+			if($(this).val() == "po_sdate") {
+				//$(".DateInput").show();
+				picker = new Lightpick({
+				    field: $("[name=keyword]")[0], //검색일
+				    singleDate: true,
+				    format: "YYYY-MM-DD", //검색 형태
+				});
+			} 
+			else {
+				//$(".DateInput").hide();
+				if(picker) {
+					picker.destroy();				
+				}
+			}
+		});
+	});
+</script> -->
+
 <style>
 .menu-type {
 	margin: 0px !important;
@@ -20,7 +51,6 @@
 
 
 </style>
-
 
 <script type="text/javascript">    
      $(function(){
@@ -66,11 +96,14 @@
 						<div class="cell searchArea w-75 left"><!-- 검색 기능 -->
 							<form action="list" method="get">
 								<select name="column" class="searchSelect">
-									<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''}>주문번호</option>
+									<option value="po_no" ${param.column == 'po_no' ? 'selected' : ''} >주문번호</option>
 									<option value="po_status" ${param.column == 'po_status' ? 'selected' : ''}>상태</option>
-									<option value="po_sdate" ${param.column == 'po_sdate' ? 'selected' : ''}>작성일</option>
+									<%-- <option value="po_sdate" ${param.column == 'po_sdate' ? 'selected' : ''}>일자별</option> --%>
 								</select> 
-								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar">
+								<!-- <div class="DateInput" style="display: none;">
+									<input type="text" name="startDate" placeholder="날짜 선택" value="$(settlementVO.poPayDate)">
+								</div> -->
+								<input type="search" name="keyword" placeholder="" value="${param.keyword}">
 								<button class="btn searchBtn">
 									<i class="fa-solid fa-search"></i>
 								</button>

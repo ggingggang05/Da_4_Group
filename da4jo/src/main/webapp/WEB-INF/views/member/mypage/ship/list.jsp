@@ -68,7 +68,7 @@
 								<select name="column" class="searchSelect">
 									<option value="shipsvc_no" ${param.column == 'shipsvc_no' ? 'selected' : ''}>주문번호</option>
 									<option value="shipsvc_status" ${param.column == 'shipsvc_status' ? 'selected' : ''}>상태</option>
-									<option value="shipsvc_sdate" ${param.column == 'shipsvc_sdate' ? 'selected' : ''}>작성일</option>
+									<%-- <option value="shipsvc_sdate" ${param.column == 'shipsvc_sdate' ? 'selected' : ''}>작성일</option> --%>
 								</select> 
 								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar">
 								<button class="btn searchBtn">
