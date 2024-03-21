@@ -47,14 +47,6 @@
 <br>
 <br>
 <div class="container container-body">
-	<!-- 마이페이지 헤더 -->
-	<div class="container inner-container">
-		<div class="content content-head">
-			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${memberDto.memberId}님의 문의내역
-			</div>
-		</div>
-	</div>
 		<!-- 왼쪽 내용 -->
 	<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
 
@@ -62,7 +54,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 나의 문의내역
+				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 리뷰내역
 			</div>
 		</div>
 		<div class="content content-body">
@@ -70,13 +62,13 @@
 				<c:if test="${empty reviewList}">
 					<!-- 구매서 작성 내역이 없는 경우 -->
 					<div class="cell center mt-30">
-						<i class="fa-regular fa-face-sad-tear fa-3x"></i>
+						<i class="fa-regular fa-circle-xmark fa-3x"></i>
 						<h2>남기신 후기가 없습니다</h2>
 					</div>
 					<div class="cell center">
 						<h2>
 							<a href="/member/board/review" class="btn"> <i
-								class="fa-solid fa-paper" style="color: #B2BC76;"></i> 리뷰 작성하러
+								class="fa-solid fa-paper" style="color: #B2BC76;"></i> 후기 작성하러
 								가기
 							</a>
 						</h2>
