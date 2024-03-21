@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.kh.da4jo.dto.ReviewDto;
+import com.kh.da4jo.mapper.BestReviewVOMapper;
 import com.kh.da4jo.mapper.ReviewMapper;
+import com.kh.da4jo.vo.BestReviewVO;
 
 @Repository
 public class ReviewDao {
@@ -127,4 +129,17 @@ public class ReviewDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	@Autowired
+	BestReviewVOMapper bestReviewVOMapper;
+	//베스트리뷰(5점 중 최근 3명)
+	public List<BestReviewVO> getBestReview() {
+		String sql = "SELECT REVIEW_NO, REVIEW_WRITER "
+				+ "FROM ("
+				+ "SELECT REVIEW_NO, REVIEW_WRITER, ROW_NUMBER() OVER (ORDER BY REVIEW_WDATE DESC) AS RN "
+				+ "FROM REVIEW "
+				+ "WHERE review_star = 5 "
+				+ ") sub "
+				+ "WHERE RN <= 3";
+		return jdbcTemplate.query(sql, bestReviewVOMapper);
+	}
 }

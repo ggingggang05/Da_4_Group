@@ -31,10 +31,12 @@
 				</div>
 				<div class="cell currency">
 					<h3>
-						환율안내 <span>/ Exchange rate</span>
+						다사조 <span>/ da4jo</span>
 					</h3>
 					<div class="cell center">
-						<h1>환율 표 자리</h1>
+						<a href="/">
+							<img src="/image/logotemplate.png" width="350px">
+						</a>
 					</div>
 				</div>
 				<script type="text/javascript">
