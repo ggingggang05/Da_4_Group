@@ -12,6 +12,7 @@ import com.kh.da4jo.interceptor.NoticeVcountInterceptor;
 import com.kh.da4jo.interceptor.QnaOwnerInterceptor;
 import com.kh.da4jo.interceptor.QnaVcountInterceptor;
 import com.kh.da4jo.interceptor.ReviewOwnerInterceptor;
+import com.kh.da4jo.interceptor.ReviewValidInterceptor;
 import com.kh.da4jo.interceptor.ReviewVcountInterceptor;
 
 @Configuration
@@ -33,6 +34,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	private ReviewVcountInterceptor reviewVcountInterceptor;
 	@Autowired
 	private QnaVcountInterceptor qnaVcountInterceptor;
+	@Autowired
+	private ReviewValidInterceptor reviewValidInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -60,6 +63,11 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/board/qna/write",
 						"/board/review/write",
 						"/member/po/request"
+						);
+		//구매이력 중 배송완료 가 없으면(서비스를 이용한 적 없으면) 리뷰 금지
+		registry.addInterceptor(reviewValidInterceptor)
+						.addPathPatterns(
+						"/board/review/write"
 						);
 		//QnA 본인 글만 수정, 삭제
 		registry.addInterceptor(QnaOwnerInterceptor)

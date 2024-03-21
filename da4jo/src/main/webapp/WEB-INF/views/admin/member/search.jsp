@@ -8,6 +8,20 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 
+<!-- select2 cdn -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$(".searchSelect").select2({
+		minimumResultsForSearch : Infinity
+	//selelct창에 검색 바 유무(주석처리 시 생김)
+	});
+});
+</script>
 
 <style>
 .menu-type {

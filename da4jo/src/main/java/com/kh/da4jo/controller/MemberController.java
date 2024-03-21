@@ -99,7 +99,8 @@ public class MemberController {
 		//결과 처리
 		if(isValid) {
 			session.setAttribute("loginId",	findDto.getMemberId());
-			session.setAttribute("loginLevel",	findDto.getMemberLevel());
+			session.setAttribute("loginLevel",findDto.getMemberLevel());
+			session.setAttribute("hasServiceHistory", memberDao.hasServiceHistory(findDto.getMemberId()));
 			
 			//최종 로그인 시각 갱신
 			memberDao.updateMemberLoginDate(findDto.getMemberId());

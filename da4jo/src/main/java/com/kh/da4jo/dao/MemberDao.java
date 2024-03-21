@@ -176,5 +176,20 @@ public class MemberDao {
 		Object[] data = { memberId, imgNo };
 		jdbcTemplate.update(sql, data);
 	}
-
+	
+	//회원이 우리 서비스를 이용한적(배송완료) 있는지
+	public int hasServiceHistory(String memberId) {
+		String sql = "SELECT COUNT(*) "
+				+ "FROM ("
+				+ "SELECT SHIPSVC.SHIPSVC_CUSTOMER_ID "
+				+ "FROM SHIPSVC "
+				+ "WHERE SHIPSVC.SHIPSVC_STATUS = '배송완료' AND SHIPSVC.SHIPSVC_CUSTOMER_ID = ? "
+				+ "UNION ALL "
+				+ "SELECT PO.PO_CUSTOMER_ID "
+				+ "FROM PO "
+				+ "WHERE PO.PO_STATUS = '배송완료' AND PO.PO_CUSTOMER_ID = ?"
+				+ ")";
+		Object[] datas = {memberId, memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, datas);
+	}
 }
