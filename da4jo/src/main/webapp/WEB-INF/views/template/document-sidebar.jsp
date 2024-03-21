@@ -46,6 +46,11 @@
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
+					<a href="/document/delivery-address" class="link main-title">배송 대행지 목록</a>
+				</div>
+			</div>
+			<div class="title-body-main">
+				<div class="title-body-text">
 					<a href="/document/fee-info" class="link main-title">수수료 및 요금표</a>
 				</div>
 			</div>

@@ -43,4 +43,8 @@ public class DocumentController
 	public String feeInfo() {
 		return "/WEB-INF/views/document/fee-info.jsp";
 	}
+	@RequestMapping("/delivery-address")
+	public String deliveryAddress() {
+		return "/WEB-INF/views/document/delivery-address.jsp";
+	}
 }

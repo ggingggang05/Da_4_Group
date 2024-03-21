@@ -48,7 +48,8 @@
 <script type="text/javascript">
 	$(function() {
 		$(".searchSelect").select2({
-			minimumResultsForSearch : Infinity //selelct창에 검색 바 유무(주석처리 시 생김)
+			minimumResultsForSearch : Infinity
+		//selelct창에 검색 바 유무(주석처리 시 생김)
 		});
 	});
 </script>
@@ -74,6 +75,10 @@
 	color: #2D3436;
 	padding: 0.5em;
 	position: relative;
+}
+
+.head-middle {
+	height: 80px;
 }
 
 .home>a {
@@ -161,9 +166,9 @@
 
 							for (var i = 0; i < response.length; i++) {
 								var tag = $("<img>").attr("src",
-										"/download?imgNo=" + response[i])
-										.attr("data-key", response[i])
-										.addClass("server-img");
+										"/download?imgNo=" + response[i]).attr(
+										"data-key", response[i]).addClass(
+										"server-img");
 								$(".imgArea").summernote("insertNode", tag[0]);
 							}
 						}
@@ -208,11 +213,90 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="cell center">
-				<a href="/">
-					<img src="/image/로고템플릿cut.png" width="100px">
-				</a>
+		<div class="head-middle">
+			<div class="nav container">
+				<ul class="menu cell center">
+					<li class="us-or nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_us.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>미국(OR)</strong></span>
+							</div>
+						</a>
+					</li>
+					<li class="us-nj nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_us.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>미국(NJ)</strong></span>
+							</div>
+						</a>
+					</li>
+					<li class="jp nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_jp.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>일본(JP)</strong></span>
+							</div>
+						</a>
+					</li>
+					<li class="uk nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_uk.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>영국(UK)</strong></span>
+							</div>
+						</a>
+					</li>
+					<li class="de nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_de.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>독일(DE)</strong></span>
+							</div>
+						</a>
+					</li>
+					<li class="es nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_es.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>스페인(ES)</strong></span>
+							</div>
+						</a>
+					</li>
+					<li class="cn nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_cn.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>중국(CN)</strong></span>
+							</div>
+						</a>
+					</li>
+					<li class="au nation">
+						<a href="/document/delivery-address" class="link">
+							<div class="nation-icon">
+								<img src="/image/top_iso_au.png">
+							</div>
+							<div class="nation-text">
+								<span><strong>호주(AU)</strong></span>
+							</div>
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="head-bottom">
@@ -228,8 +312,8 @@
 
 					<li><a href="/board/review/list">이용후기</a></li>
 
-					<li><a href="/member/po/request"><button class="btn delivery">배송대행
-								신청하기</button></a></li>
+					<li><a href="/member/po/request"><button
+								class="btn delivery">배송대행 신청하기</button></a></li>
 
 				</ul>
 			</div>
