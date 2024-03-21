@@ -555,7 +555,27 @@ textarea.tool.tool-fixed {
 .contour li:last-child::after {
     display: none;
 }
-
+/* 상단 배송대행 주소 구분선*/
+.nation::after {
+	content: "";
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    /* 조절해서 원하는 간격 설정 */
+    height: 70px;
+    /* 구분선의 높이 조절 */
+    width: 1px;
+    /* 구분선의 너비 조절 */
+    background-color: #d8d8d8;
+    /* 연한 회색 */
+    transform: translateY(-50%);
+}
+.nation:last-child::after {
+	display: none;
+}
+.nation-text {
+	font-size: 14px;
+}
 /* 메뉴 안에 있는 모든 ul 태그에 대한 디자인 초기화 */
 .menu, 
 .menu ul {

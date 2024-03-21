@@ -75,7 +75,9 @@
 	padding: 0.5em;
 	position: relative;
 }
-
+.head-middle {
+	height: 80px;
+}
 .home>a {
 	font-size: 30px;
 	font-weight: 800;
@@ -208,11 +210,42 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="cell center">
-				<a href="/">
-					<img src="/image/로고템플릿cut.png" width="100px">
-				</a>
+		<div class="head-middle">
+			<div class="nav container">
+				<ul class="menu cell center">
+					<li class="us-or nation">
+						<div class="nation-icon"><img src="/image/top_iso_us.png"></div>
+						<div class="nation-text"><span><strong>미국(OR)</strong></span></div>
+					</li>
+					<li class="us-nj nation">
+						<div class="nation-icon"><img src="/image/top_iso_us.png"></div>
+						<div class="nation-text"><span><strong>미국(NJ)</strong></span></div>
+					</li>
+					<li class="jp nation">
+						<div class="nation-icon"><img src="/image/top_iso_jp.png"></div>
+						<div class="nation-text"><span><strong>일본(JP)</strong></span></div>
+					</li>
+					<li class="uk nation">
+						<div class="nation-icon"><img src="/image/top_iso_uk.png"></div>
+						<div class="nation-text"><span><strong>영국(UK)</strong></span></div>
+					</li>
+					<li class="de nation">
+						<div class="nation-icon"><img src="/image/top_iso_de.png"></div>
+						<div class="nation-text"><span><strong>독일(DE)</strong></span></div>
+					</li>
+					<li class="es nation">
+						<div class="nation-icon"><img src="/image/top_iso_es.png"></div>
+						<div class="nation-text"><span><strong>스페인(ES)</strong></span></div>
+					</li>
+					<li class="cn nation">
+						<div class="nation-icon"><img src="/image/top_iso_cn.png"></div>
+						<div class="nation-text"><span><strong>중국(CN)</strong></span></div>
+					</li>
+					<li class="au nation">
+						<div class="nation-icon"><img src="/image/top_iso_au.png"></div>
+						<div class="nation-text"><span><strong>호주(AU)</strong></span></div>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="head-bottom">
