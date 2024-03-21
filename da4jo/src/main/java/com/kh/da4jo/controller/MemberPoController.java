@@ -133,7 +133,6 @@ public class MemberPoController {
 		String loginId = (String)session.getAttribute("loginId");
 		
 		int count = poDao.shippingCount(pageVO, loginId);
-		System.out.println(count);
 		pageVO.setCount(count);
 		
 		List<PoDto> list = poDao.selectShippingListByPaging(pageVO, loginId);
@@ -158,8 +157,7 @@ public class MemberPoController {
 	}
 	
 	@RequestMapping("/updateCancelStatus")
-	public String delete(@RequestParam int poNo,
-						@RequestParam String poStatus) {
+	public String delete(@RequestParam int poNo) {
 		//주문 취소 버튼을 누른 경우
 		poDao.updateCancelStatus(poNo); //상태 업데이트
 		return "redirect:list";
