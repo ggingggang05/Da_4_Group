@@ -54,14 +54,14 @@
 			<%-- 검색창 --%>
 			<div class="cell center my-50">
 				<form action="list" method="get">
-					<select class="btn" name="column">
+					<select class="searchSelect" name="column">
 						<option value="notice_title"
 							${param.column == 'notice_title' ? 'selected' : ''}>제목</option>
 						<option value="notice_content"
 							${param.column == 'notice_content' ? 'selected' : ''}>내용</option>
-					</select> <input class="tool w-50" type="search" name="keyword"
+					</select> <input class="searchBar w-50" type="search" name="keyword"
 						placeholder="검색어 입력" required value="${param.keyword}">
-					<button class="btn">검색</button>
+					<button class="btn searchBtn">검색</button>
 				</form>
 				<br>
 				<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
