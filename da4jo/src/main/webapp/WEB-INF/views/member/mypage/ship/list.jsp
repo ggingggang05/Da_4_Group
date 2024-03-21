@@ -43,7 +43,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 배송대행 신청서 목록
+				<i class="fa-solid fa-list" style="color: #6c6e6e;"></i> ${sessionScope.loginId}님의 배송대행 신청서 목록
 			</div>
 		</div>
 		<div class="content content-body">
@@ -89,37 +89,17 @@
 							<li id="shipSvcSdate"><strong>작성일</strong></li>
 							<li id="shipSvcStatus"><strong>상태</strong></li>
 							<li id="shipSvcTotalPriceKrw"><strong>최종 결제금액</strong></li>
-							<li id="shipSvcPayment"><strong>결제하기</strong></li>
 						</ul>
 						
 					
 						<c:forEach var="shipSvcDto" items="${shipList}">
 							<ul class="menu menu-list">
 								<li id="shipSvcNo">${shipSvcDto.shipSvcNo}</li>
-								<li id="shipSvcItemEngName"><a href="/member/mypage/purchase/detail?shipSvcNo=${shipSvcDto.shipSvcNo}" >${shipSvcDto.shipSvcItemEngName}</a></li>
+								<li id="shipSvcItemEngName"><a href="detail?shipSvcNo=${shipSvcDto.shipSvcNo}" >${shipSvcDto.shipSvcItemEngName}</a></li>
 								<li id="shipSvcItemCategory">${shipSvcDto.shipSvcItemCategory}</li>
 								<li id="shipSvcSdate"><fmt:formatDate value="${shipSvcDto.shipSvcSDate}" pattern="y년 M월 d일" /></li>
 								<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 								<li id="shipSvcTotalPriceKrw"><fmt:formatNumber value="${shipSvcDto.shipSvcTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
-								<!-- 결제 -->
-								<c:choose>
-									<c:when test="${shipSvcDto.shipSvcStatus != '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->
-										<!-- 결제 창 이동 막기 -->
-										<li id="shipSvcPayment" class="payAlert">
-											<a href="#" style="color: #B2BC76;">
-												<i class="fa-solid fa-wallet"></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<!-- 결제 창으로 이동 -->
-										<li id="shipSvcPayment">
-											<a href="payment?shipSvcNo=${shipSvcDto.shipSvcNo}" style="color: #B2BC76;">
-												<i class="fa-solid fa-wallet"></i>
-											</a> 
-										</li>
-									</c:otherwise>
-								</c:choose>
 							</ul>
 						</c:forEach>					
 					</div>

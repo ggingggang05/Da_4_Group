@@ -37,6 +37,7 @@ public class MemberShipController {
 		
 		int count = shipSvcDao.userListCount(pageVO, loginId);
 		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
 		
 		List<ShipSvcDto> dataList = shipSvcDao.selectList(loginId);
 		shipSvcDao.compareDate(dataList);
@@ -70,6 +71,7 @@ public class MemberShipController {
 		
 		int count = shipSvcDao.shippingCount(pageVO, loginId);
 		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
 		
 		List<ShipSvcDto> list = shipSvcDao.selectShippingListByPaging(pageVO, loginId);
 		model.addAttribute("shipList", list);

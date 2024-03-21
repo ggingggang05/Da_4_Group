@@ -67,7 +67,7 @@
 		<div class="container inner-container">
 			<div class="content content-head">
 				<div class="content-head-text">
-					<i class="fa-solid fa-user"></i>${session.loginId}님의 구매서 목록
+					<i class="fa-solid fa-money-check-dollar" style="color: #6c6e6e;"></i> ${sessionScope.loginId}님 결제
 				</div>
 			</div>
 			<div class="content content-body">
