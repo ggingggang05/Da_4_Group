@@ -81,7 +81,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i>${session.loginId}님의 구매서
+				<i class="fa-solid fa-file-circle-check" style="color: #6c6e6e;"></i> ${sessionScope.loginId}님의 구매서
 			</div>
 		</div>
 	</div>

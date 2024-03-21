@@ -51,7 +51,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 배송현황
+				<i class="fa-solid fa-truck-fast" style="color: #6c6e6e;"></i> ${sessionScope.loginId}님의 배송현황
 			</div>
 		</div>
 		<div class="content content-body">

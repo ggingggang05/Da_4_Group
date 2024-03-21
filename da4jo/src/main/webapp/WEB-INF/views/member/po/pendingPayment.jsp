@@ -51,7 +51,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 결제 대기 중인 주문서
+				<i class="fa-solid fa-list" style="color: #6c6e6e;"></i> ${sessionScope.loginId}님의 결제 대기 중인 주문서
 			</div>
 		</div>
 		<div class="content content-body">
@@ -78,6 +78,7 @@
 						<li id="poStatus"><strong>상태</strong></li>
 						<li id="poTotalPriceKrw"><strong>결제금액</strong></li>
 						<li id="poDetail"><strong>자세히 보기</strong></li>
+						<li id="poPayment"><strong>결제하기</strong></li>
 					</ul>	
 				
 					<c:forEach var="poDto" items="${poList}">
@@ -86,7 +87,26 @@
 							<li id="poItemEngName">${poDto.poItemEngName}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poTotalPriceKrw">${poDto.poTotalPriceKrw}</li>
-							<li id="poDetail"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+							<li id="poDetail"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
+							<!-- 결제 -->
+							<c:choose>
+								<c:when test="${poDto.poStatus != '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->
+									<!-- 결제 창 이동 막기 -->
+									<li id="poPayment" class="payAlert">
+										<a href="#" style="color: #60A1F855;">
+											<i class="fa-solid fa-wallet"></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<!-- 결제 창으로 이동 -->
+									<li id="poPayment">
+										<a href="payment?poNo=${poDto.poNo}" style="color: #60A1F855;">
+											<i class="fa-solid fa-wallet"></i>
+										</a> 
+									</li>
+								</c:otherwise>
+							</c:choose>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 주문정보 확인 중, 결제 대기 중인 구매서가 있다면 닫는 태그 -->

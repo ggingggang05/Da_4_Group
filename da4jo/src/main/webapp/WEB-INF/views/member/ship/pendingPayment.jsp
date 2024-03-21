@@ -51,7 +51,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 결제 대기 중인 배송대행 주문서
+				<i class="fa-solid fa-list" style="color: #6c6e6e;"></i> ${sessionScope.loginId}님의 결제 대기 중인 배송대행 주문서
 			</div>
 		</div>
 		<div class="content content-body">
@@ -78,6 +78,7 @@
 						<li id="shipSvcStatus"><strong>상태</strong></li>
 						<li id="shipSvcTotalPriceKrw"><strong>결제금액</strong></li>
 						<li id="shipSvcDetail"><strong>자세히 보기</strong></li>
+						<li id="shipSvcPayment"><strong>결제하기</strong></li>
 					</ul>	
 				
 					<c:forEach var="shipSvcDto" items="${shipList}">
@@ -86,7 +87,26 @@
 							<li id="shipSvcItemEngName">${shipSvcDto.shipSvcItemEngName}</li>
 							<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 							<li id="shipSvcTotalPriceKrw">${shipSvcDto.shipSvcTotalPriceKrw}</li>
-							<li id="shipSvcDetail"><a href="detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+							<li id="shipSvcDetail"><a href="detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
+							<!-- 결제 -->
+							<c:choose>
+								<c:when test="${shipSvcDto.shipSvcStatus != '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->
+									<!-- 결제 창 이동 막기 -->
+									<li id="shipSvcPayment" class="payAlert">
+										<a href="#" style="color: #60A1F855;">
+											<i class="fa-solid fa-wallet"></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<!-- 결제 창으로 이동 -->
+									<li id="shipSvcPayment">
+										<a href="payment?shipSvcNo=${shipSvcDto.shipSvcNo}" style="color: #60A1F855;">
+											<i class="fa-solid fa-wallet"></i>
+										</a> 
+									</li>
+								</c:otherwise>
+							</c:choose>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 주문정보 확인 중, 결제 대기 중인 구매서가 있다면 닫는 태그 -->

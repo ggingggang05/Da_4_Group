@@ -82,7 +82,7 @@
 		<div class="container inner-container">
 			<div class="content content-head">
 				<div class="content-head-text">
-					<i class="fa-solid fa-user"></i>${session.loginId}님의 배송대행 신청서
+					<i class="fa-solid fa-file-circle-check" style="color: #6c6e6e;"></i> ${sessionScope.loginId}님의 배송대행 신청서
 				</div>
 			</div>
 			<!-- 구매자 정보 -->
@@ -151,7 +151,7 @@
 				</div>
 				<div class="info-body">
 					<div class="info-group">
-						<div class="info-label">구매대행정보</div>
+						<div class="info-label">배송대행정보</div>
 						<div class="info-content-wrapper">
 							<div class="info-content">국가 ${shipSvcDto.shipSvcCountry}</div>
 							<div class="info-content">통화 ${shipSvcDto.shipSvcCurrency}</div>
@@ -203,6 +203,24 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="info-group">
+						<div class="info-label">배송회사</div>
+						<div class="info-content-wrapper">
+							<div class="info-content">
+								${shipSvcDto.shipSvcUserShipper}
+							</div>
+						</div>
+					</div>
+					<div class="info-group">
+						<div class="info-label">송장 번호</div>
+						<div class="info-content-wrapper">
+							<div class="info-content">
+								${shipSvcDto.shipSvcUserAwbNumber}
+							</div>
+						</div>
+					</div>
+					
 				</div>
 				<!-- 결제정보 -->
 				<div class="content content-body">
