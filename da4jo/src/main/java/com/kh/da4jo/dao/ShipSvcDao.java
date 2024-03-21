@@ -8,15 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.da4jo.dto.ShipSvcDto;
 import com.kh.da4jo.mapper.DailyDetailVOMapper;
-import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.SettlementVOMapper;
+import com.kh.da4jo.mapper.ShipPaymentVOMapper;
 import com.kh.da4jo.mapper.ShipSvcListMapper;
 import com.kh.da4jo.mapper.ShipSvcMapper;
 import com.kh.da4jo.mapper.VatListVOMapper;
 import com.kh.da4jo.vo.DailyDetailVO;
 import com.kh.da4jo.vo.PageVO;
-import com.kh.da4jo.vo.PaymentVO;
 import com.kh.da4jo.vo.SettlementVO;
+import com.kh.da4jo.vo.ShipPaymentVO;
 import com.kh.da4jo.vo.VatListVO;
 
 @Repository
@@ -24,7 +24,7 @@ public class ShipSvcDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
-	private PaymentVOMapper paymentVOMapper;
+	private ShipPaymentVOMapper shipPaymentVOMapper;
 	@Autowired
 	private SettlementVOMapper settlementVOMapper;
 	@Autowired
@@ -248,7 +248,7 @@ public class ShipSvcDao {
 	}
 
 	// 카운트 - 로그인한 사용자의 구매서 정보 조회를 위해 목록일 경우와 검색일 경우 각각 구현
-	public int loginIdcount(PageVO pageVO, String memberId) {
+	public int userListCount(PageVO pageVO, String memberId) {
 		if (pageVO.isSearch()) {// 검색
 			String sql = "select count(*) from SHIPSVC " + "where instr(" + pageVO.getColumn()
 					+ ", ?) > 0 and SHIPSVC_customer_id=?";
@@ -371,14 +371,14 @@ public class ShipSvcDao {
 	}
 
 	// SHIPSVC+크레딧/포인트 연결 구매서
-	public PaymentVO getPaymentInfo(int shipSvcNo) {
+	public ShipPaymentVO getPaymentInfo(int shipSvcNo) {
 		String sql = "SELECT " + " SHIPSVC.SHIPSVC_no, SHIPSVC.SHIPSVC_NAME_KOR, SHIPSVC.SHIPSVC_NAME_ENG, SHIPSVC.SHIPSVC_STATUS, "
 				+ " SHIPSVC.SHIPSVC_FX_RATE, SHIPSVC.SHIPSVC_FX, SHIPSVC.SHIPSVC_ITEM_PRICE_KRW, "
 				+ " SHIPSVC.SHIPSVC_ITEM_VAT, SHIPSVC.SHIPSVC_SERVICE_FEE, SHIPSVC.SHIPSVC_TOTAL_PRICE_KRW, "
 				+ " MEMBER.MEMBER_CREDIT, MEMBER.MEMBER_POINT " + "FROM SHIPSVC "
 				+ "JOIN MEMBER ON SHIPSVC.SHIPSVC_CUSTOMER_ID = MEMBER.MEMBER_ID " + "WHERE SHIPSVC.SHIPSVC_no = ?";
 		Object[] data = { shipSvcNo };
-		List<PaymentVO> list = jdbcTemplate.query(sql, paymentVOMapper, data);
+		List<ShipPaymentVO> list = jdbcTemplate.query(sql, shipPaymentVOMapper , data);
 		return list.isEmpty() ? null : list.get(0);
 	}
 
