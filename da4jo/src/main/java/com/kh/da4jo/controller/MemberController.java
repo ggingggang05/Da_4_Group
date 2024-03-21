@@ -19,6 +19,7 @@ import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dao.PoDao;
 import com.kh.da4jo.dao.QnaDao;
 import com.kh.da4jo.dao.ReviewDao;
+import com.kh.da4jo.dao.ShipSvcDao;
 import com.kh.da4jo.dto.MemberDto;
 import com.kh.da4jo.dto.QnaDto;
 import com.kh.da4jo.dto.ReviewDto;
@@ -48,6 +49,8 @@ public class MemberController {
 	private PoDao poDao;
 	@Autowired
 	private QnaDao qnaDao;
+	@Autowired
+	private ShipSvcDao shipSvcDao;
 	
 	
 	//회원가입
@@ -127,12 +130,14 @@ public class MemberController {
 		
 		//로그인한 사용자의 캐시 내역을 첨부
 		model.addAttribute("creditList", creditDao.selectList(loginId));
-		//로그인한 사용자의 총 구매서 작성 개수를 첨부
+		//로그인한 사용자의 총 구매대행 구매서 작성 개수를 첨부
 		model.addAttribute("countPo", poDao.countEachMember(loginId));
 		//로그인한 사용자의 리뷰 글 개수 첨부
 		model.addAttribute("countReview", reviewDao.countEachMember(loginId));
 		//로그인한 사용자의 QNA 글 개수 첨부
 		model.addAttribute("countQna", qnaDao.countEachMember(loginId));
+		//로그인한 사용자의 총 배송대행 구매서 작성 개수를 첨부
+		model.addAttribute("countShip", shipSvcDao.countEachMember(loginId));
 		
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
