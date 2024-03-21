@@ -70,7 +70,9 @@
 .add {
 	max-width:100%;
 }
-
+.best-review {
+	width: 1140px;
+}
 .review-wrapper {
 	display: flex;
 }
@@ -194,18 +196,36 @@
 		<div class="swiper-button-next"></div>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $.ajax({
+        url: "/rest/best-review",
+        method: "GET", // 단순히 읽기만 함
+        success: function(response) { // 읽어들이면 동작
+            var container = $("<div class='review-wrapper'></div>"); // 새로운 컨테이너 요소 생성
+            for (var i = 0; i < response.length; i++) {
+                var review = response[i];
+                var reviewNo = review.reviewNo;
+                var reviewWriter = review.reviewWriter;
+                console.log(reviewNo);
+                console.log(reviewWriter);
+                //썸네일 이미지를 가져와서 추가
+                var reviewImage = $("<img src='image?reviewNo=" + reviewNo + "'>");
+                // 새로운 <a> 요소를 생성하여 글쓴이를 포함시킵니다.
+                var reviewLink = $("<a class='link review-link'></a>").attr("href", "/board/review/detail?reviewNo=" + reviewNo).text(reviewWriter + '님의 리뷰').css("font-size", "14px");
+                var listItem = $("<div class='w-100'></div>").append(reviewImage).append(reviewLink);
+                container.append(listItem); // 새로운 아이템을 컨테이너에 추가
+            }
+            $(".best-review").append(container); // 컨테이너를 실제로 DOM에 추가
+        },
+        error: function(xhr, status, error) { // 엉키면...
+            console.error("띠로리...");
+        }
+    });
+});
+				</script>
 <div class="container best-review">
-	<div class="review-wrapper">
-		<div class="cell">
-		
-		</div>
-		<div class="cell">
-		
-		</div>
-		<div class="cell">
-		
-		</div>
-	</div>
+
 </div>
 
 
