@@ -27,6 +27,53 @@
 	font-size: 52px !important;
 	font-weight: 100 !important;
 }
+.link-container {
+	width: 1140px;
+}
+.link-wrapper {
+	display: flex;
+	margin: 30px 10px 20px 10px;
+}
+
+.link-kh {
+	flex: 5;
+	border-top: 1px solid #d8d8d8;
+	border-bottom: 1px solid #d8d8d8;
+	padding: 10px;
+}
+
+.btn.ship, .btn.buying {
+	color: white;
+	white-space: nowrap;
+	width: 150px;
+	height: 130px;
+	font-size: 20px;
+}
+
+.link-ship {
+	flex: 1;
+	padding: 10px;
+}
+
+.btn.ship {
+	background-color: rgb(0, 151, 150);
+}
+
+.link-buying {
+	flex: 1;
+	padding: 10px;
+}
+
+.btn.buying {
+	background-color: rgb(234, 111, 0);
+}
+.add {
+	max-width:100%;
+}
+
+.review-wrapper {
+	display: flex;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -54,6 +101,24 @@
 				"backgroundColor" : colors[index],
 				"transition" : "background-color 3s",
 			});
+		});
+		
+		var swiper2 = new Swiper('.banners2', {
+			direction : 'horizontal',
+			loop : true,
+			speed : 4000,
+			slidesPerView : 2, // 동시에 보여줄 슬라이드 갯수
+			spaceBetween : 30, // 슬라이드간 간격
+			slidesPerGroup : 1, // 그룹으로 묶을 수
+			autoplay : {
+				delay : 2000,
+				disableOnInteraction: false,
+			},
+			navigation : {
+				nextEl : '.swiper-button-next',//다음버튼 선택자
+				prevEl : '.swiper-button-prev',//이전버튼 선택자
+			},
+
 		});
 
 	});
@@ -87,10 +152,59 @@
 		<div class="swiper-button-next"></div>
 	</div>
 </div>
-<div class="container">
-	<div class="cell center">
-		<h1>페이지 내용 자리</h1>
-		<img src="/image/로고템플릿.png" width="600px">
+<div class="container link-container">
+	<div class="link-wrapper">
+		<div class="link-kh center">
+			<a class="link" href="https://kh-academy.co.kr/main/main.kh">
+				<img class="m-10" src="/image/KH정보교육원 로고.png">
+			</a>
+		</div>
+		<div class="link-ship center">
+			<a class="link" href="/member/ship/request">
+				<button class="btn ship"><strong>배송대행</strong><br>신청하기</button>
+			</a>
+		</div>
+		<div class="link-buying center">
+			<a class="link" href="/member/po/request">
+				<button class="btn buying"><strong>구매대행</strong><br>신청하기</button>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="middle-banner">
+	<div class="swiper banners2 center">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<a class="link" href="https://docs.sysout.co.kr/" target='_blank'>
+					<img class="add" src="image/Hacademy.png">			
+				</a>
+			</div>
+			<div class="swiper-slide">
+				<a class="link" href="https://www.youtube.com/channel/UCdllyP_VgK-PY7VJRWOkOKQ" target='_blank'>
+					<img class="add" src="image/열혈강사youtube.png">
+				</a>
+			</div>
+			<div class="swiper-slide">
+				<a class="link" href="https://video.sysout.co.kr/" target='_blank'>
+					<img class="add" src="image/video-sysout.png">
+				</a>
+			</div>
+		</div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+	</div>
+</div>
+<div class="container best-review">
+	<div class="review-wrapper">
+		<div class="cell">
+		
+		</div>
+		<div class="cell">
+		
+		</div>
+		<div class="cell">
+		
+		</div>
 	</div>
 </div>
 
