@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
 
@@ -92,10 +94,10 @@ color: #d63031 !important;
 							<li id="qnaRock">${qnaDto.qnaSecret}</li>
 							</c:if>
 							
-							
 							<c:choose>
  							<c:when test="${sessionScope.loginId == qnaDto.qnaWriter || sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자' || qnaDto.qnaSecret == 'N'}">
- 								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a>
+							<c:set var="formattedTitle" value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
+								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${formattedTitle}</a></li>
  							</c:when>
  							<c:otherwise>
  								<li id="qnaTitle" class="qnaTitlteLock"><i class="fa-solid fa-lock blue"> 이 글은 비밀글 입니다.</i></li>
