@@ -66,9 +66,10 @@
 
 </style>
 
+
 <script>
-    // qnaStatus에 따른 색상 매핑
-    function getStatusColor(status) {
+    
+    function qnaStatus(status) {
         switch(status) {
             case '미답변글':
                 return 'red';
@@ -81,6 +82,7 @@
         }
     }
 </script>
+
 
 <br>
 <div class="container container-body">
@@ -95,7 +97,7 @@
 
 		<%-- 질문글 미답변 목록 --%>
 		<div class="content content-head">
-			<div class="content-head-text">질문글 미답변 목록</div>
+			<div class="content-head-text mt-50">질문글 미답변 목록</div>
 		</div>
 		<div class="content content-body right">
 			<div class="cell center"></div>
@@ -125,7 +127,7 @@
 					</c:forEach>
 				</div>
 
-				<div class="cell">
+				<div class="cell mt-40">
 					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 				</div>
 			</div>
@@ -135,7 +137,7 @@
 
 		<%-- 답글에 대한 목록 --%>
 		<div class="content content-head">
-			<div class="content-head-text">답글에 대한 목록</div>
+			<div class="content-head-text mt-50">답글에 대한 목록</div>
 		</div>
 		<div class="content content-body right">
 			<div class="cell center"></div>
@@ -163,16 +165,13 @@
 						</ul>
 					</c:forEach>
 				</div>
-				<div class="cell">
+				<div class="cell mt-40">
 					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>
 		<%-- 답글에 대한 목록 --%>
-
-
 	</div>
-</div>
 </div>
 
 
