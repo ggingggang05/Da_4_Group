@@ -24,6 +24,59 @@
 	width: 20%;
 	text-align: center;
 }
+.menu.menu-type {
+	border-bottom: 1px solid #CAE4FF;
+	border-top: 1px solid #CAE4FF;
+	background-color: #DEEEFF;
+}
+
+.bottom-bar div:first-child {
+	width: 750px;
+}
+
+.menu.menu-type.qnaMenu {
+	height: 40px !important;
+}
+
+.menu.menu-list.qnaMenu {
+	height: 40px !important;
+}
+
+.qnaTitlteLock {
+	color: #d63031 !important;
+}
+
+#qnaNo {
+	width: 8% !important;
+}
+
+#qnaRock {
+	width: 15% !important;
+}
+
+#typeQnaTitle {
+	text-align: center;
+	width: 70% !important;
+}
+
+#qnaTitle {
+	text-align: left;
+	width: 70% !important;
+}
+
+#qnaMember {
+	text-align: left;
+	width: 70% !important;
+}
+
+#qnaMember1 {
+	text-align: center;
+	width: 70% !important;
+}
+
+#qnaWdate {
+	width: 20% !important;
+}
 </style>
 <br>
 <div class="container container-body">
@@ -36,14 +89,15 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell flex-cell">
-				<div class="notice-number">번호</div>
-				<div class="notice-title">제목</div>
-				<div class="notice-date">작성일</div>
+			<div class="cell flex-cell menu menu-type qnaMenu mt-10">
+				<div class="notice-number" style="font-size: 14px;">번호</div>
+				<div class="notice-title" style="font-size: 14px;">제목</div>
+				<div class="notice-date" style="font-size: 14px;">작성일</div>
 			</div>
 			<!--- 리스트 --->
+			<div class="content-body-text" style="padding-top: 6px;">
 			<c:forEach var="noticeDto" items="${noticeDto}">
-				<div class="cell flex-cell">
+				<div class="cell flex-cell" >
 					<div class="notice-number">${noticeDto.noticeNo}</div>
 					<div class="notice-title2"><a class="link"
 						href="detail?noticeNo=${noticeDto.noticeNo}">
@@ -51,6 +105,7 @@
 					<div class="notice-date wdate">${noticeDto.noticeWdate}</div>
 				</div>
 			</c:forEach>
+			</div>
 			<%-- 검색창 --%>
 			<div class="cell center my-50">
 				<form action="list" method="get">
