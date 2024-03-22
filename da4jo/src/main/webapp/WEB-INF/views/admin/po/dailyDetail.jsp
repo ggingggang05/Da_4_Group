@@ -47,10 +47,12 @@ section{
 	document.addEventListener("DOMContentLoaded", function() {
 		var totalPriceElements = document.querySelectorAll("#poTotalPrice");
 		var totalVatElements = document.querySelectorAll("#vat");
+		var totalQtyElements = document.querySelectorAll("#qty");
 		
 		//초기화
 		var totalPrice = 0;
 		var vat = 0;
+		var totalQty = 0;
 		
 		//총 금액 계산
 		totalPriceElements.forEach(function(element) {
@@ -60,6 +62,10 @@ section{
 		totalVatElements.forEach(function(element) {
 			vat += parseInt(element.textContent.replace(/,/g, ""));
         });
+        //수량 계산
+        totalQtyElements.forEach(function(element) {
+        	totalQty += parseInt(element.textContent.replace(/,/g, ""));
+        });
 		
 		//총 금액 계산 결과 값
         var totalPriceDisplay = document.getElementById("totalPrice");
@@ -68,6 +74,10 @@ section{
     	//총 부가세 계산 결과 값
         var vatDisplay = document.getElementById("totalVat");
         vatDisplay.textContent = vat.toLocaleString();
+        
+        // 총 건수를 출력하는 영역에 결과를 삽입
+        var totalQtyDisplay = document.getElementById("totalQty");
+        totalQtyDisplay.textContent = totalQty.toLocaleString();
 	});
 </script>
 
@@ -120,10 +130,10 @@ section{
 						</ul>
 				</c:forEach>
 				<ul class="menu menu-list">
-					<li><strong>합계</strong></li>
-					<li>금액 : <strong id= "totalPrice"></strong></li>
+					<li><strong>${dailyDetailVO.poPayDate}</strong></li>
+					<li>총 금액 : <strong id= "totalPrice"></strong></li>
 					<li>부가세 : <strong id= "totalVat"></strong></li>
-					<li id="poDetail"><strong></strong></li>
+					<li>판매 수량 : <strong id= "totalQty"></strong></li>
 				</ul>
 				
 			</div>
