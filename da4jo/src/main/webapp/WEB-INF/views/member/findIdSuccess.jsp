@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-.btn.login, .btn.pw {
+.btn.login, .btn.pw { 
 	color: white;
 	white-space: nowrap;
 	width: 150px;

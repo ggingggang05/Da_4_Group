@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-	.flex-cell input.tool
+	.flex-cell input.tool 
 	{
 		border-left: none;
 	    border-right: none;
