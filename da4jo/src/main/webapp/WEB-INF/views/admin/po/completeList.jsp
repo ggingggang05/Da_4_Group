@@ -66,7 +66,7 @@
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
-							<li id="poDetail"><a href="processDetail?poNo=${poDto.poNo}"><i
+							<li id="poDetail"><a href="completeDetail?poNo=${poDto.poNo}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 				</c:forEach>
