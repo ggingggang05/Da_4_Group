@@ -68,7 +68,7 @@ public class QnaController {
 //	}
 	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO,
+	public String list(@ModelAttribute PageVO pageVO,
 					 HttpSession session, Model model) {
 		String loginId = (String) session.getAttribute("loginId");
 

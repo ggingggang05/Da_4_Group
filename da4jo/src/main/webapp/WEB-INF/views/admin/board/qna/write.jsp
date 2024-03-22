@@ -3,48 +3,55 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<form action="write" method="post" autocapitalize="off">
-	<!-- 답변글일 경우 대상의 번호가 반드시 등록페이지로 전송되야함-->
-	<c:choose>
-		<c:when test="${param.qnaTarget != null}">
-			<input type="hidden" name="qnaTarget" value="${param.qnaTarget}">
-			<input type="hidden" name="qnaStatus" value="답변용글">
-		</c:when>
-		<c:otherwise>
-			<input type="hidden" name="qnaStatus" value="미답변글">
-		</c:otherwise>
-	</c:choose>
-	
-	
-	<input type="hidden" name="qna">
+<style>
+.input {
+	border: 1px;
+	color: red;
+}
+</style>
 
-	<div class="container w-800">
-		<div>
-			<h1>Q&A글 작성</h1>
-		</div>
-		<c:if test="${param.qnaTarget == null}">
-			<h2>공개여부</h2>
-			<div class="cell">
-				<input type="radio" name="qnaSecret" value="N" checked> <label>공개</label>
-				<input type="radio" name="qnaSecret" value="Y"> <label>비공개</label>
+<div class="container container-body">
+	<jsp:include page="/WEB-INF/views/template/board-sidebar.jsp"></jsp:include>
+	<!-- 내용자리 -->
+	<div class="container inner-container">
+		<div class="content content-head">
+			<div class="content-head-text">
+				<i class="fa-solid fa-pause"></i> [관리자] 댓글 작성
 			</div>
-		</c:if>
-
-		<h3>제목</h3>
-		<div>
-			<input class="tool w-100" type="hidden" name="qnaTitle"
-					value="➜">
-			<input class="tool w-100" type="text" name="qnaTitle" ${targetDto.qnaTitle}>
 		</div>
+		<form action="write" method="post" autocapitalize="off">
+			<c:choose>
+				<c:when test="${param.qnaTarget != null}">
+					<input type="hidden" name="qnaTarget" value="${param.qnaTarget}">
+					<input type="hidden" name="qnaStatus" value="답변용글">
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" name="qnaStatus" value="미답변글">
+				</c:otherwise>
+			</c:choose>
+			<input type="hidden" name="qna">
+			<c:if test="${param.qnaTarget == null}">
+				<h2>공개여부</h2>
+				<div class="cell">
+					<input type="radio" name="qnaSecret" value="N" checked> <label>공개</label>
+					<input type="radio" name="qnaSecret" value="Y"> <label>비공개</label>
+				</div>
+			</c:if>
 
-		<h3>내용</h3>
-		<div>
-			<textarea class="imgArea" name="qnaContent"></textarea>
-		</div>
+				<div class="cell py-20 ms-10">
+					<input type="hidden" name="qnaTitle" value="➜"> <input
+						class="wTool w-100" type="text" name="qnaTitle" placeholder="제목을 작성해주세요"
+						${targetDto.qnaTitle}>
+				</div>
+			<div>
+				<textarea class="imgArea" name="qnaContent"></textarea>
+			</div>
 
-		<button type="submit" class="btn">등록</button>
+			<button type="submit" class="btn w-100 mt-10">등록</button>
+		</form>
+
 	</div>
-</form>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -53,20 +53,6 @@ public class AdminBoardQnaController {
 	
 	}
 
-	//목록
-//	@RequestMapping("/list")
-//	public String list(@RequestParam(required = false) String column,
-//							@RequestParam(required = false) String keyword, Model model) {
-//		boolean isSearch = column != null && keyword != null;
-//		if(isSearch) {
-//			model.addAttribute("list", qnaDao.selectList(column, keyword));
-//		}
-//		else {
-//			model.addAttribute("list", qnaDao.selectList());
-//		}
-//		
-//		return "/WEB-INF/views/board/qna/list.jsp";
-//	}
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(value = "pageVO") PageVO pageVO,
@@ -92,7 +78,7 @@ public class AdminBoardQnaController {
 		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
 		model.addAttribute("qnaDto", qnaDto);
 		
-		return "/WEB-INF/views/admin/board/qna/detail.jsp";
+		return "/WEB-INF/views/board/qna/detail.jsp";
 	}
 
 	//삭제

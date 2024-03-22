@@ -79,6 +79,16 @@
     border-radius: 0.1em;
 }
 
+/* QNA REVIEW 작성창 */
+.wTool { 
+    font-size: 16px;
+    padding: 0.5em 1em;
+    outline: none;/*선택시 자동강조효과 제거*/
+    border: none;
+    border-bottom: 1px solid #c0c0c0;
+    border-radius: 0.1em;
+}
+
 /* 입력창은 focus 효과가 발생할 때 테두리를 강조 */
 .tool:focus {
     border-color: #2d3436;

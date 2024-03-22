@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
 .menu.menu-type {
@@ -63,25 +63,8 @@
 #qnaStatus {
 	width: 15% !important;
 }
-
 </style>
 
-
-<script>
-    
-    function qnaStatus(status) {
-        switch(status) {
-            case '미답변글':
-                return 'red';
-            case '답변용글':
-                return 'blue';
-            case '답변완료':
-                return 'green';
-            default:
-                return 'black'; // 기본값은 검정색
-        }
-    }
-</script>
 
 
 <br>
@@ -117,8 +100,9 @@
 							<ul class="menu menu-list qnaMenu">
 								<li id="qnaNo">${qnaDto.qnaNo}</li>
 								<li id="qnaRock">${qnaDto.qnaSecret}</li>
-								<c:set var="formattedTitle" value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
-								<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
+								<c:set var="formattedTitle"
+									value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
+								<li id="qnaTitle"><a href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
 								<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 								<li id="qnaStatus"><a
 									href="write?qnaTarget=${qnaDto.qnaNo}">${qnaDto.qnaStatus}</a></li>
@@ -133,7 +117,7 @@
 			</div>
 		</div>
 		<%-- 질문글 미답변 목록 --%>
- 
+
 
 		<%-- 답글에 대한 목록 --%>
 		<div class="content content-head">
@@ -155,11 +139,9 @@
 						<ul class="menu menu-list qnaMenu">
 							<li id="qnaNo">${qnaDto.qnaNo}</li>
 							<li id="qnaRock">${qnaDto.qnaSecret}</li>
-
-					<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${formattedTitle}</a>
-						<c:set var="formattedTitle"
-							value="${fn:replace(qnaDto.qnaTitle, ',', '')}" /></li>
-
+							<c:set var="formattedTitle"
+								value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
+							<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${formattedTitle}</a></li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 							<li id="qnaStatus">${qnaDto.qnaStatus}</li>
 						</ul>

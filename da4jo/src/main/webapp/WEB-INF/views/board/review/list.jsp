@@ -8,6 +8,20 @@
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+	<!-- select2 cdn -->
+<link
+    href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+    rel="stylesheet" />
+<script
+    src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    $(".searchSelect").select2({
+        minimumResultsForSearch : Infinity
+    //selelct창에 검색 바 유무(주석처리 시 생김)
+    });
+});
+</script>
 
 <script>
 	$(function() {
@@ -124,22 +138,24 @@
 						</ul>
 					</c:forEach>
 
-					<%-- 검색창 --%>
 					<div class="cell center flex-cell my-50 bottom-bar">
-						<div class="cell search-wrapper left">
-							<form action="list" method="get">
-								<select class="   " name="column">
-									<option value="review_title"
-										${param.column == 'review_title' ? 'selected' : ''}>제목</option>
-									<option value="review_writer"
-										${param.column == 'review_writer' ? 'selected' : ''}>작성자</option>
-									<option value="review_content"
-										${param.column == 'review_content' ? 'selected' : ''}>내용</option>
-								</select> <input class="searchBar w-50" type="search" name="keyword"
-									placeholder="검색어 입력" required value="${param.keyword}">
-								<button class="searchBtn mx-10">검색</button>
-							</form>
-						</div>
+						<%-- 검색창 --%>
+				<form action="list" method="get" class="left">
+					<div class="cell searchArea left">
+						<select name="column" class="searchSelect">
+							<option value="REVIEW_NO"
+								${param.column == 'review_no' ? 'selected' : ''}>글번호</option>
+							<option value="REVIEW_TITLE"
+								${param.column == 'review_title' ? 'selected' : ''}>제목</option>
+							<option value="review_writer"
+								${param.column == '"review_writer"' ? 'selected' : ''}>작성자</option>
+						</select> <input type="search" name="keyword" placeholder=""
+							value="${param.keyword}" class="searchBar">
+						<button class="btn searchBtn">	
+							<i class="fa-solid fa-search"></i>
+						</button>
+					</div>
+				</form>
 						
 						<div class="cell right">
 							<a href="write" class="btn">리뷰글쓰기</a>

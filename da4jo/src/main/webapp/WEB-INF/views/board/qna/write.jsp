@@ -13,7 +13,7 @@
 		<c:otherwise>
 			<input type="hidden" name="qnaStatus" value="미답변글">
 		</c:otherwise>
-	</c:choose>
+	</c:choose>  
 
 	<div class="container w-800">
 		<div>
