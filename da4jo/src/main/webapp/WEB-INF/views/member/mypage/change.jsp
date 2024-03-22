@@ -25,7 +25,7 @@
 .input {
 	border-radius: 4px;
 	margin:5px !important;
-	padding-top: 10px !important;
+	width: 100%;
 }
 *{
 	box-sizing: border-box;
@@ -36,8 +36,15 @@
 label {
 	 font-weight: bold !important; 
      font-size: 16px !important; 
-     margin-top:10px !important;
      color: #2d3436;
+}
+
+.labelText {
+	padding : 20px !important;
+    padding-top : 20px !important;
+}
+.pwLabelText {
+    padding-top : 16px !important;
 }
  
 /*아이디,비밀번호 placeholder*/		
@@ -106,6 +113,9 @@ input[type="file"]::-webkit-file-upload-button {
 } 
 
 
+.second-flex-cell {
+    display: flex;
+}
 </style>
 
 
@@ -316,18 +326,18 @@ $(function(){
 		<div class="container w-550 block">
 			<div class="container w-500">
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="center">아이디<b style="color:red">*</b></label>
+					<div class="w-25 labelText">
+						<label>아이디<b style="color:red">*</b></label>
 					</div>
-					<div class="w-75">
-						<input type="text" name="memberId" class= "tool box input" placeholder="아이디" value="${memberDto.memberId}" readonly/>
+					<div class="w-75 pe-20">
+						<input type="text" name="memberId" class= "tool box input" placeholder="아이디" value="${memberDto.memberId}" readonly style="width: 100%;"/>
 					</div>
 				</div>
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="center">이름(한글)<b style="color:red">*</b></label>
+					<div class="w-25 labelText">
+						<label>이름(한글)<b style="color:red">*</b></label>
 					</div>
-					<div class="w-75">
+					<div class="w-75 pe-20">
 						<input type="text" name="memberNameKor" class="tool box input" value="${memberDto.memberNameKor}">
 						<div class="success-feedback">
 							<label></label>
@@ -336,10 +346,10 @@ $(function(){
 					</div>					
 				</div>
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="center">이름(영문)</label>
+					<div class="w-25 labelText">
+						<label>이름(영문)</label>
 					</div>
-					<div class="w-75">
+					<div class="w-75 pe-20">
 						<input type="text" name="memberNameEng" class="tool box input" value="${memberDto.memberNameEng}">
 						<div class="success-feedback">
 							<label></label>
@@ -348,18 +358,18 @@ $(function(){
 					</div>
 				</div>
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="center">이메일<b style="color:red">*</b></label>
+					<div class="w-25 labelText">
+						<label>이메일<b style="color:red">*</b></label>
 					</div>
-					<div class="w-75">
+					<div class="w-75 pe-20">
 						<input type="text" name="memberEmail" class= "tool box input" value="${memberDto.memberEmail}" readonly/>
 					</div>
 				</div>
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="center">통관번호</label>
+					<div class="w-25 labelText">
+						<label>통관번호</label>
 					</div>
-					<div class="w-75">
+					<div class="w-75 pe-20">
 						<input type="text" name="memberClearanceId" class= "tool box input" value="${memberDto.memberClearanceId}">
 						<div class="success-feedback">
 							<label></label>
@@ -368,10 +378,10 @@ $(function(){
 					</div>
 				</div>
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="w-25 center">연락처1<b style="color:red">*</b></label>
+					<div class="w-25 labelText">
+						<label>연락처1<b style="color:red">*</b></label>
 					</div>
-					<div class="w-75">
+					<div class="w-75 pe-20">
 						<input type="text" name="memberContact1" class= "tool box w-75 input" value="${memberDto.memberContact1}">
 						<div class="success-feedback">
 							<label></label>
@@ -380,10 +390,10 @@ $(function(){
 					</div>
 				</div>
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="w-25 center">연락처2</label>
+					<div class="w-25 labelText">
+						<label>연락처2</label>
 					</div>
-					<div class="w-75">
+					<div class="w-75 pe-20">
 						<input type="text" name="memberContact2" class= "tool box w-75 input" value="${memberDto.memberContact2}">
 						<div class="success-feedback">
 							<label></label>
@@ -394,39 +404,42 @@ $(function(){
 				<!-- 주소 입력창 -->
 				<!-- 우편번호 입력창 -->
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="w-25 center">주소</label>
+					<div class="w-25 labelText">
+						<label>주소</label>
 					</div>
-					<div class="w-75 right">
-						<input type="text" name="memberZipcode" class= "tool box input" placeholder="우편번호" readonly style="width: 57%">	
-					</div>
-					<div class="w-10">
-						<button type="button" class="btn btn-address-search" style= "border-right: 1px; height: 48px; margin-top: 5px; margin-right: 3px;">
-			                <i class="fa-solid fa-magnifying-glass"></i>
-			            </button> 
-					</div>
-					<div class="w-10">
-						<button type="button" class="btn btn-address-clear" style= "border-right: 1px; height: 48px; margin-top: 5px;">
-						     <i class="fa-solid fa-xmark"></i>
-						</button>
+					<div class="w-75 right pe-20">
+						<div class="cell second-flex-cell">
+							<div class="w-50">
+								<input type="text" name="memberZipcode" class= "tool box input" placeholder="우편번호" readonly/>	
+							</div>
+							<div class="w-10">
+								<button type="button" class="btn btn-address-search ms-10 me-40" style= "border-right: 1px; height: 48px; margin-top:5px;">
+				                	<i class="fa-solid fa-magnifying-glass"></i>
+				            	</button>
+							</div>
+							<div class="w-10">
+								<button type="button" class="btn btn-address-clear ms-20" style= "border-right: 1px; height: 48px; margin-top:5px;">
+							     <i class="fa-solid fa-xmark"></i>
+								</button>
+							</div>
+						</div>
+						<div class="cell">
+							<input type="text" name="memberAddress1" class= "tool w-100 box input" placeholder= "기본주소" readonly>
+						</div>
+						<div class="cell">
+							<input type="text" name="memberAddress2" class= "tool w-100 box input" placeholder="상세주소">
+							<div class="success-feedback">
+								<label></label>
+							</div>
+							<div class="fail-feedback">주소를 검색하여 우편번호를 입력해주세요.</div>
+						</div>		
 					</div>
 				</div>
-				<!-- 기본주소 입력창 -->
 				<div class="cell flex-cell">
-					<input type="text" name="memberAddress1" class= "tool w-100 box input" placeholder= "기본주소" readonly style="width: 98%;">
-				</div>
-				<div class="cell flex-cell">
-					<input type="text" name="memberAddress2" class= "tool w-100 box input" placeholder="상세주소" style="width: 98%;">
-					<div class="success-feedback">
-						<label></label>
+					<div class="w-25 labelText">
+						<label>생년월일</label>
 					</div>
-					<div class="fail-feedback">주소를 검색하여 우편번호를 입력해주세요.</div>
-				</div>
-				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="w-25 center">생년월일</label>
-					</div>
-					<div class="w-75">
+					<div class="w-75 pe-20">
 						<input type="text" name="memberBirth" class= "tool box w-75 input" value="${memberDto.memberBirth}">
 						<div class="success-feedback">
 							<label></label>
@@ -441,11 +454,11 @@ $(function(){
 		<div class="container w-550 block">
 			<div class="container w-500">
 				<div class="cell flex-cell">
-					<div class="w-25">
-						<label class="center">비밀번호 확인<b style="color:red">*</b></label>
+					<div class="w-25 pwLabelText">
+						<label>비밀번호 확인<b style="color:red">*</b></label>
 					</div>
-					<div class="w-75">
-						<input type="password" name="memberPw" class="tool box input" style="width: 70%;">
+					<div class="w-75 pe-20">
+						<input type="password" name="memberPw" class="tool box input">
 			          	<c:if test="${param.error != null}">
 			               <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
 			            </c:if>
