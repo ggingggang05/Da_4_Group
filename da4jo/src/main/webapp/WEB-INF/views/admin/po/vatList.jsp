@@ -42,12 +42,18 @@
 		<div class="content content-body">
 			<div class="cell listArea">
 				<ul class="menu menu-type">
+					<li id=""><strong>연도</strong></li>
 					<li id=""><strong>분기</strong></li>
+					<li id=""><strong>구매대행</strong></li>
+					<li id=""><strong>배송대행</strong></li>
 					<li id=""><strong>부가세 총합</strong></li>
 				</ul>
 				<c:forEach var="vatListVO" items="${list}">
 					<ul class="menu menu-list">
+						<li id="">${vatListVO.year}</li>
 						<li id="">${vatListVO.quater}</li>
+						<li id="">${vatListVO.poVatTotal}</li>
+						<li id="">${vatListVO.shipsvcVatTotal}</li>
 						<li id="">${vatListVO.vatTotal}</li>
 					</ul>
 				</c:forEach>

@@ -110,7 +110,10 @@ public class MemberController {
 			//최종 로그인 시각 갱신
 			memberDao.updateMemberLoginDate(findDto.getMemberId());
 			
-			if (referer == null || referer.isEmpty())
+			//이전 접속한 사이트가 있으면
+			if (referer == null || referer.isEmpty()
+					|| referer.equals("http://localhost:8080/member/login?error")
+					|| referer.equals("http://localhost:8080/member/login"))
 			{
 				return "redirect:/";
 			} else

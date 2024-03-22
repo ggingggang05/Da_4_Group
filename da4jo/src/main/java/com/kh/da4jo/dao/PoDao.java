@@ -513,12 +513,43 @@ public class PoDao {
     	return jdbcTemplate.query(sql, dailyDetailVOMapper, data);
     }
     public List<VatListVO> getVatListByYear(String year) {
-    	String sql = "SELECT TO_CHAR(PO_SDATE, 'YYYY-Q') AS QUARTER, "
-    			+ "SUM(PO_ITEM_VAT) AS VAT_TOTAL "
+    	String sql = "WITH PO_VAT_TOTALS AS ("
+    			+ "SELECT "
+    			+ "TO_CHAR(PO_SDATE, 'YYYY') AS YEAR, "
+    			+ "CEIL(TO_CHAR(PO_SDATE, 'MM') / 3) AS QUARTER, "
+    			+ "SUM(PO_ITEM_VAT) AS PO_VAT_TOTAL "
     			+ "FROM PO "
-    			+ "WHERE EXTRACT(YEAR FROM PO_SDATE) = ? "
-    			+ "GROUP BY TO_CHAR(PO_SDATE, 'YYYY-Q')";
-    	return jdbcTemplate.query(sql, vatListVOMapper, Integer.parseInt(year));
+    			+ "GROUP BY "
+    			+ "TO_CHAR(PO_SDATE, 'YYYY'), "
+    			+ "CEIL(TO_CHAR(PO_SDATE, 'MM') / 3)"
+    			+ "), "
+    			+ "SHIPSVC_VAT_TOTALS AS ("
+    			+ "SELECT TO_CHAR(SHIPSVC_SDATE, 'YYYY') AS YEAR, "
+    			+ "CEIL(TO_CHAR(SHIPSVC_SDATE, 'MM') / 3) AS QUARTER, "
+    			+ " SUM(SHIPSVC_ITEM_VAT) AS SHIPSVC_VAT_TOTAL "
+    			+ "FROM SHIPSVC "
+    			+ "GROUP BY "
+    			+ "TO_CHAR(SHIPSVC_SDATE, 'YYYY'), "
+    			+ "CEIL(TO_CHAR(SHIPSVC_SDATE, 'MM') / 3)"
+    			+ ") "
+    			+ "SELECT "
+    			+ "NVL(PO.YEAR, SHIPSVC.YEAR) AS YEAR, "
+    			+ "NVL(PO.QUARTER, SHIPSVC.QUARTER) AS QUARTER, "
+    			+ "NVL(PO.PO_VAT_TOTAL, 0) AS PO_VAT_TOTAL, "
+    			+ "NVL(SHIPSVC.SHIPSVC_VAT_TOTAL, 0) AS SHIPSVC_VAT_TOTAL, "
+    			+ "NVL(PO.PO_VAT_TOTAL, 0) + NVL(SHIPSVC.SHIPSVC_VAT_TOTAL, 0) AS VAT_TOTAL "
+    			+ "FROM "
+    			+ "PO_VAT_TOTALS PO "
+    			+ "FULL OUTER JOIN "
+    			+ "SHIPSVC_VAT_TOTALS SHIPSVC "
+    			+ "ON "
+    			+ "PO.YEAR = SHIPSVC.YEAR AND PO.QUARTER = SHIPSVC.QUARTER "
+    			+ "WHERE "
+    			+ "NVL(PO.YEAR, SHIPSVC.YEAR) = ? "
+    			+ "ORDER BY "
+    			+ "NVL(PO.YEAR, SHIPSVC.YEAR), "
+    			+ "NVL(PO.QUARTER, SHIPSVC.QUARTER)";
+    	return jdbcTemplate.query(sql, vatListVOMapper, year);
     }
     //배송중으로 바뀐 시점부터 7일뒤 배송완료로
 	public void compareDate(List<PoDto> dateList) {
