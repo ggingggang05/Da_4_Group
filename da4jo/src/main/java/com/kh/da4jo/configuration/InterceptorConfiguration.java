@@ -72,8 +72,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//QnA 본인 글만 수정, 삭제
 		registry.addInterceptor(QnaOwnerInterceptor)
 						.addPathPatterns( 
-								"/board/qna/edit"
-								
+								"/board/qna/detail"
 						);
 		//Review 본인 글만 수정, 삭제
 		registry.addInterceptor(reviewOwnerInterceptor)

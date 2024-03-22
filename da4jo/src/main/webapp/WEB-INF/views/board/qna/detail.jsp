@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 <style>
@@ -25,9 +27,12 @@
 
 		<div class="container inner-container">
 
-			
+
 			<div class="cell">
-				<h2>제목 : ${qnaDto.qnaTitle}</h2>
+				<%-- 쉼표를 없애고 formattedTitle에 저장합니다 --%>
+				<c:set var="formattedTitle"
+					value="${fn:replace(qnaDto.qnaTitle, '➜,', '')}" />
+				<h3>제목 : ${formattedTitle}</h3>
 			</div>
 
 			<div class="cell mt-50">
@@ -39,25 +44,22 @@
 			<div class="cell" style="min-height: 250px">
 				${qnaDto.qnaContent}</div>
 			<div class="cell right py-10 px-10">
-				<label>작성자 : ${qnaDto.qnaWriter}</label>
+				<strong><label>작성자 : ${qnaDto.qnaWriter}</label></strong>
 			</div>
 			<hr>
 
 			<div class="cell flex-cell auto-width">
 				<div class="cell">
 					<div class="cell">
-						<label>작성일 : ${qnaDto.qnaWdate}</label> <label>조회수 :
-							${qnaDto.qnaVcount}</label>
+						<label>작성일 : ${qnaDto.qnaWdate}</label> 
+						<label>조회수 : ${qnaDto.qnaVcount}</label>
 					</div>
 				</div>
 
 				<div class="cell right">
-					<a class="btn" href="write">질문글작성</a> <a class="btn" href="list">목록으로</a>
-					<a class="btn" href="/board/qna/edit?qnaNo=${qnaDto.qnaNo}">질문글수정</a>
+					<a class="btn link" href="write">질문글작성</a> <a class="btn link" href="list">목록으로</a>
 					<c:if
 						test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
-						<a class="btn"
-							href="/admin/board/qna/write?qnaTarget=${qnaDto.qnaNo}">답글쓰기</a>
 						<a class="btn negative"
 							href="/board/qna/delete?qnaNo=${qnaDto.qnaNo}">질문글삭제</a>
 					</c:if>

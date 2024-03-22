@@ -5,15 +5,37 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-  <!-- jquery cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+<!-- jquery cdn -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+
+<!-- select2 cdn -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	
+<script type="text/javascript">
+	$(function() {
+		$(".searchSelect").select2({
+			minimumResultsForSearch : Infinity
+		//selelct창에 검색 바 유무(주석처리 시 생김)
+		});
+	});
+</script>
 
 <style>
 .menu.menu-type {
 	border-bottom: 1px solid #CAE4FF;
 	border-top: 1px solid #CAE4FF;
 	background-color: #DEEEFF;
+	font-size: 14px;
+}
+
+.menu.menu-list.menu li {
+	font-size: 14px;
+}
+
+.menu.menu-list.menu li {
+	font-size: 14px;
 }
 
 .bottom-bar div:first-child {
@@ -63,6 +85,14 @@
 #qnaWdate {
 	width: 20% !important;
 }
+/* .menu li { */
+/*     font-size: 16px; */
+/*     width: 200px; */
+/*     color: #2D3436; */
+/*     padding: 0.5em; */
+/*     text-align: center; */
+/* } */
+
 </style>
 
 <!-- select2 cdn -->
@@ -144,24 +174,30 @@
 					</ul>
 				</c:forEach>
 
-				<%-- 검색창 --%>
-				<form action="list" method="post">
-					<div class="cell searchArea center">
-						<select name="column" class="searchSelect">
-							<option value="qna_no"
-								${param.column == 'qna_no' ? 'selected' : ''}>글번호</option>
-							<option value="qna_title"
-								${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
-							<option value="qna_writer"
-								${param.column == 'qna_writer' ? 'selected' : ''}>작성자</option>
-						</select> <input type="search" name="keyword" placeholder=""
-							value="${param.keyword}" class="searchBar">
-						<button class="btn searchBtn">
-							<i class="fa-solid fa-search"></i>
-						</button>
+				<div class="flex-cell">
+					<div class="cell flex-cell my-30 bottom-bar">
+						<div class="cell">
+							<%-- 검색창 --%>
+							<form action="list" method="get" class="left">
+								<select name="column" class="searchSelect">
+									<option value="qna_no"
+										${param.column == 'qna_no' ? 'selected' : ''}>글번호</option>
+									<option value="qna_title"
+										${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
+									<option value="qna_writer"
+										${param.column == 'qna_writer' ? 'selected' : ''}>작성자</option>
+									<option value="qna_content"
+										${param.column == 'qna_content' ? 'selected' : ''}>내용</option>
+								</select> <input class="searchBar w-400" type="search" name="keyword"
+									placeholder="검색어 입력" required value="${param.keyword}">
+								<button class="btn searchBtn">검색</button>
+							</form>
+						</div>
+						<div class="cell right">
+							<a href="write" class="link">질문글쓰기</a>
+						</div>
 					</div>
-				</form>
-
+				</div>
 
 				<div class="cell">
 					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>

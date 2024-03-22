@@ -23,8 +23,10 @@ import com.kh.da4jo.dao.ImgDao;
 import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dao.ReviewDao;
 import com.kh.da4jo.dto.MemberDto;
+import com.kh.da4jo.dto.QnaDto;
 import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.service.ImgService;
+import com.kh.da4jo.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -70,9 +72,19 @@ public class ReviewController {
 	
 	//리뷰 목록
 	@RequestMapping("/list")
-	public String list(Model model) {
-		List<ReviewDto> list = reviewDao.selectList();
-		model.addAttribute("list", list);
+	public String list(@ModelAttribute PageVO pageVO,
+					 HttpSession session, Model model) {
+		String loginId = (String) session.getAttribute("loginId");
+
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		model.addAttribute("memberDto", memberDto);
+		
+		int count = reviewDao.count(pageVO);
+		pageVO.setCount(count);
+		
+		List<ReviewDto> list = reviewDao.selectListByPaging(pageVO);
+		model.addAttribute("list", list); 
+		
 		return "/WEB-INF/views/board/review/list.jsp";
 	}
 	

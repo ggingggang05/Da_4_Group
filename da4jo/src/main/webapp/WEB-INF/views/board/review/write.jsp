@@ -16,25 +16,12 @@
 
 <style>
 </style>
-<script>
-	$(function() {
-		//출력용
-		$(".score").score({
-			starColor : "#ff8080", //별 색상
-			display : {//표시 옵션
-				showNumber : false,//숫자 표시 여부
-				textColor : "#ff8080", //글자 색상
-				placeLimit : 0,//표시할 소수점 자리수
-			},
-		});
-	});
-</script>
 
 <script>
         $(function(){
             //작성용
                 $(".score-edit").score({
-                starColor: "#ff8080", //별 색상
+                starColor: "#FED330", //별 색상
                 editable: true,//편집 가능 설정
                 integerOnly: true,//정수만 선택 가능하도록 설정
 
@@ -45,7 +32,7 @@
 
                 display:{//표시 옵션
                     showNumber: true,//숫자 표시 여부
-                    textColor: "#ff8080", //글자 색상
+                    textColor: "#FED330", //글자 색상
                     placeLimit: 0,//표시할 소수점 자리수
                 },
 
@@ -75,22 +62,22 @@
 			<div>
 			</div>
 			<div>
-				<input class="wTool w-100" type="text" name="reviewTitle"
-					placeholder="제목을 입력해주세요.">
+				<input class="wTool w-100 pt-30" type="text" name="reviewTitle"
+					placeholder="제목을 입력해주세요." required="required">
 			
 			
 			<div class="cell py-20">
-				<h3>썸네일 이미지 [리뷰목록에 출력됩니다]</h3>
+				<h3><i class="fa-solid fa-asterisk blue"></i>&nbsp;썸네일 이미지 [리뷰목록에 출력됩니다]</h3>
 					
 					<input type="file" name="img" accept="image/*">
 					<div class="cell">
-					<div class="score-edit" data-max="5.0"></div>
+					<div class="score-edit" data-max="5.0" style="font-size: 24px;"></div>
 						</div>
 				</div>
 
-			<h3 style="margin-top: 50px;">리뷰글에 대한 내용을 입력해주세요</h3>
+			<h3 style="margin-top: 10px;"><i class="fa-solid fa-asterisk blue"></i>&nbsp;리뷰글에 대한 내용을 입력해주세요</h3>
 			<div>
-				<textarea class="imgArea" name="reviewContent"></textarea>
+				<textarea class="imgArea" name="reviewContent" required></textarea>
 			</div>
 			</div>
 			<div class="cell right">

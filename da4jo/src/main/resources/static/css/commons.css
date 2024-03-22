@@ -126,6 +126,10 @@ textarea.tool.tool-fixed {
     background-color: #db4444;
     color: white;
 }
+.btn.delete {
+    background-color: white;
+    color: #db4444;
+}
 
 /* 버튼에 마우스가 올라가면 밝기 90%*/
 .btn:hover {
@@ -633,7 +637,6 @@ textarea.tool.tool-fixed {
     padding: 0.5em;
     text-align: center;
 }
-
 /* 2차 이상의 메뉴(.menu li > ul)를 숨김 처리 */
 .menu li > ul {
     display:none;

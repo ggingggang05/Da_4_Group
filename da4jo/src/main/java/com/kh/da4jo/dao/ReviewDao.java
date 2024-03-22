@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.mapper.BestReviewVOMapper;
+import com.kh.da4jo.mapper.ReviewListMapper;
 import com.kh.da4jo.mapper.ReviewMapper;
 import com.kh.da4jo.vo.BestReviewVO;
+import com.kh.da4jo.vo.PageVO;
 
 @Repository
 public class ReviewDao {
@@ -16,6 +19,8 @@ public class ReviewDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private ReviewMapper reviewMapper;
+	@Autowired
+	private ReviewListMapper reviewListMapper;
 	
 	//시퀀스
 	public int getSequence() {
@@ -128,6 +133,56 @@ public class ReviewDao {
 		Object[] data = {reviewNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	//카운트
+	public int count(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색
+			String sql = "select count(*) from review "
+							+ "where instr("+pageVO.getColumn()+", ?) > 0";
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {//목록
+			String sql = "select count(*) from review";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+	
+	//리뷰 페이징 및 
+	public List<ReviewDto> selectListByPaging(PageVO pageVO){ 
+		if(pageVO.isSearch()) {//검색
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "review_no, review_title, review_writer, "
+										+ "review_wdate, review_vcount, review_star "
+									+ "from review "
+									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
+									+ "order by review_no desc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {
+					pageVO.getKeyword(), 
+					pageVO.getBeginRow(), 
+					pageVO.getEndRow()
+			};
+			return jdbcTemplate.query(sql, reviewListMapper, data);
+		}
+		else {//목록
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "review_no, review_title, review_writer, "
+										+ "review_wdate, review_vcount, review_star "
+									+ "from review "
+									+ "order by review_no desc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, reviewListMapper, data);
+		}
+	}
+	
 	
 	@Autowired
 	BestReviewVOMapper bestReviewVOMapper;
