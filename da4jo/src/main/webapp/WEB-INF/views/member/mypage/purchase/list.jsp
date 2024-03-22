@@ -49,6 +49,46 @@
 	border: 1px solid #ced3d6;
 }
 
+.menu-type {
+	background-color: #60A1F833 !important;
+	height : 42px;
+}
+
+#poNo {
+	width: 10%;
+}
+
+#poItemEngName {
+	width: 25%;
+}
+
+#poItemCategory {
+	width: 10%;
+}
+
+#poSdate {
+	width: 20%
+}
+
+#poStatus {
+	width: 20%;
+}
+
+#poTotalPriceKrw {
+	width: 15%;
+}
+
+.requestBtn {
+	font-size: 15px !important;
+}
+
+.linkEffect {
+    transition: filter 0.3s ease; /* 변경 효과 부드럽게 적용 */
+}
+.linkEffect:hover  {
+	color: #60A1F888;
+    filter: brightness(0.9);
+}
 
 </style>
 
@@ -77,7 +117,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell listArea">
+			<div class="cell">
 				<c:if test="${empty poList}"><!-- 구매서 작성 내역이 없는 경우 -->
 					<div class="cell center mt-30">
 						<i class="fa-regular fa-circle-xmark fa-3x"></i>
@@ -110,7 +150,7 @@
 							</form>
 						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<h2><a class="btn" href="/member/po/request" style="color: #B2BC76;">구매서 작성하기</a></h2>
+							<a class="btn requestBtn" href="/member/po/request" style="color: #60A1F8;">구매서 작성하기</a>
 						</div>
 					</div>
 					
@@ -127,9 +167,9 @@
 					<c:forEach var="poDto" items="${poList}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
-							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" >${poDto.poItemEngName}</a></li>
+							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" class="linkEffect">${poDto.poItemEngName}</a></li>
 							<li id="poItemCategory">${poDto.poItemCategory}</li>
-							<li id="poSdate"><fmt:formatDate value="${poDto.poSdate}" pattern="y년 M월 d일" /></li>
+							<li id="poSdate"><fmt:formatDate value="${poDto.poSdate}" pattern="y-MM-dd" /></li>
 							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poTotalPriceKrw"><fmt:formatNumber value="${poDto.poTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
 						</ul>
@@ -137,10 +177,42 @@
 				</c:if><!-- 구매서 작성 내역이 있는 경우 닫는 태그 -->
 			</div><!-- 구매서 리스트 닫는 태그-->
 		</div><!-- 내용 바디 닫는 태그 -->
-		<div class="cell">
-			<%--네비게이터 --%>
-			<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
-		</div>
+		<div class="page-navigator"> <!-- 네비게이터 태그 -->
+			<%-- 이전이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isFirstBlock()}">
+					<a class="off">&lt;이전</a>
+				</c:when>
+				<c:otherwise>
+					<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+				</c:otherwise>
+			</c:choose>
+
+			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
+				end="${pageVO.getEndBlock()}" step="1">
+				<%-- 다른 페이지일 경우만 링크를 제공 --%>
+				<c:choose>
+					<c:when test="${pageVO.isCurrentPage(i)}">
+						<a class="on">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 다음이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isLastBlock()}">
+					<a class="off">다음&gt;</a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+				</c:otherwise>
+			</c:choose>
+		</div><!-- 네비게이터 닫는 태그 -->
 	</div><!-- 오른쪽 내용 닫는 태그 -->	
 </div><!-- 컨테이너 자리 닫는 태그 -->
 

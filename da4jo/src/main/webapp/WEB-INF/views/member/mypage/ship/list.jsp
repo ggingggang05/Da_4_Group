@@ -18,7 +18,46 @@
 	border: 1px solid #ced3d6;
 }
 
+.menu-type {
+	background-color: #60A1F833 !important;
+	height : 42px;
+}
 
+#shipSvcNo {
+	width: 10%;
+}
+
+#shipSvcItemEngName {
+	width: 25%;
+}
+
+#shipSvcItemCategory {
+	width: 10%;
+}
+
+#shipSvcSdate {
+	width: 20%
+}
+
+#shipSvcStatus {
+	width: 20%;
+}
+
+#shipSvcTotalPriceKrw {
+	width: 15%;
+}
+
+.requestBtn {
+	font-size: 15px !important;
+}
+
+.linkEffect {
+    transition: filter 0.3s ease; /* 변경 효과 부드럽게 적용 */
+}
+.linkEffect:hover  {
+	color: #60A1F888;
+    filter: brightness(0.9);
+}
 </style>
 
 
@@ -47,7 +86,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell listArea">
+			<div class="cell">
 				<c:if test="${empty shipList}"><!-- 배송 대행서 작성 내역이 없는 경우 -->
 					<div class="cell center mt-30">
 						<i class="fa-regular fa-circle-xmark fa-3x"></i>
@@ -77,7 +116,7 @@
 							</form>
 						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<h2><a class="btn" href="/member/ship/request" style="color: #B2BC76;">배송서 작성하기</a></h2>
+							<a class="btn requestBtn" href="/member/ship/request" style="color: #60A1F8;">배송서 작성하기</a>
 						</div>
 					</div>
 					<div class="cell listArea">
@@ -95,9 +134,9 @@
 						<c:forEach var="shipSvcDto" items="${shipList}">
 							<ul class="menu menu-list">
 								<li id="shipSvcNo">${shipSvcDto.shipSvcNo}</li>
-								<li id="shipSvcItemEngName"><a href="detail?shipSvcNo=${shipSvcDto.shipSvcNo}" >${shipSvcDto.shipSvcItemEngName}</a></li>
+								<li id="shipSvcItemEngName"><a href="detail?shipSvcNo=${shipSvcDto.shipSvcNo}" class="linkEffect">${shipSvcDto.shipSvcItemEngName}</a></li>
 								<li id="shipSvcItemCategory">${shipSvcDto.shipSvcItemCategory}</li>
-								<li id="shipSvcSdate"><fmt:formatDate value="${shipSvcDto.shipSvcSDate}" pattern="y년 M월 d일" /></li>
+								<li id="shipSvcSdate"><fmt:formatDate value="${shipSvcDto.shipSvcSDate}" pattern="y-MM-dd" /></li>
 								<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 								<li id="shipSvcTotalPriceKrw"><fmt:formatNumber value="${shipSvcDto.shipSvcTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
 							</ul>
@@ -106,10 +145,42 @@
 				</c:if><!-- 배송 대행서 내역이 있는 경우 닫는 태그 -->
 			</div><!-- 배송서 리스트 닫는 태그-->
 		</div><!-- 내용 바디 닫는 태그 -->
-		<div class="cell">
-			<%--네비게이터 --%>
-			<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
-		</div>
+		<div class="page-navigator"> <!-- 네비게이터 태그 -->
+			<%-- 이전이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isFirstBlock()}">
+					<a class="off">&lt;이전</a>
+				</c:when>
+				<c:otherwise>
+					<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+				</c:otherwise>
+			</c:choose>
+
+			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
+				end="${pageVO.getEndBlock()}" step="1">
+				<%-- 다른 페이지일 경우만 링크를 제공 --%>
+				<c:choose>
+					<c:when test="${pageVO.isCurrentPage(i)}">
+						<a class="on">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 다음이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isLastBlock()}">
+					<a class="off">다음&gt;</a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+				</c:otherwise>
+			</c:choose>
+		</div><!-- 네비게이터 닫는 태그 -->
 	</div><!-- 오른쪽 내용 닫는 태그 -->	
 </div><!-- 컨테이너 자리 닫는 태그 -->
 
