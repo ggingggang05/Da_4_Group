@@ -92,36 +92,6 @@ $(function(){
                     .addClass(state.memberNameEngValid ? "success" : "fail");
     });
     
-    //이메일 검사
-    $("[name=memberEmail]").blur(function(){
-        var regex = /^[a-z0-9_]{5,20}@[a-z0-9.]{1,20}$/;
-        var value = $(this).val();
-    
-        if(regex.test(value)) {//이메일 형식 검사 통과
-            $.ajax({
-                url : "/rest/member/checkEmail",
-                method : "post",
-                data: {
-                    memberEmail : value
-                },
-                success : function(response) {
-                    console.log(response);
-                    if(response == "emailN") {
-                        $("[name=memberEmail]").removeClass("success fail fail2").addClass("fail2");
-                        state.memberEmailValid = false;
-                    }
-                    else if(response == "emailY") {
-                        $("[name=memberEmail]").removeClass("success fail fail2").addClass("success");
-                        state.memberEmailValid = true;
-                    }
-                }
-            });
-        }
-        else {//이메일 형식 검사 실패
-            $("[name=memberEmail]").removeClass("success fail fail2").addClass("fail");
-            state.memberEmailValid = false;
-        }
-    });
         
     //연락처1* 검사
      $("[name=memberContact1]").blur(function(){
@@ -219,12 +189,7 @@ $(function(){
 		</div>
 		<div class="cell">
 			<label>이메일<b style="color:red">*</b></label>
-			<input type="text" name="memberEmail" class= "tool w-100" value="${memberDto.memberEmail}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
-			</div>
-			<div class="fail-feedback">이메일 형식 오류</div>
-			<div class="fail2-feedback">사용중인 이메일입니다</div>
+			<input type="text" name="memberEmail" class= "tool w-100" value="${memberDto.memberEmail}" readonly/>
 		</div>
 		<div class="cell">
 			<label>통관번호</label>
