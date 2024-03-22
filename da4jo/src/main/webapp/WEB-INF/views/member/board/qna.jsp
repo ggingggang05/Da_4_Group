@@ -2,42 +2,54 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- lightpick CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 
 <style>
 .menu-type {
 	margin: 0px !important;
 }
-
 .menu-list {
 	margin: 0px !important;
 }
-
 .listArea {
 	border: 1px solid #ced3d6;
 }
 
-#memberId {
-	width: 23%;
+#qnaNo {
+	width: 10%;
+}
+#qnaSecret {
+	width: 10%;
+}
+#qnaTitle {
+	width: 60%;
+}
+#qnaWdate {
+	width: 15%;
 }
 
-#memerName {
-	width: 13%;
-}
 
-#memberEmail {
-	width: 50%;
-}
-
-#memberCode {
-	width: 32%;
-}
 
 #isBlock, #memberDetail {
 	width: 9%;
 }
+
+.menu-type {
+	background-color: #60A1F833 !important;
+	height : 42px;
+}
+.menu-list {
+	margin: 0px !important;
+}
+
 </style>
 
 
@@ -58,7 +70,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell listArea">
+			<div class="cell">
 				<c:if test="${empty qnaList}">
 					<!-- 구매서 작성 내역이 없는 경우 -->
 					<div class="cell center mt-30">
@@ -77,28 +89,26 @@
 				<!-- 문의 내역이 없는 경우 닫는 태그 -->
 				<c:if test="${!empty qnaList}">
 					<!-- 문의 내역이 있는 경우 -->
+					
 					<div class="cell flex-cell">
-						<div class="cell searchArea w-75 left">
-							<!-- 검색 기능 -->
-							<form action="list" method="get">
-								<select name="column" class="searchSelect">
-									<option value="qna_title"
-										${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
-									<option value="qna_wdate"
-										${param.column == 'qna_wdate' ? 'selected' : ''}>작성일</option>
-								</select> <input type="search" name="keyword" placeholder=""
-									value="${param.keyword}" class="searchBar">
-								<button class="btn searchBtn">
+						<div class="cell searchArea w-75 left"><!-- 검색 기능 -->
+							<form action="qna" method="get">
+								<select name="column" class="searchSelect searchOption">
+									<option value="qna_no" ${empty param.column || param.column == 'qna_no' ? 'selected' : ''} >글번호</option>
+									<option value="qna_secret" ${param.column == '"qna_secret"' ? 'selected' : ''}>잠금현황</option>
+									<option value="qna_title" ${param.column == 'qna_sdate' ? 'selected' : ''}>제목</option>
+								</select> 
+								<!-- <div class="DateInput" style="display: none;">
+									<input type="text" name="startDate" placeholder="날짜 선택" value="$(settlementVO.qnaPayDate)">
+								</div> -->
+								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar" autocomplete="off">
+								<button class="btn searchBtn" type="submit">
 									<i class="fa-solid fa-search"></i>
 								</button>
 							</form>
-						</div>
-						<!-- 검색기능 닫는 태그 -->
+						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<h2>
-								<a class="btn" href="/member/board/qna" style="color: #B2BC76;">문의
-									작성하기</a>
-							</h2>
+							<a class="btn requestBtn" href="/member/qna/request" style="color: #60A1F8;">구매서 작성하기</a>
 						</div>
 					</div>
 
@@ -116,7 +126,8 @@
 							<li id="qnaNo">${qnaDto.qnaNo}</li>
 							<li id="qnaSecret"><a
 								href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</a></li>
-							<li id="qnaTitle">${qnaDto.qnaTitle}</li>
+								<c:set var="formattedTitle" value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
+							<li id="qnaTitle" class="cell left">${qnaDto.qnaTitle}</li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 						</ul>
 					</c:forEach>
@@ -126,6 +137,42 @@
 			<!-- 구매서 리스트 닫는 태그-->
 		</div>
 		<!-- 내용 바디 닫는 태그 -->
+		<div class="page-navigator"> <!-- 네비게이터 태그 -->
+			<%-- 이전이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isFirstBlock()}">
+					<a class="off">&lt;이전</a>
+				</c:when>
+				<c:otherwise>
+					<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+				</c:otherwise>
+			</c:choose>
+
+			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
+				end="${pageVO.getEndBlock()}" step="1">
+				<%-- 다른 페이지일 경우만 링크를 제공 --%>
+				<c:choose>
+					<c:when test="${pageVO.isCurrentPage(i)}">
+						<a class="on">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 다음이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isLastBlock()}">
+					<a class="off">다음&gt;</a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+				</c:otherwise>
+			</c:choose>
+		</div><!-- 네비게이터 닫는 태그 -->
 	</div>
 	<!-- 오른쪽 내용 닫는 태그 -->
 </div>

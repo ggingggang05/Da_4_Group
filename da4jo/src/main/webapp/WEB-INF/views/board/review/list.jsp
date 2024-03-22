@@ -35,7 +35,10 @@
 </script>
 
 <style>
-
+.menu.menu-type.reviewMenu {
+	height: 40px !important;
+}
+ 
 .truncate-text {
     display: inline-block;
     white-space: nowrap;
@@ -103,7 +106,7 @@
 			<div class="cell center"></div>
 			<div class="cell center">
 
-				<ul class="menu menu-type center">
+				<ul class="menu menu-type reviewMenu center">
 					<li id="reviewNo">번호</li>
 					<li id="reviewImg">이미지</li>
 					<li id="reviewTitle">제목</li>
@@ -113,7 +116,7 @@
 				</ul>
 
 				<c:forEach var="reviewDto" items="${list}">
-					<ul class="menu menu-list center py-40">
+					<ul class="menu menu-list center py-30">
 						<li id="reviewNo">${reviewDto.reviewNo}</li>
 						<!-- <li><img src="/download?imgNo=166"></li> -->
 						<li id="reviewImg"><img
@@ -132,8 +135,8 @@
 					</ul>
 				</c:forEach>
 
+			<%-- 검색창 --%>
 				<div class="flex-cell">
-					<div class="cell flex-cell my-30 bottom-bar">
 						<div class="cell">
 							<%-- 검색창 --%>
 							<form action="list" method="get" class="left">
@@ -151,10 +154,9 @@
 								<button class="btn searchBtn">검색</button>
 							</form>
 						</div>
-						<div class="cell right">
+						<div class="cell">
 							<a href="write" class="link">질문글쓰기</a>
 						</div>
-					</div>
 				</div>
 
 				<div class="cell">
