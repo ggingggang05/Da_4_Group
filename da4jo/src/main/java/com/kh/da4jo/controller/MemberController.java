@@ -324,7 +324,7 @@ public class MemberController {
 	
 	//내가 쓴 리뷰글 페이지
 	@RequestMapping("/board/review")
-	public String review(@ModelAttribute ReviewDto reviewDto, HttpSession session,
+	public String review(@ModelAttribute PageVO pageVO, HttpSession session,
 						Model model) {
 		//로그인 아이디 추출
 		String loginId = (String) session.getAttribute("loginId");
@@ -333,14 +333,18 @@ public class MemberController {
 		//화면으로 전달
 		model.addAttribute("memberDto", memberDto);
 		//내가 쓴 리뷰 글 가져오기
-		model.addAttribute("reviewList", reviewDao.selectList(loginId));
+		int count = qnaDao.count();
+		pageVO.setCount(count);
+		
+		List<ReviewDto> list = reviewDao.selectListByPaging(pageVO);
+		model.addAttribute("reviewList" , list);
 		
 		return "/WEB-INF/views/member/board/review.jsp";
 	}
 	
 	//내가 쓴 QNA 페이지
 	@RequestMapping("/board/qna")
-	public String qna(@ModelAttribute(value = "pageVO") PageVO pageVO,
+	public String qna(@ModelAttribute PageVO pageVO,
 					 HttpSession session, Model model) {
 		String loginId = (String) session.getAttribute("loginId");
 

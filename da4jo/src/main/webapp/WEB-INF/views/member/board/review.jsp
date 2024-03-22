@@ -21,25 +21,39 @@
 	border: 1px solid #ced3d6;
 }
 
-#memberId {
-	width: 23%;
+#reviewNo {
+	width: 15%;
+}
+#reviewTitle {
+	width: 60%;
+}
+#reviewWriter {
+	width: 15%;
+}
+#reviewWdate {
+	width: 15%;
+}
+.truncate-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50ch; /* 최대 10글자로 설정 */
 }
 
-#memerName {
-	width: 13%;
+.truncate-name {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 15ch; /* 최대 10글자로 설정 */
 }
 
-#memberEmail {
-	width: 50%;
+.menu-type {
+	background-color: #60A1F833 !important;
+	height : 42px;
 }
 
-#memberCode {
-	width: 32%;
-}
-
-#isBlock, #memberDetail {
-	width: 9%;
-}
 </style>
 
 
@@ -58,7 +72,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell listArea">
+			<div class="cell">
 				<c:if test="${empty reviewList}">
 					<!-- 구매서 작성 내역이 없는 경우 -->
 					<div class="cell center mt-30">
@@ -78,29 +92,24 @@
 				<c:if test="${!empty reviewList}">
 					<!-- 문의 내역이 있는 경우 -->
 					<div class="cell flex-cell">
-						<div class="cell searchArea w-75 left">
-							<!-- 검색 기능 -->
-							<form action="list" method="get">
-								<select name="column" class="searchSelect">
-									<option value="review_title"
-										${param.column == 'review_title' ? 'selected' : ''}>제목</option>
-									<option value="review_content"
-										${param.column == 'review_content' ? 'selected' : ''}>내용</option>
-									<option value="review_wdate"
-										${param.column == 'review_wdate' ? 'selected' : ''}>작성일</option>
-								</select> <input type="search" name="keyword" placeholder=""
-									value="${param.keyword}" class="searchBar">
-								<button class="btn searchBtn">
+						<div class="cell searchArea w-75 left"><!-- 검색 기능 -->
+							<form action="review" method="get">
+								<select name="column" class="searchSelect searchOption">
+									<option value="review_no" ${empty param.column || param.column == 'review_no' ? 'selected' : ''} >글번호</option>
+									<option value="review_title" ${param.column == 'review_sdate' ? 'selected' : ''}>제목</option>
+									<option value="review_writer" ${param.column == 'review_sdate' ? 'selected' : ''}>작성자</option>
+								</select> 
+								<!-- <div class="DateInput" style="display: none;">
+									<input type="text" name="startDate" placeholder="날짜 선택" value="$(settlementVO.reviewPayDate)">
+								</div> -->
+								<input type="search" name="keyword" placeholder="" value="${param.keyword}" class="searchBar" autocomplete="off">
+								<button class="btn searchBtn" type="submit">
 									<i class="fa-solid fa-search"></i>
 								</button>
 							</form>
-						</div>
-						<!-- 검색기능 닫는 태그 -->
+						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<h2>
-								<a class="btn" href="/board/review/write" style="color: #B2BC76;">리뷰
-									작성하기</a>
-							</h2>
+							<a class="btn requestBtn" href="/member/review/request" style="color: #B2BC76;">리뷰 작성하기</a>
 						</div>
 					</div>
 
@@ -108,7 +117,7 @@
 						<li id="reviewNo"><strong>글번호</strong></li>
 						<li id="reviewTitle"><strong>제목</strong></li>
 						<!-- 아이템 이름 -->
-						<li id="reviewContent"><strong>내용</strong></li>
+						<li id="reviewWriter"><strong>작성자</strong></li>
 						<li id="reviewWdate"><strong>작성일</strong></li>
 					</ul>
 
@@ -116,8 +125,8 @@
 					<c:forEach var="reviewDto" items="${reviewList}">
 						<ul class="menu menu-list">
 							<li id="reviewNo">${reviewDto.reviewNo}</li>
-							<li id="reviewTitle">${reviewDto.reviewTitle }</li>
-							<li id="reviewContent">${reviewDto.reviewContent}</li>
+							<li id="reviewTitle" class="cell left ms-20 truncate-text">${reviewDto.reviewTitle }</li>
+							<li id="reviewWriter" class="truncate-name">${reviewDto.reviewWriter}</li>
 							<li id="reviewWdate">${reviewDto.reviewWdate}</li>
 						</ul>
 					</c:forEach>
@@ -127,6 +136,42 @@
 			<!-- 구매서 리스트 닫는 태그-->
 		</div>
 		<!-- 내용 바디 닫는 태그 -->
+		<div class="page-navigator"> <!-- 네비게이터 태그 -->
+			<%-- 이전이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isFirstBlock()}">
+					<a class="off">&lt;이전</a>
+				</c:when>
+				<c:otherwise>
+					<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+				</c:otherwise>
+			</c:choose>
+
+			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
+				end="${pageVO.getEndBlock()}" step="1">
+				<%-- 다른 페이지일 경우만 링크를 제공 --%>
+				<c:choose>
+					<c:when test="${pageVO.isCurrentPage(i)}">
+						<a class="on">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 다음이 있을 경우만 링크를 제공 --%>
+			<c:choose>
+				<c:when test="${pageVO.isLastBlock()}">
+					<a class="off">다음&gt;</a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+				</c:otherwise>
+			</c:choose>
+		</div><!-- 네비게이터 닫는 태그 -->
 	</div>
 	<!-- 오른쪽 내용 닫는 태그 -->
 </div>

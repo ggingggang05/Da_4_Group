@@ -122,21 +122,44 @@ public class QnaDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
+	//마이페이지 전용
 	public List<QnaDto> selectListByPaging(PageVO pageVO, String loginId) {
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ( "
-					+ "select "
-						+ "qna_no, qna_secret, "
-						+ "qna_title, qna_wdate "
-					+ "from qna "
-					+ "where qna_writer=?"
-					+ "order by qna_wdate desc"
-				+ ")TMP"
-			+ ") where rn between ? and ?";
-		Object[] data = {loginId, pageVO.getBeginRow(), pageVO.getEndRow()};
+		if(pageVO.isSearch()) {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ( "
+						+ "select "
+							+ "qna_no, qna_secret, "
+							+ "qna_title, qna_wdate "
+						+ "from qna "
+						+ "where instr("+pageVO.getColumn()+", ?) > 0"
+					+ ")TMP"
+				+ ") where rn between ? and ?";
+			Object[] data = {
+					pageVO.getKeyword(),
+					pageVO.getBeginRow(),
+					pageVO.getEndRow()
+				};
+			return jdbcTemplate.query(sql, qnaListMapper, data);
+		}
+		else {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ( "
+						+ "select "
+							+ "qna_no, qna_secret, "
+							+ "qna_title, qna_wdate "
+						+ "from qna "
+						+ "where qna_writer=?"
+						+ "order by qna_wdate desc"
+					+ ")TMP"
+				+ ") where rn between ? and ?";
+			Object[] data = {loginId, pageVO.getBeginRow(), pageVO.getEndRow()};
 
-		return jdbcTemplate.query(sql, qnaListMapper, data);
+			return jdbcTemplate.query(sql, qnaListMapper, data);
+		}
 	}
+		
+	
+	
 	
 	//문의글 답변 달기위한 목록 [순서변경][
 	public List<QnaDto> selectListByQnaPaging(PageVO pageVO) {

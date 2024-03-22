@@ -34,8 +34,10 @@
 
 .t1 {
 /* 	border-bottom: 1px solid #ddedff; */
-	border-top: 1px solid #CAE4FF;
+	border-top: 1px thin #CAE4FF;
 	background-color: #DEEEFF;
+	box-shadow: 0 0 1px 0 #74B9FF;
+	font-size: 16px;
 }
 
 .t1.width-fill {
@@ -43,11 +45,14 @@
 }
 
 .t2 {
-	border-bottom: 0.35px solid #CAE4FF;
+	border-bottom: 0.35px thin #CAE4FF;
 	background-color: #DEEEFF;
+	box-shadow: 0 0 1px 0 #74B9FF;
+	font-size: 16px;
 }
 
 .t2.width-fill {
+	
 	background-color: white;
 }
 
@@ -72,13 +77,13 @@
 		<br>
 		<div class="t1 flex-cell">
 			<div class="t1 w-20 center py-10">
-				<strong>제 목</strong>
+				제 목
 			</div>
 			<div class="t1 width-fill py-10 px-10">${reviewDto.reviewTitle}</div>
 		</div>
 		<div class="t2 flex-cell">
 			<div class="t2 w-20 center py-10">
-				<strong>작성자</strong>
+				작성자
 			</div>
 			<div class="t2 width-fill py-10 px-10"">${reviewDto.reviewWriter}</div>
 		</div>
