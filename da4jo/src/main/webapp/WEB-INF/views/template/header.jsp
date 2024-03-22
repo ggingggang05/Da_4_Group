@@ -208,7 +208,7 @@
 								<li><a href="/member/join">회원가입</a></li>
 							</c:otherwise>
 						</c:choose>
-						<li><a href="#">고객센터</a></li>
+						<li><a href="/board/notice/list">고객센터</a></li>
 					</ul>
 				</div>
 			</div>
