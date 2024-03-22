@@ -25,17 +25,10 @@
 
 		<div class="container inner-container">
 
-
-			<c:choose>
-				<c:when test="${qnaDto.qnaTarget != null}">
-					<div class="cell"></div>
-				</c:when>
-				<c:otherwise>
-					<div class="cell">
-						<h2>제목 : ${qnaDto.qnaTitle}</h2>
-					</div>
-				</c:otherwise>
-			</c:choose>
+			
+			<div class="cell">
+				<h2>제목 : ${qnaDto.qnaTitle}</h2>
+			</div>
 
 			<div class="cell mt-50">
 				<h3>내가 작성한 내용</h3>

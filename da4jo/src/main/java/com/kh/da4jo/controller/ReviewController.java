@@ -68,8 +68,6 @@ public class ReviewController {
 		return "redirect:list";
 	}
 	
-	
-	
 	//리뷰 목록
 	@RequestMapping("/list")
 	public String list(Model model) {

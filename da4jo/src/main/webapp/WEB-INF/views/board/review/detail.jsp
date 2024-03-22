@@ -43,7 +43,6 @@
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
-
 <script type="text/javascript">
 	$(function() {
 		//출력용
@@ -64,7 +63,8 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> ${reviewDto.reviewNo}번 ${reviewDto.reviewWriter}님의 글
+				<i class="fa-solid fa-pause"></i> ${reviewDto.reviewNo}번
+				${reviewDto.reviewWriter}님의 글
 			</div>
 		</div>
 
@@ -86,12 +86,12 @@
 
 		<div class="content content-head">
 			<div class="content-head-text mt-50">
-				<i class="fa-solid fa-pause"></i> 글 내용
+				작성하신 글 내용
 			</div>
 		</div>
 		<div class="cell" style="min-height: 250px">
 			${reviewDto.reviewContent}</div>
-			
+
 		<div class="content content-head">
 			<div class="content-head-text mt-50"></div>
 		</div>
@@ -99,7 +99,8 @@
 		<div class="cell flex-cell auto-width">
 			<div class="cell">
 				<div class="score" data-max="5.0"
-										data-rate="${reviewDto.reviewStar}" style="font-size: 24px;"> </div>
+					data-rate="${reviewDto.reviewStar}" style="font-size: 24px;">
+				</div>
 			</div>
 
 			<div class="cell right">
@@ -107,12 +108,13 @@
 					<label>작성일 : ${reviewDto.reviewWdate} </label> <label>조회수 :
 						${reviewDto.reviewVcount}</label>
 				</div>
-				
+
 			</div>
-			
+
 		</div>
 
-		<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
+		<c:if
+			test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 			<div class="cell right">
 				<a class="btn" href="list">목록으로</a> <a class="btn" href="write">리뷰글작성</a>
 				<a class="btn"

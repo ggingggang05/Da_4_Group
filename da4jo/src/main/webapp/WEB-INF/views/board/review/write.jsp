@@ -3,14 +3,18 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- jquery cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
-    
-     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <style>
-
 </style>
 <script>
 	$(function() {
@@ -26,7 +30,7 @@
 	});
 </script>
 
-	<script>
+<script>
         $(function(){
             //작성용
                 $(".score-edit").score({
@@ -52,40 +56,59 @@
             });
         });
     </script>
+    
+    
 
-<form action="write" method="post" autocapitalize="off"
-	enctype="multipart/form-data">
-
-	<div class="container w-800">
-		<div>
-			<h1>리뷰글 작성</h1>
-		</div>
-		
-		 <div class="cell">
-            <div class="score-edit" data-max="5.0"></div>
-        </div>
-
-		<h2>제목</h2>
-		<div>
-			<input class="tool w-100" type="text" name="reviewTitle">
+<div class="container container-body">
+	<jsp:include page="/WEB-INF/views/template/board-sidebar.jsp"></jsp:include>
+	<!-- 내용자리 -->
+	<div class="container inner-container">
+		<div class="content content-head">
+			<div class="content-head-text">
+				<i class="fa-solid fa-pause"></i> 리뷰글 작성
+			</div>
 		</div>
 
-		<h2>내용</h2>
-		<div>
-			<textarea class="imgArea" name="reviewContent"></textarea>
-		</div>
+		<form action="write" method="post" autocapitalize="off"
+			enctype="multipart/form-data">
+			
+			<div>
+			</div>
+			<div>
+				<input class="wTool w-100" type="text" name="reviewTitle"
+					placeholder="제목을 입력해주세요.">
+			
+			
+			<div class="cell py-20">
+				<h3>썸네일 이미지 [리뷰목록에 출력됩니다]</h3>
+					
+					<input type="file" name="img" accept="image/*">
+					<div class="cell">
+					<div class="score-edit" data-max="5.0"></div>
+						</div>
+				</div>
 
-		<h2>썸네일 이미지</h2>
-		<div>
-			<input type="file" name="img" accept="image/*" class="">
-		</div>
+			<h3 style="margin-top: 50px;">리뷰글에 대한 내용을 입력해주세요</h3>
+			<div>
+				<textarea class="imgArea" name="reviewContent"></textarea>
+			</div>
+			</div>
+			<div class="cell right">
+				<button class="btn w-100">등록</button>
+			</div>
 
-<div class="cell right">
-		<button class="btn">등록</button>
-</div>
+				
+
+			
+
+		</form>
+
 	</div>
+</div>
 
-</form>
+
+
+
 
 
 
