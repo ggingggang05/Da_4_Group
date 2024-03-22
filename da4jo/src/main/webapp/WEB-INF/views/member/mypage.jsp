@@ -58,6 +58,11 @@
 .chargeList .chargeTime {
 	width: 70%;
 }
+
+img.newProfile { /*프로필 공간 고정*/
+    width: 100%;
+    height: 150px;
+}
 </style>
 
 
