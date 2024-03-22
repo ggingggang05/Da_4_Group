@@ -210,7 +210,7 @@
 <div class="container link-container">
 	<div class="link-wrapper">
 		<div class="link-kh center">
-			<a class="link" href="https://kh-academy.co.kr/main/main.kh"> <img
+			<a class="link" href="https://kh-academy.co.kr/main/main.kh" target='_blank'> <img
 				class="m-10" src="/image/KH정보교육원 로고.png">
 			</a>
 		</div>
