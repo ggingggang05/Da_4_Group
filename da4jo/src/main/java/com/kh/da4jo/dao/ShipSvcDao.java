@@ -316,8 +316,9 @@ public class ShipSvcDao {
 	public int pendingPaymentCount(PageVO pageVO, String loginId) {
 		if (pageVO.isSearch()) {// 검색
 			String sql = "select count(*) from SHIPSVC where instr(" + pageVO.getColumn()
-					+ ", ?) > 0 AND ( SHIPSVC_STATUS='주문정보 확인 중' OR SHIPSVC_STATUS='결제 대기 중')";
-			Object[] data = { pageVO.getKeyword() };
+					+ ", ?) > 0 AND ( SHIPSVC_STATUS='주문정보 확인 중' OR SHIPSVC_STATUS='결제 대기 중') "
+					+ "AND SHIPSVC_CUSTOMER_ID=?";
+			Object[] data = { pageVO.getKeyword() , loginId};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		} else {// 목록
 			String sql = "select count(*) from SHIPSVC where SHIPSVC_STATUS='주문정보 확인 중' OR SHIPSVC_STATUS='결제 대기 중'";

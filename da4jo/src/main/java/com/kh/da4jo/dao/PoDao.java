@@ -296,8 +296,10 @@ public class PoDao {
 		// 카운트 - 주문정보 확인 중, 결제 대기 중인 구매서 목록/검색 각각 구현
 		public int pendingPaymentCount(PageVO pageVO, String loginId) {
 			if (pageVO.isSearch()) {// 검색
-				String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 AND ( PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중')";
-				Object[] data = { pageVO.getKeyword() };
+				String sql = "select count(*) from po where instr(" + pageVO.getColumn() +", ?) > 0 "
+						+ "AND ( PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중') "
+						+ "AND PO_CUSTOMER_ID=?";
+				Object[] data = { pageVO.getKeyword(), loginId };
 				return jdbcTemplate.queryForObject(sql, int.class, data);
 			} else {// 목록
 				String sql = "select count(*) from po where PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중'";
