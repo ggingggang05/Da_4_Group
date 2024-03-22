@@ -26,7 +26,7 @@
 		<div class="content content-body">
 			<div class="cell content-body-text">
 				<div class="cell">
-					<strong>1. jimpass.com에 로그인 후 [구매대행 신청] 메뉴를 클릭하여 이동합니다.</strong><br> 
+					<strong>1. 다사조.com 에 로그인 후 [구매대행 신청] 메뉴를 클릭하여 이동합니다.</strong><br> 
 				</div>
 				<div class="cell center">
 				<img src="/image/신청서작성1.jpg">
@@ -34,7 +34,7 @@
 				<div class="cell">
 					<strong>2. 구매대행시 주의사항을 꼼꼼하게 확인 후 동의해 주십시오. </strong><br> 
 					<ul class="info-list">
-						<li>주의사항 미확인으로 발생하는 문제에 대해서는 jimpass.com는 책임지지 않으므로 양해바랍니다.</li>
+						<li>주의사항 미확인으로 발생하는 문제에 대해서는 다사조.com는 책임지지 않으므로 양해바랍니다.</li>
 						<li>하단의 구매대행 신청서 작성폼에 구매할 상품의 상품명, 품목분류, 브랜드/셀러, 단가, 수량, 제품색상(영문), 제품사이즈(영문) 등의 필요사항을 정확하게 기입하신 후 [신청하기] 버튼을 클릭합니다.</li>
 					</ul>
 				</div>
@@ -66,7 +66,7 @@
 				<div class="cell">
 					<strong>6. 정상 승인</strong><br>
 					<ul class="info-list">
-						<li>정상적으로 구매 승인이 났더라도 해당 상품에 대해서 상품값 결제를 해주셔야만 짐패스가 실제 구매를 하게됩니다.</li>
+						<li>정상적으로 구매 승인이 났더라도 해당 상품에 대해서 상품값 결제를 해주셔야만 다사조가 실제 구매를 하게됩니다.</li>
 						<li>마이페이지>구매대행 결제대기에서 구매 승인이 난 제품들에 대해서만 상품값을 결제 하실 수 있습니다.</li>
 					</ul>
 				</div>

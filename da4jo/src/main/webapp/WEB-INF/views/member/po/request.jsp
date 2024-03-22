@@ -218,47 +218,63 @@
 	});
 </script>
 <script type="text/javascript">
-    $(function() {
-        var state = {
-            // 필수항목 : true 선택항목 : false
-            poAgree: true,
-            poCountry: true,
-            poNameKor: true,
-            poNameEng: true,
-            poClearanceId: true,
-            poContact: true,
-            poZipcode: true,
-            poAddress1: true,
-            poAddress2: true,
-            poItemEngName: true,
-            poItemCategory: true,
-            poItemOption1: false,
-            poItemOption2: false,
-            poItemOption3: false,
-            poFx: true,
-            poQty: true,
-            poLink: true,
-            poDcomment: false,
-            poCurrency: true,
-        };
+$(function() {
+    var state = {
+        // 필수항목 : true 선택항목 : false
+        poAgree: true,
+        poCountry: true,
+        poNameKor: true,
+        poNameEng: true,
+        poClearanceId: true,
+        poContact: true,
+        poZipcode: true,
+        poAddress1: true,
+        poAddress2: true,
+        poItemEngName: true,
+        poItemCategory: true,
+        poItemOption1: false,
+        poItemOption2: false,
+        poItemOption3: false,
+        poFx: true,
+        poQty: true,
+        poLink: true,
+        poDcomment: false,
+        poCurrency: true,
+    };
 
-        // 버튼 클릭 이벤트 리스너 추가
-        $("form").click(function(){
-            // 필수 항목이 모두 입력되었는지 확인
-            var poAgree = $("input[name=poAgree]").val();
-            if(poAgree == ""){
-            	alert("유의사항에 동의하셔야 합니다.");
-            return false;
+    // 버튼 클릭 이벤트 리스너 추가
+    $(".btn-click").click(function(e) {
+        e.preventDefault(); // 폼 제출 방지
+
+        // 필수 항목이 모두 입력되었는지 확인
+        for (var key in state) {
+            if (state.hasOwnProperty(key) && state[key] === true) {
+                var value = $("input[name='" + key + "']").val();
+                if (value === "") {
+                    alert("모든 항목을 입력해야 합니다.");
+                    return false;
+                }
             }
-            // 필수 항목이 모두 입력되었을 때
-            if (isAllFieldsFilled) {
-                console.log("필수 항목이 모두 입력되었습니다.");
-                // 예: $("#formId").submit();
-            }
-        });
+        }
+
+        // 모든 필수 항목이 입력되었으면 폼 제출
+        $("form").submit();
     });
+
+    // form 전송
+    $(".check-form").submit(function() {
+        // 필요한 경우 추가 검증을 수행할 수 있습니다.
+        return true;
+    });
+});
+
 </script>
 
+<script type="text/javascript">
+$(function() {
+
+
+</script>
 <br>
 <br>
 <div id="agency_buy_write" class="section container center w-900">
@@ -270,9 +286,12 @@
 			<h3>해외 온라인 사이트의 가입, 해외결제등의 절차가 어렵고 번거로우시다면, 구매대행 서비스를 이용해 주세요.</h3>
 			구매대행시 주의사항을 확인 및 동의하신 후 하단의 신청폼에 상품정보를 입력하고 신청해 주세요!
 		</div>
-
+		<div class="cell w-100">
+		<a class="link" href="/document/delivery-step"><button type="button" class="btn">배송대행 신청방법 보러가기</button></a>
+	</div>
+	<br><br>
 		<div class="box_form">
-			<form name="form_agency_buy_write" id="form_agency_buy_write"
+			<form name="form_agency_buy_write" id="form_agency_buy_write" class="check-form"
 				method="post" action="/member/po/request">
 				<div class="content content-head" style="border-bottom: none;">
 					<div class="content-head-text">신청서 작성시 유의사항</div>
@@ -568,7 +587,7 @@
 			<br>
 		</div>
 		<div class="button_area text-center">
-    		<button id="submitButton" type="button" class="btn mt-10">신청서 작성하기</button>
+    		<button id="submitButton" type="submit" class="btn mt-10 btn-click">신청서 작성하기</button>
 		</div>
 	</div>
 	</form>

@@ -42,41 +42,7 @@
 	height: 40px !important;
 }
 
-.qnaTitlteLock {
-	color: #d63031 !important;
-}
 
-#qnaNo {
-	width: 8% !important;
-}
-
-#qnaRock {
-	width: 15% !important;
-}
-
-#typeQnaTitle {
-	text-align: center;
-	width: 70% !important;
-}
-
-#qnaTitle {
-	text-align: left;
-	width: 70% !important;
-}
-
-#qnaMember {
-	text-align: left;
-	width: 70% !important;
-}
-
-#qnaMember1 {
-	text-align: center;
-	width: 70% !important;
-}
-
-#qnaWdate {
-	width: 20% !important;
-}
 </style>
 <br>
 <div class="container container-body">
