@@ -395,8 +395,8 @@ public class ShipSvcDao {
 
 	// 상태 변수 변경 , 결제시간 변경
 	public void updateStatus(ShipSvcDto shipSvcDto) {
-		String sql = "update SHIPSVC set SHIPSVC_status=?,SHIPSVC_pay_date = sysdate where shipsvc_no=?";
-		Object[] data = { shipSvcDto.getShipSvcStatus(), shipSvcDto.getShipSvcStatus() };
+		String sql = "update SHIPSVC set SHIPSVC_status=?, SHIPSVC_pay_date = sysdate where shipsvc_no=?";
+		Object[] data = { shipSvcDto.getShipSvcStatus(), shipSvcDto.getShipSvcNo() };
 		jdbcTemplate.update(sql, data);
 	}
 

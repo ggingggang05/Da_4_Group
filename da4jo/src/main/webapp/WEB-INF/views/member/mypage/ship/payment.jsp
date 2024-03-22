@@ -60,7 +60,6 @@
 <br>
 <br>
 <div class="container container-body">
-	<div class="container flex-container">
 		<!-- 왼쪽 내용 -->
 		<jsp:include page="/WEB-INF/views/template/mypage-leftbar.jsp"></jsp:include>
 		<!-- 오른쪽 내용 -->

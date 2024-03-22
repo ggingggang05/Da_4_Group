@@ -6,67 +6,133 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<!-- 최종 수정 시 확인 알림창 -->
-<script type="text/javascript">
-    function validateForm() {
-		var choice = window.confirm("수정하시겠습니까?");
-		if(choice == false) return;
-    }
-</script>
+<style>
+.box{
+    display: block;
+    font-size: 15px;
+    padding: 0.7em;
+}
+/* .box도 있고 .input도 있는 경우 선택*/
+.box.input{
+    border: 2px solid #ccc;
+    /* 입력창의 기본 강조효과 제거 */
+	outline: none; 
+}
+/* 조건부 선택자*/
+.box.input:focus{
+    border-color: #2db400;
+}
+.input {
+	border-radius: 4px;
+	margin:5px !important;
+	padding-top: 10px !important;
+}
+*{
+	box-sizing: border-box;
+	font-family: sans-serif;    
+} 
+
+/*라벨 글씨 크기 스타일*/
+label {
+	 font-weight: bold !important; 
+     font-size: 16px !important; 
+     margin-top:10px !important;
+     color: #2d3436;
+}
+ 
+/*아이디,비밀번호 placeholder*/		
+input.tool::placeholder {
+	color: #b2bec3;
+	font-size: 14px;
+}
+		
+.timer{
+	color: red;
+}
+/*수정 버튼 디자인*/
+.editBtn{
+	color: white;
+	background-color: #74b9ff;
+	border-radius: 5px;
+}
+/*블럭별 디자인*/
+.block{
+	padding: 0.4em;
+	margin-top: 1em;
+	box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+	border-radius: 0.5em;
+}
+/* 웹킷(WebKit) 기반 브라우저용 스타일 */
+input[type="file"]::-webkit-file-upload-button {
+	  background: #74b9ff;;
+	  color: #fff;
+	  border: none;
+	  padding: 10px 20px;
+	  border-radius: 5px;
+	  cursor: pointer;
+}
+	
+/* 파이어폭스(Firefox)용 스타일 */
+.input::file-selector-button {
+  	background: #74b9ff;;
+  	color: #fff;
+    border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+
+.new-flex-cell {
+    display: flex;
+}
+.new-flex-cell > .width-fill {
+    flex-grow: 1;
+}
+.new-flex-cell.auto-width > * {
+    flex-grow: 1;
+}
+/* .new-flex-cell.vertical {
+    flex-direction: column;
+}  */
+.new-flex-cell.tool > * {
+	flex-wrap:wrap;
+	flex-direction: row;
+}
+
+.new-flex-cell.middle {
+    justify-content: center;
+    align-items: center;
+} 
+
+
+</style>
+
+
+
 
 <!-- 제약조건 검사 -->
 <script type="text/javascript"> 
 $(function(){
     var state = {
 	        //필수항목 : true; , 선택항목 : false;
-	        memberIdValid : false,
 	        memberNameKorValid : false,
 	        memberNameEngValid : true,//선택
-	        memberEmailValid : false,
 	        memberContact1Valid : false,
 	        memberContact2Valid : true,//선택
 	        memberBirthValid : true, //선택
 	        memberClrearanceIdValid : true,//선택
 	        memberAddressValid : true,//선택
+	        memberPwValid : false,
 	        //객체에 함수를 변수처럼 생성할 수 있다
 	        ok : function(){
-	            return this.memberIdValid && this.memberPwValid 
+	            return this.memberPwValid 
             		&& this.memberPwCheckValid && this.memberNameKorValid 
-            		&& this.memberEmailValid && this.memberContact1Valid 
+            		&& this.memberContact1Valid && this.memberPwValid
             		&& this.memberContact2Valid && this.memberBirthValid 
             		&& this.memberClrearanceIdValid && this.memberAddressValid;
 	        },
    		 };
-    //아이디 검사(비동기)
-    $("[name=memberId]").blur(function(){
-        var regex = /^[a-z][a-z0-9]{7,19}$/;
-        var value = $(this).val();	    
-    
-        if(regex.test(value)) {//아이디 형식 검사를 통과
-            $.ajax({
-                url : "/rest/member/checkJoinId",
-                method : "post",
-                data: {
-                    memberId : value
-                },
-                success : function(response) {
-                    console.log(response);
-                    if(response == "joinN") {
-                        $("[name=memberId]").removeClass("success fail fail2").addClass("fail2");
-                        state.memberIdValid = false;
-                    }
-                    else if(response == "joinY") {
-                        $("[name=memberId]").removeClass("success fail fail2").addClass("success");
-                        state.memberIdValid = true;
-                    }
-                }
-            });
-        }
-        else {//아이디가 형식검사 통과
-            $("[name=memberId]").removeClass("success fail fail2").addClass("fail");
-            state.memberIdValid = false;
-        }
-    });	
     
     //한글이름 검사
      $("[name=memberNameKor]").blur(function(){
@@ -91,6 +157,37 @@ $(function(){
         $(this).removeClass("success fail")
                     .addClass(state.memberNameEngValid ? "success" : "fail");
     });
+    
+    //비밀번호 검사(+비밀번호 확인)
+    $("[name=memberPw]").on("blur", function(){
+        var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$%^&*]{6,15}$/;
+        var value = $(this).val();	
+        
+        if(regex.test(value)) {//비밀번호 형식 검사 
+            $.ajax({
+                url : "/rest/member/checkInputPw",
+                method : "post",
+                data: {
+                    memberPw : value
+                },
+                success : function(response) {
+                    if(response) {
+                    	$("[name=memberPw]").removeClass("success fail fail2").addClass("success");
+                    	state.memberPwValid = true;
+                    }
+                    else {
+                        $("[name=memberPw]").removeClass("success fail fail2").addClass("fail");
+                        state.memberPwValid = false;
+                    }
+                }
+            });
+        }
+        else {
+            $("[name=memberPw]").removeClass("success fail fail2").addClass("fail");
+            state.memberPwValid = false;
+        }
+    });	     
+ 	   
     
         
     //연락처1* 검사
@@ -138,122 +235,231 @@ $(function(){
     
     //주소
     $("[name=memberAddress2]").blur(function(){
-        var post = $("[name=memberZipcode]").val();
+    	var zipcode = $("[name=memberZipcode]").val();
         var address1 = $("[name=memberAddress1]").val();
         var address2 = $("[name=memberAddress2]").val();
 
-        var isClear = post.length == 0 && address1.length == 0 && address2.length == 0;
-        var isFill = post.length > 0 && address1.length > 0 && address2.length > 0;
-
-        state.memberAddressValid = isClear || isFill;
+        var isClear = zipcode.length == 0 && address1.length == 0 && address2.length == 0;
+        var isFill = zipcode.length > 0 && address1.length > 0 && address2.length > 0;
+        var address2Null = zipcode.length > 0 && address1.length > 0 && address2.length == 0;
+        
+        state.memberAddressValid = isClear || isFill || address2Null;
         
         $("[name=memberZipcode], [name=memberAddress1], [name=memberAddress2]")
-        .removeClass("success fail")
-        .addClass(state.memberAddressValid ? "success" : "fail");
+			            .removeClass("success fail")
+			         	  	 .addClass(state.memberAddressValid ? "success" : "fail");
 	});
+    
+  //제출이 되는 경우
+    $(".check-form").submit(function(){
+    	var choice = window.confirm("수정하시겠습니까?");
+		if(choice) {
+        	$(this).find(".tool").not(".success, .fail, .fail2").blur();
+       		return state.ok();
+        } else {
+        	return false;
+        }
+    });
 });
+</script>
+
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    $(function(){
+        $(".btn-address-search").click(function(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var addr = ''; // 주소 변수
+
+                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        addr = data.roadAddress;
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        addr = data.jibunAddress;
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    $("[name=memberZipcode]").val(data.zonecode);
+                    $("[name=memberAddress1]").val(addr);
+                    
+                    // 커서를 상세주소 필드로 이동한다.
+                    $("[name=memberAddress2]").focus();
+                }
+            }).open();
+        });
+        
+        $(".btn-address-clear").click(function(){
+        	$("[name=memberZipcode]").val("");
+        	$("[name=memberAddress1]").val("");
+        	$("[name=memberAddress2]").val("");
+        });
+    });
+    
+    
+    
+    
 </script>
 
 <!-- 개인정보 수정 페이지 -->
 <!-- <form action="/member/mypage/change" method="post" autocomplete="off"> -->
-<form action="change" method="post" autocomplete="off" onsubmit="return validateForm()">
-	<div class="container w-500">
+<form action="change" method="post" autocomplete="off" class="check-form">
+	<div class="container w-550">
 		<div class="cell center">
-			<h1>개인정보 변경</h1>	
+			<h1 style= "color: #74b9ff;">개인정보 변경</h1>	
 		</div>
-		<!-- 수정할 정보 -->		
-		<div class="cell">
-			<label>아이디<b style="color:red">*</b></label>
-			<input type="text" name="memberId" class= "tool w-100" placeholder="아이디" value="${memberDto.memberId}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
+		<!-- 수정할 정보(첫번째 블럭) -->
+		<div class="container w-550 block">
+			<div class="container w-500">
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="center">아이디<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberId" class= "tool box input" placeholder="아이디" value="${memberDto.memberId}" readonly/>
+					</div>
+				</div>
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="center">이름(한글)<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberNameKor" class="tool box input" value="${memberDto.memberNameKor}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">한글 이름을 입력해주세요</div>
+					</div>					
+				</div>
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="center">이름(영문)</label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberNameEng" class="tool box input" value="${memberDto.memberNameEng}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 영어 이름입니다.</div>
+					</div>
+				</div>
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="center">이메일<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberEmail" class= "tool box input" value="${memberDto.memberEmail}" readonly/>
+					</div>
+				</div>
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="center">통관번호</label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberClearanceId" class= "tool box input" value="${memberDto.memberClearanceId}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 형식입니다.</div>
+					</div>
+				</div>
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="w-25 center">연락처1<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberContact1" class= "tool box w-75 input" value="${memberDto.memberContact1}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">연락처 형식 오류</div>		
+					</div>
+				</div>
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="w-25 center">연락처2</label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberContact2" class= "tool box w-75 input" value="${memberDto.memberContact2}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 연락처입니다.</div>
+					</div>
+				</div>
+				<!-- 주소 입력창 -->
+				<!-- 우편번호 입력창 -->
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="w-25 center">주소</label>
+					</div>
+					<div class="w-75 right">
+						<input type="text" name="memberZipcode" class= "tool box input" placeholder="우편번호" readonly style="width: 57%">	
+					</div>
+					<div class="w-10">
+						<button type="button" class="btn btn-address-search" style= "border-right: 1px; height: 48px; margin-top: 5px; margin-right: 3px;">
+			                <i class="fa-solid fa-magnifying-glass"></i>
+			            </button> 
+					</div>
+					<div class="w-10">
+						<button type="button" class="btn btn-address-clear" style= "border-right: 1px; height: 48px; margin-top: 5px;">
+						     <i class="fa-solid fa-xmark"></i>
+						</button>
+					</div>
+				</div>
+				<!-- 기본주소 입력창 -->
+				<div class="cell flex-cell">
+					<input type="text" name="memberAddress1" class= "tool w-100 box input" placeholder= "기본주소" readonly style="width: 98%;">
+				</div>
+				<div class="cell flex-cell">
+					<input type="text" name="memberAddress2" class= "tool w-100 box input" placeholder="상세주소" style="width: 98%;">
+					<div class="success-feedback">
+						<label></label>
+					</div>
+					<div class="fail-feedback">주소를 검색하여 우편번호를 입력해주세요.</div>
+				</div>
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="w-25 center">생년월일</label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberBirth" class= "tool box w-75 input" value="${memberDto.memberBirth}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 형식입니다.</div>						
+					</div>
+				</div>
 			</div>
-			<div class="fail-feedback">아이디는 소문자 시작, 숫자 포함 8~20자로 작성하세요</div>
-			<div class="fail2-feedback">이미 사용중인 아이디입니다</div>
-		</div>
-		<div class="cell">
-			<label>이름(한글)<b style="color:red">*</b></label>
-			<input type="text" name="memberNameKor" class="tool w-100" value="${memberDto.memberNameKor}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
-			</div>
-			<div class="fail-feedback">한글 이름을 입력해주세요</div>
-		</div>
-		<div class="cell">
-			<label>이름(영문)</label>
-			<input type="text" name="memberNameEng" class="tool w-100" value="${memberDto.memberNameEng}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
-			</div>
-			<div class="fail-feedback">잘못된 영어 이름입니다.</div>
-		</div>
-		<div class="cell">
-			<label>이메일<b style="color:red">*</b></label>
-			<input type="text" name="memberEmail" class= "tool w-100" value="${memberDto.memberEmail}" readonly/>
-		</div>
-		<div class="cell">
-			<label>통관번호</label>
-			<input type="text" name="memberClearanceId" class= "tool w-100" value="${memberDto.memberClearanceId}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
-			</div>
-			<div class="fail-feedback">잘못된 형식입니다.</div>
-		</div>
-		<div class="cell">
-			<label>연락처1<b style="color:red">*</b></label>
-			<input type="text" name="memberContact1" class= "tool w-100" value="${memberDto.memberContact1}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
-			</div>
-			<div class="fail-feedback">연락처 형식 오류</div>
-		</div>
-		<div class="cell">
-			<label>연락처2</label>
-			<input type="text" name="memberContact2" class= "tool w-100" value="${memberDto.memberContact2}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
-			</div>
-			<div class="fail-feedback">잘못된 연락처입니다.</div>
-		</div>
-		<div class="cell">
-			<label>주소</label>
-		</div>
-		<div class="cell">
-			<input type="text" name="memberZipcode" placeholder="우편번호" class="tool" size="8" value="${memberDto.memberZipcode}">
-			<button class="btn">검색</button>
-		</div>
-		<div class="cell">
-			<input type="text" name="memberAddress1" placeholder="기본주소" class="tool w-100" value="${memberDto.memberAddress1}">
-		</div>
-		<div class="cell">
-			<input type="text" name="memberAddress2" placeholder="상세주소" class="tool w-100" value="${memberDto.memberAddress2}">
-			<div class="fail-feedback">주소를 모두 작성하세요</div>
-		</div>
-		<div class="cell">
-			<label>생년월일</label>
-			<input type="text" name="memberBirth" class= "tool w-100" value="${memberDto.memberBirth}">
-			<div class="success-feedback">
-				<label><i class="fa-solid fa-circle-check"></i></label>
-			</div>
-			<div class="fail-feedback">잘못된 형식입니다.</div>
-		</div>
+		</div><!-- 첫번째 블럭 닫는 태그 -->		
 		
-		
-		<hr>
-
 		<!-- 개인정보 수정을 위한 비밀번호 확인 -->
-		<div class="cell mt-20">
-			<label>비밀번호 확인<b style="color:red">*</b></label>
-			<input type="password" name="memberPw" class="tool w-100">
-		</div>
-		<div>
-          	<c:if test="${param.error != null}">
-               <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
-            </c:if>
-        </div>
+		<div class="container w-550 block">
+			<div class="container w-500">
+				<div class="cell flex-cell">
+					<div class="w-25">
+						<label class="center">비밀번호 확인<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="password" name="memberPw" class="tool box input" style="width: 70%;">
+			          	<c:if test="${param.error != null}">
+			               <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
+			            </c:if>
+					</div>
+		        </div>
+			</div>
+		</div><!-- 두번째 블럭 닫는 태그 -->
 		
-		<div class="cell">
-			<button class="btn positive w-100">변경하기</button>
+		<div class="container w-550 pt-10 pb-20">
+			<div class="cell">
+				<button class="btn w-100 editBtn">
+					<i class="fa-regular fa-pen-to-square"></i> 변경
+				</button>
+			</div>
 		</div>
 		
 	</div>

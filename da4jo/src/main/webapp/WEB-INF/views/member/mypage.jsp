@@ -23,7 +23,7 @@
 }
 
 .detailInfo,
-.btn {
+.btnMypage {
 	font-size: 12px;
 	padding: 5px;
 }
