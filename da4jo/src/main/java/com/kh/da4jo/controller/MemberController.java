@@ -156,32 +156,10 @@ public class MemberController {
 		return"/WEB-INF/views/member/mypage/change.jsp"; 
 	}
 	@PostMapping("/mypage/change")
-	public String change(@ModelAttribute MemberDto memberDto, HttpSession session,
-					@RequestParam MultipartFile img) throws IllegalStateException, IOException {
-		//로그인 아이디 추출
-		String loginId = (String)session.getAttribute("loginId");
-		//memberDto에 아이디 설정
-		memberDto.setMemberId(loginId);
-		//DB정보 조회
-		MemberDto findDto = memberDao.selectOne(loginId);
-		//판정
-		boolean isValid = memberDto.getMemberPw().equals(findDto.getMemberPw());
-		System.out.println("isValid = " + isValid);
-		//변경 (판정문이 맞다면 == 현재 입력된 비밀번호와 원래 비밀번호 일치 여부 확인)
-		if(isValid) {
-			memberDao.updateMember(memberDto);
+	public String change(@ModelAttribute MemberDto memberDto, HttpSession session) throws IllegalStateException, IOException {
+		memberDao.updateMember(memberDto);
 			
-			//첨부파일 등록
-			if(!img.isEmpty()) {
-				int imgNo = imgService.save(img);//파일저장 + DB저장
-				
-				memberDao.connect(memberDto.getMemberId(), imgNo);//연결
-			}
-			
-			return "redirect:/member/mypage";
-		} else {
-			return "redirect:/member/mypage/change?error";
-		}
+		return "redirect:/member/mypage";
 	}
 	
 	//회원 비밀번호 변경 페이지

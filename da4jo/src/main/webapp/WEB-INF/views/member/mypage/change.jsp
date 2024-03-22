@@ -82,16 +82,34 @@ input[type="file"]::-webkit-file-upload-button {
 	cursor: pointer;
 }
 
+
+.new-flex-cell {
+    display: flex;
+}
+.new-flex-cell > .width-fill {
+    flex-grow: 1;
+}
+.new-flex-cell.auto-width > * {
+    flex-grow: 1;
+}
+/* .new-flex-cell.vertical {
+    flex-direction: column;
+}  */
+.new-flex-cell.tool > * {
+	flex-wrap:wrap;
+	flex-direction: row;
+}
+
+.new-flex-cell.middle {
+    justify-content: center;
+    align-items: center;
+} 
+
+
 </style>
 
 
-<!-- 최종 수정 시 확인 알림창 -->
-<script type="text/javascript">
-    function validateForm() {
-		var choice = window.confirm("수정하시겠습니까?");
-		if(choice == false) return;
-    }
-</script>
+
 
 <!-- 제약조건 검사 -->
 <script type="text/javascript"> 
@@ -105,11 +123,12 @@ $(function(){
 	        memberBirthValid : true, //선택
 	        memberClrearanceIdValid : true,//선택
 	        memberAddressValid : true,//선택
+	        memberPwValid : false,
 	        //객체에 함수를 변수처럼 생성할 수 있다
 	        ok : function(){
 	            return this.memberPwValid 
             		&& this.memberPwCheckValid && this.memberNameKorValid 
-            		&& this.memberContact1Valid 
+            		&& this.memberContact1Valid && this.memberPwValid
             		&& this.memberContact2Valid && this.memberBirthValid 
             		&& this.memberClrearanceIdValid && this.memberAddressValid;
 	        },
@@ -138,6 +157,37 @@ $(function(){
         $(this).removeClass("success fail")
                     .addClass(state.memberNameEngValid ? "success" : "fail");
     });
+    
+    //비밀번호 검사(+비밀번호 확인)
+    $("[name=memberPw]").on("blur", function(){
+        var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$%^&*]{6,15}$/;
+        var value = $(this).val();	
+        
+        if(regex.test(value)) {//비밀번호 형식 검사 
+            $.ajax({
+                url : "/rest/member/checkInputPw",
+                method : "post",
+                data: {
+                    memberPw : value
+                },
+                success : function(response) {
+                    if(response) {
+                    	$("[name=memberPw]").removeClass("success fail fail2").addClass("success");
+                    	state.memberPwValid = true;
+                    }
+                    else {
+                        $("[name=memberPw]").removeClass("success fail fail2").addClass("fail");
+                        state.memberPwValid = false;
+                    }
+                }
+            });
+        }
+        else {
+            $("[name=memberPw]").removeClass("success fail fail2").addClass("fail");
+            state.memberPwValid = false;
+        }
+    });	     
+ 	   
     
         
     //연락처1* 검사
@@ -199,6 +249,17 @@ $(function(){
 			            .removeClass("success fail")
 			         	  	 .addClass(state.memberAddressValid ? "success" : "fail");
 	});
+    
+  //제출이 되는 경우
+    $(".check-form").submit(function(){
+    	var choice = window.confirm("수정하시겠습니까?");
+		if(choice) {
+        	$(this).find(".tool").not(".success, .fail, .fail2").blur();
+       		return state.ok();
+        } else {
+        	return false;
+        }
+    });
 });
 </script>
 
@@ -239,20 +300,14 @@ $(function(){
         });
     });
     
-    $(".check-form").submit(function(){
-        //$(this).find("[name], #pw-reinput").blur();
-        //$(this).find(".tool").blur();//모든 창
-        
-        //입력창 중에서 success fail fail2가 없는 창
-        $(this).find(".tool").not(".success, .fail, .fail2").blur();
-        return state.ok();
-    });
+    
+    
     
 </script>
 
 <!-- 개인정보 수정 페이지 -->
 <!-- <form action="/member/mypage/change" method="post" autocomplete="off"> -->
-<form action="change" method="post" autocomplete="off" onsubmit="return validateForm()">
+<form action="change" method="post" autocomplete="off" class="check-form">
 	<div class="container w-550">
 		<div class="cell center">
 			<h1 style= "color: #74b9ff;">개인정보 변경</h1>	
@@ -261,73 +316,106 @@ $(function(){
 		<div class="container w-550 block">
 			<div class="container w-500">
 				<div class="cell flex-cell">
-					<label class="w-25 center">아이디<b style="color:red">*</b></label>
-					<input type="text" name="memberId" class= "tool box w-75 input" placeholder="아이디" value="${memberDto.memberId}" readonly/>
+					<div class="w-25">
+						<label class="center">아이디<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberId" class= "tool box input" placeholder="아이디" value="${memberDto.memberId}" readonly/>
+					</div>
 				</div>
 				<div class="cell flex-cell">
-					<label class="w-25 center">이름(한글)<b style="color:red">*</b></label>
-					<input type="text" name="memberNameKor" class="tool box w-75 input" value="${memberDto.memberNameKor}">
-					<div class="cell">
+					<div class="w-25">
+						<label class="center">이름(한글)<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberNameKor" class="tool box input" value="${memberDto.memberNameKor}">
 						<div class="success-feedback">
 							<label></label>
 						</div>
 						<div class="fail-feedback">한글 이름을 입력해주세요</div>
-					</div>
-					
+					</div>					
 				</div>
 				<div class="cell flex-cell">
-					<label class="w-25 center">이름(영문)</label>
-					<input type="text" name="memberNameEng" class="tool box w-75 input" value="${memberDto.memberNameEng}">
-					<div class="success-feedback">
-						<label></label>
+					<div class="w-25">
+						<label class="center">이름(영문)</label>
 					</div>
-					<div class="fail-feedback">잘못된 영어 이름입니다.</div>
+					<div class="w-75">
+						<input type="text" name="memberNameEng" class="tool box input" value="${memberDto.memberNameEng}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 영어 이름입니다.</div>
+					</div>
 				</div>
 				<div class="cell flex-cell">
-					<label class="w-25 center">이메일<b style="color:red">*</b></label>
-					<input type="text" name="memberEmail" class= "tool box w-75 input" value="${memberDto.memberEmail}" readonly/>
+					<div class="w-25">
+						<label class="center">이메일<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="text" name="memberEmail" class= "tool box input" value="${memberDto.memberEmail}" readonly/>
+					</div>
 				</div>
 				<div class="cell flex-cell">
-					<label class="w-25 center">통관번호</label>
-					<input type="text" name="memberClearanceId" class= "tool box w-75 input" value="${memberDto.memberClearanceId}">
-					<div class="success-feedback">
-						<label></label>
+					<div class="w-25">
+						<label class="center">통관번호</label>
 					</div>
-					<div class="fail-feedback">잘못된 형식입니다.</div>
+					<div class="w-75">
+						<input type="text" name="memberClearanceId" class= "tool box input" value="${memberDto.memberClearanceId}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 형식입니다.</div>
+					</div>
 				</div>
 				<div class="cell flex-cell">
-					<label class="w-25 center">연락처1<b style="color:red">*</b></label>
-					<input type="text" name="memberContact1" class= "tool box w-75 input" value="${memberDto.memberContact1}">
-					<div class="success-feedback">
-						<label></label>
+					<div class="w-25">
+						<label class="w-25 center">연락처1<b style="color:red">*</b></label>
 					</div>
-					<div class="fail-feedback">연락처 형식 오류</div>
+					<div class="w-75">
+						<input type="text" name="memberContact1" class= "tool box w-75 input" value="${memberDto.memberContact1}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">연락처 형식 오류</div>		
+					</div>
 				</div>
 				<div class="cell flex-cell">
-					<label class="w-25 center">연락처2</label>
-					<input type="text" name="memberContact2" class= "tool box w-75 input" value="${memberDto.memberContact2}">
-					<div class="success-feedback">
-						<label></label>
+					<div class="w-25">
+						<label class="w-25 center">연락처2</label>
 					</div>
-					<div class="fail-feedback">잘못된 연락처입니다.</div>
+					<div class="w-75">
+						<input type="text" name="memberContact2" class= "tool box w-75 input" value="${memberDto.memberContact2}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 연락처입니다.</div>
+					</div>
 				</div>
 				<!-- 주소 입력창 -->
 				<!-- 우편번호 입력창 -->
 				<div class="cell flex-cell">
-					<label class="w-25 center">주소</label>
-					<input type="text" name="memberZipcode" class= "tool box input" placeholder="우편번호" readonly style="width: 57%">
-				    <button type="button" class="btn btn-address-search" style= "border-right: 1px; height: 48px; margin-top: 5px; margin-right: 3px;">
-		                <i class="fa-solid fa-magnifying-glass"></i>
-		            </button>      
-		     		<button type="button" class="btn btn-address-clear" style= "border-right: 1px; height: 48px; margin-top: 5px;">
-					     <i class="fa-solid fa-xmark"></i>
-					</button>
+					<div class="w-25">
+						<label class="w-25 center">주소</label>
+					</div>
+					<div class="w-75 right">
+						<input type="text" name="memberZipcode" class= "tool box input" placeholder="우편번호" readonly style="width: 57%">	
+					</div>
+					<div class="w-10">
+						<button type="button" class="btn btn-address-search" style= "border-right: 1px; height: 48px; margin-top: 5px; margin-right: 3px;">
+			                <i class="fa-solid fa-magnifying-glass"></i>
+			            </button> 
+					</div>
+					<div class="w-10">
+						<button type="button" class="btn btn-address-clear" style= "border-right: 1px; height: 48px; margin-top: 5px;">
+						     <i class="fa-solid fa-xmark"></i>
+						</button>
+					</div>
 				</div>
 				<!-- 기본주소 입력창 -->
-				<div class="cell">
+				<div class="cell flex-cell">
 					<input type="text" name="memberAddress1" class= "tool w-100 box input" placeholder= "기본주소" readonly style="width: 98%;">
 				</div>
-				<div class="cell">
+				<div class="cell flex-cell">
 					<input type="text" name="memberAddress2" class= "tool w-100 box input" placeholder="상세주소" style="width: 98%;">
 					<div class="success-feedback">
 						<label></label>
@@ -335,12 +423,16 @@ $(function(){
 					<div class="fail-feedback">주소를 검색하여 우편번호를 입력해주세요.</div>
 				</div>
 				<div class="cell flex-cell">
-					<label class="w-25 center">생년월일</label>
-					<input type="text" name="memberBirth" class= "tool box w-75 input" value="${memberDto.memberBirth}">
-					<div class="success-feedback">
-						<label></label>
+					<div class="w-25">
+						<label class="w-25 center">생년월일</label>
 					</div>
-					<div class="fail-feedback">잘못된 형식입니다.</div>
+					<div class="w-75">
+						<input type="text" name="memberBirth" class= "tool box w-75 input" value="${memberDto.memberBirth}">
+						<div class="success-feedback">
+							<label></label>
+						</div>
+						<div class="fail-feedback">잘못된 형식입니다.</div>						
+					</div>
 				</div>
 			</div>
 		</div><!-- 첫번째 블럭 닫는 태그 -->		
@@ -349,21 +441,23 @@ $(function(){
 		<div class="container w-550 block">
 			<div class="container w-500">
 				<div class="cell flex-cell">
-					<label class="w-25 center">비밀번호 확인<b style="color:red">*</b></label>
-					<input type="password" name="memberPw" class="tool box input" style="width: 70%;">
-				</div>
-				<div>
-		          	<c:if test="${param.error != null}">
-		               <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
-		            </c:if>
+					<div class="w-25">
+						<label class="center">비밀번호 확인<b style="color:red">*</b></label>
+					</div>
+					<div class="w-75">
+						<input type="password" name="memberPw" class="tool box input" style="width: 70%;">
+			          	<c:if test="${param.error != null}">
+			               <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
+			            </c:if>
+					</div>
 		        </div>
 			</div>
 		</div><!-- 두번째 블럭 닫는 태그 -->
 		
 		<div class="container w-550 pt-10 pb-20">
 			<div class="cell">
-				<button class="btn w-100 editBtn" type="submit">
-					<i class="fa-regular fa-pen-to-square"></i>변경
+				<button class="btn w-100 editBtn">
+					<i class="fa-regular fa-pen-to-square"></i> 변경
 				</button>
 			</div>
 		</div>

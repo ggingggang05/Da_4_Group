@@ -72,6 +72,20 @@ public class MemberRestController {
 			return "loginN"; // 사용 불가능한 경우(DB == null)
 		}
 	}
+	
+	// 비밀번호 검사
+	@RequestMapping("/checkInputPw")
+	public boolean checkInputPw(HttpSession session,
+						@RequestParam String memberPw) {
+		String loginId = (String)session.getAttribute("loginId");
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		
+		if(memberPw.equals(memberDto.getMemberPw()) && memberDto != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	@RequestMapping("/editProfile")
 	public List<Integer> editProfile(HttpSession session, @RequestParam MultipartFile img)
