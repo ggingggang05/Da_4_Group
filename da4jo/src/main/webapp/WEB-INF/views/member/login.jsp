@@ -145,7 +145,7 @@
 						</h5>
 	                </c:if>
 	            </div>
-	            
+	            <input type = "hidden" id="referer" name = "referer" value = "${referer}" >
        	     	<div class="cell floating-cell" style="padding-top: 1em;">
                     <div class="w-50 center">
                      	<a href="findId" style= "font-size: 13px;">아이디 찾기</a>

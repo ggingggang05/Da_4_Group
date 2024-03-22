@@ -27,6 +27,7 @@ import com.kh.da4jo.service.EmailService;
 import com.kh.da4jo.service.ImgService;
 import com.kh.da4jo.vo.PageVO;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -85,12 +86,16 @@ public class MemberController {
 	
 	//로그인
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpServletRequest request, Model model) {
+		String referer = request.getHeader("referer");
+		model.addAttribute("referer", referer);
 		return "/WEB-INF/views/member/login.jsp";
 	}
 	@PostMapping("/login")
 	public String login(@ModelAttribute MemberDto inputDto,
-										HttpSession session) {
+										HttpSession session,
+										@RequestParam String referer, 
+										Model model) {
 		//아이디 조회
 		MemberDto findDto = memberDao.selectOne(inputDto.getMemberId());
 		//로그인 가능 여부 판정
@@ -105,9 +110,16 @@ public class MemberController {
 			//최종 로그인 시각 갱신
 			memberDao.updateMemberLoginDate(findDto.getMemberId());
 			
-			return "redirect:/";
+			if (referer == null || referer.isEmpty())
+			{
+				return "redirect:/";
+			} else
+			{
+				return "redirect:" + referer;
+			}
 		}
 		else {//로그인 실패
+			model.addAttribute("referer", referer);
 			return "redirect:login?error";
 		}
 	}
