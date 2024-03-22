@@ -146,40 +146,44 @@
 			</div><!-- 배송서 리스트 닫는 태그-->
 		</div><!-- 내용 바디 닫는 태그 -->
 		<div class="page-navigator"> <!-- 네비게이터 태그 -->
-			<%-- 이전이 있을 경우만 링크를 제공 --%>
-			<c:choose>
-				<c:when test="${pageVO.isFirstBlock()}">
-					<a class="off">&lt;이전</a>
-				</c:when>
-				<c:otherwise>
-					<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
-				</c:otherwise>
-			</c:choose>
-
-			<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
-			<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
-				end="${pageVO.getEndBlock()}" step="1">
-				<%-- 다른 페이지일 경우만 링크를 제공 --%>
+			<c:if test="${empty poList}"> <%-- 리스트가 없을 땐 --%>
+				<!-- 네비게이터 안 보여줌 -->
+			</c:if>
+			<c:if test="${!empty poList}">
 				<c:choose>
-					<c:when test="${pageVO.isCurrentPage(i)}">
-						<a class="on">${i}</a>
+					<c:when test="${pageVO.isFirstBlock()}">
+						<a class="off">&lt;이전</a>
 					</c:when>
 					<c:otherwise>
-						<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+						<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
 					</c:otherwise>
 				</c:choose>
-			</c:forEach>
-
-			<%-- 다음이 있을 경우만 링크를 제공 --%>
-			<c:choose>
-				<c:when test="${pageVO.isLastBlock()}">
-					<a class="off">다음&gt;</a>
-				</c:when>
-				<c:otherwise>
-					<a
-						href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
-				</c:otherwise>
-			</c:choose>
+	
+				<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+				<c:forEach var="i" begin="${pageVO.getBeginBlock()}"
+					end="${pageVO.getEndBlock()}" step="1">
+					<%-- 다른 페이지일 경우만 링크를 제공 --%>
+					<c:choose>
+						<c:when test="${pageVO.isCurrentPage(i)}">
+							<a class="on">${i}</a>
+						</c:when>
+						<c:otherwise>
+							<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+	
+				<%-- 다음이 있을 경우만 링크를 제공 --%>
+				<c:choose>
+					<c:when test="${pageVO.isLastBlock()}">
+						<a class="off">다음&gt;</a>
+					</c:when>
+					<c:otherwise>
+						<a
+							href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
 		</div><!-- 네비게이터 닫는 태그 -->
 	</div><!-- 오른쪽 내용 닫는 태그 -->	
 </div><!-- 컨테이너 자리 닫는 태그 -->
