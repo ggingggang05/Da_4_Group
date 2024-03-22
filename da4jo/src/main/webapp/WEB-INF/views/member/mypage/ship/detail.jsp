@@ -202,78 +202,64 @@
 									pattern="y년 M월 d일 E H시 m분 s초" />
 							</div>
 						</div>
-					</div>
-					
-					<div class="info-group">
-						<div class="info-label">배송회사</div>
-						<div class="info-content-wrapper">
-							<div class="info-content">
-								${shipSvcDto.shipSvcUserShipper}
-							</div>
-						</div>
-					</div>
-					<div class="info-group">
-						<div class="info-label">송장 번호</div>
-						<div class="info-content-wrapper">
-							<div class="info-content">
-								${shipSvcDto.shipSvcUserAwbNumber}
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				<!-- 결제정보 -->
-				<div class="content content-body">
-					<div class="info-head w-100">
-						<strong>결제정보</strong>
 					</div>	
-						<div class="info-body">
-							<div class="info-group">
-								<div class="info-label">상품금액(원화)</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										${shipSvcDto.itemPrice}
-									</div>
-								</div>
-							</div>
-							<div class="info-group">
-								<div class="info-label">부가세</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										<c:choose>
-										<c:when test="${shipSvcDto.itemPrice >= 200000}">
-											${shipSvcDto.vat}
-										</c:when>
-										<c:otherwise>
-											0
-										</c:otherwise>
-									</c:choose>
-									</div>
-								</div>
-							</div>
-							<div class="info-group">
-								<div class="info-label">수수료</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										${shipSvcDto.shipSvcServiceFee}
-									</div>
-								</div>
-							</div>
-							<div class="info-group">
-								<div class="info-label">결제금액</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										${shipSvcDto.shipSvcTotalPriceKrw}
-									</div>
+				</div>
+			</div> <!-- 상품 정보 닫는 태그 -->
+			<!-- 결제정보 -->
+			<div class="content content-body">
+				<div class="info-head w-100">
+					<strong>결제정보</strong>
+				</div>	
+					<div class="info-body">
+						<div class="info-group">
+							<div class="info-label">상품금액(원화)</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									${shipSvcDto.itemPrice}
 								</div>
 							</div>
 						</div>
-				</div>
-				<!-- 메뉴 -->			
-				<div class="cell center">
+						<div class="info-group">
+							<div class="info-label">부가세</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									<c:choose>
+									<c:when test="${shipSvcDto.itemPrice >= 200000}">
+										${shipSvcDto.vat}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">수수료</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									${shipSvcDto.shipSvcServiceFee}
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">결제금액</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									${shipSvcDto.shipSvcTotalPriceKrw}
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			<!-- 메뉴 -->			
+			<div class="cell center">
+				<div class="cell w-50 right p-20">
 					<a href="/mypage/ship/list" class="link">
 						<button class="btn">목록으로</button>
 					</a>
+				</div>
+				<div class="cell w-50 left p-20">
 					<form action="updateCancelStatus" method="post">
 					    <c:choose>
 					        <c:when test="${shipSvcDto.shipSvcStatus == '결제 대기 중' || shipSvcDto.shipSvcStatus == '주문정보 확인 중'}"> <!-- 주문 취소 가능한 상태일 때 -->
@@ -289,9 +275,8 @@
 					        </c:otherwise>
 					    </c:choose>
 					</form>
-					
 				</div>
-			</div> <!-- 상품 정보 닫는 태그 -->			
+			</div>			
 		</div><!-- 오른쪽 내용 닫는 태그 -->
 	
 </div><!-- 컨테이너 자리 닫는 태그 -->

@@ -232,58 +232,62 @@
 						</div>
 					</div>
 				</div>
-				<!-- 결제정보 -->
-				<div class="content content-body">
-					<div class="info-head w-100">
-						<strong>결제정보</strong>
-					</div>	
-						<div class="info-body">
-							<div class="info-group">
-								<div class="info-label">상품금액(원화)</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										${poDto.itemPrice}
-									</div>
-								</div>
-							</div>
-							<div class="info-group">
-								<div class="info-label">부가세</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										<c:choose>
-										<c:when test="${poDto.itemPrice >= 200000}">
-											${poDto.vat}
-										</c:when>
-										<c:otherwise>
-											0
-										</c:otherwise>
-									</c:choose>
-									</div>
-								</div>
-							</div>
-							<div class="info-group">
-								<div class="info-label">수수료</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										${poDto.poServiceFee}
-									</div>
-								</div>
-							</div>
-							<div class="info-group">
-								<div class="info-label">결제금액</div>
-								<div class="info-content-wrapper">
-									<div class="info-content">
-										${poDto.poTotalPriceKrw}
-									</div>
+			</div> <!-- 상품 정보 닫는 태그 -->	
+			<!-- 결제정보 -->
+			<div class="content content-body">
+				<div class="info-head w-100">
+					<strong>결제정보</strong>
+				</div>	
+					<div class="info-body">
+						<div class="info-group">
+							<div class="info-label">상품금액(원화)</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									${poDto.itemPrice}
 								</div>
 							</div>
 						</div>
-				</div>
-				<!-- 메뉴 -->			
-				<div class="cell center">
+						<div class="info-group">
+							<div class="info-label">부가세</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									<c:choose>
+									<c:when test="${poDto.itemPrice >= 200000}">
+										${poDto.vat}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">수수료</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									${poDto.poServiceFee}
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">결제금액</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									${poDto.poTotalPriceKrw}
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			<!-- 메뉴 -->			
+			<div class="cell center flex-cell">
+				<div class="cell w-50 right p-20">
 					<a href="/mypage/purchase/list" class="link">
 						<button class="btn">목록으로</button>
 					</a>
+				</div>
+				<div class="cell w-50 left p-20">
 					<form action="updateCancelStatus" method="post">
 					    <c:choose>
 					        <c:when test="${poDto.poStatus == '결제 대기 중' || poDto.poStatus == '주문정보 확인 중'}"> <!-- 주문 취소 가능한 상태일 때 -->
@@ -299,9 +303,8 @@
 					        </c:otherwise>
 					    </c:choose>
 					</form>
-					
 				</div>
-			</div> <!-- 상품 정보 닫는 태그 -->			
+			</div>		
 		</div><!-- 오른쪽 내용 닫는 태그 -->
 	
 </div><!-- 컨테이너 자리 닫는 태그 -->
