@@ -75,8 +75,8 @@
 			<div>
 			</div>
 			<div>
-				<input class="wTool w-100" type="text" name="reviewTitle"
-					placeholder="제목을 입력해주세요.">
+				<input class="wTool w-100 pt-30" type="text" name="reviewTitle"
+					placeholder="제목을 입력해주세요." required="required">
 			
 			
 			<div class="cell py-20">

@@ -83,6 +83,7 @@ public class QnaController {
 		
 		return "/WEB-INF/views/board/qna/list.jsp";
 	}
+	
 
 	//상세조회
 	@RequestMapping("/detail")
@@ -93,6 +94,8 @@ public class QnaController {
 		
 		return "/WEB-INF/views/board/qna/detail.jsp";
 	}
+	
+	
 
 	//수정
 	@GetMapping("/edit") 

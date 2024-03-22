@@ -36,6 +36,7 @@ public class QnaVcountInterceptor implements HandlerInterceptor{
 			return true; // 작성자가 탈퇴한 사용자면 조회수 증가 없음
 		}
 		
+		
 		Set<Integer> history = (Set<Integer>)session.getAttribute("history");
 		// 세션에 history라는 저장소를 생성하거나 있으면 꺼낸다
 		if(history == null){// 이 이름의 저장소가 없으면 새로 만들어준다
@@ -50,6 +51,7 @@ public class QnaVcountInterceptor implements HandlerInterceptor{
 			history.add(qnaNo);
 			session.setAttribute("history", history);
 		}
+		
 		
 		// 조회수 증가
 		qnaDao.updateQnaReadcount(qnaNo);

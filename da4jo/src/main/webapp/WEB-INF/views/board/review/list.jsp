@@ -4,23 +4,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- jquery cdn -->
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
-	<!-- select2 cdn -->
-<link
-    href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-    rel="stylesheet" />
-<script
-    src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+
+<!-- select2 cdn -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	
 <script type="text/javascript">
-$(function() {
-    $(".searchSelect").select2({
-        minimumResultsForSearch : Infinity
-    //selelct창에 검색 바 유무(주석처리 시 생김)
-    });
-});
+	$(function() {
+		$(".searchSelect").select2({
+			minimumResultsForSearch : Infinity
+		//selelct창에 검색 바 유무(주석처리 시 생김)
+		});
+	});
 </script>
 
 <script>
@@ -36,8 +33,6 @@ $(function() {
 		});
 	});
 </script>
-
-
 
 <style>
 
@@ -56,16 +51,16 @@ $(function() {
     max-width: 8ch; /* 최대 10글자로 설정 */
 }
 
-/* .menu.menu-type { */
-/* 	border-bottom: 1px solid #CAE4FF; */
-/* 	border-top: 1px solid #CAE4FF; */
-/* 	background-color: #F1F3F5; */
-/* } */
-
-.py-60 {
-	padding-top: 60px !important;
-	padding-bottom: 60px !important;
-}
+ .menu.menu-type { 
+ 	border-bottom: 1px solid #CAE4FF; 
+ 	border-top: 1px solid #CAE4FF; 
+ 	background-color: #DEEEFF; 
+ 	font-size: 14px;
+ } 
+ 
+ .menu.menu-list {
+ 	font-size: 14px;
+ } 
 
 .bottom-bar div:first-child {
 	width: 750px;
@@ -106,10 +101,10 @@ $(function() {
 		<div class="content content-body right">
 
 			<div class="cell center"></div>
-			<div class="cell center my-50">
+			<div class="cell center">
 
 				<ul class="menu menu-type center">
-					<li id="reviewNo"><strong>번호</strong></li>
+					<li id="reviewNo">번호</li>
 					<li id="reviewImg">이미지</li>
 					<li id="reviewTitle">제목</li>
 					<li id="reviewWriter">작성자</li>
@@ -117,50 +112,50 @@ $(function() {
 					<li id="">별점</li>
 				</ul>
 
-					<c:forEach var="reviewDto" items="${list}">
-						<ul class="menu menu-list center py-40">
-							<li id="reviewNo">${reviewDto.reviewNo}</li>
-							<!-- <li><img src="/download?imgNo=166"></li> -->
-							<li id="reviewImg"><img
-								src="image?reviewNo=${reviewDto.reviewNo}" width="50"
-								height="50"></li>
+				<c:forEach var="reviewDto" items="${list}">
+					<ul class="menu menu-list center py-40">
+						<li id="reviewNo">${reviewDto.reviewNo}</li>
+						<!-- <li><img src="/download?imgNo=166"></li> -->
+						<li id="reviewImg"><img
+							src="image?reviewNo=${reviewDto.reviewNo}" width="50" height="50"></li>
 						<li id="reviewTitle" class="cell left"><a
 							href="detail?reviewNo=${reviewDto.reviewNo}"
 							class="truncate-text">${reviewDto.reviewTitle}</a></li>
 						<li id="reviewWriter" class="truncate-name">${reviewDto.reviewWriter}</li>
-							<li>${reviewDto.reviewWdate}</li>
-							<li>
-								<div class="cell">
-									<div class="score" data-max="5.0"
-										data-rate="${reviewDto.reviewStar}"></div>
-								</div>
-							</li>
-						</ul>
-					</c:forEach>
+						<li>${reviewDto.reviewWdate}</li>
+						<li>
+							<div class="cell">
+								<div class="score" data-max="5.0"
+									data-rate="${reviewDto.reviewStar}"></div>
+							</div>
+						</li>
+					</ul>
+				</c:forEach>
 
-					<div class="cell center flex-cell my-50 bottom-bar">
-						<%-- 검색창 --%>
-				<form action="list" method="get" class="left">
-					<div class="cell searchArea left">
-						<select name="column" class="searchSelect">
-							<option value="REVIEW_NO"
-								${param.column == 'review_no' ? 'selected' : ''}>글번호</option>
-							<option value="REVIEW_TITLE"
-								${param.column == 'review_title' ? 'selected' : ''}>제목</option>
-							<option value="review_writer"
-								${param.column == '"review_writer"' ? 'selected' : ''}>작성자</option>
-						</select> <input type="search" name="keyword" placeholder=""
-							value="${param.keyword}" class="searchBar">
-						<button class="btn searchBtn">	
-							<i class="fa-solid fa-search"></i>
-						</button>
-					</div>
-				</form>
-						
+				<div class="flex-cell">
+					<div class="cell flex-cell my-30 bottom-bar">
+						<div class="cell">
+							<%-- 검색창 --%>
+							<form action="list" method="get" class="left">
+								<select name="column" class="searchSelect">
+									<option value="review_no"
+										${param.column == 'review_no' ? 'selected' : ''}>글번호</option>
+									<option value="review_title"
+										${param.column == 'review_title' ? 'selected' : ''}>제목</option>
+									<option value="review_writer"
+										${param.column == 'review_writer' ? 'selected' : ''}>작성자</option>
+									<option value="review_content"
+										${param.column == 'review_content' ? 'selected' : ''}>내용</option>
+								</select> <input class="searchBar w-400" type="search" name="keyword"
+									placeholder="검색어 입력" required value="${param.keyword}">
+								<button class="btn searchBtn">검색</button>
+							</form>
+						</div>
 						<div class="cell right">
-							<a href="write" class="btn">리뷰글쓰기</a>
+							<a href="write" class="link">질문글쓰기</a>
 						</div>
 					</div>
+				</div>
 
 				<div class="cell">
 					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>

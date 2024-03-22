@@ -155,7 +155,7 @@ public class QnaDao {
 					+ ")TMP"
 				+ ") where rn between ? and ?";
 			Object[] data = {
-					pageVO.getBeginRow(),
+					pageVO.getKeyword(),
 					pageVO.getBeginRow(),
 					pageVO.getEndRow()
 				};
