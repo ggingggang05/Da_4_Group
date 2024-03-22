@@ -9,7 +9,7 @@
 <style>
 .asterisk {
 	font-size: 8px;
-	vertical-align: top !imshipSvcrtant;
+	vertical-align: top !important;
 }
 
 #agency_buy_write fieldset {
@@ -460,39 +460,39 @@ $(function() {
 		<div class="box">
 			<ul>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="오리건" data-currency="USD" /> 오리건 
+					<div class="info">
+						<input name="shipSvcCountry" type="radio"
+							value="오리건" data-currency="USD" /> 오리건 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="뉴저지" data-currency="USD" /> 뉴저지 
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="뉴저지" data-currency="USD" /> 뉴저지 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="영국" data-currency="GBP" /> 영국 
+					<div class="info">
+						<input name="shipSvcCountry" type="radio"
+							value="영국" data-currency="GBP" /> 영국 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
+					<div class="info">
+						<input name="shipSvcCountry" type="radio"
 							class="type_radio" value="독일" data-currency="EUR" /> 독일 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
 							class="type_radio" value="일본(항공)-오사카" data-currency="JPY" />
 							일본(항공)-오사카 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
 							class="type_radio" value="중국(항공)" data-currency="CNY" /> 중국(항공)
 
 						
@@ -500,28 +500,28 @@ $(function() {
 				</li>
 				<br>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="스페인" data-currency="EUR" /> 스페인 
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="스페인" data-currency="EUR" /> 스페인 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="호주" data-currency="AUD" /> 호주 
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="호주" data-currency="AUD" /> 호주 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="일본(선박)-후쿠오카" data-currency="JPY" />
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="일본(선박)-후쿠오카" data-currency="JPY" />
 							일본(선박)-후쿠오카 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="중국(선박)" data-currency="CNY" /> 중국(선박)
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="중국(선박)" data-currency="CNY" /> 중국(선박)
 
 						
 					</div>
@@ -530,17 +530,13 @@ $(function() {
 			<script>
 				$(function() {
 					$('input[name=shipSvcCountry]')
-							.on(
-									'click',
-									function() {
-										var currency = $(this).data('currency');
-										// 선택된 국가의 통화를 가져와서 변수에 저장
-										console.log('선택된 통화: ' + currency);
-										// 선택된 통화를 콘솔에 출력 (이 부분은 필요에 따라 백엔드로 전달하거나 다른 작업을 수행할 수 있음)
-										$('Form')
-												.append(
-														'<input type="hidden" name="shipSvcCurrency" value="' + currency + '">');
-									});
+							.on('click',function() {
+								var currency = $(this).data('currency');
+								// 선택된 국가의 통화를 가져와서 변수에 저장
+								console.log('선택된 통화: ' + currency);
+								$('Form').find('input[name=shipSvcCurrency]').remove();
+								$('Form').append('<input type="hidden" name="shipSvcCurrency" value="' + currency + '">');
+						});
 				});
 			</script>
 		</div>
