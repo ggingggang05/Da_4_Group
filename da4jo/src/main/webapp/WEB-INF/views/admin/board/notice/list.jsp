@@ -18,12 +18,27 @@
 	width: 70%;
 	text-align: left;
 }
-
-
 .notice-date {
 	width: 20%;
 	text-align: center;
 }
+.menu.menu-type {
+	border-bottom: 1px solid #d8d8d8;
+	border-top: 1px solid #d8d8d8;
+	background-color: #F1F3F5;
+}
+
+.bottom-bar div:first-child {
+	width: 750px;
+}
+.menu.menu-type.qnaMenu {
+	height: 40px !important;
+}
+
+.menu.menu-list.qnaMenu {
+	height: 40px !important;
+}
+
 </style>
 <br>
 <div class="container container-body">
@@ -36,12 +51,13 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell flex-cell">
-				<div class="notice-number">번호</div>
-				<div class="notice-title">제목</div>
-				<div class="notice-date">작성일</div>
+			<div class="cell flex-cell menu menu-type qnaMenu mt-10">
+				<div class="notice-number" style="font-size: 14px;">번호</div>
+				<div class="notice-title" style="font-size: 14px;">제목</div>
+				<div class="notice-date" style="font-size: 14px;">작성일</div>
 			</div>
 			<!--- 리스트 --->
+			<div class="content-body-text" style="padding-top: 6px;">
 			<c:forEach var="noticeDto" items="${noticeDto}">
 				<div class="cell flex-cell">
 					<div class="notice-number">${noticeDto.noticeNo}</div>
@@ -54,7 +70,8 @@
 			<div class="cell right">
 				<c:if
 					test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
-					<a href="/board/notice/write" class="link">글쓰기</a>
+					<br>
+					<a href="/admin/board/notice/write" class="link">글쓰기</a>
 				</c:if>
 			</div>
 			<%-- 검색창 --%>
