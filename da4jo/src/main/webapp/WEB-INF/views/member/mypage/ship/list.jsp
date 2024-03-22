@@ -119,7 +119,7 @@
 							<a class="btn requestBtn" href="/member/ship/request" style="color: #60A1F8;">배송서 작성하기</a>
 						</div>
 					</div>
-					<div class="cell listArea">
+					<div class="cell">
 					
 						<ul class="menu menu-type">
 							<li id="shipSvcNo"><strong>주문번호</strong></li>
