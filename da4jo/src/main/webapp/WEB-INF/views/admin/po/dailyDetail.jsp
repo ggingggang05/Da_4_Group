@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -19,9 +18,10 @@
 .listArea {
 	border: 1px solid #ced3d6;
 }
-section{
+
+section {
 	display: block;
- }
+}
 
 #memberId {
 	width: 23%;
@@ -80,18 +80,39 @@ section{
         totalQtyDisplay.textContent = totalQty.toLocaleString();
 	});
 </script>
+<script type="text/javascript">
+document.querySelector('#down').addEventListener('click', makeFile);
+function makeFile (e) {
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('tab_1');
+
+    download(workbook, 'test').then(r => {});
+}
+
+const download = async (workbook, fileName) => {
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    });
+    const url = window.URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = fileName + '.xlsx';
+    anchor.click();
+    window.URL.revokeObjectURL(url);
+};
+</script>
 
 <div class="container container-body container-body-long">
 	<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 
-				정산 내역
+				<i class="fa-solid fa-pause"></i> 정산 내역
 			</div>
 		</div>
-		    	
-    	
+
 		<div class="content content-body">
 			<div class="cell listArea">
 				<ul class="menu menu-type">
@@ -106,39 +127,37 @@ section{
 					<li><strong>부가세</strong></li>
 					<li><strong>송장번호</strong></li>
 				</ul>
-				
+
 				<c:forEach var="dailyDetailVO" items="${list}">
-						<ul class="menu menu-list">
-							<li id="poPayDate">
-								<fmt:formatDate value="${dailyDetailVO.poPayDate}" pattern="Y-MM-dd HH:mm:ss" />
-							</li>
-							<li id="orderDate">
-			                	<fmt:formatDate value="${dailyDetailVO.poSdate}" pattern="Y-MM-dd HH:mm:ss" />
-		                	</li>
-							<li id="poNo">${dailyDetailVO.poNo}</li>
-			               	<li id="memberId">${dailyDetailVO.poCustomerId}</li>
-			                <li id="memberName">${dailyDetailVO.poNameKor}</li>
-			                <li id="itemName">${dailyDetailVO.poItemEngName}</li>
-			                <li id="qty">${dailyDetailVO.poQty}</li>
-			                <li id="poTotalPrice">
-			                	<fmt:formatNumber value="${dailyDetailVO.poTotalPriceKrw}"  pattern="#,##0"/>
-		                	</li>
-			                <li id="vat">
-			                	<fmt:formatNumber value="${dailyDetailVO.poItemVat}"  pattern="#,##0"/>
-			                	</li>
-			                <li id="awbNumber">${dailyDetailVO.poAwbNumber}</li>
-						</ul>
+					<ul class="menu menu-list">
+						<li id="poPayDate"><fmt:formatDate
+								value="${dailyDetailVO.poPayDate}" pattern="Y-MM-dd HH:mm:ss" />
+						</li>
+						<li id="orderDate"><fmt:formatDate
+								value="${dailyDetailVO.poSdate}" pattern="Y-MM-dd HH:mm:ss" />
+						</li>
+						<li id="poNo">${dailyDetailVO.poNo}</li>
+						<li id="memberId">${dailyDetailVO.poCustomerId}</li>
+						<li id="memberName">${dailyDetailVO.poNameKor}</li>
+						<li id="itemName">${dailyDetailVO.poItemEngName}</li>
+						<li id="qty">${dailyDetailVO.poQty}</li>
+						<li id="poTotalPrice"><fmt:formatNumber
+								value="${dailyDetailVO.poTotalPriceKrw}" pattern="#,##0" /></li>
+						<li id="vat"><fmt:formatNumber
+								value="${dailyDetailVO.poItemVat}" pattern="#,##0" /></li>
+						<li id="awbNumber">${dailyDetailVO.poAwbNumber}</li>
+					</ul>
 				</c:forEach>
 				<ul class="menu menu-list">
 					<li><strong>${dailyDetailVO.poPayDate}</strong></li>
-					<li>총 금액 : <strong id= "totalPrice"></strong></li>
-					<li>부가세 : <strong id= "totalVat"></strong></li>
-					<li>판매 수량 : <strong id= "totalQty"></strong></li>
+					<li>총 금액 : <strong id="totalPrice"></strong></li>
+					<li>부가세 : <strong id="totalVat"></strong></li>
+					<li>판매 수량 : <strong id="totalQty"></strong></li>
 				</ul>
-				
+
 			</div>
 		</div>
-		
+
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/admin-footer.jsp"></jsp:include>
