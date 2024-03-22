@@ -495,7 +495,7 @@
     
 </head>
 <body>
-	<div class="container w-600">
+	<div class="container w-600" style="margin-bottom: 3em; margin-top: 3em;">
 	<form action="join" method="post" autocomplete="off" enctype="multipart/form-data" 
 									class="check-form">
 		<div class="container w-550">
@@ -582,7 +582,7 @@
 						</div>
 						<!-- 연락처2 입력창 -->
 						<div class="cell">
-							<input type="text" name="memberContact2" class= "tool w-100 box input" placeholder="연락처2 (숫자만 입력해주세요)">
+							<input type="text" name="memberContact2" class= "tool w-100 box input" placeholder="연락처2  (숫자만 입력해주세요)">
 								<div class="success-feedback">
 									<label></label>
 								</div>
@@ -636,7 +636,7 @@
 					</div>
 				</div>
 				
-				<div class="container w-450">
+				<div class="container w-450" style="margin-bottom: 3em;">
 					<div class="cell">
 					<button type="submit" class="btn w-100 join">
 						<i class="fa-solid fa-user"></i>
