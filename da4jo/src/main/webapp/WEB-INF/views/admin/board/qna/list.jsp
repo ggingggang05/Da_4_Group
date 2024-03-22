@@ -60,8 +60,14 @@
 	width: 21% !important;
 }
 
+#qnaStatusType {
+	width: 15% !important;
+	color: black;
+}
+
 #qnaStatus {
 	width: 15% !important;
+	color: red;
 }
 </style>
 
@@ -92,7 +98,7 @@
 						<li id="qnaRock">잠금상태</li>
 						<li id="typeQnaTitle">제목</li>
 						<li id="qnaWdate">작성일</li>
-						<li id="qnaStatus">현재상태</li>
+						<li id="qnaStatusType">현재상태</li>
 					</ul>
 
 					<c:forEach var="qnaDto" items="${list}">
@@ -110,8 +116,32 @@
 						</c:if>
 					</c:forEach>
 				</div>
+				
+				<div class="flex-cell">
+					<div class="cell flex-cell mt-30 bottom-bar">
+						<div class="cell">
+							<%-- 검색창 --%>
+							<form action="list" method="get" class="center">
+								<select name="column" class="searchSelect">
+									<option value="qna_no"
+										${param.column == 'qna_no' ? 'selected' : ''}>글번호</option>
+									<option value="qna_title"
+										${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
+									<option value="qna_writer"
+										${param.column == 'qna_writer' ? 'selected' : ''}>작성자</option>
+									<option value="qna_content"
+										${param.column == 'qna_content' ? 'selected' : ''}>내용</option>
+									<option value="qna_status"
+									${param.column == 'qna_content' ? 'selected' : ''}>현재상태</option>
+								</select> <input class="searchBar w-400" type="search" name="keyword"
+									placeholder="검색어 입력" required value="${param.keyword}">
+								<button class="btn searchBtn">검색</button>
+							</form>
+						</div>
+					</div>
+				</div>
 
-				<div class="cell mt-40">
+				<div class="cell">
 					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 				</div>
 			</div>
@@ -133,7 +163,7 @@
 						<li id="qnaRock">잠금상태</li>
 						<li id="typeQnaTitle">제목</li>
 						<li id="qnaWdate">작성일</li>
-						<li id="qnaStatus">현재상태</li>
+						<li id="qnaStatusType">현재상태</li>
 					</ul>
 					<c:forEach var="qnaDto" items="${list}">
 						<ul class="menu menu-list qnaMenu">
@@ -143,7 +173,7 @@
 								value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
 							<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${formattedTitle}</a></li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
-							<li id="qnaStatus">${qnaDto.qnaStatus}</li>
+							<li id="qnaStatus" style="color: ${qnaDto.qnaStatus == '답변완료' ? '#00b894' : 'red'}">${qnaDto.qnaStatus}</li>
 						</ul>
 					</c:forEach>
 				</div>

@@ -6,6 +6,8 @@
 
 <input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
 
+<%-- 이코드 사용 안합니다 임시로 남겨놓은거임 
+
 <div class="container w-800">
 	<div>
 		<h1>Q&A 글수정</h1>
@@ -24,5 +26,7 @@
 	<button class="btn">수정</button>
 </div>
 </form>
+
+--%>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

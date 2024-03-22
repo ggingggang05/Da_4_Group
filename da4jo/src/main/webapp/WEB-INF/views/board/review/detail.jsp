@@ -115,7 +115,7 @@
 		<c:if
 			test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 			<div class="cell right">
-				<a class="btn" href="list">목록으로</a> <a class="btn" href="write">리뷰글작성</a>
+				<a class="btn link" href="list">목록으로</a> <a class="btn link" href="write">리뷰글작성</a>
 <!-- 				<a class="btn" -->
 <%-- 					href="/board/review/edit?reviewNo=${reviewDto.reviewNo}">리뷰글수정</a> --%>
 				<a class="btn delete"
