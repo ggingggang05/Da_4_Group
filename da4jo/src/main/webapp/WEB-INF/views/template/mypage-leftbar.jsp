@@ -39,6 +39,11 @@
 .title-head {
 	background-color: #60A1F833;
 }
+
+img.newProfile { /*프로필 공간 고정*/
+    width: 100%;
+    height: 150px;
+}
 </style>
 
 <script>
@@ -52,7 +57,6 @@
 				<div class="cell center memberInfo">
 					<img src="/member/img" width="100%" class="newProfile">
 					<div class="cell">
-						<label for="edit-profile"><i class="fa-solid fa-plus">수정</i></label>
 						<input type="file" name="img" class="tool w-100 profileEdit" id="edit-profile">
 					</div>
 					<p><b>'${sessionScope.loginId}'</b> 회원님</p>

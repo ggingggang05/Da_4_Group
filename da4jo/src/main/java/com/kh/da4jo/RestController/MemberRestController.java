@@ -80,19 +80,22 @@ public class MemberRestController {
 		String loginId = (String) session.getAttribute("loginId");
 
 		// 해당 아이디의 기존 이미지 삭제
-		int currentImgNo = memberDao.findImgNo(loginId);
-		System.out.println(currentImgNo);
-		boolean isValid = currentImgNo != 0;
-		if (isValid) {
-			imgService.removeFile(currentImgNo);
+		try {
+			int currentImgNo = memberDao.findImgNo(loginId);
+			//System.out.println(currentImgNo);
+			boolean isValid = currentImgNo != 0;
+			if (isValid) {
+				imgService.removeFile(currentImgNo);
+			}
 		}
-		// 새 이미지 적용
+		catch(Exception e) {}
 		
-
 		// 올린 내용이 없으면 중지
 		if (img.isEmpty()) {
 			return null;
 		}
+		
+		// 새 이미지 적용
 		List<Integer> numbers = new ArrayList<>();
 		int imgNo = imgService.save(img);
 		numbers.add(imgNo);

@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell listArea">
+			<div class="cell">
 				<!-- 배송 진행 중인 구매서가 없다면 -->
 				<c:if test="${empty poList}">
 					<div class="cell center mt-30">

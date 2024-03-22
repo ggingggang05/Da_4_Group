@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell listArea">
+			<div class="cell">
 				<!-- 배송 진행 중인 구매서가 없다면 -->
 				<c:if test="${empty shipList}">
 					<div class="cell center mt-30">
@@ -97,7 +97,7 @@
 							<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 							<li id="shipSvcAwbNumber">${shipSvcDto.shipSvcAwbNumber}</li>
 							<li id="shipSvcTotalPriceKrw"><fmt:formatNumber value="${shipSvcDto.shipSvcTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
-							<li id="shipSvcDetail"><a href="/mypage/ship/detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
+							<li id="shipSvcDetail"><a href="/member/mypage/ship/detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 배송 진행 중인 구매서가 있다면 닫는 태그 -->

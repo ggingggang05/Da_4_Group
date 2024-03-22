@@ -61,7 +61,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<div class="cell listArea">
+			<div class="cell">
 				<!-- 주문정보 확인 중, 결제 대기 중인 구매서가 없다면 -->
 				<c:if test="${empty shipList}">
 					<div class="cell center mt-30">
