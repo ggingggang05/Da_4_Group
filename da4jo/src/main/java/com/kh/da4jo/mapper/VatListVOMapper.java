@@ -16,7 +16,10 @@ public class VatListVOMapper implements RowMapper<VatListVO>
 	public VatListVO mapRow(ResultSet rs, int rowNum) throws SQLException
 	{
 		VatListVO vatListVO = new VatListVO();
+		vatListVO.setYear(rs.getString("YEAR"));
 		vatListVO.setQuater(rs.getString("QUARTER"));
+		vatListVO.setPoVatTotal(rs.getInt("PO_VAT_TOTAL"));
+		vatListVO.setShipsvcVatTotal(rs.getInt("SHIPSVC_VAT_TOTAL"));
 		vatListVO.setVatTotal(rs.getInt("VAT_TOTAL"));
 		return vatListVO;
 	}
