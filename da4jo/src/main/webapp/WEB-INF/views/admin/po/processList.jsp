@@ -49,8 +49,8 @@
 			<div class="cell listArea">
 				<ul class="menu menu-type">
 					<li id="poNo"><strong>주문서번호</strong></li>
-					<li id="poContact"><strong>결제시간</strong></li>
-					<li id="poCustomerId"><strong>주문자</strong></li>
+					<li id="poPayDate"><strong>결제시간</strong></li>
+					<li id="poNameKor"><strong>주문자</strong></li>
 					<li id="poClearanceId"><strong>개인통관고유번호</strong></li>
 					<li id="poAddress1"><strong>주소</strong></li>
 					<li id="poStatus"><strong>상태</strong></li>
