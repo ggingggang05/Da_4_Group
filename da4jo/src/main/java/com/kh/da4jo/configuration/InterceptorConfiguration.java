@@ -73,6 +73,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(QnaOwnerInterceptor)
 						.addPathPatterns( 
 								"/board/qna/edit"
+								
 						);
 		//Review 본인 글만 수정, 삭제
 		registry.addInterceptor(reviewOwnerInterceptor)
@@ -87,7 +88,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//리뷰글 조회수 중복방지
 				registry.addInterceptor(reviewVcountInterceptor)
 								.addPathPatterns(
-										"/board/review/detail"
+								"/board/review/detail"
 						);
 		//문의글 조회수 중복방지
 		registry.addInterceptor(qnaVcountInterceptor)

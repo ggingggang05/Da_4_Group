@@ -30,7 +30,7 @@ public class QnaOwnerInterceptor implements HandlerInterceptor{
 			String loginId = (String)session.getAttribute("loginId");
 			String loginLevel = (String)session.getAttribute("loginLevel");
 			
-			//관리자
+			//관리자, 총관리자
 			if(loginLevel != null && loginLevel.equals("관리자") || loginLevel.equals("총관리자"))  {
 				return true;
 			}
