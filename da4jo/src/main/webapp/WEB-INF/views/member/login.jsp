@@ -72,7 +72,8 @@
 			  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
 			  color: white;
 			  font-size: 17px;
-				
+				border: none;
+				cursor: pointer;	
 		}
 			/*
 			.login button {
