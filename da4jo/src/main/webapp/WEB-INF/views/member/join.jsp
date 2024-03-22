@@ -294,7 +294,7 @@
                     alert("시스템 오류. 잠시 후 이용바람");
                 },
                 complete:function(){
-                    $(btn).find("span").text("보내기");
+                    $(btn).find("span").text("완료");
                     $(btn).find("i").removeClass("fa-solid fa-spinner fa-spin")  
                                             .addClass("fa-regular fa-paper-plane");
                     $(btn).prop("disabled", false);
@@ -468,8 +468,8 @@
 	.block{
 		padding: 0.4em;
 		margin-top: 1em;
-		box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-		border-radius: 0.5em;
+		box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+		border-radius: 0.5em	;
 	}
 	/* 웹킷(WebKit) 기반 브라우저용 스타일 */
 	input[type="file"]::-webkit-file-upload-button {
@@ -500,7 +500,7 @@
 									class="check-form">
 		<div class="container w-550">
 			<div class="cell center">
-				<h1 style= "color: #74b9ff;">회원가입</h1>
+				<label><img src="/image/logotemplatecut.png" style="width: 200px"></label>	
 			</div>
 			
 				<!-- 첫번째 블럭 -->
