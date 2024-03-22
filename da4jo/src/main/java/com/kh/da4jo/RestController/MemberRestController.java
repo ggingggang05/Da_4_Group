@@ -86,13 +86,13 @@ public class MemberRestController {
 		if (isValid) {
 			imgService.removeFile(currentImgNo);
 		}
-		// 새 이미지 적용
 		
-
 		// 올린 내용이 없으면 중지
 		if (img.isEmpty()) {
 			return null;
 		}
+		
+		// 새 이미지 적용
 		List<Integer> numbers = new ArrayList<>();
 		int imgNo = imgService.save(img);
 		numbers.add(imgNo);
