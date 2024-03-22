@@ -5,11 +5,11 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script
-	src="//t1.daumcdn.net/mapjsapi/bundle/shipSvcstcode/prod/shipSvcstcode.v2.js"></script>
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 .asterisk {
 	font-size: 8px;
-	vertical-align: top !imshipSvcrtant;
+	vertical-align: top !important;
 }
 
 #agency_buy_write fieldset {
@@ -179,7 +179,7 @@
 <script>
 	$(function() {
 		$(".btn-address-search").click(function() {
-			new daum.shipSvcstcode({
+			new daum.Postcode({
 				oncomplete : function(data) {
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
@@ -211,33 +211,66 @@
 		});
 	});
 
-	$(".check-form").submit(function() {
+/* 	$(".check-form").submit(function() {
 		//$(this).find("[name], #pw-reinput").blur();
 		//$(this).find(".tool").blur();//모든 창
 
 		//입력창 중에서 success fail fail2가 없는 창
 		$(this).find(".tool").not(".success, .fail, .fail2").blur();
 		return state.ok();
-	});
+	}); */
 </script>
 <script type="text/javascript">
-	$(function(){
-		var state = {
-				// 필수항목 : true 선택항목 : false
-				shipSvcAgree : true,
-				shipSvcCountry : true,
-				shipSvcItemEngName : true,
-				shipSvcItemCategory : true,
-				shipSvcFx : true,
-				shipSvcQty : true,
-				shipSvcUserShipper : true,
-				
-				
-				
-				
-				
-		}
-	})
+$(function() {
+    var state = {
+        // 필수항목 : true 선택항목 : false
+        shipSvcAgree: true,
+        shipSvcCountry: true,
+        shipSvcNameKor: true,
+        shipSvcNameEng: true,
+        shipSvcClearanceId: true,
+        shipSvcContact: true,
+        shipSvcZipcode: true,
+        shipSvcAddress1: true,
+        shipSvcAddress2: true,
+        shipSvcItemEngName: true,
+        shipSvcItemCategory: true,
+        shipSvcItemOption1: false,
+        shipSvcFx: true,
+        shipSvcQty: true,
+        shipSvcLink: true,
+        shipSvcDcomment: false,
+        shipSvcCurrency: true,
+        shipSvcUserShipper: true,
+        shipSvcUserAwbNumber: true,
+    };
+
+    // 버튼 클릭 이벤트 리스너 추가
+    $(".btn-click").click(function(e) {
+        e.preventDefault(); // 폼 제출 방지
+
+        // 필수 항목이 모두 입력되었는지 확인
+        for (var key in state) {
+            if (state.hasOwnProperty(key) && state[key] === true) {
+                var value = $("input[name='" + key + "']").val();
+                if (value === "") {
+                    alert("모든 항목을 입력해야 합니다.");
+                    return false;
+                }
+            }
+        }
+
+        // 모든 필수 항목이 입력되었으면 폼 제출
+        $("form").submit();
+    });
+
+    // form 전송
+    $(".check-form").submit(function() {
+        // 필요한 경우 추가 검증을 수행할 수 있습니다.
+        return true;
+    });
+});
+
 </script>
 <br>
 <br>
@@ -261,7 +294,7 @@
 	</div>
 	<br><br>
 	<div class="box_form">
-		<form name="form_agency_buy_write" id="form_agency_buy_write"
+		<form name="form_agency_buy_write" id="form_agency_buy_write" class="check-form"
 			method="post" action="/member/ship/request">
 			<div class="content content-head" style="border-bottom: none;">
 				<div class="content-head-text">신청서 작성시 유의사항</div>
@@ -427,39 +460,39 @@
 		<div class="box">
 			<ul>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="오리건" data-currency="USD" /> 오리건 
+					<div class="info">
+						<input name="shipSvcCountry" type="radio"
+							value="오리건" data-currency="USD" /> 오리건 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="뉴저지" data-currency="USD" /> 뉴저지 
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="뉴저지" data-currency="USD" /> 뉴저지 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="영국" data-currency="GBP" /> 영국 
+					<div class="info">
+						<input name="shipSvcCountry" type="radio"
+							value="영국" data-currency="GBP" /> 영국 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
+					<div class="info">
+						<input name="shipSvcCountry" type="radio"
 							class="type_radio" value="독일" data-currency="EUR" /> 독일 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
 							class="type_radio" value="일본(항공)-오사카" data-currency="JPY" />
 							일본(항공)-오사카 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
 							class="type_radio" value="중국(항공)" data-currency="CNY" /> 중국(항공)
 
 						
@@ -467,28 +500,28 @@
 				</li>
 				<br>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="스페인" data-currency="EUR" /> 스페인 
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="스페인" data-currency="EUR" /> 스페인 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="호주" data-currency="AUD" /> 호주 
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="호주" data-currency="AUD" /> 호주 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="일본(선박)-후쿠오카" data-currency="JPY" />
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="일본(선박)-후쿠오카" data-currency="JPY" />
 							일본(선박)-후쿠오카 
 					</div>
 				</li>
 				<li>
-					<div class="info radio">
-						<label><input name="shipSvcCountry" type="radio"
-							class="type_radio" value="중국(선박)" data-currency="CNY" /> 중국(선박)
+					<div class="info ">
+						<input name="shipSvcCountry" type="radio"
+							 value="중국(선박)" data-currency="CNY" /> 중국(선박)
 
 						
 					</div>
@@ -497,17 +530,13 @@
 			<script>
 				$(function() {
 					$('input[name=shipSvcCountry]')
-							.on(
-									'click',
-									function() {
-										var currency = $(this).data('currency');
-										// 선택된 국가의 통화를 가져와서 변수에 저장
-										console.log('선택된 통화: ' + currency);
-										// 선택된 통화를 콘솔에 출력 (이 부분은 필요에 따라 백엔드로 전달하거나 다른 작업을 수행할 수 있음)
-										$('Form')
-												.append(
-														'<input type="hidden" name="shipSvcCurrency" value="' + currency + '">');
-									});
+							.on('click',function() {
+								var currency = $(this).data('currency');
+								// 선택된 국가의 통화를 가져와서 변수에 저장
+								console.log('선택된 통화: ' + currency);
+								$('Form').find('input[name=shipSvcCurrency]').remove();
+								$('Form').append('<input type="hidden" name="shipSvcCurrency" value="' + currency + '">');
+						});
 				});
 			</script>
 		</div>
@@ -544,12 +573,12 @@
 	</div>
 	<div class="flex-cell" >
 	<div class="cell left w-50 sfont ">
-		<label for="shipSvcItemCategory">운송사(본인이 업체로부터 받은)</label><input type="text" name="shipSvcUserShipper" class="tool w-100 line"
-			placeholder="(필수) 운송사를 입력하세요">
+		<label for="shipSvcUserShipper">운송사(본인이 업체로부터 받은)</label><input type="text" name="shipSvcUserShipper" class="tool w-100 line"
+			id="shipSvcUserShipper" placeholder="(필수) 운송사를 입력하세요">
 	</div>
 	<div class="cell left w-50 sfont">
-		<label for="shipSvcItemCategory">트레킹넘버</label><input type="text" name="shipSvcUserAwbNumber" class="tool w-100 line"
-			placeholder="(필수) 트레킹넘버를 입력하세요">
+		<label for="shipSvcUserAwbNumber">트레킹넘버</label><input type="text" name="shipSvcUserAwbNumber" class="tool w-100 line"
+			id="shipSvcUserAwbNumber" placeholder="(필수) 트레킹넘버를 입력하세요">
 	</div>
 	</div>
 	<div class="cell">
@@ -605,7 +634,7 @@
 	<br>
 </div>
 <div class="button_area text-center">
-	<button type="submit" class="btn mt-10">신청서 작성하기</button>
+	<button type="submit" class="btn mt-10 btn-click">신청서 작성하기</button>
 </div>
 </form>
 </div>

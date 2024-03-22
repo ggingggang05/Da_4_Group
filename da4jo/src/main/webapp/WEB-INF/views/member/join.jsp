@@ -17,6 +17,7 @@
 		        memberNameKorValid : false,
 		        memberNameEngValid : true,//선택
 		        memberEmailValid : false,
+		        isCertValid : false,
 		        memberContact1Valid : false,
 		        memberContact2Valid : true,//선택
 		        memberBirthValid : true, //선택
@@ -26,7 +27,8 @@
 		        ok : function(){
 		            return this.memberIdValid && this.memberPwValid 
 	            		&& this.memberPwCheckValid && this.memberNameKorValid 
-	            		&& this.memberEmailValid && this.memberContact1Valid 
+	            		&& this.memberEmailValid && this.isCertValid 
+	            		&& this.memberContact1Valid 
 	            		&& this.memberContact2Valid && this.memberBirthValid 
 	            		&& this.memberClrearanceIdValid && this.memberAddressValid;
 		        },
@@ -106,9 +108,11 @@
 	                    .addClass(state.memberNameEngValid ? "success" : "fail");
 	    });
 	    $("[name=memberEmail]").on("input", function(){
-			if(state.memberEmailValid){
+			if(state.isCertValid){
+				alert("이메일 변경으로 재인증이 필요합니다.");
 				state.memberEmailValid = false;
-				$(this).removeClass("success fail");
+				state.isCertValid = false;
+				$(this).removeClass("success fail").addClass("fail");
 				$(".cert-wrapper").empty();
 			}	    	
 	    });
@@ -155,7 +159,7 @@
 	            state.memberEmailValid = false;
 	        }
 	    });
-        //뒤에 있는 보내기 버튼을 활성화 또는 비활성화
+//         //뒤에 있는 보내기 버튼을 활성화 또는 비활성화
 //         $(this).next(".btn-send-cert").prop("disabled", !isValid)
 //         				.removeClass("positive negative")
 //         				.addClass(isValid ? "positive" : "negative");
@@ -221,172 +225,148 @@
 				            .removeClass("success fail")
 				         	  	 .addClass(state.memberAddressValid ? "success" : "fail");
 		});
-   });
-    </script>
-    <script type="text/javascript">
-	    //인증메일
-    	$(function(){
-    		
-            var state = {
-                    memberEmailValid: false
-                };
-            
-            var timer;
-    	    var minutes = 5;
-    	    var seconds = 0;
-    	
-    	    function startTimer() {
-    	        timer = setInterval(updateTimer, 1000);
-    	    }
-    	
-    	    function updateTimer() {
-    	        if (seconds > 0) {
-    	            seconds--;
-    	        } else {
-    	            if (minutes > 0) {
-    	                minutes--;
-    	                seconds = 59;
-    	            } else {
-    	                clearInterval(timer);
-    	                $(".timer").hide(); // 타이머 숨기기
-    	                return;
-    	            }
-    	        }
-    	
-    	        var timerText = ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
-    	        $(".timer").text(timerText);
-    	    }
-    	
-    	    startTimer();
-    	
-    	    // 인증번호 입력 시 타이머 숨기기
-    	    $("input[name='verificationCode']").on("input", function() {
-    	        if ($(this).val().length > 0) {
-    	            clearInterval(timer);
-    	            $(".timer").hide(); // 타이머 숨기기
-    	        }
-    	    });
-    		
-    		//인증메일 보내기
-            var memberEmail;
-            $(".btn-send-cert").click(function(){
-                var btn = this;
-                $(btn).find("span").text("전송중");
-                $(btn).find("i").removeClass("fa-regular fa-paper-plane")  
-                                        .addClass("fa-solid fa-spinner fa-spin");
-                $(btn).prop("disabled", true);
+	    
+	    var timer;
+	    var minutes = 5;
+	    var seconds = 0;
+	
+	    function startTimer() {
+	        timer = setInterval(updateTimer, 1000);
+	    }
+	
+	    function updateTimer() {
+	        if (seconds > 0) {
+	            seconds--;
+	        } else {
+	            if (minutes > 0) {
+	                minutes--;
+	                seconds = 59;
+	            } else {
+	                clearInterval(timer);
+	                $(".timer").hide(); // 타이머 숨기기
+	                return;
+	            }
+	        }
+	
+	        var timerText = ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
+	        $(".timer").text(timerText);
+	    }
+	
+	    startTimer();
+	
+	    // 인증번호 입력 시 타이머 숨기기
+	    $("input[name='verificationCode']").on("input", function() {
+	        if ($(this).val().length > 0) {
+	            clearInterval(timer);
+	            $(".timer").hide(); // 타이머 숨기기
+	        }
+	    });
+		
+		//인증메일 보내기
+        var memberEmail;
+        $(".btn-send-cert").click(function(){
+            var btn = this;
+            $(btn).find("span").text("전송중");
+            $(btn).find("i").removeClass("fa-regular fa-paper-plane")  
+                                    .addClass("fa-solid fa-spinner fa-spin");
+            $(btn).prop("disabled", true);
 
-                //이메일 불러오기
-                var email = $("[name=memberEmail]").val();
-                if(email.length == 0) return;
+            //이메일 불러오기
+            var email = $("[name=memberEmail]").val();
+            if(email.length == 0) return;
 
-                $.ajax({
-                    url:"/rest/member/sendCert",
-                    method:"post",
-                    data:{memberEmail : email},
-                    success: function(response){
-                        //템플릿을 불러와서 인증번호 입력창을 추가
-                        var templateText = $("#cert-template").text();
-                        var templateHtml = $.parseHTML(templateText);
+            $.ajax({
+                url:"/rest/member/sendCert",
+                method:"post",
+                data:{memberEmail : email},
+                success: function(response){
+                    //템플릿을 불러와서 인증번호 입력창을 추가
+                    var templateText = $("#cert-template").text();
+                    var templateHtml = $.parseHTML(templateText);
 
-                        $(".cert-wrapper").empty().append(templateHtml);
-                        //$(".cert-wrapper").html(templateHtml);
+                    $(".cert-wrapper").empty().append(templateHtml);
+                    //$(".cert-wrapper").html(templateHtml);
 
-                        //이메일 정보를 저장
-                        memberEmail = email;
-                    },
-                    error:function(){
-                        alert("시스템 오류. 잠시 후 이용바람");
-                    },
-                    complete:function(){
-                        $(btn).find("span").text("보내기");
-                        $(btn).find("i").removeClass("fa-solid fa-spinner fa-spin")  
-                                                .addClass("fa-regular fa-paper-plane");
-                        $(btn).prop("disabled", false);
-                    },
-                });
+                    //이메일 정보를 저장
+                    memberEmail = email;
+                },
+                error:function(){
+                    alert("시스템 오류. 잠시 후 이용바람");
+                },
+                complete:function(){
+                    $(btn).find("span").text("완료");
+                    $(btn).find("i").removeClass("fa-solid fa-spinner fa-spin")  
+                                            .addClass("fa-regular fa-paper-plane");
+                    $(btn).prop("disabled", false);
+                },
             });
-            
-          //인증번호 확인버튼 이벤트
-            $(document).on("click", ".btn-check-cert", function(){
-                var number = $(".cert-input").val();//인증번호
-                if(memberEmail == undefined || number.length == 0) return;
-
-                $.ajax({
-                    url:"/rest/member/checkCert",
-                    method:"post",
-                    data:{ certEmail : memberEmail, certNumber : number },
-                    success: function(response){
-                        //response는 true 아니면 false이므로 상태를 갱신하도록 처리
-                        console.log(response);
-                        $(".cert-input").removeClass("success fail")
-                                        .addClass(response === true ? "success" : "fail");
+        });
+        
+      //인증번호 확인버튼 이벤트
+        $(document).on("click", ".btn-check-cert", function(){
+            var number = $(".cert-input").val();//인증번호
+            if(memberEmail == undefined || number.length == 0) return;
+			
+            $.ajax({
+                url:"/rest/member/checkCert",
+                method:"post",
+                data:{ certEmail : memberEmail, certNumber : number },
+                success: function(response){
+                    //response는 true 아니면 false이므로 상태를 갱신하도록 처리
+                    console.log(response);
+                    $(".cert-input").removeClass("success fail")
+                                    .addClass(response === true ? "success" : "fail");
+                    
+                    if(response) {
+                        //$(".btn-check-cert").off("click");
+                        //$(".btn-check-cert").remove();
+                        $(".btn-check-cert").prop("disabled", true);
+                        state.isCertValid = true;
                         
-                        if(response === true) {
-                            //$(".btn-check-cert").off("click");
-                            //$(".btn-check-cert").remove();
-                            $(".btn-check-cert").prop("disabled", true);
-                            state.memberEmailValid = true;
-                            
-                            // 인증번호 입력 후 타이머를 멈추고 숨기기
-                            clearInterval(timer);
-                            $(".timer").text("인증완료").css("color", "green");
-                            $(".timer").fadeOut(1000); // 1초 후 타이머 숨기기
+                        // 인증번호 입력 후 타이머를 멈추고 숨기기
+                        clearInterval(timer);
+                        $(".timer").text("인증완료").css("color", "green");
+                        $(".timer").fadeOut(1000); // 1초 후 타이머 숨기기
+                        $(".cert-wrapper").empty();
 
-                        }
-                        else{
-                        	state.memberEmailValid =false;
-                        }
-                    },
-                    error:function(){
-                        alert("확인 과정에서 오류가 발생했습니다");
-                    },
-                    //complete:function(){}
-                });
+                    }
+                    else{
+                    	state.memberEmailValid =false;
+                    }
+                },
+                error:function(){
+                    alert("확인 과정에서 오류가 발생했습니다");
+                },
+                //complete:function(){}
             });
-
-    });
+        });
+	    
+	    $(".check-form").submit(function(e){
+	        //$(this).find("[name], #pw-reinput").blur();
+	        //$(this).find(".tool").blur();//모든 창
+	        
+	        //입력창 중에서 success fail fail2가 없는 창
+	        $(this).find(".tool").not(".success, .fail, .fail2").blur();
+	        //console.table(state);
+	        return state.ok();
+	    });
+   });
     </script>
 
     <script type="text/template" id="cert-template">
         <div>
-			<div class="cell plex-cell">
+			<div class="cell flex-cell">
            		<input type="text" class="tool cert-input" 
                                         placeholder="인증번호">
-            	<button type= "button" class="btn btn-check-cert">확인</button>
-				<div class="timer"></div>
+				<button type= "button" class="btn btn-check-cert">확인</button>
 			</div>
-            <div class="success-feedback">이메일 인증 완료</div>
+			<div class="success-feedback">이메일 인증 완료</div>
             <div class="fail-feedback">인증번호 불일치</div>
-        </div>
+			<div class="timer"></div>
+		</div>
+     </div>
 	</script>
-	<script type="text/javascript">
-	$(function(){
-		//이전, 다음 버튼을 누르면 표시된 페이지의 순서에 맞게 진행바 변경
-		calculatePercent(1);
-		
-		$(".page").find(".btn-prev").click(function(){
-			//표시되는 페이지가 몇 번째인가?
-			//-> $(대상).index(전체대상)
-			//-> 대상은 :visible 이라고 붙이면 표시된 항목을 찾아준다(jQuery 전용)
-			var index = $(".page:visible").index(".page") + 1;
-			calculatePercent(index);
-		});
-		$(".page").find(".btn-next").click(function(){
-			var index = $(".page:visible").index(".page") + 1;
-			calculatePercent(index);
-		});
-		
-		function calculatePercent(page) {
-			var total = $(".page").length;
-			var percent = page * 100 / total;
-			$(".progressbar > .guage").css("width", percent+"%");
-			
-	        // 프로그레스 바 안에 현재 단계 텍스트 추가
-	        $(".progressbar > .guage").text(page + "단계");
-		}
-	});
-	</script>
+	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     $(function(){
@@ -421,243 +401,253 @@
         	$("[name=memberAddress1]").val("");
         	$("[name=memberAddress2]").val("");
         });
-    });
     
-    $(".check-form").submit(function(){
-        //$(this).find("[name], #pw-reinput").blur();
-        //$(this).find(".tool").blur();//모든 창
-        
-        //입력창 중에서 success fail fail2가 없는 창
-        $(this).find(".tool").not(".success, .fail, .fail2").blur();
-        return state.ok();
     });
     
 </script>
 
 	<style>
-	/* 프로그레스 바 스타일 */
-	.progressbar {
-	  width: 100%;
-	  height: 30px;
-	  background-color: #f2f2f2;
-	  margin-bottom: 20px;
-/*       border-color: 2px solid black; */
+	/*
+	input.tool {
+		border-radius: 10px;
+		
+	}
+	*/
 
+	.box{
+    display: block;
+
+    font-size: 15px;
+    padding: 0.7em;
+    /* margin: 10px 0px; */
+	}
+	/* .box도 있고 .input도 있는 경우 선택*/
+	.box.input{
+	    border: 2px solid #ccc;
+	    /* 입력창의 기본 강조효과 제거 */
+ 	    outline: none; 
+	}
+	/* 조건부 선택자*/
+	.box.input:focus{
+	    border-color: #2db400;
+	}
+	.box.input {
+/*  	    border-bottom: 1px;  */
+	    border-radius: 4px;
+/* 	    border-top-right-radius: 4px; */
+	    /* padding: 0.4em; */
+	}
+	/*
+	.box.input[name=memberPw]{
+	    border-top-width: 1px;
+	    border-top-left-radius: 4px;
+	    border-top-right-radius: 4px;
+	     padding: 0.4em; 
+	*/
+	
+	}
+	*{
+	    box-sizing: border-box;
+	    font-family: sans-serif;    
+	}  
+	/*아이디,비밀번호 placeholder*/		
+	input.tool::placeholder {
+	    color: #b2bec3;
+	    font-size: 14px;
 	}
 	
-	.guage {
-	  height: 100%;
-	  background-color: rgb(64, 175, 239);;
-	  text-align: center;
-	  line-height: 30px;
-	  color: black;
-	  font-weight: bold;
-      border-color: black 2px;
-	}
+	
 	.timer{
-	color: red;
+		color: red;
+	}
+	.join{
+		color: white;
+		background-color: #74b9ff;
+		border-radius: 5px;
+	}
+	.block{
+		padding: 0.4em;
+		margin-top: 1em;
+		box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+		border-radius: 0.5em	;
+	}
+	/* 웹킷(WebKit) 기반 브라우저용 스타일 */
+	input[type="file"]::-webkit-file-upload-button {
+	  background: #74b9ff;;
+	  color: #fff;
+	  border: none;
+	  padding: 10px 20px;
+	  border-radius: 5px;
+	  cursor: pointer;
 	}
 	
-	/*입력창 (아이디,패스워드)*/
-	.flex-cell input.tool
-	{
-		border-left: none;
-	    border-right: none;
-	    border-top: none;
-	    padding-left: 0;
-	    padding-right: 0;
-	       border-bottom: 1px solid rgb(224, 224, 224);
-	       transition: border-color 0.3s;
-	}
-	.fa-solid,
-	.fa-regular
-	 {
-	          width: 12%;
-	          font-size: 20px;
-	          padding: 0.5em;
-	          border-bottom: 1px solid rgb(224, 224, 224);
-	          color: #b2bec3;
-	          transition: border-color 0.3s, color 0.3s;
-	}
-	
-		.cell.flex-cell {
- 	    display: flex; 
- 	    /*flex-direction: column;*/ /*세로로 */
-		}
-		.success-feedback,
-		.fail-feedback,
-		.fail2-feedback {
-	    margin-top: 5px; /* 각 피드백 요소 사이에 간격을 조정합니다. */
-		}
+	/* 파이어폭스(Firefox)용 스타일 */
+	.input::file-selector-button {
+	  background: #74b9ff;;
+	  color: #fff;
+	  border: none;
+	  padding: 10px 20px;
+	  border-radius: 5px;
+	  cursor: pointer;
+}
 </style>
-
+ 
     
 </head>
 <body>
-	<div class="container w-500" >
+	<div class="container w-600" style="margin-bottom: 3em; margin-top: 3em;">
 	<form action="join" method="post" autocomplete="off" enctype="multipart/form-data" 
 									class="check-form">
-		<div class="contailner w-450"> 
+		<div class="container w-550">
 			<div class="cell center">
-				<h1>회원가입 화면</h1>
+				<label><img src="/image/logotemplatecut.png" style="width: 200px"></label>	
 			</div>
+			
+				<!-- 첫번째 블럭 -->
 				
-		<!-- 진행바 -->
-
-			<!-- 아이디 입력창 -->
-			<div class="cell flex-cell">
-			        <i class="fa-solid fa-user"></i>
-			        <input type="text" name="memberId" class="tool w-100" placeholder="아이디">
-				<div class="success-feedback">
-					<label><i class="fa-solid fa-circle-check"></i></label>
-				</div>
-				<div class="fail-feedback">아이디는 소문자 시작, 숫자 포함 8~20자로 작성하세요</div>
-				<div class="fail2-feedback">사용할수 없는 아이디 입니다</div>
-			</div>
-			<!-- 비밀번호 입력창 -->
-			<div class="cell flex-cell">
-				<i class="fa-solid fa-lock" ></i>
-				<input type="password" name="memberPw" class= "tool w-100" placeholder="비밀번호">
-				<div class="success-feedback">
-					<label><i class="fa-solid fa-circle-check"></i></label>
-				</div>
-				<div class="fail-feedback">비밀번호에는 반드시 영문 대,소문자와 숫자, 특수문자가
-								포함되어야 합니다
-				</div>
-			</div>
-			<!-- 비밀번호 확인창 -->
-			<div class="cell flex-cell">
-				<i class="fa-solid fa-check"></i>
-				<input type="password" id="pw-reinput"  class="tool w-100" placeholder="비밀번호 확인">
-				<div class="success-feedback">
-					<label><i class="fa-solid fa-circle-check"></i></label>
-				</div>
-				<div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
-				<div class="fail2-feedback">비밀번호를 먼저 입력하세요</div>
-			</div>
-			
-			<!-- 아이디, 비밀번호 입력창 fail 메시지 위치 -->
-			<div class="cell flex-cell">
-			    <div class="fail-message-container">
-			        <div class="fail-feedback" id="memberIdFailMessage"></div>
-			        <div class="fail-feedback" id="memberPwFailMessage"></div>
-			    </div>
-			</div>
-			
-			<!-- 한국이름 입력창-->
-			<div class="cell flex-cell">
-				<i class="fa-solid fa-pencil"></i>
-				<input type="text" name="memberNameKor" class= "tool w-100" placeholder="한국이름">
-				<div class="success-feedback">
-					<label><i class="fa-solid fa-circle-check"></i></label>
-				</div>
-				<div class="fail-feedback">한글 이름을 입력해주세요</div>
-			</div>
-			<!-- 영어이름 입력창-->
-			<div class="cell flex-cell">
-				<i class="fa-solid fa-pen-fancy"></i>
-				<input type="text" name="memberNameEng" class="tool w-100" placeholder="영어이름">
-				<div class="success-feedback">
-					<label><i class="fa-solid fa-circle-check"></i></label>
-				</div>
-					<div class="fail-feedback">잘못된 영어 이름입니다.</div>
-			</div>
-			
-			<!-- 이메일 입력창 -->
-			<div class="cell">
-	            
-	            <div class="flex-cell" style="flex-wrap:wrap;">
-		            <input type="email" name="memberEmail" 
-		                                class="tool width-fill" placeholder="이메일">
-		            <button type= "button" class="btn btn-send-cert">
-	
-		            	<span>인증번호 받기</span>
-		            </button>
-		            <div class="fail-feedback w-100">잘못된 이메일 형식입니다</div>
-		            <div class="fail2-feedback w-100">사용중인 이메일입니다</div>
-	            </div>
-	        </div>
-			
-			<!-- 연락처1 입력창 -->
-			<div class="cell cert-wrapper"></div>			
-			<div class="cell flex-cell">
-				<i class="fa-solid fa-mobile-screen-button"></i>
-				<input type="text" name="memberContact1" class= "tool w-100" placeholder="연락처1">
-				<div class="success-feedback">
-					<label><i class="fa-solid fa-circle-check"></i></label>
-				</div>
-				<div class="fail-feedback">연락처 형식 오류</div>
-			</div>
-			<!-- 연락처2 입력창 -->
-			<div class="cell flex-cell">
-				<i class="fa-solid fa-mobile-screen"></i>
-				<input type="text" name="memberContact2" class= "tool w-100" placeholder="연락처2">
-					<div class="success-feedback">
-						<label><i class="fa-solid fa-circle-check"></i></label>
+				<div class="container w-450 block">
+						<div class="container w-400">
+							<p class="right" style="font-size: 12px; color: red;">* 표시는 필수 항목입니다.</p>
+							<!-- 아이디 입력창 -->
+							<div class="cell">
+								<input type="text" name="memberId" class= "tool w-100 box input" placeholder="아이디*">
+								<div class="success-feedback">
+									<label></label>
+								</div>
+								<div class="fail-feedback">아이디는 소문자 시작, 숫자 포함 8~20자로 작성하세요</div>
+								<div class="fail2-feedback">이미 사용중인 아이디입니다</div>
+							</div>
+							<!-- 비밀번호 입력창 -->
+							<div class="cell">
+								<input type="password" name="memberPw" class= "tool w-100 box input" placeholder="비밀번호*">
+								<div class="success-feedback">
+									<label></label>
+								</div>
+								<div class="fail-feedback">비밀번호에는 반드시 영문 대,소문자와 숫자, 특수문자가
+												포함되어야 합니다
+								</div>
+							</div>
+						
+						<!-- 비밀번호 확인 입력창 -->
+						<div class="cell">
+							<input type="password" id="pw-reinput"  class="tool w-100 box input" placeholder="비밀번호 확인 *">
+							<div class="success-feedback">
+								<label></label>
+							</div>
+							<div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
+							<div class="fail2-feedback">비밀번호를 먼저 입력하세요</div>
+						</div>
+						<!-- 한국이름 입력창 -->
+						<div class="cell">
+							<input type="text" name="memberNameKor" class= "tool w-100 box input" placeholder="한국이름*">
+							<div class="success-feedback">
+								<label></label>
+							</div>
+							<div class="fail-feedback">한글 이름을 입력해주세요</div>
+						</div>
+						<!-- 영어이름 입력창 -->
+						<div class="cell">
+							<input type="text" name="memberNameEng" class="tool w-100 box input" placeholder="영어이름">
+								<div class="success-feedback">
+									<label></label>
+								</div>
+								<div class="fail-feedback">잘못된 영어 이름입니다.</div>
+						</div>
+						<!-- 이메일 입력창 -->
+						<div class="cell">
+				            <div class="flex-cell" style="flex-wrap:wrap;">
+					            <input type="email" name="memberEmail" 
+					                                class="tool width-fill box input" placeholder="이메일">
+					            <button type= "button" class="btn btn-send-cert" 
+					            			style="background-color: #74b9ff; color: white;">
+				
+					            	<span>인증번호 요청</span>
+					            </button>
+					            <div class="fail-feedback w-100">잘못된 이메일 형식입니다</div>
+					            <div class="fail2-feedback w-100">사용중인 이메일입니다</div>
+				            </div>
+			            </div>
+			        <div class="cell cert-wrapper"></div>	
+			    </div>		
+		        </div>
+				<div class="container w-450 block">
+					<div class="container w-400">
+						<!-- 연락처1 입력창 -->
+						<div class="cell">
+							<input type="text" name="memberContact1" class= "tool w-100 box input" placeholder="연락처1* (숫자만 입력해주세요)">
+							<div class="success-feedback">
+								<label></label>
+							</div>
+							<div class="fail-feedback">연락처 형식 오류</div>
+						</div>
+						<!-- 연락처2 입력창 -->
+						<div class="cell">
+							<input type="text" name="memberContact2" class= "tool w-100 box input" placeholder="연락처2  (숫자만 입력해주세요)">
+								<div class="success-feedback">
+									<label></label>
+								</div>
+								<div class="fail-feedback">잘못된 연락처입니다.</div>
+						</div>
+					
+						<!-- 생년월일 입력창 -->
+						<div class="cell">
+							<input type="text" name="memberBirth" class= "tool w-100 box input" placeholder="생년월일 YYYY-MM-DD">
+								<div class="success-feedback">
+									<label></label>
+								</div>
+								<div class="fail-feedback">잘못된 형식입니다.</div>
+						</div>
+						<!-- 통관번호 입력창 -->
+						<div class="cell">
+							<input type="text" name="memberClearanceId" class= "tool w-100 box input" placeholder="통관번호 ex)P1111222233334444">
+								<div class="success-feedback">
+									<label></label>
+								</div>
+								<div class="fail-feedback">잘못된 형식입니다.</div>
+						</div>
+						<!-- 주소 입력창 -->
+						<!-- 우편번호 입력창 -->
+						<div class="cell flex-cell">
+							<input type="text" name="memberZipcode" class= "tool w-100 box input" placeholder="우편번호" readonly>
+				            <button type="button" class="btn btn-address-search" style= "border-right: 1px; background-color:  #74b9ff; color: white;">
+		                		<i class="fa-solid fa-magnifying-glass"></i>
+		            		</button>      
+		     		            <button type="button" class="btn btn-address-clear" style= "background-color:  #74b9ff; color: white;">
+					            	<i class="fa-solid fa-xmark"></i>
+					            </button>
+						</div>
+						<!-- 기본주소 입력창 -->
+						<div class="cell">
+							<input type="text" name="memberAddress1" class= "tool w-100 box input" placeholder= "기본주소" readonly>
+						</div>
+						<div class="cell">
+							<input type="text" name="memberAddress2" class= "tool w-100 box input" placeholder="상세주소">
+								<div class="success-feedback">
+									<label></label>
+								</div>
+							<div class="fail-feedback">주소를 검색하여 우편번호를 입력해주세요.</div>
+						</div>
+						<!-- 프로필 이미지 입력창 -->
+						<div class="cell">
+<!-- 							<label for="img"><img src="/image/user.png" style="width: 200px"></label> -->
+							<label style="color: #b2bec3; font-size: 15px;;">프로필 이미지</label>
+							<input type="file" id="img" name="img" class="tool w-100 box input" >
+						</div>
 					</div>
-					<div class="fail-feedback">잘못된 연락처입니다.</div>
-			</div>
-		
-		
-			<!-- 생년월일 입력창 -->
-			<div class="cell flex-cell">
-				<i class="fa-regular fa-calendar-days"></i>
-				<input type="text" name="memberBirth" class= "tool w-100" placeholder="생년월일 YYYY-MM-DD">
-					<div class="success-feedback">
-						<label><i class="fa-solid fa-circle-check"></i></label>
+				</div>
+				
+				<div class="container w-450" style="margin-bottom: 3em;">
+					<div class="cell">
+					<button type="submit" class="btn w-100 join">
+						<i class="fa-solid fa-user"></i>
+						회원가입
+					</button>
 					</div>
-					<div class="fail-feedback">잘못된 형식입니다.</div>
-			</div>
-			<!-- 통관번호 입력창 -->
-			<div class="cell flex-cell">
-				<i class="fa-solid fa-plane"></i>
-				<input type="text" name="memberClearanceId" class= "tool w-100" placeholder=" 통관번호 ex)P1111222233334444">
-					<div class="success-feedback">
-						<label><i class="fa-solid fa-circle-check"></i></label>
-					</div>
-					<div class="fail-feedback">잘못된 형식입니다.</div>
-			</div>
-			<!-- 주소 입력창 -->
-			<!-- 우편번호 -->
-			<div class="cell flex-cell">
-			
-				<input type="text" name="memberZipcode" class= "tool w-20" placeholder="우편번호" readonly>
-	            <button type="button" class="btn btn-address-search">
-               		<i class="fa-solid fa-magnifying-glass" style= "border-bottom: none;"></i>
-           		</button>      
-    		            <button type="button" class="btn btn-address-clear" style= "border-bottom: none;">
-		            	<i class="fa-solid fa-xmark"></i>
-		            </button>
-			</div>
-			<!-- 상세주소1 -->
-			<div class="cell flex-cell">
-				<input type="text" name="memberAddress1" class= "tool w-100" placeholder= "기본주소" readonly>
-			</div>
-			<!-- 상세주소2 -->
-			<div class="cell flex-cell">
-				<input type="text" name="memberAddress2" class= "tool w-100" placeholder="상세주소">
-					<div class="success-feedback">
-						<label><i class="fa-solid fa-circle-check"></i></label>
-					</div>
-				<div class="fail-feedback">주소를 검색하여 우편번호를 입력해주세요.</div>
-			</div>
-			<!-- 프로필 이미지 -->
-			<div class="cell flex-cell">
-				<input type="file" name="img" class="tool w-100" placeholder="프로필">
-			</div>
-			
+				</div>	
+				
 
 			
-		<div class="flex-cell">
 
-
-			<div class="w-100 ">
-				<button type="submit" class="btn tool w-100">
-					<i class="fa-solid fa-user" style= "border-bottom: none;"></i>
-					회원가입
-				</button>
-			</div>
-			</div>
 
 		</div>
 	</form>

@@ -20,7 +20,7 @@
 						</ul>
 					</div>
 					<div class="cell worktime">
-						<strong>평일</strong> : 09:30 ~ 16:20 / 점심시간 : 11:20 ~ 12:20<br>
+						<strong>평일</strong> : 09:30 ~ 18:00 / 점심시간 : 11:30 ~ 12:40<br>
 						토요일, 일요일 및 법정공휴일은 휴무입니다.<br> (근무시간 외 상담은 게시판 이용 부탁드립니다.)
 					</div>
 					<div class="cell email">

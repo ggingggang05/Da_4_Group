@@ -36,7 +36,6 @@ public class QnaOwnerInterceptor implements HandlerInterceptor{
 			
 			MemberDto memberDto = memberDao.selectOne(loginId);
 						
-			//관리자면 통과
 			if(loginLevel != null && loginLevel.equals("관리자") || loginLevel.equals("총관리자"))  {
 				return true;
 			}

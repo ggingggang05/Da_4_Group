@@ -65,7 +65,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-user"></i> ${poDto.poCustomerId} 님의 구매대행 취소내역
+				<i class="fa-solid fa-user"></i> ${poDto.poCustomerId} 님의 구매대행 배송완료 상세
 			</div>
 		</div>
 		<div class="content content-body">
@@ -107,7 +107,32 @@
 		</div>
 		<div class="content content-body">
 			<div class="info-head w-100">
-				<strong>배송지</strong>
+				<strong>배송 완료정보</strong>
+			</div>
+			<div class="info-body">
+				<div class="info-group">
+					<div class="info-label">배송사</div>
+					<div class="info-content-wrapper">
+						<div class="info-content">${poDto.poShipper}</div>
+					</div>
+				</div>
+				<div class="info-group">
+					<div class="info-label">송장번호</div>
+					<div class="info-content-wrapper">
+						<div class="info-content">${poDto.poAwbNumber}</div>
+					</div>
+				</div>
+				<div class="info-group">
+					<div class="info-label">배송완료시간</div>
+					<div class="info-content-wrapper">
+						<div class="info-content">${poDto.poEdate}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content content-body">
+			<div class="info-head w-100">
+				<strong>배송상세</strong>
 			</div>
 			<div class="info-body">
 				<div class="info-group">
@@ -195,15 +220,53 @@
 						</div>
 					</div>
 				</div>
-				<div class="info-group">
-					<div class="info-label">결제 취소 시간</div>
-					<div class="info-content-wrapper">
-						<div class="info-content">${poDto.poEdate}</div>
-					</div>
+				<div class="info-head w-100">
+					<strong>결제정보</strong>
 				</div>
+				<!-- 사용자에게 결제금액 전달해주는 창인데 자동계산되게 함
+				원래 200달러 이상만 부가세 대상인데 우리는 다른 통화가 있어서..
+				그것까지 고려하면 너무 어려워서 그냥 20만원 이상이면 부가세 내게 함
+				수수료는 상품금액(원화)의 5%에 기본수수료 1만원 더해서 출력 -->
+					<div class="info-body">
+						<div class="info-group">
+							<div class="info-label">상품금액(원화)</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">${poDto.itemPrice}
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">부가세</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+								${poDto.poItemVat}
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">수수료</div>
+							<div class="info-content-wrapper">
+								<div class="info-content">
+									${poDto.fee}
+								</div>
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">결제금액</div>
+							<div class="info-content-wrapper">
+								${poDto.totalPrice}
+							</div>
+						</div>
+						<div class="info-group">
+							<div class="info-label">결제일자</div>
+							<div class="info-content-wrapper">
+								${poDto.poPayDate}
+							</div>
+						</div>
 				<div class="cell center">
-					<a href="/admin/po/cancelList" class="link">
-						<button class="btn">목록으로</button></a>
+					<a href="/admin/po/completeList" class="link">
+						<button class="btn">목록으로</button>
+					</a> 
 				</div>
 			</div>
 		</div>

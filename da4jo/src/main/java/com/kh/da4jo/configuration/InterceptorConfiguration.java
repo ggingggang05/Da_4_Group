@@ -87,7 +87,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//리뷰글 조회수 중복방지
 				registry.addInterceptor(reviewVcountInterceptor)
 								.addPathPatterns(
-										"/board/review/detail"
+								"/board/review/detail"
 						);
 		//문의글 조회수 중복방지
 		registry.addInterceptor(qnaVcountInterceptor)

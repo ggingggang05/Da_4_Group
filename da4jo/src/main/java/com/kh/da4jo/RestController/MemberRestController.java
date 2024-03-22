@@ -72,6 +72,20 @@ public class MemberRestController {
 			return "loginN"; // 사용 불가능한 경우(DB == null)
 		}
 	}
+	
+	// 비밀번호 검사
+	@RequestMapping("/checkInputPw")
+	public boolean checkInputPw(HttpSession session,
+						@RequestParam String memberPw) {
+		String loginId = (String)session.getAttribute("loginId");
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		
+		if(memberPw.equals(memberDto.getMemberPw()) && memberDto != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	@RequestMapping("/editProfile")
 	public List<Integer> editProfile(HttpSession session, @RequestParam MultipartFile img)
@@ -80,19 +94,22 @@ public class MemberRestController {
 		String loginId = (String) session.getAttribute("loginId");
 
 		// 해당 아이디의 기존 이미지 삭제
-		int currentImgNo = memberDao.findImgNo(loginId);
-		System.out.println(currentImgNo);
-		boolean isValid = currentImgNo != 0;
-		if (isValid) {
-			imgService.removeFile(currentImgNo);
+		try {
+			int currentImgNo = memberDao.findImgNo(loginId);
+			//System.out.println(currentImgNo);
+			boolean isValid = currentImgNo != 0;
+			if (isValid) {
+				imgService.removeFile(currentImgNo);
+			}
 		}
-		// 새 이미지 적용
+		catch(Exception e) {}
 		
-
 		// 올린 내용이 없으면 중지
 		if (img.isEmpty()) {
 			return null;
 		}
+		
+		// 새 이미지 적용
 		List<Integer> numbers = new ArrayList<>();
 		int imgNo = imgService.save(img);
 		numbers.add(imgNo);

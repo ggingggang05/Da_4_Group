@@ -42,7 +42,7 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> 배송완료목록
+				<i class="fa-solid fa-pause"></i> 구매대행 배송완료목록
 			</div>
 		</div>
 		<div class="content content-body">
@@ -66,7 +66,7 @@
 							<li id="poClearanceId">${poDto.poClearanceId}</li>
 							<li id="poAddress1">${poDto.poAddress1}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
-							<li id="poDetail"><a href="processDetail?poNo=${poDto.poNo}"><i
+							<li id="poDetail"><a href="completeDetail?poNo=${poDto.poNo}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 				</c:forEach>

@@ -107,6 +107,12 @@ public class AdminPoController {
 
 		return "/WEB-INF/views/admin/po/completeList.jsp";
 	}
+	@GetMapping("/completeDetail")
+	public String completeDetail(@RequestParam int poNo, Model model) {
+		PoDto poDto = poDao.selectOne(poNo);
+		model.addAttribute("poDto", poDto);
+		return "/WEB-INF/views/admin/po/completeDetail.jsp";
+	}
 
 	
 	@RequestMapping("/cancelList")
@@ -130,12 +136,12 @@ public class AdminPoController {
 		model.addAttribute("poDto",poDto);
 		return "/WEB-INF/views/admin/po/cancelDetail.jsp";
 	}
-	@PostMapping("/cancelDetail")
-	public String cancelDetail(@ModelAttribute PoDto poDto) {
-		poDao.updateAWB(poDto);
-		return "redirect:cancelList";
-	}
-	
+//	@PostMapping("/cancelDetail")
+//	public String cancelDetail(@ModelAttribute PoDto poDto) {
+//		poDao.updateAWB(poDto);
+//		return "redirect:cancelList";
+//	}
+//	
 	
 	@GetMapping("/settlement")
 	    public String getDailyPayments(Model model,
