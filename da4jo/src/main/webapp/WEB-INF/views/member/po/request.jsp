@@ -217,6 +217,48 @@
 		return state.ok();
 	});
 </script>
+<script type="text/javascript">
+    $(function() {
+        var state = {
+            // 필수항목 : true 선택항목 : false
+            poAgree: true,
+            poCountry: true,
+            poNameKor: true,
+            poNameEng: true,
+            poClearanceId: true,
+            poContact: true,
+            poZipcode: true,
+            poAddress1: true,
+            poAddress2: true,
+            poItemEngName: true,
+            poItemCategory: true,
+            poItemOption1: false,
+            poItemOption2: false,
+            poItemOption3: false,
+            poFx: true,
+            poQty: true,
+            poLink: true,
+            poDcomment: false,
+            poCurrency: true,
+        };
+
+        // 버튼 클릭 이벤트 리스너 추가
+        $("form").click(function(){
+            // 필수 항목이 모두 입력되었는지 확인
+            var poAgree = $("input[name=poAgree]").val();
+            if(poAgree == ""){
+            	alert("유의사항에 동의하셔야 합니다.");
+            return false;
+            }
+            // 필수 항목이 모두 입력되었을 때
+            if (isAllFieldsFilled) {
+                console.log("필수 항목이 모두 입력되었습니다.");
+                // 예: $("#formId").submit();
+            }
+        });
+    });
+</script>
+
 <br>
 <br>
 <div id="agency_buy_write" class="section container center w-900">
@@ -525,8 +567,8 @@
 			</div>
 			<br>
 		</div>
-		<div class="button_area text-center" >
-			<button type="submit" class="btn mt-10">신청서 작성하기</button>
+		<div class="button_area text-center">
+    		<button id="submitButton" type="button" class="btn mt-10">신청서 작성하기</button>
 		</div>
 	</div>
 	</form>

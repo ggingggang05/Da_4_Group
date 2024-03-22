@@ -220,6 +220,25 @@
 		return state.ok();
 	});
 </script>
+<script type="text/javascript">
+	$(function(){
+		var state = {
+				// 필수항목 : true 선택항목 : false
+				shipSvcAgree : true,
+				shipSvcCountry : true,
+				shipSvcItemEngName : true,
+				shipSvcItemCategory : true,
+				shipSvcFx : true,
+				shipSvcQty : true,
+				shipSvcUserShipper : true,
+				
+				
+				
+				
+				
+		}
+	})
+</script>
 <br>
 <br>
 <div id="agency_buy_write" class="section container center w-900">

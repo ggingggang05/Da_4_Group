@@ -278,13 +278,11 @@
 				<div class="cell center">
 					<a href="/admin/ship/orderList" class="link">
 						<button class="btn">목록으로</button>
-					</a> <a href="#" class="link">
-						<button class="btn">수정</button>
-					</a> <a href="#" class="link">
-						<button class="btn">삭제</button>
-					</a>
+					</a> 
 				</div>
-				
+				<a href="/admin/ship/orderInvoice?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
+						견적내러가기
+						</a>
 			</div>
 		</div>
 	</div>
