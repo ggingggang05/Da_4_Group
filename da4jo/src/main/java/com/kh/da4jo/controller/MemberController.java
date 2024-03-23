@@ -336,7 +336,7 @@ public class MemberController {
 		int count = qnaDao.count();
 		pageVO.setCount(count);
 		
-		List<ReviewDto> list = reviewDao.selectListByPaging(pageVO);
+		List<ReviewDto> list = reviewDao.selectListByMyPaging(pageVO, loginId);
 		model.addAttribute("reviewList" , list);
 		
 		return "/WEB-INF/views/member/board/review.jsp";
@@ -355,7 +355,7 @@ public class MemberController {
 		pageVO.setCount(count);
 		
 		List<QnaDto> list = qnaDao.selectListByPaging(pageVO, loginId);
-		model.addAttribute("qnaList", list); 
+		model.addAttribute("qnaList", list);  
 		
 		return "/WEB-INF/views/member/board/qna.jsp";
 	}

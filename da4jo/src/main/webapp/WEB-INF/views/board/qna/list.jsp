@@ -194,7 +194,7 @@
 							</form>
 						</div>
 						<div class="cell right">
-							<a href="write" class="link">질문글쓰기</a>
+							<a href="write" class="link py-10">문의 작성하기</a>
 						</div>
 					</div>
 				</div>

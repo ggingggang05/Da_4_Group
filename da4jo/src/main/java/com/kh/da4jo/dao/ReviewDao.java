@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.da4jo.dto.QnaDto;
 import com.kh.da4jo.dto.ReviewDto;
 import com.kh.da4jo.mapper.BestReviewVOMapper;
 import com.kh.da4jo.mapper.ReviewListMapper;
 import com.kh.da4jo.mapper.ReviewMapper;
+import com.kh.da4jo.mapper.ReviewMypageList;
 import com.kh.da4jo.vo.BestReviewVO;
 import com.kh.da4jo.vo.PageVO;
 
@@ -21,6 +23,9 @@ public class ReviewDao {
 	private ReviewMapper reviewMapper;
 	@Autowired
 	private ReviewListMapper reviewListMapper;
+	@Autowired
+	private ReviewMypageList reviewMypageList;
+	
 	
 	//시퀀스
 	public int getSequence() {
@@ -148,6 +153,7 @@ public class ReviewDao {
 		}
 	}
 	
+	
 	//리뷰 페이징 및 
 	public List<ReviewDto> selectListByPaging(PageVO pageVO){ 
 		if(pageVO.isSearch()) {//검색
@@ -180,6 +186,42 @@ public class ReviewDao {
 							+ ") where rn between ? and ?";
 			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
 			return jdbcTemplate.query(sql, reviewListMapper, data);
+		}
+	}
+	
+	//리뷰 마이페이지 전용 목록
+	public List<ReviewDto> selectListByMyPaging(PageVO pageVO, String loginId) {
+		if(pageVO.isSearch()) {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ( "
+						+ "select "
+							+ "review_no, review_title, "
+							+ "review_writer, review_wdate "
+						+ "from review "
+						+ "where instr("+pageVO.getColumn()+", ?) > 0"
+					+ ")TMP"
+				+ ") where rn between ? and ?";
+			Object[] data = {
+					pageVO.getKeyword(),
+					pageVO.getBeginRow(),
+					pageVO.getEndRow()
+				};
+			return jdbcTemplate.query(sql, reviewMypageList, data);
+		}
+		else {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ( "
+						+ "select "
+						+ "review_no, review_title, "
+						+ "review_writer, review_wdate "
+					+ "from review "
+						+ "where review_writer=?"
+						+ "order by review_wdate desc"
+					+ ")TMP"
+				+ ") where rn between ? and ?";
+			Object[] data = {loginId, pageVO.getBeginRow(), pageVO.getEndRow()};
+
+			return jdbcTemplate.query(sql, reviewMypageList, data);
 		}
 	}
 	

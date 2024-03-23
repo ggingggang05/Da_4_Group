@@ -109,7 +109,7 @@
 							</form>
 						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<a class="btn requestBtn" href="/member/review/request" style="color: #B2BC76;">리뷰 작성하기</a>
+							<a class="btn requestBtn" href="/board/review/write" style="color: #60A1F8;">리뷰 작성하기</a>
 						</div>
 					</div>
 
@@ -143,7 +143,7 @@
 					<a class="off">&lt;이전</a>
 				</c:when>
 				<c:otherwise>
-					<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+					<a href="review?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
 				</c:otherwise>
 			</c:choose>
 
@@ -156,7 +156,7 @@
 						<a class="on">${i}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+						<a href="review?page=${i}&${pageVO.getQueryString()}">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -168,7 +168,7 @@
 				</c:when>
 				<c:otherwise>
 					<a
-						href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+						href="review?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
 				</c:otherwise>
 			</c:choose>
 		</div><!-- 네비게이터 닫는 태그 -->
