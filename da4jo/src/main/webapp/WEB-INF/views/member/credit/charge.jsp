@@ -21,7 +21,7 @@ $(function(){
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> {session.loginId}님의 캐시 충전
+				<i class="fa-solid fa-pause"></i> ${sessionScope.loginId}님의 캐시 충전
 			</div>
 		</div>
 		<div class="content content-body">
