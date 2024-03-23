@@ -73,7 +73,7 @@
 	$(function(){
 		$(".cancelOrderFail").on("click", function(){
 			var choice = window.alert("주문서 취소 불가");
-			if(choice == false) return;
+			return choice;
 		});
 	});
 </script>
@@ -285,7 +285,7 @@
 				</a>
 			</div>
 			<div class="cell w-50 left p-20">
-				<form action="updateCancelStatus" method="post">
+				<form action="list" method="post">
 				    <c:choose>
 				        <c:when test="${poDto.poStatus == '결제 대기 중' || poDto.poStatus == '주문정보 확인 중'}"> <!-- 주문 취소 가능한 상태일 때 -->
 				            <input type="hidden" name="poNo" value="${poDto.poNo}">

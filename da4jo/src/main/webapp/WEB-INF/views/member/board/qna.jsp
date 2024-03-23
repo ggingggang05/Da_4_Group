@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- lightpick CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
@@ -108,7 +108,7 @@
 							</form>
 						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<a class="btn requestBtn" href="/member/qna/request" style="color: #60A1F8;">구매서 작성하기</a>
+							<a class="btn requestBtn" href="/board/qna/write" style="color: #60A1F8;">문의 작성하기</a>
 						</div>
 					</div>
 
@@ -120,17 +120,19 @@
 						<li id="qnaWdate"><strong>작성일</strong></li>
 					</ul>
 
-
-					<c:forEach var="qnaDto" items="${qnaList}">
-						<ul class="menu menu-list">
-							<li id="qnaNo">${qnaDto.qnaNo}</li>
-							<li id="qnaSecret"><a
-								href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</a></li>
-								<c:set var="formattedTitle" value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
-							<li id="qnaTitle" class="cell left">${qnaDto.qnaTitle}</li>
-							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
-						</ul>
-					</c:forEach>
+						<c:forEach var="qnaDto" items="${qnaList}">
+							<ul class="menu menu-list">
+								<li id="qnaNo">${qnaDto.qnaNo}</li>
+								<li id="qnaSecret"><a
+									href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</a></li>
+								<li id="qnaTitle" class="cell left"><c:set
+										var="formattedTitle"
+										value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
+									${formattedTitle}</li>
+								<li id="qnaWdate">${qnaDto.qnaWdate}</li>
+							</ul>
+						</c:forEach>
+					<!-- 작성자가 로그인 아이디랑 같을때 출력하는 구문 -->
 				</c:if>
 				<!-- 구매서 작성 내역이 있는 경우 닫는 태그 -->
 			</div>
@@ -144,7 +146,7 @@
 					<a class="off">&lt;이전</a>
 				</c:when>
 				<c:otherwise>
-					<a href="list?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
+					<a href="qna?page=${pageVO.getPrevBlock()}&${pageVO.getQueryString()}">&lt;이전</a>
 				</c:otherwise>
 			</c:choose>
 
@@ -157,7 +159,7 @@
 						<a class="on">${i}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="list?page=${i}&${pageVO.getQueryString()}">${i}</a>
+						<a href="qna?page=${i}&${pageVO.getQueryString()}">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -169,7 +171,7 @@
 				</c:when>
 				<c:otherwise>
 					<a
-						href="list?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
+						href="qna?page=${pageVO.getNextBlock()}&${pageVO.getQueryString()}">다음&gt;</a>
 				</c:otherwise>
 			</c:choose>
 		</div><!-- 네비게이터 닫는 태그 -->

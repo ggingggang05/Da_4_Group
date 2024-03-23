@@ -135,8 +135,8 @@
 					</ul>
 				</c:forEach>
 
-			<%-- 검색창 --%>
 				<div class="flex-cell">
+					<div class="cell flex-cell my-30 bottom-bar">
 						<div class="cell">
 							<%-- 검색창 --%>
 							<form action="list" method="get" class="left">
@@ -154,9 +154,10 @@
 								<button class="btn searchBtn">검색</button>
 							</form>
 						</div>
-						<div class="cell">
-							<a href="write" class="link">질문글쓰기</a>
+						<div class="cell right">
+							<a href="write" class="link py-10">리뷰 작성하기</a>
 						</div>
+					</div>
 				</div>
 
 				<div class="cell">
