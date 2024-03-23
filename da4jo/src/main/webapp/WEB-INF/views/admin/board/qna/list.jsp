@@ -173,7 +173,7 @@
 								value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
 							<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${formattedTitle}</a></li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
-							<li id="qnaStatus" style="color: ${qnaDto.qnaStatus == '답변완료' ? '#00b894' : 'red'}">${qnaDto.qnaStatus}</li>
+							<li id="qnaStatus" style="color: ${qnaDto.qnaStatus == '답변완료' ? '#00b894' : (qnaDto.qnaStatus == '답변용글' ? '#00b894' : 'red')}">${qnaDto.qnaStatus}</li>
 						</ul>
 					</c:forEach>
 				</div>
