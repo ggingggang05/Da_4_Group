@@ -34,13 +34,37 @@ input
     transition: border-color 0.3s;
     height: 50px;
 }
-
-/*입력창 클릭시*/			
-.flex-cell input.tool:focus + .fa-solid{
-    border-bottom-color: #47A3FF; /* 입력창이 포커스를 받았을 때 보더의 아래 부분의 색상을 변경합니다. */
-}
 		    	
 </style>
+
+<script>
+$(function(){
+	var state = {
+		memberNumberValid : false,
+        //객체에 함수를 변수처럼 생성할 수 있다
+        ok : function(){
+            return this.memberNumberValid;
+        },
+   	};
+   	
+   	$("[name=creditCharge]").blur(function(){
+	    var regex = /^[0-9]+$/;
+	    var value = $(this).val();
+		
+		if(regex.test(value)){
+			$(this).removeClass("fail").addClass("success");
+			state.memberNumberValid = true;
+		}
+		else{
+			$(this).removeClass("success fail")
+						 .addClass(state.memberContact1Valid ? "success" : "fail");
+			state.memberNumberValid = false;
+		}
+	});
+});  
+   	
+});
+</script>
 
 
 <script>
@@ -69,9 +93,13 @@ $(function(){
 			<form action="charge" method="post" autocomplete="off">
 				<div class="cell center">
 					<label for="credit" class="labelText">충전금액(원) : </label>
-					<input type="text" name = "creditCharge" id="credit" placeholder="15000">
+					<input type="text" name = "creditCharge" id="credit" placeholder="15000" required/>
 				</div>
-				<div class="cell center">
+				<div class="success-feedback">
+						<label></label>
+				</div>
+				<div class="fail-feedback">숫자만 입력하세요</div>
+				<div class="cell center chargeBtn">
 					<button class="btn">충전하기</button>
 				</div>
 			</form>
