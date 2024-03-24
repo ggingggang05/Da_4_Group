@@ -10,7 +10,7 @@
 					<h3>
 						고객센터 <span>/ CS center</span>
 					</h3>
-					<div class="cell">
+					<div class="cell pt-20">
 						<ul class="menu">
 							<li><a href="/board/qna/list"> <img
 									src="/image/1대1문의.png">
