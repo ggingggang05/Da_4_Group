@@ -125,7 +125,7 @@
 					<c:forEach var="reviewDto" items="${reviewList}">
 						<ul class="menu menu-list">
 							<li id="reviewNo">${reviewDto.reviewNo}</li>
-							<li id="reviewTitle" class="cell left ms-20 truncate-text">${reviewDto.reviewTitle }</li>
+							<li id="reviewTitle" class="cell left ms-20 truncate-text"><a href="/board/review/detail?reviewNo=${reviewDto.reviewNo}">${reviewDto.reviewTitle }</a></li>
 							<li id="reviewWriter" class="truncate-name">${reviewDto.reviewWriter}</li>
 							<li id="reviewWdate">${reviewDto.reviewWdate}</li>
 						</ul>

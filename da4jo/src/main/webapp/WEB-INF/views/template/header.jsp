@@ -136,9 +136,9 @@
 					[ 'para', [ 'style', 'ul', 'ol', 'paragraph' ] ],
 					[ 'insert', [ 'picture', 'link', 'hr' ] ], ],
 			//기본높이 설정(단위 : px)
-			height : 200,
+			height : 500,
 			minHeight : 200,
-			maxHeight : 300,
+			maxHeight : 2000,
 			//안내문구 설정
 			callbacks : {
 				//이미지 업로드 시 실행되는 콜백 함수 정의
