@@ -17,7 +17,6 @@
 				<i class="fa-solid fa-pause"></i>구매대행 신청방법
 			</div>
 		</div>
-		<h1>이미지는 디자인 다 끝나면 교체예정 임시로 자리만 잡음</h1>
 		<div class="content content-body">
 			<div class="cell content-body-text">
 				※ 신청서 작성 전 "구매대행 이용안내" 의 구매 전 주의사항을 꼭 숙지 부탁드립니다.
@@ -28,8 +27,9 @@
 				<div class="cell">
 					<strong>1. 다사조.com 에 로그인 후 [구매대행 신청] 메뉴를 클릭하여 이동합니다.</strong><br> 
 				</div>
+				<br>
 				<div class="cell center">
-				<img src="/image/신청서작성1.jpg">
+				<img src="/image/신청서작성00.png" width="20%" height="50%">
 				</div>
 				<div class="cell">
 					<strong>2. 구매대행시 주의사항을 꼼꼼하게 확인 후 동의해 주십시오. </strong><br> 

@@ -17,7 +17,6 @@
 				<i class="fa-solid fa-pause"></i>배송대행 신청방법
 			</div>
 		</div>
-		<h1>이미지는 디자인 다 끝나면 교체예정 임시로 자리만 잡음</h1>
 		<div class="content content-body">
 			<div class="cell content-body-text">
 				<div class="cell">
@@ -26,8 +25,9 @@
 						<li>해외의 온라인 쇼핑몰에서 상품을 주문 후, 즉시 짐패스 배송대행 신청서를 작성합니다. 짐패스 사이트의 [배송대행 신청] 메뉴를 클릭하여 이동합니다</li>
 					</ul>
 				</div>
+				<br>
 				<div class="cell center">
-				<img src="/image/신청서작성1.jpg">
+				<img src="/image/신청서작성01.png" width="20%" height="50%">
 				</div>
 				<div class="cell">
 					<strong>2. 주의사항 확인 후 신청서 작성 </strong><br> 
@@ -37,7 +37,7 @@
 					</ul>
 				</div>
 				<div class="cell center" style="border: 1px solid #DEE2E6;">
-				<img src="/image/신청서작성2.png" width="800px">
+				<img src="/image/신청서작성02.png" width="800px">
 				</div>
 				<br>
 				<div class="cell">
@@ -66,7 +66,7 @@
 					</ul>
 				</div>
 				<div class="cell">
-					<img src="/image/신청서작성3.png" width="800px">
+					<img src="/image/신청서작성03.png" width="800px">
 				</div>
 				<div class="cell">
 					<strong>7. 신청서 확인</strong><br>
