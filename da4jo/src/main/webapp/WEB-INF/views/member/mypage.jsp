@@ -185,12 +185,12 @@ $(function(){
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link main-title" href="/board/qna/list">QNA</a>
+						<a class="link main-title" href="/member/board/qna">QNA</a>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link main-title" href="/board/review/list">리뷰 게시판</a>
+						<a class="link main-title" href="/member/board/review">리뷰 게시판</a>
 					</div>
 				</div>
 			</div>
@@ -227,6 +227,7 @@ $(function(){
 						<div class="title title-body mt-10">
 							<div>
 								<h3> ${countQna} 건</h3>
+								<a class="btn w-100 btnMypage " href="/board/qna/write">작성하기</a>
 								<a class="btn w-100 btnMypage " href="board/qna">내 문의내역</a>
 							</div>
 						</div>
@@ -238,6 +239,7 @@ $(function(){
 						<div class="title title-body mt-10">
 							<div>
 								<h3> ${countReview} 건</h3>
+								<a class="btn w-100 btnMypage " href="/board/review/write">작성하기</a>
 								<a class="btn w-100 btnMypage " href="board/review">내가 쓴 리뷰</a>
 							</div>
 						</div>
