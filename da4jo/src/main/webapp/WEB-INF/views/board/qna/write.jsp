@@ -48,7 +48,7 @@
 			<textarea class="imgArea" name="qnaContent" required></textarea>
 		</div>
 
-		<button type="submit" class="btn">등록</button>
+		<button type="submit" class="btn w-100">등록</button>
 </form>
 		
 	</div>
