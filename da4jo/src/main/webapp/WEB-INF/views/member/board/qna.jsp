@@ -125,12 +125,12 @@
 								<li id="qnaNo">${qnaDto.qnaNo}</li>
 								<li id="qnaSecret"><a
 									href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</a></li>
-								<li id="qnaTitle" class="cell left"><c:set
-										var="formattedTitle"
-										value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
-									${formattedTitle}</li>
-								<li id="qnaWdate">${qnaDto.qnaWdate}</li>
-							</ul>
+
+							<li id="qnaTitle" class="cell left">
+							<c:set var="formattedTitle" value="${fn:replace(qnaDto.qnaTitle, ',', '')}" /> <a
+								href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}"> ${formattedTitle}</a></li>
+							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
+						</ul>
 						</c:forEach>
 					<!-- 작성자가 로그인 아이디랑 같을때 출력하는 구문 -->
 				</c:if>
