@@ -46,6 +46,15 @@
 
 </style>
 
+<script>
+	$(function(){
+		$(".payAlert").on("click", function(){
+			var choice = window.alert("결제 단계가 아닙니다!");
+			return choice;
+		});
+	});
+</script>
+
 <!-- 로그인 한 회원의 구매서 목록 페이지 -->
 <br>
 <br>

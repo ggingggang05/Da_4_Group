@@ -287,17 +287,20 @@ $(function(){
 						</a>
 					</div>
 					<div class="cell center">
-						<ul class="menu chargeList">
-							<li>충전금액</li>
-							<li class="chargeTime">충전일시</li>
-						</ul>
-						<c:forEach var="creditDto" items="${creditList}">
 							<ul class="menu chargeList">
-								<li><fmt:formatNumber value="${creditDto.creditCharge}" pattern="#,##0"></fmt:formatNumber>원</li>
-								<li class="chargeTime"><fmt:formatDate value="${creditDto.creditTimeDate}"
-										pattern="y년 M월 d일 H시 m분 s초" /></li>
+								<li>충전금액</li>
+								<li class="chargeTime">충전일시</li>
+								<li>충전상태</li>
 							</ul>
-						</c:forEach>
+							<c:forEach var="creditDto" items="${creditList}">
+									<ul class="menu chargeList">
+										<li><fmt:formatNumber value="${creditDto.creditCharge}" pattern="#,##0"></fmt:formatNumber>원</li>
+										<li class="chargeTime"><fmt:formatDate value="${creditDto.creditTimeDate}"
+												pattern="y년 M월 d일 H시 m분 s초" /></li>
+										<li>${creditDto.creditStatus}</li>
+									</ul>
+							</c:forEach>
+						
 					</div>
 				</c:if><!-- 캐쉬 내역이 있는 경우 닫는 태그 -->
 				
