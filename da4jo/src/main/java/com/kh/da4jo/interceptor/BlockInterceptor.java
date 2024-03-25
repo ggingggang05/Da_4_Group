@@ -31,8 +31,8 @@ public class BlockInterceptor implements HandlerInterceptor{
 	        return true;
 		}
 		else {//블락회원
-			response.sendError(403);
-			//response.sendRedirect("/");//어디로 보낼지?
+			
+			response.sendRedirect("/alert/isBlock");//어디로 보낼지?
 		}
 		return false;
 	}
