@@ -146,10 +146,10 @@
 			</div><!-- 배송서 리스트 닫는 태그-->
 		</div><!-- 내용 바디 닫는 태그 -->
 		<div class="page-navigator"> <!-- 네비게이터 태그 -->
-			<c:if test="${empty poList}"> <%-- 리스트가 없을 땐 --%>
+			<c:if test="${empty shipList}"> <%-- 리스트가 없을 땐 --%>
 				<!-- 네비게이터 안 보여줌 -->
 			</c:if>
-			<c:if test="${!empty poList}">
+			<c:if test="${!empty shipList}">
 				<c:choose>
 					<c:when test="${pageVO.isFirstBlock()}">
 						<a class="off">&lt;이전</a>
