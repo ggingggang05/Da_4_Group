@@ -300,7 +300,6 @@ $(function(){
 										<li>${creditDto.creditStatus}</li>
 									</ul>
 							</c:forEach>
-						
 					</div>
 				</c:if><!-- 캐쉬 내역이 있는 경우 닫는 태그 -->
 				
