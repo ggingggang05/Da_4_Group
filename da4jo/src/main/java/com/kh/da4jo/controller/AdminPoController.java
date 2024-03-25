@@ -59,6 +59,18 @@ public class AdminPoController {
 		poDao.update(poDto);
 		return "redirect:orderList";
 	}
+	
+	@GetMapping("/orderCancel")
+	public String orderCancel(@RequestParam int poNo, Model model) {
+		model.addAttribute("poNo", poNo);
+		return "/WEB-INF/views/admin/po/orderCancel.jsp";
+	}
+	@PostMapping("/orderCancel")
+	public String orderCancel(@RequestParam int poNo, @RequestParam String poAdminComment) {
+		poDao.cancelOrder(poAdminComment, poNo);
+		return "redirect:orderList";
+	}
+	
 
 //	@RequestMapping("/processList")
 //	public String processList(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword,

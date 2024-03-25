@@ -530,5 +530,10 @@ public class ShipSvcDao {
 		String sql = "UPDATE SHIPSVC SET SHIPSVC_STATUS = '배송완료' WHERE SHIPSVC_SHIP_DATE + 7 < sysdate";
 		jdbcTemplate.update(sql);
 	}
-
+	
+	public void cancelOrder(String shipSvcAdminComment, int shipSvcNo) {
+		String sql = "UPDATE SHIPSVC SET SHIPSVC_ADMIN_COMMENT=?, SHIPSVC_STATUS='주문취소' WHERE SHIPSVC_NO=?";
+		Object[] datas = { shipSvcAdminComment, shipSvcNo};
+		jdbcTemplate.update(sql, datas);
+	}
 }

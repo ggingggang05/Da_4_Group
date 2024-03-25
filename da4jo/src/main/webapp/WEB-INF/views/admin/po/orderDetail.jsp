@@ -50,6 +50,15 @@
 	padding-left: 15px;
 	text-align: left;
 }
+
+.btns {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn-cancel{
+	margin-left: 260px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -254,10 +263,17 @@
 							<button type="submit" class="btn">사용자에게 전송</button>
 						</div>
 				</form>
-				<div class="cell center">
-					<a href="/admin/po/orderList" class="link">
-						<button class="btn">목록으로</button>
-					</a> 
+				<div class="cell btns">
+					<div class="cell">
+						<a href="/admin/po/orderList" class="link">
+							<button type="button" class="btn btn-list">목록으로</button>
+						</a> 
+					</div>
+					<div class="cell">
+						<a href="/admin/po/orderCancel?poNo=${poDto.poNo}" class="link">
+							<button type="button" class="btn btn-cancel negative">주문서 반려</button>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

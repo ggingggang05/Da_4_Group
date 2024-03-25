@@ -58,13 +58,13 @@ public class PoDao {
 		jdbcTemplate.update(sql, data);
 	}
 
-	// R(read) 공지목록
-	public List<PoDto> selectList() {// 공지의 단순 목록만 나오게
+
+	public List<PoDto> selectList() {
 		String sql = "select * from po order by PO_NO desc";
 		return jdbcTemplate.query(sql, poMapper);
 	}
 
-	// 공지의 검색 목록이 나옴
+
 	public List<PoDto> selectList(String column, String keyword) {
 		String sql = "select PO_NO, PO_CUSTOMER_ID, PO_ITEM_ENG_NAME from po where instr(" + column + ", ?) > 0 "
 				+ " order by PO_NO desc";
@@ -555,5 +555,11 @@ public class PoDao {
 	public void compareDate(List<PoDto> dateList) {
 		String sql = "UPDATE po SET PO_STATUS = '배송완료' WHERE PO_SHIP_DATE + 7 < sysdate";
 		jdbcTemplate.update(sql);
+	}
+	
+	public void cancelOrder(String poAdminComment, int poNo) {
+		String sql = "UPDATE PO SET PO_ADMIN_COMMENT=?, PO_STATUS='주문취소' WHERE PO_NO=?";
+		Object[] datas = { poAdminComment, poNo};
+		jdbcTemplate.update(sql, datas);
 	}
 }

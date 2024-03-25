@@ -19,11 +19,14 @@
 }
 
 #reasonArea {
-	height: 75px;
+	height: 300px;
 	font-size: 16px;
 	padding-bottom: 45px;
 	padding-left: 15px;
 	width: 500px;
+	white-space: pre-wrap;
+    word-wrap: break-word;
+    resize: none;
 }
 
 #charCount {
@@ -37,48 +40,48 @@
 	position: absolute;
 	right: 272px;
 	bottom: -40px;
-	border-radius: 30px;
+	border-radius: 50px;
 }
 </style>
 <script type="text/javascript">
 	$(function() {
 		$('#reasonArea').on('input', function() {
 			var textLength = $(this).val().length;
-			$('#charCount').text(textLength + ' / 30');
+			$('#charCount').text(textLength + ' / 300');
 			//최대 글자 수 제한
-			if (textLength > 30) {
-				$(this).val($(this).val().substring(0, 29));
+			if (textLength > 300) {
+				$(this).val($(this).val().substring(0, 299));
 			}
 		});
 		$(".submint-form").submit(function(e) {
-			var confirmation = confirm("정말 차단을 해제하시겠습니까?");
+			var confirmation = confirm("정말 주문취소 하시겠습니까?");
 			if (confirmation) {
-				alert("차단 해제 되었습니다."); 
+				alert("주문이 취소되었습니다."); 
 			} else {
 				e.preventDefault();
 			}
 		});
 	});
 </script>
-<form action="cancel" class="submint-form" method="post" autocomplete="off">
+<form action="orderCancel" class="submint-form" method="post" autocomplete="off">
 	<div class="container container-body">
 		<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 		<div class="container inner-container">
 			<div class="content content-head">
 				<div class="content-head-text">
-					<i class="fa-solid fa-user"></i>${memberId}
+					<i class="fa-solid fa-user"></i>${poNo}번 주문 반려
 				</div>
 			</div>
 			<div class="content content-body">
 				<div class="info-head w-100">
-					<strong>멤버 차단 해제 사유</strong>
+					<strong>주문 반려 사유</strong>
 				</div>
 				<div class="info-body">
-					<input type="hidden" name="memberId" value="${memberId}">
-					<input type="text" name="cancelReason" id=reasonArea></input>
-					<div id="charCount">0 / 30</div>
+					<input type="hidden" name="poNo" value="${poNo}">
+					<textarea name="poAdminComment" id=reasonArea></textarea>
+					<div id="charCount">0 / 300</div>
 					<div id="cancelButton">
-						<button class="btn">차단해제</button>
+						<button class="btn negative">주문취소</button>
 					</div>
 				</div>
 			</div>
