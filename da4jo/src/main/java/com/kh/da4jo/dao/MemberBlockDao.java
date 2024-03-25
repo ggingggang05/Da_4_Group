@@ -64,6 +64,6 @@ public class MemberBlockDao
 		public MemberBlockDto selectOne(String memberId) {
 			String sql = "SELECT * FROM MEMBER_BLOCK WHERE BLOCK_MEMBER_ID = ? ORDER BY BLOCK_TIME DESC";
 			List<MemberBlockDto> list = jdbcTemplate.query(sql, memberBlockMapper ,memberId);
-			return list.get(0);
+			return list.isEmpty() ? null : list.get(0);
 		}
 }
