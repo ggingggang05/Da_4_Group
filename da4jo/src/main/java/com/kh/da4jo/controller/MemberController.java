@@ -112,8 +112,8 @@ public class MemberController {
 			
 			//이전 접속한 사이트가 있으면
 			if (referer == null || referer.isEmpty()
-					|| referer.equals("http://localhost:8080/member/login?error")
-					|| referer.equals("http://localhost:8080/member/login"))
+					|| referer.contains("/member/login?error")
+					|| referer.contains("/member/login"))
 			{
 				return "redirect:/";
 			} else
@@ -131,6 +131,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId"); // 세션 값 삭제
 		session.removeAttribute("loginLevel");
+		session.removeAttribute("hasServiceHistory");
 		return "redirect:/";
 	}
 	

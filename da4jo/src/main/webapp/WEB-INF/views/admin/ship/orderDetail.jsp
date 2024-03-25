@@ -297,9 +297,8 @@
 					</div>
 				</div>
 				<a href="/admin/ship/orderInvoice?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
-						견적내러가기
-						
-						</a>
+						견적내러가기	
+				</a>
 			</div>
 		</div>
 	</div>

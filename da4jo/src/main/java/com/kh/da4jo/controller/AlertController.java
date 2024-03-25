@@ -11,4 +11,14 @@ public class AlertController
 	public String hasntServiceHistory() {
 		return "/WEB-INF/views/alert/hasntServiceHistory.jsp";
 	}
+	
+	@RequestMapping("/isBlock")
+	public String isBlock() {
+		return "/WEB-INF/views/alert/isBlock.jsp";
+	}
+	
+	@RequestMapping("/resignMember")
+	public String resignMember() {
+		return "/WEB-INF/views/alert/resignMember.jsp";
+	}
 }
