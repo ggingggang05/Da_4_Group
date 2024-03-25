@@ -43,7 +43,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(memberInterceptor)
 						.addPathPatterns(//인터셉터 적용할 페이지
 						"/member/mypage",
-						"/board/review/write"
+						"/board/review/write",
+						"/member/ship/request",
+						"/member/po/request"
 						)
 					.excludePathPatterns(//인터셉터에서 제외할 페이지
 						"/board/notice/list",
