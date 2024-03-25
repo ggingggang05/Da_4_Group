@@ -35,6 +35,6 @@ public class ShipServiceController {
 		int sequence = shipSvcDao.getSequence(); // 시퀀스 정보도 PO로 넘겨주기
 		shipSvcDto.setShipSvcNo(sequence);
 		shipSvcDao.insert(shipSvcDto);
-		return "redirect:/member/mypage";
+		return "redirect:/member/mypage/ship/pendingPayment";
 	}
 }
