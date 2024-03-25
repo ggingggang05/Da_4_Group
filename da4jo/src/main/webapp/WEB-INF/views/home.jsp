@@ -94,6 +94,10 @@
 	margin-right: 5px;
 	border: 1px solid #d8d8d8;
 }
+
+.reviewImage {
+	height: 323px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -276,7 +280,7 @@
 									var reviewNo = review.reviewNo;
 									var reviewWriter = review.reviewWriter;
 
-									var reviewImage = $("<img class='w-100' src='/board/review/image?reviewNo=" + reviewNo + "'>");
+									var reviewImage = $("<img class='reviewImage w-100' src='/board/review/image?reviewNo=" + reviewNo + "'>");
 									var reviewLink = $("<a class='link review-link'></a>")
 											.attr("href", "/board/review/detail?reviewNo=" + reviewNo)
 											.text(reviewWriter + '님의 리뷰')
