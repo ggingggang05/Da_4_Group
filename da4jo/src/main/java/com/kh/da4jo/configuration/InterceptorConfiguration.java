@@ -11,6 +11,7 @@ import com.kh.da4jo.interceptor.MemberInterceptor;
 import com.kh.da4jo.interceptor.NoticeVcountInterceptor;
 import com.kh.da4jo.interceptor.QnaOwnerInterceptor;
 import com.kh.da4jo.interceptor.QnaVcountInterceptor;
+import com.kh.da4jo.interceptor.ResignInterceptor;
 import com.kh.da4jo.interceptor.ReviewOwnerInterceptor;
 import com.kh.da4jo.interceptor.ReviewValidInterceptor;
 import com.kh.da4jo.interceptor.ReviewVcountInterceptor;
@@ -36,6 +37,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	private QnaVcountInterceptor qnaVcountInterceptor;
 	@Autowired
 	private ReviewValidInterceptor reviewValidInterceptor;
+	@Autowired
+	private ResignInterceptor resignInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -62,7 +65,17 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						.addPathPatterns(
 						"/board/qna/write",
 						"/board/review/write",
-						"/member/po/request"
+						"/member/po/request",
+						"/member/ship/request"
+						);
+		//탈퇴회원이 접근 시 강제 로그아웃 후 회원가입 페이지로 유도
+		registry.addInterceptor(resignInterceptor)
+						.addPathPatterns(
+						"/board/qna/write",
+						"/board/review/write",
+						"/member/po/request",
+						"/member/ship/request",
+						"/member/mypage"
 						);
 		//구매이력 중 배송완료 가 없으면(서비스를 이용한 적 없으면) 리뷰 금지
 		registry.addInterceptor(reviewValidInterceptor)

@@ -131,6 +131,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId"); // 세션 값 삭제
 		session.removeAttribute("loginLevel");
+		session.removeAttribute("hasServiceHistory");
 		return "redirect:/";
 	}
 	

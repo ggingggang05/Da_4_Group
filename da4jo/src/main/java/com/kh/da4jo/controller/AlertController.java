@@ -16,4 +16,9 @@ public class AlertController
 	public String isBlock() {
 		return "/WEB-INF/views/alert/isBlock.jsp";
 	}
+	
+	@RequestMapping("/resignMember")
+	public String resignMember() {
+		return "/WEB-INF/views/alert/resignMember.jsp";
+	}
 }

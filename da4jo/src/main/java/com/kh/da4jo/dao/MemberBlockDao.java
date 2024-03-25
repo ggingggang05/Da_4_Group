@@ -60,5 +60,10 @@ public class MemberBlockDao
                     "WHERE SUB.ROW_NUM = 1";
 			return jdbcTemplate.query(sql, blockMemberVOMapper, memberId);
 		}
-	
+	//차단 회원인지 조회
+		public MemberBlockDto selectOne(String memberId) {
+			String sql = "SELECT * FROM MEMBER_BLOCK WHERE BLOCK_MEMBER_ID = ? ORDER BY BLOCK_TIME DESC";
+			List<MemberBlockDto> list = jdbcTemplate.query(sql, memberBlockMapper ,memberId);
+			return list.get(0);
+		}
 }
