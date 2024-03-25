@@ -37,6 +37,6 @@ public class PoController {
 		int sequence = poDao.getSequence(); // 시퀀스 정보도 PO로 넘겨주기
 		poDto.setPoNo(sequence);
 		poDao.insert(poDto);
-		return "redirect:/member/mypage";
+		return "redirect:/member/mypage/purchase/pendingPayment";
 	}
 }
