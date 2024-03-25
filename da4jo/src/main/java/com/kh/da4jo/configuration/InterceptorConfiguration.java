@@ -42,7 +42,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//비회원 접근 금지
 		registry.addInterceptor(memberInterceptor)
 						.addPathPatterns(//인터셉터 적용할 페이지
-						"/member/mypge",
+						"/member/mypage",
 						"/board/review/list",
 						"/board/qna/**",
 						"/board/notice/**"
