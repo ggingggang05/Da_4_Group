@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dao.PoDao;
+import com.kh.da4jo.dto.MemberDto;
 import com.kh.da4jo.dto.PoDto;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,11 +23,17 @@ public class PoController {
 
 	@Autowired
 	private PoDao poDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	
 	// 주문서 작성
 	@GetMapping("/po/request")
-	public String request() {
+	public String request(HttpSession session, Model model) {
+		String loginId = (String)session.getAttribute("loginId");
+		MemberDto loginDto = memberDao.selectOne(loginId);
+		model.addAttribute("loginDto", loginDto);
+		
 		return "/WEB-INF/views/member/po/request.jsp";
 	}
 	@PostMapping("/po/request")

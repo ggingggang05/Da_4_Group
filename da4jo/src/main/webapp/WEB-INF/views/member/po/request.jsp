@@ -561,36 +561,36 @@ $(function() {
 		</div>
 		<div class="flex-cell">
 			<div class="cell sfont">
-				구매자(한글) <input type="text" name="poNameKor" class="tool w-100 line"
+				구매자(한글) <input type="text" name="poNameKor" class="tool w-100 line" value="${loginDto.memberNameKor}"
 					placeholder="한글이름">
 			</div>
 			<div class="cell sfont">
-				구매자(영문) <input type="text" name="poNameEng" class="tool w-100 line"
+				구매자(영문) <input type="text" name="poNameEng" class="tool w-100 line" value="${loginDto.memberNameEng}"
 					placeholder="영어이름">
 			</div>
 			<div class="cell sfont">
-				통관고유번호 <input type="text" name="poClearanceId"
+				통관고유번호 <input type="text" name="poClearanceId" value="${loginDto.memberClearanceId}"
 					class="tool w-100 line" placeholder="P로시작">
 			</div>
 			<div class="cell sfont">
-				연락처 <input type="text" name="poContact" class="tool w-100 line"
+				연락처 <input type="text" name="poContact" class="tool w-100 line" value="${loginDto.memberContact1}"
 					placeholder="전화번호">
 			</div>
 		</div>
 		<div class="cell left">
 			<div class="cell">
-				 <input type="text" name="poZipcode" class="tool w-20 line"
+				 <input type="text" name="poZipcode" class="tool w-20 line" value="${loginDto.memberZipcode}"
 					placeholder="우편번호">
 			<button type="button" class="btn btn-address-search">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
 			</div>
 			<div class="cell">
-				 <input type="text" name="poAddress1" class="tool w-50 line"
+				 <input type="text" name="poAddress1" class="tool w-50 line" value="${loginDto.memberAddress1}"
 					placeholder="기본주소">
 			</div>
 			<div class="cell">
-				 <input type="text" name="poAddress2" class="tool w-50 line"
+				 <input type="text" name="poAddress2" class="tool w-50 line" value="${loginDto.memberAddress2}"
 					placeholder="상세주소">
 			</div>
 			<br>

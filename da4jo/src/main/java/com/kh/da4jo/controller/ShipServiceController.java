@@ -3,12 +3,15 @@ package com.kh.da4jo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.da4jo.dao.MemberDao;
 import com.kh.da4jo.dao.ShipSvcDao;
+import com.kh.da4jo.dto.MemberDto;
 import com.kh.da4jo.dto.ShipSvcDto;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,11 +22,15 @@ public class ShipServiceController {
 
 	@Autowired
 	private ShipSvcDao shipSvcDao;
-	
+	@Autowired
+	private MemberDao memberDao;
 	
 	// 주문서 작성
 	@GetMapping("/request")
-	public String request() {
+	public String request(HttpSession session, Model model) {
+		String loginId = (String)session.getAttribute("loginId");
+		MemberDto loginDto = memberDao.selectOne(loginId);
+		model.addAttribute("loginDto", loginDto);
 		return "/WEB-INF/views/member/ship/request.jsp";
 	}
 	@PostMapping("/request")
