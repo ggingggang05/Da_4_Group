@@ -219,61 +219,70 @@
 </script>
 <script type="text/javascript">
 $(function() {
-    var state = {
-        // 필수항목 : true 선택항목 : false
-        poAgree: true,
-        poCountry: true,
-        poNameKor: true,
-        poNameEng: true,
-        poClearanceId: true,
-        poContact: true,
-        poZipcode: true,
-        poAddress1: true,
-        poAddress2: true,
-        poItemEngName: true,
-        poItemCategory: true,
-        poItemOption1: false,
-        poItemOption2: false,
-        poItemOption3: false,
-        poFx: true,
-        poQty: true,
-        poLink: true,
-        poDcomment: false,
-        poCurrency: true,
-    };
-
-    // 버튼 클릭 이벤트 리스너 추가
-    $(".btn-click").click(function(e) {
-        e.preventDefault(); // 폼 제출 방지
-
-        // 필수 항목이 모두 입력되었는지 확인
-        for (var key in state) {
-            if (state.hasOwnProperty(key) && state[key] === true) {
-                var value = $("input[name='" + key + "']").val();
-                if (value === "") {
-                    alert("모든 항목을 입력해야 합니다.");
-                    return false;
-                }
-            }
-        }
-
-        // 모든 필수 항목이 입력되었으면 폼 제출
-        $("form").submit();
-    });
-
-    // form 전송
     $(".check-form").submit(function() {
-        // 필요한 경우 추가 검증을 수행할 수 있습니다.
+    	var poAgree = $("input[name='poAgree']:checked").val();
+        var poNameKor = $("input[name='poNameKor']").val();
+        var poNameEng = $("input[name='poNameEng']").val();
+        var poClearanceId = $("input[name='poClearanceId']").val();
+        var poContact = $("input[name='poContact']").val();
+        var poZipcode = $("input[name='poZipcode']").val();
+        var poItemEngName = $("input[name='poItemEngName']").val();
+        var poItemCategory = $("input[name='poItemCategory']").val();
+        var poLink = $("input[name='poLink']").val();
+	    var poCountryChecked = $("input[name='poCountry']:checked").val();
+     	// poAgree 동의 여부 확인
+        if (poAgree !== "Y") {
+            alert("약관에 동의해주세요.");
+            return false;
+        }
+        // poCountry 선택 여부 확인
+        if (!poCountryChecked) {
+            alert("구매대행지를 선택해 주세요.");
+            return false;
+        }
+     	// poItemEngName 검증
+        if (!/^[a-zA-Z\s]{1,30}$/.test(poItemEngName)) {
+            alert("상품 이름(영문)은 영어로만 입력하고 30자 이내로 입력하세요.");
+            return false;
+        }
+        // poItemCategory 검증
+        if (poItemCategory === "") {
+            alert("카테고리를 입력하세요.");
+            return false;
+        }
+        // poNameKor 검증
+        if (!/^.{1,4}$/.test(poNameKor)) {
+            alert("한국어 이름은 4글자 이내로 입력하세요.");
+            return false;
+        }
+        // poNameEng 검증
+        if (!/^[a-zA-Z]{1,20}$/.test(poNameEng)) {
+            alert("영문 이름은 알파벳 최대 20자로 입력하세요.");
+            return false;
+        }
+        // poClearanceId 검증
+        if (!/^P\d{12}$/.test(poClearanceId)) {
+            alert("통관 고유번호는 대문자 P로 시작하고 숫자 12자리여야 합니다.");
+            return false;
+        }
+        // poContact 검증
+        if (!/^010\d{8}$/.test(poContact)) {
+            alert("연락처는 010으로 시작하고 뒤에 8자리의 숫자로 입력하세요.");
+            return false;
+        }
+        // poZipcode 검증
+        if (!/^\d{5,6}$/.test(poZipcode)) {
+            alert("주소를 검색하여 우편번호를 입력해주세요.");
+            return false;
+        }
+        // poLink 검증
+        if (poLink === "") {
+            alert("링크를 입력하세요.");
+            return false;
+        }
         return true;
     });
 });
-
-</script>
-
-<script type="text/javascript">
-$(function() {
-
-
 </script>
 <br>
 <br>
@@ -287,7 +296,7 @@ $(function() {
 			구매대행시 주의사항을 확인 및 동의하신 후 하단의 신청폼에 상품정보를 입력하고 신청해 주세요!
 		</div>
 		<div class="cell w-100">
-		<a class="link" href="/document/delivery-step"><button type="button" class="btn">배송대행 신청방법 보러가기</button></a>
+		<a class="link" href="/document/buying-step"><button type="button" class="btn">구매대행 신청방법 보러가기</button></a>
 	</div>
 	<br><br>
 		<div class="box_form">
