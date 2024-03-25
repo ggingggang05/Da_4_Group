@@ -51,6 +51,16 @@ public class AdminShipSvcController {
 		return "redirect:orderList";
 	}
 	
+	@GetMapping("/orderCancel")
+	public String orderCancel(@RequestParam int shipSvcNo, Model model) {
+		model.addAttribute("shipSvcNo", shipSvcNo);
+		return "/WEB-INF/views/admin/ship/orderCancel.jsp";
+	}
+	@PostMapping("/orderCancel")
+	public String orderCancel(@RequestParam int shipSvcNo, @RequestParam String shipSvcAdminComment) {
+		shipSvcDao.cancelOrder(shipSvcAdminComment, shipSvcNo);
+		return "redirect:orderList";
+	}
 	
 	@GetMapping("/orderDetail")
 	public String orderDetail(@RequestParam int shipSvcNo, Model model) {

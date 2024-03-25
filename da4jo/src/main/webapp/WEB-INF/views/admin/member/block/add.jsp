@@ -50,10 +50,12 @@
 				$(this).val($(this).val().substring(0, 29));
 			}
 		});
-		$(".submint-form").submit(function() {
+		$(".submint-form").submit(function(e) {
 			var confirmation = confirm("정말 차단하시겠습니까?");
 			if (confirmation) {
 				alert("차단되었습니다."); 
+			} else {
+				e.preventDefault();
 			}
 		});
 	});

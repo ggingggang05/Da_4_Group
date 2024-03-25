@@ -50,6 +50,15 @@
 	padding-left: 15px;
 	text-align: left;
 }
+
+.btns {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn-cancel{
+	margin-left: 260px;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -90,7 +99,7 @@
 		<div class="content content-head">
 			<div class="content-head-text">
 				<i class="fa-solid fa-user"></i> ${shipSvcDto.shipSvcCustomerId} 님의
-				구매대행 신청서
+				배송대행 신청서
 			</div>
 		</div>
 		<div class="content content-body">
@@ -275,10 +284,17 @@
 							<button type="submit" class="btn">사용자에게 전송</button>
 						</div>
 				</form>
-				<div class="cell center">
-					<a href="/admin/ship/orderList" class="link">
-						<button class="btn">목록으로</button>
-					</a> 
+				<div class="cell btns">
+					<div class="cell">
+						<a href="/admin/ship/orderList" class="link">
+							<button type="button" class="btn btn-list">목록으로</button>
+						</a> 
+					</div>
+					<div class="cell">
+						<a href="/admin/ship/orderCancel?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
+							<button type="button" class="btn btn-cancel negative">주문서 반려</button>
+						</a>
+					</div>
 				</div>
 				<a href="/admin/ship/orderInvoice?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
 						견적내러가기
