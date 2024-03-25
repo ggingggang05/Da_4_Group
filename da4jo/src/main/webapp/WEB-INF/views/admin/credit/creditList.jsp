@@ -47,6 +47,16 @@
 					<li id="creditStatus"><strong>현재상태</strong></li>
 					<li id="statusBtn"></li>
 				</ul>
+				<script type="text/javascript">
+					$(function() {
+						$("#changeStatusButton").on("click", function(e) {
+							if ($("#creditStatusSelect").val() === "") {
+								e.preventDefault(); // 폼의 제출을 막음
+								return; // 버튼 동작 중지
+							}
+						});
+					})
+				</script>
 				<c:forEach var="creditDto" items="${creditList}">
 					<form action="creditList" method="post">
 						<ul class="menu menu-list">
@@ -70,16 +80,6 @@
 								<button id="changeStatusButton" class="w-25">상태변경</button></li>
 						</ul>
 					</form>
-<script type="text/javascript">
-	$(function () {
-		$("#changeStatusButton").on("click", function(e) {
-		    if ($("#creditStatusSelect").val() === "") {
-		    	e.preventDefault(); // 폼의 제출을 막음
-		        return; // 버튼 동작 중지
-		    }
-		});
-	})
-</script>
 				</c:forEach>
 			</div>
 		</div>
