@@ -26,6 +26,8 @@ public class ResignInterceptor implements HandlerInterceptor{
 		String loginId = (String)session.getAttribute("loginId");
 		
 		MemberBlockDto memberBlockDto = memberBlockDao.selectOne(loginId);
+		if(memberBlockDto==null) return true;
+		
 		String memberStatus = memberBlockDto.getBlockStatus();
 		
 	    if ("탈퇴회원".equals(memberStatus)) {
