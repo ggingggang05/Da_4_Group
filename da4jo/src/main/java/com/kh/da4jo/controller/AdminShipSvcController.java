@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.da4jo.dao.ShipSvcDao;
+import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.dto.ShipSvcDto;
 import com.kh.da4jo.vo.DailyDetailVO;
 import com.kh.da4jo.vo.PageVO;
@@ -86,6 +87,19 @@ public class AdminShipSvcController {
 		model.addAttribute("shipSvcDto", shipSvcDto);
 
 		return "/WEB-INF/views/admin/ship/processList.jsp";
+	}
+	
+	//배송 진행 중인 구매서만 보여질 페이지
+	@RequestMapping("/processingList")
+	public String processingList(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {
+		int count = shipSvcDao.shippingProcessCount(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		
+		List<ShipSvcDto> list = shipSvcDao.selectShippingProcessListByPaging(pageVO);
+		model.addAttribute("shipList", list);
+		
+		return "/WEB-INF/views/admin/ship/processingList.jsp";
 	}
 
 	@GetMapping("/processDetail")

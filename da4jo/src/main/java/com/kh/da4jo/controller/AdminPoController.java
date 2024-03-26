@@ -18,6 +18,8 @@ import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.SettlementVO;
 import com.kh.da4jo.vo.VatListVO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/admin/po")
 public class AdminPoController {
@@ -93,6 +95,19 @@ public class AdminPoController {
 		model.addAttribute("poDto", poDto);
 
 		return "/WEB-INF/views/admin/po/processList.jsp";
+	}
+	
+	//배송 진행 중인 구매서만 보여질 페이지
+	@RequestMapping("/processingList")
+	public String processingList(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {
+		int count = poDao.shippingProcessCount(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		
+		List<PoDto> list = poDao.selectShippingProcessListByPaging(pageVO);
+		model.addAttribute("poList", list);
+		
+		return "/WEB-INF/views/admin/po/processingList.jsp";
 	}
 
 	@GetMapping("/processDetail")

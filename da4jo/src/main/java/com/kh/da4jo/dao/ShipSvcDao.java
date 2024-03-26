@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.da4jo.dto.PoDto;
 import com.kh.da4jo.dto.ShipSvcDto;
 import com.kh.da4jo.mapper.DailyDetailVOMapper;
 import com.kh.da4jo.mapper.SettlementVOMapper;
@@ -428,6 +429,19 @@ public class ShipSvcDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
+	//배송 중인 구매서에 대한 페이징 - 관리자용
+	public int shippingProcessCount(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select count(*) from shipsvc "
+						+ "where instr(" + pageVO.getColumn() + ", ?) > 0 AND shipsvc_status='배송 중'";
+			Object[] data = { pageVO.getKeyword() };
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		} else {// 목록
+			String sql = "select count(*) from shipsvc where shipsvc_status='배송 중'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+	
 	// 목록 페이징
 	public List<ShipSvcDto> selectListByPaging(PageVO pageVO, String loginId) {
 		if (pageVO.isSearch()) {// 검색
@@ -462,6 +476,34 @@ public class ShipSvcDao {
 		Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
 
 		return jdbcTemplate.query(sql, shipSvcListMapper, data);
+	}
+	//배송 중인 구매서에 대한 페이징 - 관리자
+	public List<ShipSvcDto> selectShippingProcessListByPaging(PageVO pageVO) {
+		
+		if(pageVO.isSearch()) { //검색
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ( "
+					+ "select * "
+					+ "from SHIPSVC "
+					+ "where instr("+ pageVO.getColumn() +", ?) and SHIPSVC_status='배송 중' " 
+					+ "order by SHIPSVC_sdate desc" 
+					+ ")TMP) "
+					+ "where rn between ? and ?";
+			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
+			
+			return jdbcTemplate.query(sql, shipSvcMapper, data);	
+			
+		}
+		else { //목록
+			String sql = "select * from (select rownum rn, TMP.* from ( "
+					+ "select * from SHIPSVC "
+					+ "where SHIPSVC_status='배송 중' " 
+					+ "order by SHIPSVC_sdate desc" 
+					+ ")TMP) where rn between ? and ?";
+			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
+			
+			return jdbcTemplate.query(sql, shipSvcMapper, data);			
+		}
 	}
 
 	// 주문정보 확인 중, 결제 대기 중인 구매서에 대해 페이징
@@ -536,4 +578,5 @@ public class ShipSvcDao {
 		Object[] datas = { shipSvcAdminComment, shipSvcNo};
 		jdbcTemplate.update(sql, datas);
 	}
+
 }

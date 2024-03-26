@@ -12,8 +12,8 @@ import com.kh.da4jo.mapper.PaymentVOMapper;
 import com.kh.da4jo.mapper.PoListMapper;
 import com.kh.da4jo.mapper.PoMapper;
 import com.kh.da4jo.mapper.SettlementVOMapper;
-import com.kh.da4jo.vo.DailyDetailVO;
 import com.kh.da4jo.mapper.VatListVOMapper;
+import com.kh.da4jo.vo.DailyDetailVO;
 import com.kh.da4jo.vo.PageVO;
 import com.kh.da4jo.vo.PaymentVO;
 import com.kh.da4jo.vo.SettlementVO;
@@ -216,6 +216,7 @@ public class PoDao {
 		}
 	}
 
+	
 	// 카운트 - 목록일 경우와 검색일 경우를 각각 구현
 	public int count(PageVO pageVO) {
 		if (pageVO.isSearch()) {// 검색
@@ -444,22 +445,64 @@ public class PoDao {
 
 		return jdbcTemplate.query(sql, poListMapper, data);
 	}
+	// 배송 중인 구매서에 대한 페이징 - 관리자
+	public List<PoDto> selectShippingProcessListByPaging(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ( "
+						+ "select * "
+						+ "from po "
+						+ "where instr(" + pageVO.getColumn() + ", ?) > 0 and po_status='배송 중' "
+						+ "order by po_sdate desc"
+						+ ")TMP" 
+					+ ") where rn between ? and ?";
+			Object[] data = { pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow() };
 
-		
-		// 주문정보 확인 중, 결제 대기 중인 구매서에 대해 페이징
-		public List<PoDto> selectpendingPaymentListByPaging(PageVO pageVO, String loginId) {
-			String sql = "select * from (" 
-					+ "select rownum rn, TMP.* from ( " 
+			return jdbcTemplate.query(sql, poMapper, data);
+		}
+		else { //목록
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ( "
 					+ "select * "
 					+ "from po "
-					+ "where (PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중') and po_customer_id=? "
-					+ "order by po_sdate desc" 
-					+ ")TMP" 
+					+ "where po_status='배송 중' "
+					+ "order by po_sdate desc "
+					+ ")TMP"
 					+ ") where rn between ? and ?";
-			Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
-
-			return jdbcTemplate.query(sql, poListMapper, data);
+			Object[] data = { pageVO.getBeginRow(), pageVO.getEndRow() };
+	
+			return jdbcTemplate.query(sql, poMapper, data);
 		}
+	}
+	
+	
+	// 배송 중인 구매서에 대한 페이징 - 관리자용
+	public int shippingProcessCount(PageVO pageVO) {
+		if (pageVO.isSearch()) {// 검색
+			String sql = "select count(*) from po " + "where instr(" + pageVO.getColumn() + ", ?) > 0 AND po_status='배송 중'";
+			Object[] data = { pageVO.getKeyword() };
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		} else {// 목록
+			String sql = "select count(*) from po where po_status='배송 중'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
+		
+	// 주문정보 확인 중, 결제 대기 중인 구매서에 대해 페이징
+	public List<PoDto> selectpendingPaymentListByPaging(PageVO pageVO, String loginId) {
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ( " 
+				+ "select * "
+				+ "from po "
+				+ "where (PO_STATUS='주문정보 확인 중' OR PO_STATUS='결제 대기 중') and po_customer_id=? "
+				+ "order by po_sdate desc" 
+				+ ")TMP" 
+				+ ") where rn between ? and ?";
+		Object[] data = { loginId, pageVO.getBeginRow(), pageVO.getEndRow() };
+
+		return jdbcTemplate.query(sql, poListMapper, data);
+	}
 	
 	
 	// 결제 완료 목록 조회
@@ -562,4 +605,5 @@ public class PoDao {
 		Object[] datas = { poAdminComment, poNo};
 		jdbcTemplate.update(sql, datas);
 	}
+
 }
