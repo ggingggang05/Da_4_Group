@@ -98,7 +98,7 @@ public class AdminPoController {
 	}
 	
 	//배송 진행 중인 구매서만 보여질 페이지
-	@RequestMapping("/processingList")
+	@GetMapping("/processingList")
 	public String processingList(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {
 		int count = poDao.shippingProcessCount(pageVO);
 		pageVO.setCount(count);
@@ -108,6 +108,13 @@ public class AdminPoController {
 		model.addAttribute("poList", list);
 		
 		return "/WEB-INF/views/admin/po/processingList.jsp";
+	}
+	@PostMapping("/processingList")
+	public String processingList(@ModelAttribute PoDto poDto) {
+		System.out.println(poDto);
+		poDao.updateStatus(poDto.getPoStatus(), poDto.getPoNo());
+		
+		return "redirect:processingList";
 	}
 
 	@GetMapping("/processDetail")

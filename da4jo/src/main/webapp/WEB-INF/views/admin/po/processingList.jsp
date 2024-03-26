@@ -38,13 +38,28 @@
 	width: 30%;
 }
 #poStatus {
-	width: 8;
+	width: 10%;
+}
+#poStatusChange {
+	width: 20%;
 }
 
 #poDetail {
 	width: 7%;
 }
 </style>
+
+<script type="text/javascript">
+	$(function() {
+		$("#changeStatusButton").on("click", function(e) {
+			if ($("#StatusSelect").val() === "") {
+				e.preventDefault(); // 폼의 제출을 막음
+				return; // 버튼 동작 중지
+			}
+		});
+	})
+</script>
+
 <div class="container container-body container-body-long">
 	<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 	<div class="container inner-container">
@@ -62,21 +77,33 @@
 					<li id="poClearanceId"><strong>개인통관고유번호</strong></li>
 					<li id="poAddress1"><strong>주소</strong></li>
 					<li id="poStatus"><strong>상태</strong></li>
+					<li id="poStatusChange"><strong>상태변경</strong></li>
 					<li id="poDetail"><strong>상세</strong></li>
 				</ul>
 				<c:forEach var="poDto" items="${poList}">
 					<c:if test="${poDto.poStatus == '배송 중'}">
-						<ul class="menu menu-list">
-							<li id="poNo">${poDto.poNo}</li>
-							<li id="poPayDate"><fmt:formatDate
-									value="${poDto.poPayDate}" pattern="Y-MM-dd HH:mm" /></li>
-							<li id="poNameKor">${poDto.poNameKor}</li>
-							<li id="poClearanceId">${poDto.poClearanceId}</li>
-							<li id="poAddress1">${poDto.poAddress1}</li>
-							<li id="poStatus">${poDto.poStatus}</li>
-							<li id="poDetail"><a href="processDetail?poNo=${poDto.poNo}"><i
-									class="fa-solid fa-list"></i></a></li>
-						</ul>
+						<form action="processingList" method="post">
+							<input name="poNo" value="${poDto.poNo}" type="hidden">
+							<ul class="menu menu-list">
+								<li id="poNo">${poDto.poNo}</li>
+								<li id="poPayDate"><fmt:formatDate
+										value="${poDto.poPayDate}" pattern="Y-MM-dd HH:mm" /></li>
+								<li id="poNameKor">${poDto.poNameKor}</li>
+								<li id="poClearanceId">${poDto.poClearanceId}</li>
+								<li id="poAddress1">${poDto.poAddress1}</li>
+								<li id="poStatus">${poDto.poStatus}</li>
+								<li id="poStatusChange" class="flex-cell">
+									<select name="poStatus" id="StatusSelect" class="tool w-75">
+										<option value="">선택하세요</option>
+										<option value="배송 중">배송중</option>
+										<option value="배송완료">배송완료</option>
+									</select>
+									<button id="changeStatusButton" class="w-25">변경</button>
+								</li>
+								<li id="poDetail"><a href="processDetail?poNo=${poDto.poNo}"><i
+										class="fa-solid fa-list"></i></a></li>
+							</ul>
+						</form>
 					</c:if>
 				</c:forEach>
 			</div>

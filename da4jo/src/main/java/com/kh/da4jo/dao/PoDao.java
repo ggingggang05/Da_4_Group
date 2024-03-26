@@ -362,8 +362,15 @@ public class PoDao {
 
 	// 상태 변수 변경 , 결제시간 변경
 	public void updateStatus(PoDto poDto) {
-		String sql = "update po set po_status=?,po_pay_date = sysdate where po_no=?";
+		String sql = "update po set po_status=?, po_pay_date = sysdate where po_no=?";
 		Object[] data = { poDto.getPoStatus(), poDto.getPoNo() };
+		jdbcTemplate.update(sql, data);
+	}
+	
+	//배송 완료/배송 중으로 변경
+	public void updateStatus(String poStatus, int poNo) {
+		String sql = "update po set po_status=?, po_ship_date = sysdate where po_no=?";
+		Object[] data = { poStatus, poNo };
 		jdbcTemplate.update(sql, data);
 	}
 	

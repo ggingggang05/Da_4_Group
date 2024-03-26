@@ -401,6 +401,13 @@ public class ShipSvcDao {
 		Object[] data = { shipSvcDto.getShipSvcStatus(), shipSvcDto.getShipSvcNo() };
 		jdbcTemplate.update(sql, data);
 	}
+	
+	// 배송완료/배송중으로 변경
+	public void updateStatus(String shipSvcStatus, int shipSvcNo) {
+		String sql = "update SHIPSVC set SHIPSVC_status=?, SHIPSVC_ship_date = sysdate where shipsvc_no=?";
+		Object[] data = { shipSvcStatus, shipSvcNo };
+		jdbcTemplate.update(sql, data);
+	}
 
 	public void updateCancelStatus(int shipSvcNo) {
 		String sql = "update SHIPSVC set SHIPSVC_status='주문취소', SHIPSVC_pay_date = sysdate where shipsvc_no=?";

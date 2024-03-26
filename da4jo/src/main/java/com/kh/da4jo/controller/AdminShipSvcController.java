@@ -90,7 +90,7 @@ public class AdminShipSvcController {
 	}
 	
 	//배송 진행 중인 구매서만 보여질 페이지
-	@RequestMapping("/processingList")
+	@GetMapping("/processingList")
 	public String processingList(@ModelAttribute(value = "pageVO") PageVO pageVO, Model model) {
 		int count = shipSvcDao.shippingProcessCount(pageVO);
 		pageVO.setCount(count);
@@ -100,6 +100,12 @@ public class AdminShipSvcController {
 		model.addAttribute("shipList", list);
 		
 		return "/WEB-INF/views/admin/ship/processingList.jsp";
+	}
+	@PostMapping("/processingList")
+	public String processingList(@ModelAttribute ShipSvcDto shipSvcDto) {
+		shipSvcDao.updateStatus(shipSvcDto.getShipSvcStatus(), shipSvcDto.getShipSvcNo());
+		
+		return "redirect:processingList";
 	}
 
 	@GetMapping("/processDetail")

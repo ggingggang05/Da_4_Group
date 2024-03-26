@@ -46,7 +46,7 @@ public class AdminCreditController {
 	public String creditList(@ModelAttribute CreditDto creditDto) {
 		// 상태 수정
 		creditDao.updateStatus(creditDto.getCreditStatus(), creditDto.getCreditNo());
-		System.out.println(creditDto);
+		
 		//승인 완료일때만 credit 추가
 		if(creditDto.getCreditStatus().equals("승인 완료")) {
 			MemberDto memberDto = memberDao.selectOne(creditDto.getMemberId());

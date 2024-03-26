@@ -38,13 +38,28 @@
 	width: 30%;
 }
 #shipStatus {
-	width: 8;
+	width: 10%;
+}
+#shipStatusChange {
+	width: 20%;
 }
 
 #shipDetail {
 	width: 7%;
 }
 </style>
+
+<script type="text/javascript">
+	$(function() {
+		$("#changeStatusButton").on("click", function(e) {
+			if ($("#StatusSelect").val() === "") {
+				e.preventDefault(); // 폼의 제출을 막음
+				return; // 버튼 동작 중지
+			}
+		});
+	})
+</script>
+
 <div class="container container-body container-body-long">
 	<jsp:include page="/WEB-INF/views/template/admin-sidebar.jsp"></jsp:include>
 	<div class="container inner-container">
@@ -62,21 +77,34 @@
 					<li id="shipClearanceId"><strong>개인통관고유번호</strong></li>
 					<li id="shipAddress1"><strong>주소</strong></li>
 					<li id="shipStatus"><strong>상태</strong></li>
+					<li id="shipStatusChange"><strong>상태변경</strong></li>
 					<li id="shipDetail"><strong>상세</strong></li>
 				</ul>
 				<c:forEach var="shipDto" items="${shipList}">
 					<c:if test="${shipDto.shipSvcStatus == '배송 중'}">
-						<ul class="menu menu-list">
-							<li id="shipNo">${shipDto.shipSvcNo}</li>
-							<li id="shipPayDate"><fmt:formatDate
-									value="${shipDto.shipSvcPayDate}" pattern="Y-MM-dd HH:mm" /></li>
-							<li id="shipNameKor">${shipDto.shipSvcNameKor}</li>
-							<li id="shipClearanceId">${shipDto.shipSvcClearanceId}</li>
-							<li id="shipAddress1">${shipDto.shipSvcAddress1}</li>
-							<li id="shipStatus">${shipDto.shipSvcStatus}</li>
-							<li id="shipDetail"><a href="processDetail?shipSvcNo=${shipDto.shipSvcNo}"><i
-									class="fa-solid fa-list"></i></a></li>
-						</ul>
+						<form action="processingList" method="post">
+							<input name="shipSvcNo" value="${shipDto.shipSvcNo}" type="hidden">
+							<ul class="menu menu-list">
+								<li id="shipNo">${shipDto.shipSvcNo}</li>
+								<li id="shipPayDate"><fmt:formatDate
+										value="${shipDto.shipSvcPayDate}" pattern="Y-MM-dd HH:mm" /></li>
+								<li id="shipNameKor">${shipDto.shipSvcNameKor}</li>
+								<li id="shipClearanceId">${shipDto.shipSvcClearanceId}</li>
+								<li id="shipAddress1">${shipDto.shipSvcAddress1}</li>
+								<li id="shipStatus">${shipDto.shipSvcStatus}</li>
+								<li id="shipStatusChange" class="flex-cell">
+									<select name="shipSvcStatus" id="StatusSelect" class="tool w-75">
+										<option value="">선택하세요</option>
+										<option value="배송 중">배송중</option>
+										<option value="배송완료">배송완료</option>
+									</select>
+									<button id="changeStatusButton" class="w-25">변경</button>
+								</li>
+								<li id="shipDetail"><a href="processDetail?shipSvcNo=${shipDto.shipSvcNo}"><i
+										class="fa-solid fa-list"></i></a></li>
+							</ul>
+						</form>
+						
 					</c:if>
 				</c:forEach>
 			</div>
