@@ -31,6 +31,9 @@
 						<a href="/admin/po/processList" class="link">구매대행 배송대기</a>
 					</div>
 					<div class="title-body-text">
+						<a href="/admin/po/processingList" class="link">구매대행 배송현황</a>
+					</div>
+					<div class="title-body-text">
 						<a href="/admin/po/completeList" class="link">구매대행 완료목록</a>
 					</div>
 					<div class="title-body-text">
@@ -48,6 +51,9 @@
 					</div>
 					<div class="title-body-text">
 						<a href="/admin/ship/processList" class="link">배송대행 배송대기</a>
+					</div>
+					<div class="title-body-text">
+						<a href="/admin/ship/processingList" class="link">구매대행 배송현황</a>
 					</div>
 					<div class="title-body-text">
 						<a href="/admin/ship/completeList" class="link">배송대행 완료목록</a>
