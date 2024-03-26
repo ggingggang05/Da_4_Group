@@ -547,28 +547,7 @@ input[type="file"]::-webkit-file-upload-button {
 	background: #fff;
 }
 
-#document_box {
-	overflow: auto;
-	height: 170px;
-	margin-bottom: 7px;
-	padding: 10px;
-	line-height: 150%;
-	border: 1px solid #ddd;
-	background: #fff;
-	overflow: auto;
-}
 
-.step-agreement {
-	padding: 24px 24px 0;
-	border: 1px solid #e0e0e0;
-	background: #fff;
-	margin-bottom: 50px;
-}
-
-.step-agreement .checkbox {
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
 </style>
 
 
@@ -590,6 +569,31 @@ input[type="file"]::-webkit-file-upload-button {
 					<div class="container w-400">
 						<p class="right" style="font-size: 12px; color: red;">* 표시는 필수
 							항목입니다.</p>
+						<style>
+							#document_box {
+								overflow: auto;
+								height: 170px;
+								margin-bottom: 7px;
+								padding: 10px;
+								line-height: 150%;
+								border: 1px solid #ddd;
+								background: #fff;
+								overflow: auto;
+							}
+							
+							.step-agreement {
+								padding: 24px 24px 0;
+								border: 1px solid #e0e0e0;
+								background: #fff;
+								margin-bottom: 50px;
+								font-size: 12px;
+							}
+							
+							.step-agreement .checkbox {
+								margin-top: 15px;
+								margin-bottom: 15px;
+							}
+						</style>
 						<div class="area step step-agreement">
 							<div id="document_box">
 								<p>개인정보보호법에 따라 다사조에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및
@@ -668,8 +672,8 @@ input[type="file"]::-webkit-file-upload-button {
 							</div>
 							<div class="checkbox text-right">
 								<label><input name="joinAgree" type="checkbox"
-									class="type_checkbox" /> 위의 주의사항을 모두 확인하였으며, 위 사항에
-									동의합니다.</label>
+									class="type_checkbox" /> <span>위의 주의사항을 모두 확인하였으며, 위 사항에
+									동의합니다.</span></label>
 							</div>
 						</div>
 					</div>
