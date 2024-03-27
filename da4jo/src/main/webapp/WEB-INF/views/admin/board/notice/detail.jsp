@@ -36,7 +36,7 @@
 		<div class="cell">
 			<div class="cell flex-cell">
 				<div class="cell w-50">
-				<a href="/admin/board/notice/list"><button class="btn">목록으로</button></a></div>
+				<a href="${pageContext.request.contextPath}/admin/board/notice/list"><button class="btn">목록으로</button></a></div>
 				<div class="cell w-50 right notice-date">
 				<!-- 관리자만 삭제버튼 보이게, 인터셉터에도 주소로 못들어가게 하기 -->
 				<c:if test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">

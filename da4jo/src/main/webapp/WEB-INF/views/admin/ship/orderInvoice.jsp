@@ -134,7 +134,7 @@
 			</div>
 		</div>
 		<div class="">
-			<a href="/admin/ship/orderDetail?shipSvcNo=${shipSvcDto.shipSvcNo}"
+			<a href="${pageContext.request.contextPath}/admin/ship/orderDetail?shipSvcNo=${shipSvcDto.shipSvcNo}"
 				class="link">
 				<button class="btn">상세목록</button>
 			</a>

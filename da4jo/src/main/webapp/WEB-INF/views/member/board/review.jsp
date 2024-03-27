@@ -81,7 +81,7 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/member/board/review" class="btn"> <i
+							<a href="${pageContext.request.contextPath}/member/board/review" class="btn"> <i
 								class="fa-solid fa-paper" style="color: #B2BC76;"></i> 후기 작성하러
 								가기
 							</a>
@@ -109,7 +109,7 @@
 							</form>
 						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<a class="btn requestBtn" href="/board/review/write" style="color: #60A1F8;">리뷰 작성하기</a>
+							<a class="btn requestBtn" href="${pageContext.request.contextPath}/board/review/write" style="color: #60A1F8;">리뷰 작성하기</a>
 						</div>
 					</div>
 
@@ -125,7 +125,7 @@
 					<c:forEach var="reviewDto" items="${reviewList}">
 						<ul class="menu menu-list">
 							<li id="reviewNo">${reviewDto.reviewNo}</li>
-							<li id="reviewTitle" class="cell left ms-20 truncate-text"><a href="/board/review/detail?reviewNo=${reviewDto.reviewNo}">${reviewDto.reviewTitle }</a></li>
+							<li id="reviewTitle" class="cell left ms-20 truncate-text"><a href="${pageContext.request.contextPath}/board/review/detail?reviewNo=${reviewDto.reviewNo}">${reviewDto.reviewTitle }</a></li>
 							<li id="reviewWriter" class="truncate-name">${reviewDto.reviewWriter}</li>
 							<li id="reviewWdate">${reviewDto.reviewWdate}</li>
 						</ul>

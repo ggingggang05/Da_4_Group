@@ -81,7 +81,7 @@ $(function(){
 		
 		//비동기 통신
 		$.ajax({
-			url : "/rest/member/editProfile", //이미지 업로드를 처리하는 서버
+			url : "${pageContext.request.contextPath}/rest/member/editProfile", //이미지 업로드를 처리하는 서버
 			method : "post",
 			data : formData, //이미지 파일 데이터 (전송해주기)
 			processData : false,
@@ -122,7 +122,7 @@ $(function(){
 			<!-- 회원 정보 -->
 			<div class="boxInfo">
 				<div class="cell center memberInfo">
-					<img src="/member/img" width="100%" class="newProfile">
+					<img src="${pageContext.request.contextPath}/member/img" width="100%" class="newProfile">
 					<div class="cell">
 						<label for="edit-profile"><i class="fa-solid fa-user-pen"></i>수정</i></label>
 						<input type="file" name="img" class="tool w-100 profileEdit" id="edit-profile">
@@ -132,10 +132,10 @@ $(function(){
 				<div class="cell center detailInfo">
 					<p><b>'${sessionScope.loginLevel}'</b> 입니다</p>
 					<div class="cell pt-10">
-						<a class="btn w-50 btnMypage" href="/member/mypage/change">개인정보 변경</a>
+						<a class="btn w-50 btnMypage" href="${pageContext.request.contextPath}/member/mypage/change">개인정보 변경</a>
 					</div>
 					<div class="cell">
-						<a class="btn w-150 btnMypage" href="/member/mypage/password">비밀번호 변경</a>
+						<a class="btn w-150 btnMypage" href="${pageContext.request.contextPath}/member/mypage/password">비밀번호 변경</a>
 					</div>
 				</div>
 			</div>
@@ -143,7 +143,7 @@ $(function(){
 			<!-- 메뉴바 -->
 			<div class="title title-head">
 				<div>
-					<a class="link" href="/member/mypage">MYPAGE</a>
+					<a class="link" href="${pageContext.request.contextPath}/member/mypage">MYPAGE</a>
 				</div>
 			</div>
 			<div class="title title-body">
@@ -153,16 +153,16 @@ $(function(){
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
-							<a class="link" href="/member/po/request">구매대행 신청서 작성</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/po/request">구매대행 신청서 작성</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/purchase/pendingPayment">구매대행 결제대기</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/mypage/purchase/pendingPayment">구매대행 결제대기</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/purchase/processList">배송 진행 상황</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/mypage/purchase/processList">배송 진행 상황</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/purchase/list">구매대행 신청 내역</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/mypage/purchase/list">구매대행 신청 내역</a>
 						</div>
 					</div>
 				</div>
@@ -172,27 +172,27 @@ $(function(){
 					</div>
 					<div class="title-body-sub">
 						<div class="title-body-text">
-							<a class="link" href="/member/ship/request">배송대행 신청서 작성</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/ship/request">배송대행 신청서 작성</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/ship/pendingPayment">배송대행 결제대기</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/mypage/ship/pendingPayment">배송대행 결제대기</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/ship/processList">배송 진행 상황</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/mypage/ship/processList">배송 진행 상황</a>
 						</div>
 						<div class="title-body-text">
-							<a class="link" href="/member/mypage/ship/list">배송대행 신청 내역</a>
+							<a class="link" href="${pageContext.request.contextPath}/member/mypage/ship/list">배송대행 신청 내역</a>
 						</div>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link main-title" href="/member/board/qna">QNA</a>
+						<a class="link main-title" href="${pageContext.request.contextPath}/member/board/qna">QNA</a>
 					</div>
 				</div>
 				<div class="title-body-main">
 					<div class="title-body-text">
-						<a class="link main-title" href="/member/board/review">리뷰 게시판</a>
+						<a class="link main-title" href="${pageContext.request.contextPath}/member/board/review">리뷰 게시판</a>
 					</div>
 				</div>
 			</div>
@@ -208,7 +208,7 @@ $(function(){
 						</div>
 						<div class="title title-body mt-10">
 							<h3>${countPo} 건</h3>
-							<a class="btn w-100 btnMypage " href="/member/po/request">작성하기</a>
+							<a class="btn w-100 btnMypage " href="${pageContext.request.contextPath}/member/po/request">작성하기</a>
 							<a class="btn w-100 btnMypage " href="mypage/purchase/list">내 신청서 보기</a>
 						</div>
 					</div>
@@ -218,7 +218,7 @@ $(function(){
 						</div>
 						<div class="title title-body mt-10"> <!-- 내용 -->
 							<h3>${countShip} 건</h3>
-							<a class="btn w-100 btnMypage " href="/member/ship/request">작성하기</a>
+							<a class="btn w-100 btnMypage " href="${pageContext.request.contextPath}/member/ship/request">작성하기</a>
 							<a class="btn w-100 btnMypage " href="mypage/ship/list">내 신청서 보기</a>
 						</div>
 					</div>
@@ -229,7 +229,7 @@ $(function(){
 						<div class="title title-body mt-10">
 							<div>
 								<h3> ${countQna} 건</h3>
-								<a class="btn w-100 btnMypage " href="/board/qna/write">작성하기</a>
+								<a class="btn w-100 btnMypage " href="${pageContext.request.contextPath}/board/qna/write">작성하기</a>
 								<a class="btn w-100 btnMypage " href="board/qna">내 문의내역</a>
 							</div>
 						</div>
@@ -241,7 +241,7 @@ $(function(){
 						<div class="title title-body mt-10">
 							<div>
 								<h3> ${countReview} 건</h3>
-								<a class="btn w-100 btnMypage " href="/board/review/write">작성하기</a>
+								<a class="btn w-100 btnMypage " href="${pageContext.request.contextPath}/board/review/write">작성하기</a>
 								<a class="btn w-100 btnMypage " href="board/review">내가 쓴 리뷰</a>
 							</div>
 						</div>
@@ -306,7 +306,7 @@ $(function(){
 				
 				<!-- 회원 탈퇴 페이지 이동 -->
 				<div class="cell right" style="font-size:10px;">
-					<a class="link" href="/member/mypage/exit">회원 탈퇴</a>
+					<a class="link" href="${pageContext.request.contextPath}/member/mypage/exit">회원 탈퇴</a>
 				</div>
 				</div>
 			</div>

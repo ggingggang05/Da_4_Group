@@ -296,12 +296,12 @@ $(function() {
 			구매대행시 주의사항을 확인 및 동의하신 후 하단의 신청폼에 상품정보를 입력하고 신청해 주세요!
 		</div>
 		<div class="cell w-100">
-		<a class="link" href="/document/buying-step"><button type="button" class="btn">구매대행 신청방법 보러가기</button></a>
+		<a class="link" href="${pageContext.request.contextPath}/document/buying-step"><button type="button" class="btn">구매대행 신청방법 보러가기</button></a>
 	</div>
 	<br><br>
 		<div class="box_form">
 			<form name="form_agency_buy_write" id="form_agency_buy_write" class="check-form"
-				method="post" action="/member/po/request">
+				method="post" action="${pageContext.request.contextPath}/member/po/request">
 				<div class="content content-head" style="border-bottom: none;">
 					<div class="content-head-text">신청서 작성시 유의사항</div>
 				</div>

@@ -125,7 +125,7 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/member/po/request" class="btn"> 
+							<a href="${pageContext.request.contextPath}/member/po/request" class="btn"> 
 								<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 작성하러 가기
 							</a>
 						</h2>
@@ -150,7 +150,7 @@
 							</form>
 						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<a class="btn requestBtn" href="/member/po/request" style="color: #60A1F8;">구매서 작성하기</a>
+							<a class="btn requestBtn" href="${pageContext.request.contextPath}/member/po/request" style="color: #60A1F8;">구매서 작성하기</a>
 						</div>
 					</div>
 					
@@ -167,7 +167,7 @@
 					<c:forEach var="poDto" items="${poList}">
 						<ul class="menu menu-list">
 							<li id="poNo">${poDto.poNo}</li>
-							<li id="poItemEngName"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}" class="linkEffect">${poDto.poItemEngName}</a></li>
+							<li id="poItemEngName"><a href="${pageContext.request.contextPath}/member/mypage/purchase/detail?poNo=${poDto.poNo}" class="linkEffect">${poDto.poItemEngName}</a></li>
 							<li id="poItemCategory">${poDto.poItemCategory}</li>
 							<li id="poSdate"><fmt:formatDate value="${poDto.poSdate}" pattern="y-MM-dd" /></li>
 							<li id="poStatus">${poDto.poStatus}</li>

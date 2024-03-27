@@ -122,9 +122,9 @@
 			<div class="cell right">
 				<a class="btn link" href="list">목록으로</a> <a class="btn link" href="write">리뷰글작성</a>
 <!-- 				<a class="btn" -->
-<%-- 					href="/board/review/edit?reviewNo=${reviewDto.reviewNo}">리뷰글수정</a> --%>
+<%-- 					href="${pageContext.request.contextPath}board/review/edit?reviewNo=${reviewDto.reviewNo}">리뷰글수정</a> --%>
 				<a class="btn delete"
-					href="/board/review/delete?reviewNo=${reviewDto.reviewNo}">리뷰글삭제</a>
+					href="${pageContext.request.contextPath}board/review/delete?reviewNo=${reviewDto.reviewNo}">리뷰글삭제</a>
 			</div>
 		</c:if>
 	</div>

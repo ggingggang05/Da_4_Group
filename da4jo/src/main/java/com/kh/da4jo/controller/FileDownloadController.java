@@ -39,7 +39,7 @@ public class FileDownloadController
 		}
 		
 		//실제 파일 불러오기
-		File dir = new File(System.getProperty("user.home"), "upload");
+		File dir = new File("D:/upload/kh13d");
 		File target = new File(dir, String.valueOf(imgDto.getImgNo()));
 		
 		byte[] data = FileUtils.readFileToByteArray(target);//파일을 읽어라

@@ -71,7 +71,7 @@
 									pattern="y년 M월 d일 E H시 m분 s초" /></li>
 							<li id="blockReason">${blockMemberVO.blockReason}</li>
 							<li id="detail"><a
-								href="/admin/member/detail?memberId=${blockMemberVO.memberId}"><i
+								href="${pageContext.request.contextPath}/admin/member/detail?memberId=${blockMemberVO.memberId}"><i
 									class="fa-solid fa-list"></i></a></li>
 						</ul>
 					</c:forEach>

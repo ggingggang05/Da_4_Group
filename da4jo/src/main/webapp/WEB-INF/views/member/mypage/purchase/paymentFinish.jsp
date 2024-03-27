@@ -20,7 +20,7 @@
 					<h1>결제 완료!</h1>
 				</div>
 				<div class="cell center">
-					<a href="/member/mypage" class="btn">마이페이지로 이동</a>
+					<a href="${pageContext.request.contextPath}/member/mypage" class="btn">마이페이지로 이동</a>
 				</div>	
 			</div>
 		</div><!-- 오른쪽 내용 닫는 태그 -->

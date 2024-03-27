@@ -265,12 +265,12 @@
 				</form>
 				<div class="cell btns">
 					<div class="cell">
-						<a href="/admin/po/orderList" class="link">
+						<a href="${pageContext.request.contextPath}/admin/po/orderList" class="link">
 							<button type="button" class="btn btn-list">목록으로</button>
 						</a> 
 					</div>
 					<div class="cell">
-						<a href="/admin/po/orderCancel?poNo=${poDto.poNo}" class="link">
+						<a href="${pageContext.request.contextPath}/admin/po/orderCancel?poNo=${poDto.poNo}" class="link">
 							<button type="button" class="btn btn-cancel negative">주문서 반려</button>
 						</a>
 					</div>

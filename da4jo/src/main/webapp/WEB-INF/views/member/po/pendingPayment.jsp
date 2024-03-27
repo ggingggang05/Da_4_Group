@@ -79,7 +79,7 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/member/mypage/purchase/list" class="btn"> 
+							<a href="${pageContext.request.contextPath}/member/mypage/purchase/list" class="btn"> 
 								<i class="fa-solid fa-paper"style="color: #60A1F855;"></i> 구매서 목록 보기
 							</a>
 						</h2>
@@ -102,7 +102,7 @@
 							<li id="poItemEngName">${poDto.poItemEngName}</li>
 							<li id="poStatus">${poDto.poStatus}</li>
 							<li id="poTotalPriceKrw"><fmt:formatNumber value="${poDto.poTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
-							<li id="poDetail"><a href="/member/mypage/purchase/detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
+							<li id="poDetail"><a href="${pageContext.request.contextPath}/member/mypage/purchase/detail?poNo=${poDto.poNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
 							<!-- 결제 -->
 							<c:choose>
 								<c:when test="${poDto.poStatus != '결제 대기 중'}"><!-- 만약 구매서 상태가 '결제 대기 중'이 아니라면 -->

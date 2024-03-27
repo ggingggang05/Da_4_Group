@@ -47,14 +47,14 @@
 		<div class="content content-body">
 			<div class="cell flex-cell">
 				<div class="link-login right">
-					<a class="link" href="/member/login">
+					<a class="link" href="${pageContext.request.contextPath}/member/login">
 						<button class="btn login">
 							<strong>로그인</strong><br>하러가기
 						</button>
 					</a>
 				</div>
 				<div class="link-noti left">
-					<a class="link" href="/board/notice/list">
+					<a class="link" href="${pageContext.request.contextPath}/board/notice/list">
 						<button class="btn noti">
 							<strong>고객센터</strong><br>바로가기
 						</button>

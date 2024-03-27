@@ -17,20 +17,20 @@
 		<div class="title title-body">
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a href="/board/notice/list" class="link">공지사항</a>
+					<a href="${pageContext.request.contextPath}/board/notice/list" class="link">공지사항</a>
 				</div>
 				<div class="title-body-sub"></div>
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a href="/board/qna/list" class="link">QnA 게시판</a>
+					<a href="${pageContext.request.contextPath}/board/qna/list" class="link">QnA 게시판</a>
 				</div>
 				<div class="title-body-sub">
 				</div>
 			</div>
 			<div class="title-body-main">
 				<div class="title-body-text">
-					<a href="/board/review/list" class="link">이용후기</a>
+					<a href="${pageContext.request.contextPath}/board/review/list" class="link">이용후기</a>
 				</div>
 				<div class="title-body-sub">
 				</div>

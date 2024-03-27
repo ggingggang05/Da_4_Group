@@ -219,7 +219,7 @@
 					</div>
 				</form>
 				<div class="cell center">
-					<a href="/admin/ship/processList" class="link">
+					<a href="${pageContext.request.contextPath}/admin/ship/processList" class="link">
 						<button class="btn">목록으로</button></a>
 				</div>
 			</div>

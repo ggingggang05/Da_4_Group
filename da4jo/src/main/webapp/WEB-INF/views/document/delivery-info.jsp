@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<img src="/image/delivery-process.jpg">
+			<img src="${pageContext.request.contextPath}/image/delivery-process.jpg">
 		</div>
 		<div class="content content-body">
 			<div class="cell content-body-title">
@@ -45,7 +45,7 @@
 					해외 쇼핑몰에서 주문이 완료되면, 곧바로 짐패스 배송대행 신청서를 작성해주세요.<br>
 					배송대행신청서가 작성되지 않은 상태에서 물품이 현지센터에 입고되면 신속한 처리가 어려워지며,<br>
 					배송지연 및 보관료등의 불이익이 발생할 수 있습니다.
-					<span class="red"><a class="red" href="delivery-step"><br>
+					<span class="red"><a class="red" href="${pageContext.request.contextPath}/delivery-step"><br>
 					→ [배송대행 신청방법 보기]</a></span>
 				</div>
 				<div class="cell">
@@ -78,7 +78,7 @@
 					주문상품이 해외 현지에서 국내 배송지로 발송되며, 항공 운송시 보험가입이 불가한 상품의 파손일 경우 폐사에서 책임지지 않습니다. 상품이 국내에 도착하면 반드시 통관절차를 거치며, 면세범위를 초과할 경우 통관시 관세 등 세금이 발생하게 되며 수취인이 세금은 지불하게 됩니다.<br>
 					따라서, 사전에 반드시 면세범위 등을 확인후 주문 바랍니다.<br>
 					※ 면세기준 (미국 $ 200, 그외 해외국 $ 150)<br>
-					<span class="red"><a class="red" href="prohibition">
+					<span class="red"><a class="red" href="${pageContext.request.contextPath}/prohibition">
 					→ [수입제한 품목 확인하기]</a></span>
 				</div>
 				<div class="cell">
