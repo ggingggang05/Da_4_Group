@@ -36,7 +36,7 @@
 		<div class="cell">
 			<div class="cell flex-cell">
 				<div class="cell w-50">
-				<a href="/board/notice/list"><button class="btn">목록으로</button></a></div>
+				<a href="${pageContext.request.contextPath}board/notice/list"><button class="btn">목록으로</button></a></div>
 				<div class="cell w-50 right notice-date">
 				조회수 ${noticeDto.noticeVcount}</div>
 			</div>

@@ -73,7 +73,7 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/member/mypage/purchase/list" class="btn"> 
+							<a href="${pageContext.request.contextPath}/member/mypage/purchase/list" class="btn"> 
 								<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 구매서 목록 보기
 							</a>
 						</h2>

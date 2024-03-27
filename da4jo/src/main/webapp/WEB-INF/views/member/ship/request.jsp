@@ -290,12 +290,12 @@ $(function() {
 		</div>
 	</div>
 	<div class="cell w-100">
-		<a class="link" href="/document/delivery-step"><button type="button" class="btn">배송대행 신청방법 보러가기</button></a>
+		<a class="link" href="${pageContext.request.contextPath}/document/delivery-step"><button type="button" class="btn">배송대행 신청방법 보러가기</button></a>
 	</div>
 	<br><br>
 	<div class="box_form">
 		<form name="form_agency_buy_write" id="form_agency_buy_write" class="check-form"
-			method="post" action="/member/ship/request">
+			method="post" action="${pageContext.request.contextPath}/member/ship/request">
 			<div class="content content-head" style="border-bottom: none;">
 				<div class="content-head-text">신청서 작성시 유의사항</div>
 			</div>

@@ -71,7 +71,7 @@
 				<c:if
 					test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 					<br>
-					<a href="/admin/board/notice/write" class="link">글쓰기</a>
+					<a href="${pageContext.request.contextPath}/admin/board/notice/write" class="link">글쓰기</a>
 				</c:if>
 			</div>
 			<%-- 검색창 --%>

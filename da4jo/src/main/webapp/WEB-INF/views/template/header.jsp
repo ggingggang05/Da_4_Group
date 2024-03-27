@@ -18,9 +18,9 @@
 	rel="stylesheet">
 
 <!-- 프로젝트용 기본 스타일 -->
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<!-- <link rel="stylesheet" type="text/css" href="href="${pageContext.request.contextPath}/css/test.css"> -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css">
 
 <!-- font awesome 아이콘 CDN -->
 <link rel="stylesheet" type="text/css"
@@ -151,7 +151,7 @@
 					}
 
 					$.ajax({
-						url : "/rest/board_attach/upload", //이미지 업로드를 처리하는 서버
+						url : "${pageContext.request.contextPath}/rest/board_attach/upload", //이미지 업로드를 처리하는 서버
 						method : "post",
 						data : formData, //이미지 파일 데이터
 						processData : false,
@@ -182,7 +182,7 @@
 </script>
 
 <!-- 내가 만든 JS -->
-<script src="/js/commons.js"></script>
+<script src="${pageContext.request.contextPath}/js/commons.js"></script>
 
 </head>
 
@@ -195,20 +195,20 @@
 					<ul class="right contour head">
 						<c:if
 							test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
-							<li><a href="/admin/">${sessionScope.loginLevel}</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/">${sessionScope.loginLevel}</a></li>
 						</c:if>
 						<c:choose>
 							<c:when test="${sessionScope.loginId != null}">
-								<li><a href="/member/logout">로그아웃</a></li>
-								<li><a href="/member/mypage">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/mypage">mypage</a></li>
 
 							</c:when>
 							<c:otherwise>
-								<li><a href="/member/login">로그인</a></li>
-								<li><a href="/member/join">회원가입</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/login">로그인</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/join">회원가입</a></li>
 							</c:otherwise>
 						</c:choose>
-						<li><a href="/board/notice/list">고객센터</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/notice/list">고객센터</a></li>
 					</ul>
 				</div>
 			</div>
@@ -217,9 +217,9 @@
 			<div class="nav container">
 				<ul class="menu cell center">
 					<li class="us-or nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_us.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_us.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>미국(OR)</strong></span>
@@ -227,9 +227,9 @@
 						</a>
 					</li>
 					<li class="us-nj nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_us.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_us.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>미국(NJ)</strong></span>
@@ -237,9 +237,9 @@
 						</a>
 					</li>
 					<li class="jp nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_jp.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_jp.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>일본(JP)</strong></span>
@@ -247,9 +247,9 @@
 						</a>
 					</li>
 					<li class="uk nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_uk.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_uk.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>영국(UK)</strong></span>
@@ -257,9 +257,9 @@
 						</a>
 					</li>
 					<li class="de nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_de.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_de.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>독일(DE)</strong></span>
@@ -267,9 +267,9 @@
 						</a>
 					</li>
 					<li class="es nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_es.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_es.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>스페인(ES)</strong></span>
@@ -277,9 +277,9 @@
 						</a>
 					</li>
 					<li class="cn nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_cn.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_cn.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>중국(CN)</strong></span>
@@ -287,9 +287,9 @@
 						</a>
 					</li>
 					<li class="au nation">
-						<a href="/document/delivery-address" class="link">
+						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_au.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_au.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>호주(AU)</strong></span>
@@ -298,21 +298,20 @@
 					</li>
 				</ul>
 			</div>
-		</div>
 		<div class="head-bottom">
 			<div class="nav container">
 				<ul class="menu cell center">
-					<li class="home w-25"><a href="/"> 다사조 </a></li>
+					<li class="home w-25"><a href="${pageContext.request.contextPath}"> 다사조 </a></li>
 
-					<li><a href="/document/buying-info">이용안내</a></li>
+					<li><a href="${pageContext.request.contextPath}/document/buying-info">이용안내</a></li>
 
-					<li><a href="/document/fee-info">수수료 및 요금표</a></li>
+					<li><a href="${pageContext.request.contextPath}/document/fee-info">수수료 및 요금표</a></li>
 
-					<li><a href="/board/notice/list">공지사항</a></li>
+					<li><a href="${pageContext.request.contextPath}/board/notice/list">공지사항</a></li>
 
-					<li><a href="/board/review/list">이용후기</a></li>
+					<li><a href="${pageContext.request.contextPath}/board/review/list">이용후기</a></li>
 
-					<li><a href="/member/ship/request"><button
+					<li><a href="${pageContext.request.contextPath}/member/ship/request"><button
 								class="btn delivery">배송대행 신청하기</button></a></li>
 
 				</ul>

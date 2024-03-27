@@ -12,10 +12,10 @@
 					</h3>
 					<div class="cell pt-20">
 						<ul class="menu">
-							<li><a href="/board/qna/list"> <img
-									src="/image/1대1문의.png">
+							<li><a href="${pageContext.request.contextPath}/board/qna/list"> <img
+									src="${pageContext.request.contextPath}/image/1대1문의.png">
 							</a></li>
-							<li><a href=""> <img src="/image/FAQ.png">
+							<li><a href=""> <img src="${pageContext.request.contextPath}/image/FAQ.png">
 							</a></li>
 						</ul>
 					</div>
@@ -34,15 +34,15 @@
 						다사조 <span>/ da4jo</span>
 					</h3>
 					<div class="cell center">
-						<a href="/">
-							<img src="/image/logotemplate.png" width="350px">
+						<a href="${pageContext.request.contextPath}">
+							<img src="${pageContext.request.contextPath}/image/logotemplate.png" width="350px">
 						</a>
 					</div>
 				</div>
 				<script type="text/javascript">
 				$(document).ready(function() {
 				    $.ajax({
-				        url: "/rest/notice/list", // noticeRestController에 매핑
+				        url: "${pageContext.request.contextPath}/rest/notice/list", // noticeRestController에 매핑
 				        method: "GET", // 단순히 읽기만 함
 				        success: function(response) { // 읽어들이면 동작
 				            for (var i = 0; i < response.length; i++) {
@@ -71,7 +71,7 @@
 				</script>
 				<div class="cell notice" id="notice-list">
 					<h3>
-						공지사항 <span>/ Notice</span> <a href="/board/notice/list"
+						공지사항 <span>/ Notice</span> <a href="${pageContext.request.contextPath}/board/notice/list"
 							class="link-notice"><i class="fa-solid fa-plus"></i></a>
 							<hr>
 					</h3>

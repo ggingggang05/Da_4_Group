@@ -73,7 +73,7 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/member/mypage/ship/list" class="btn"> 
+							<a href="${pageContext.request.contextPath}/member/mypage/ship/list" class="btn"> 
 								<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 배송 대행서 목록 보기
 							</a>
 						</h2>
@@ -97,7 +97,7 @@
 							<li id="shipSvcStatus">${shipSvcDto.shipSvcStatus}</li>
 							<li id="shipSvcAwbNumber">${shipSvcDto.shipSvcAwbNumber}</li>
 							<li id="shipSvcTotalPriceKrw"><fmt:formatNumber value="${shipSvcDto.shipSvcTotalPriceKrw}" pattern="#,##0"></fmt:formatNumber>원</li>
-							<li id="shipSvcDetail"><a href="/member/mypage/ship/detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
+							<li id="shipSvcDetail"><a href="${pageContext.request.contextPath}/member/mypage/ship/detail?shipSvcNo=${shipSvcDto.shipSvcNo}"><i class="fa-solid fa-magnifying-glass" style="color: #6c6e6e;"></i></a></li>
 						</ul>
 					</c:forEach>					
 				</c:if><!-- 배송 진행 중인 구매서가 있다면 닫는 태그 -->

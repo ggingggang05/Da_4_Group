@@ -23,7 +23,7 @@
 		<div class="content content-body">
 			<div class="cell">
 				<div class="center">
-					<a class="link" href="/member/join">
+					<a class="link" href="${pageContext.request.contextPath}member/join">
 						<button class="btn">
 							<strong>회원가입</strong>
 						</button>

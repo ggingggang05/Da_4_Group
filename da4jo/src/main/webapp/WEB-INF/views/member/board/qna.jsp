@@ -79,7 +79,7 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/member/board/qna" class="btn"> <i
+							<a href="${pageContext.request.contextPath}/member/board/qna" class="btn"> <i
 								class="fa-solid fa-paper" style="color: #B2BC76;"></i> 문의 작성하러
 								가기
 							</a>
@@ -108,7 +108,7 @@
 							</form>
 						</div><!-- 검색기능 닫는 태그 -->
 						<div class="cell w-25 right">
-							<a class="btn requestBtn" href="/board/qna/write" style="color: #60A1F8;">문의 작성하기</a>
+							<a class="btn requestBtn" href="${pageContext.request.contextPath}/board/qna/write" style="color: #60A1F8;">문의 작성하기</a>
 						</div>
 					</div>
 
@@ -124,11 +124,11 @@
 							<ul class="menu menu-list">
 								<li id="qnaNo">${qnaDto.qnaNo}</li>
 								<li id="qnaSecret"><a
-									href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</a></li>
+									href="${pageContext.request.contextPath}/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaSecret}</a></li>
 
 							<li id="qnaTitle" class="cell left">
 							<c:set var="formattedTitle" value="${fn:replace(qnaDto.qnaTitle, ',', '')}" /> <a
-								href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}"> ${formattedTitle}</a></li>
+								href="${pageContext.request.contextPath}/board/qna/detail?qnaNo=${qnaDto.qnaNo}"> ${formattedTitle}</a></li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 						</ul>
 						</c:forEach>

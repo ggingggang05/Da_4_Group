@@ -47,14 +47,14 @@
 		<div class="content content-body">
 			<div class="cell flex-cell">
 				<div class="link-login right">
-					<a class="link" href="/member/login">
+					<a class="link" href="${pageContext.request.contextPath}/member/login">
 						<button class="btn login">
 							<strong>로그인</strong><br>하러가기
 						</button>
 					</a>
 				</div>
 				<div class="link-pw left">
-					<a class="link" href="/member/findPw">
+					<a class="link" href="${pageContext.request.contextPath}/member/findPw">
 						<button class="btn pw">
 							<strong>비밀번호</strong><br>찾기
 						</button>

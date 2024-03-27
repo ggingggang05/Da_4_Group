@@ -202,7 +202,7 @@
 					</div>
 				</div>
 				<div class="cell center">
-					<a href="/admin/po/cancelList" class="link">
+					<a href="${pageContext.request.contextPath}/admin/po/cancelList" class="link">
 						<button class="btn">목록으로</button></a>
 				</div>
 			</div>

@@ -41,7 +41,7 @@
 
 					if (regex.test(value)) {//아이디 형식 검사를 통과
 						$.ajax({
-							url : "/rest/member/checkJoinId",
+							url : "${pageContext.request.contextPath}/rest/member/checkJoinId",
 							method : "post",
 							data : {
 								memberId : value
@@ -146,7 +146,7 @@
 
 					if (regex.test(value)) {//이메일 형식 검사 통과
 						$.ajax({
-							url : "/rest/member/checkEmail",
+							url : "${pageContext.request.contextPath}/rest/member/checkEmail",
 							method : "post",
 							data : {
 								memberEmail : value
@@ -313,7 +313,7 @@
 						return;
 
 					$.ajax({
-						url : "/rest/member/sendCert",
+						url : "${pageContext.request.contextPath}/rest/member/sendCert",
 						method : "post",
 						data : {
 							memberEmail : email
@@ -352,7 +352,7 @@
 						return;
 
 					$.ajax({
-						url : "/rest/member/checkCert",
+						url : "${pageContext.request.contextPath}/rest/member/checkCert",
 						method : "post",
 						data : {
 							certEmail : memberEmail,
@@ -559,7 +559,7 @@ input[type="file"]::-webkit-file-upload-button {
 			enctype="multipart/form-data" class="check-form">
 			<div class="container w-550">
 				<div class="cell center">
-					<label><img src="/image/logotemplatecut.png"
+					<label><img src="${pageContext.request.contextPath}/image/logotemplatecut.png"
 						style="width: 200px"></label>
 				</div>
 
@@ -812,7 +812,7 @@ input[type="file"]::-webkit-file-upload-button {
 					</div>
 					<!-- 프로필 이미지 입력창 -->
 					<div class="cell">
-						<!-- 							<label for="img"><img src="/image/user.png" style="width: 200px"></label> -->
+						<!-- 							<label for="img"><img src="${pageContext.request.contextPath}/image/user.png" style="width: 200px"></label> -->
 						<label style="color: #b2bec3; font-size: 15px;">프로필 이미지</label> <input
 							type="file" id="img" name="img" class="tool w-100 box input">
 					</div>

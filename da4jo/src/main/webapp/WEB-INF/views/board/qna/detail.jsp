@@ -61,7 +61,7 @@
 					<c:if
 						test="${sessionScope.loginLevel == '관리자' || sessionScope.loginLevel == '총관리자'}">
 						<a class="btn negative"
-							href="/board/qna/delete?qnaNo=${qnaDto.qnaNo}">질문글삭제</a>
+							href="${pageContext.request.contextPath}board/qna/delete?qnaNo=${qnaDto.qnaNo}">질문글삭제</a>
 					</c:if>
 				</div>
 

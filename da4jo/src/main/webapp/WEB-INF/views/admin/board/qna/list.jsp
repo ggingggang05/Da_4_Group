@@ -108,7 +108,7 @@
 								<li id="qnaRock">${qnaDto.qnaSecret}</li>
 								<c:set var="formattedTitle"
 									value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
-								<li id="qnaTitle"><a href="/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
+								<li id="qnaTitle"><a href="${pageContext.request.contextPath}/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
 								<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 								<li id="qnaStatus"><a
 									href="write?qnaTarget=${qnaDto.qnaNo}">${qnaDto.qnaStatus}</a></li>

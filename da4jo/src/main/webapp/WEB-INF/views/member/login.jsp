@@ -167,7 +167,7 @@
 
 	            
 	            <div style= "font-size: 14px; color: black; padding: 0.4em;  margin-bottom: 3em; margin-top: 2em;"class="center">
-	            	 <a href="/member/join">계정이 없으신가요?</a>
+	            	 <a href="${pageContext.request.contextPath}/member/join">계정이 없으신가요?</a>
 	            </div>
             </div>
         </form>

@@ -79,7 +79,7 @@
 					</div>
 					<div class="cell center">
 						<h2>
-							<a href="/member/mypage/ship/list" class="btn"> 
+							<a href="${pageContext.request.contextPath}/member/mypage/ship/list" class="btn"> 
 								<i class="fa-solid fa-paper"style="color: #B2BC76;"></i> 배송대행 주문서 목록 보기
 							</a>
 						</h2>

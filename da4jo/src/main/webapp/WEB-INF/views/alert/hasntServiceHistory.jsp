@@ -47,14 +47,14 @@
 		<div class="content content-body">
 			<div class="cell flex-cell">
 				<div class="link-ship right">
-					<a class="link" href="/member/ship/request">
+					<a class="link" href="${pageContext.request.contextPath}/member/ship/request">
 						<button class="btn ship">
 							<strong>배송대행</strong><br>신청하기
 						</button>
 					</a>
 				</div>
 				<div class="link-buying left">
-					<a class="link" href="/member/po/request">
+					<a class="link" href="${pageContext.request.contextPath}/member/po/request">
 						<button class="btn buying">
 							<strong>구매대행</strong><br>신청하기
 						</button>

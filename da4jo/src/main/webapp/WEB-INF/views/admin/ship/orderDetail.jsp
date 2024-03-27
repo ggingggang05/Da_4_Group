@@ -286,17 +286,17 @@
 				</form>
 				<div class="cell btns">
 					<div class="cell">
-						<a href="/admin/ship/orderList" class="link">
+						<a href="${pageContext.request.contextPath}/admin/ship/orderList" class="link">
 							<button type="button" class="btn btn-list">목록으로</button>
 						</a> 
 					</div>
 					<div class="cell">
-						<a href="/admin/ship/orderCancel?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
+						<a href="${pageContext.request.contextPath}/admin/ship/orderCancel?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
 							<button type="button" class="btn btn-cancel negative">주문서 반려</button>
 						</a>
 					</div>
 				</div>
-				<a href="/admin/ship/orderInvoice?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
+				<a href="${pageContext.request.contextPath}/admin/ship/orderInvoice?shipSvcNo=${shipSvcDto.shipSvcNo}" class="link">
 						견적내러가기	
 				</a>
 			</div>
