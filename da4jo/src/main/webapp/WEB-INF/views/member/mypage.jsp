@@ -120,7 +120,7 @@ $(function(){
 			<!-- 회원 정보 -->
 			<div class="boxInfo">
 				<div class="cell center memberInfo">
-					<img src="/member/img" width="100%" class="newProfile">
+					<img src="${pageContext.request.contextPath}/member/img" width="100%" class="newProfile">
 					<div class="cell">
 						<label for="edit-profile"><i class="fa-solid fa-user-pen"></i>수정</i></label>
 						<input type="file" name="img" class="tool w-100 profileEdit" id="edit-profile">

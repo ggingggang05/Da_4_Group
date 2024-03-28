@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		<div class="content content-body">
-			<img src="/image/delivery-process.jpg">
+			<img src="${pageContext.request.contextPath}/image/delivery-process.jpg">
 		</div>
 		<div class="content content-body">
 			<div class="cell content-body-title">
