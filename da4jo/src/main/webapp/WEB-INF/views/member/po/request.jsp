@@ -163,8 +163,12 @@
 	border: none;
 	border-bottom: 1px solid #E6EFF2;
 }
-.btn{
-	background-color: white;
+.btn {
+	background-color: #EA6F00;
+	color:white;
+}
+.btn-submit{
+	background-color : #b9bdbd;
 }
 .btn:hover{
 	filter:brightness(1);
@@ -224,6 +228,7 @@ $(function() {
         var poNameKor = $("input[name='poNameKor']").val();
         var poNameEng = $("input[name='poNameEng']").val();
         var poClearanceId = $("input[name='poClearanceId']").val();
+        var poFx = $("input[name='poFx']").val();
         var poContact = $("input[name='poContact']").val();
         var poZipcode = $("input[name='poZipcode']").val();
         var poItemEngName = $("input[name='poItemEngName']").val();
@@ -248,6 +253,10 @@ $(function() {
         // poItemCategory 검증
         if (poItemCategory === "") {
             alert("카테고리를 입력하세요.");
+            return false;
+        }
+        if (!/^\d{1,7}$/.test(poFx)) {
+            alert("금액을 숫자로 입력하세요.");
             return false;
         }
         // poNameKor 검증
@@ -296,12 +305,12 @@ $(function() {
 			구매대행시 주의사항을 확인 및 동의하신 후 하단의 신청폼에 상품정보를 입력하고 신청해 주세요!
 		</div>
 		<div class="cell w-100">
-		<a class="link" href="${pageContext.request.contextPath}/document/buying-step"><button type="button" class="btn">구매대행 신청방법 보러가기</button></a>
+		<a class="link" href="${pageContext.request.contextPath}/document/buying-step"><button type="button" class="btn" style="min-height: 60px;">구매대행 신청방법 보러가기</button></a>
 	</div>
 	<br><br>
 		<div class="box_form">
 			<form name="form_agency_buy_write" id="form_agency_buy_write" class="check-form"
-				method="post" action="${pageContext.request.contextPath}/member/po/request">
+				method="post" action="/member/po/request">
 				<div class="content content-head" style="border-bottom: none;">
 					<div class="content-head-text">신청서 작성시 유의사항</div>
 				</div>
@@ -493,6 +502,7 @@ $(function() {
 							.on('click',function() {
 								var currency = $(this).data('currency');
 								// 선택된 국가의 통화를 가져와서 변수에 저장
+								console.log('선택된 통화: ' + currency);
 								$('Form').find('input[name=poCurrency]').remove();
 								$('Form').append('<input type="hidden" name="poCurrency" value="' + currency + '">');
 						});
@@ -511,14 +521,14 @@ $(function() {
 				</div>
 				<div class="flex-cell">
 					<div class="cell sfont">
-						<label for="poItemEngName">상품이름(영문)</label> <input type="text"
+						<label for="poItemEngName">상품이름(영문)<i class="fa-solid fa-asterisk red"></i></label> <input type="text"
 							name="poItemEngName" class="tool w-100 line" id="poItemEngName"
 							placeholder="영어로 입력해주세요">
 					</div>
 					<div class="cell sfont">
-						<label for="poItemCategory">카테고리</label> <input type="text"
-							name="poItemCategory" class="tool w-100 line" id="poItemCategory"
-							placeholder="ex)가방">
+						<label for="poItemCategory">카테고리<i class="fa-solid fa-asterisk red"></i></label>
+							<input type="text" name="poItemCategory" class="tool w-100 line" id="poItemCategory"
+								placeholder="ex)가방">
 					</div>
 					<div class="cell sfont">
 						<label for="poItemOption1">옵션/색상</label> <input type="text"
@@ -531,27 +541,30 @@ $(function() {
 							placeholder="ex)라지">
 					</div>
 					<div class="cell sfont">
-						<label for="poFx">금액(외화)</label> <input type="text" name="poFx"
+						<label for="poFx">금액(외화)<i class="fa-solid fa-asterisk red"></i></label> <input type="text" name="poFx"
 							class="tool w-100 line" id="poFx" placeholder="">
 					</div>
 					<div class="cell sfont">
 						<!-- 최소수량 1개에서 최대 100개로 설정해둠 -->
-						<label for="poQty">구매수량</label> <input type="number" name="poQty"
+						<label for="poQty">구매수량<i class="fa-solid fa-asterisk red"></i></label> <input type="number" name="poQty"
 							class="tool w-100 line" value="1" id="poQty" min="1" max="100">
 					</div>
 				</div>
-				<div class="cell">
-					<input type="text" name="poLink" class="tool w-100 line"
+				<div class="cell left w-100 sfont">
+					<label for="poLink">상품URL<i class="fa-solid fa-asterisk red"></i></label>
+						<input type="text" name="poLink" class="tool w-100 line" id="poLink"
 						placeholder="(필수) 상품 URL을 입력하세요">
 				</div>
-				<div class="cell left">
-					<h6 style="margin: auto;">기타요청사항</h6>
-					<input type="text" name="poItemOption3" class="tool w-100 line"
+				<div class="cell left w-100 sfont">
+					<label for="poItemOption3">상세옵션<i class="fa-solid fa-asterisk red"></i></label>
+						<input type="text" name="poItemOption3" class="tool w-100 line" id="poItemOption3"
 						placeholder="상세 옵션을 적어주세요">
 				</div>
 				<div class="cell">
-					<input type="text" name="poDcomment" class="tool w-100 line"
-						placeholder="배송요청사항을 입력하세요 (ex:경비실에 맡겨주세요)">
+					<div class="cell left w-100 sfont">
+						<label for="poDcomment">배송요청사항<i class="fa-solid fa-asterisk red"></i></label>
+							<input type="text" name="poDcomment" class="tool w-100 line" id="poDcomment"
+							placeholder="배송요청사항을 입력하세요 (ex:경비실에 맡겨주세요)">
 				</div>
 		</div>
 		<br>
@@ -560,27 +573,33 @@ $(function() {
 		</div>
 		<div class="flex-cell">
 			<div class="cell sfont">
-				구매자(한글) <input type="text" name="poNameKor" class="tool w-100 line" value="${loginDto.memberNameKor}"
-					placeholder="한글이름">
+				<label for="poNameKor">구매자(한글)<i class="fa-solid fa-asterisk red"></i></label>
+				<input type="text" name="poNameKor" class="tool w-100 line" value="${loginDto.memberNameKor}"
+					placeholder="한글이름" id="poNameKor">
 			</div>
 			<div class="cell sfont">
-				구매자(영문) <input type="text" name="poNameEng" class="tool w-100 line" value="${loginDto.memberNameEng}"
-					placeholder="영어이름">
+				<label for="poNameEng">구매자(영문)<i class="fa-solid fa-asterisk red"></i></label>
+				<input type="text" name="poNameEng" class="tool w-100 line" value="${loginDto.memberNameEng}"
+					placeholder="영어이름" id="poNameEng">
 			</div>
 			<div class="cell sfont">
-				통관고유번호 <input type="text" name="poClearanceId" value="${loginDto.memberClearanceId}"
-					class="tool w-100 line" placeholder="P로시작">
+				<label for="poClearanceId">통관고유번호<i class="fa-solid fa-asterisk red"></i></label>
+					<input type="text" name="poClearanceId" value="${loginDto.memberClearanceId}"
+					class="tool w-100 line" placeholder="P로시작" id="poClearanceId">
 			</div>
 			<div class="cell sfont">
-				연락처 <input type="text" name="poContact" class="tool w-100 line" value="${loginDto.memberContact1}"
-					placeholder="전화번호">
+				<label for="poContact">연락처<i class="fa-solid fa-asterisk red"></i></label> 
+					<input type="text" name="poContact" class="tool w-100 line" value="${loginDto.memberContact1}"
+					placeholder="전화번호" id="poContact">
 			</div>
 		</div>
 		<div class="cell left">
 			<div class="cell">
+				<div class="cell sfont">
+				<label for="poZipcode">주소<i class="fa-solid fa-asterisk red"></i></label><br>
 				 <input type="text" name="poZipcode" class="tool w-20 line" value="${loginDto.memberZipcode}"
-					placeholder="우편번호">
-			<button type="button" class="btn btn-address-search">
+					placeholder="우편번호" id="poZipcode">
+			<button type="button" class="btn btn-address-search btn-submit">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
 			</div>
@@ -593,9 +612,10 @@ $(function() {
 					placeholder="상세주소">
 			</div>
 			<br>
+			</div>
 		</div>
 		<div class="button_area text-center">
-    		<button id="submitButton" type="submit" class="btn mt-10 btn-click">신청서 작성하기</button>
+    		<button id="submitButton" type="submit" class="btn mt-10 btn-click btn-submit">신청서 작성하기</button>
 		</div>
 	</div>
 	</form>

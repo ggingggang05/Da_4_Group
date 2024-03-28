@@ -165,9 +165,12 @@
 }
 
 .btn {
-	background-color: white;
+	background-color: #009796;
+	color:white;
 }
-
+.btn-submit{
+	background-color : #b9bdbd;
+}
 .btn:hover {
 	filter: brightness(1);
 }
@@ -222,55 +225,76 @@
 </script>
 <script type="text/javascript">
 $(function() {
-    var state = {
-        // 필수항목 : true 선택항목 : false
-        shipSvcAgree: true,
-        shipSvcCountry: true,
-        shipSvcNameKor: true,
-        shipSvcNameEng: true,
-        shipSvcClearanceId: true,
-        shipSvcContact: true,
-        shipSvcZipcode: true,
-        shipSvcAddress1: true,
-        shipSvcAddress2: true,
-        shipSvcItemEngName: true,
-        shipSvcItemCategory: true,
-        shipSvcItemOption1: false,
-        shipSvcFx: true,
-        shipSvcQty: true,
-        shipSvcLink: true,
-        shipSvcDcomment: false,
-        shipSvcCurrency: true,
-        shipSvcUserShipper: true,
-        shipSvcUserAwbNumber: true,
-    };
-
-    // 버튼 클릭 이벤트 리스너 추가
-    $(".btn-click").click(function(e) {
-        e.preventDefault(); // 폼 제출 방지
-
-        // 필수 항목이 모두 입력되었는지 확인
-        for (var key in state) {
-            if (state.hasOwnProperty(key) && state[key] === true) {
-                var value = $("input[name='" + key + "']").val();
-                if (value === "") {
-                    alert("모든 항목을 입력해야 합니다.");
-                    return false;
-                }
-            }
-        }
-
-        // 모든 필수 항목이 입력되었으면 폼 제출
-        $("form").submit();
-    });
-
-    // form 전송
     $(".check-form").submit(function() {
-        // 필요한 경우 추가 검증을 수행할 수 있습니다.
+    	var shipSvcAgree = $("input[name='shipSvcAgree']:checked").val();
+        var shipSvcNameKor = $("input[name='shipSvcNameKor']").val();
+        var shipSvcNameEng = $("input[name='shipSvcNameEng']").val();
+        var shipSvcClearanceId = $("input[name='shipSvcClearanceId']").val();
+        var shipSvcFx = $("input[name='shipSvcFx']").val();
+        var shipSvcContact = $("input[name='shipSvcContact']").val();
+        var shipSvcZipcode = $("input[name='shipSvcZipcode']").val();
+        var shipSvcItemEngName = $("input[name='shipSvcItemEngName']").val();
+        var shipSvcItemCategory = $("input[name='shipSvcItemCategory']").val();
+        var shipSvcLink = $("input[name='poLink']").val();
+	    var shipSvcCountryChecked = $("input[name='shipSvcCountry']:checked").val();
+     	// shipSvcAgree 동의 여부 확인
+        if (shipSvcAgree !== "Y") {
+            alert("약관에 동의해주세요.");
+            return false;
+        }
+        // shipSvcCountry 선택 여부 확인
+        if (!shipSvcCountryChecked) {
+            alert("구매대행지를 선택해 주세요.");
+            return false;
+        }
+     	// shipSvcItemEngName 검증
+        if (!/^[a-zA-Z\s]{1,30}$/.test(shipSvcItemEngName)) {
+            alert("상품 이름(영문)은 영어로만 입력하고 30자 이내로 입력하세요.");
+            return false;
+        }
+        // shipSvcItemCategory 검증
+        if (shipSvcItemCategory === "") {
+            alert("카테고리를 입력하세요.");
+            return false;
+        }
+   		// shipSvcItemCategory 검증
+        if (!/^\d{1,7}$/.test(shipSvcFx)) {
+            alert("금액을 숫자로 입력하세요.");
+            return false;
+        }
+        // shipSvcNameKor 검증
+        if (!/^.{1,4}$/.test(shipSvcNameKor)) {
+            alert("한국어 이름은 4글자 이내로 입력하세요.");
+            return false;
+        }
+        // shipSvcNameKor 검증
+        if (!/^[a-zA-Z]{1,20}$/.test(shipSvcNameEng)) {
+            alert("영문 이름은 알파벳 최대 20자로 입력하세요.");
+            return false;
+        }
+        // shipSvcClearanceId 검증
+        if (!/^P\d{12}$/.test(shipSvcClearanceId)) {
+            alert("통관 고유번호는 대문자 P로 시작하고 숫자 12자리여야 합니다.");
+            return false;
+        }
+        // shipSvcContact 검증
+        if (!/^010\d{8}$/.test(shipSvcContact)) {
+            alert("연락처는 010으로 시작하고 뒤에 8자리의 숫자로 입력하세요.");
+            return false;
+        }
+        // shipSvcZipcode 검증
+        if (!/^\d{5,6}$/.test(shipSvcZipcode)) {
+            alert("주소를 검색하여 우편번호를 입력해주세요.");
+            return false;
+        }
+        // shipSvcLink 검증
+        if (shipSvcLink === "") {
+            alert("링크를 입력하세요.");
+            return false;
+        }
         return true;
     });
 });
-
 </script>
 <br>
 <br>
@@ -290,12 +314,12 @@ $(function() {
 		</div>
 	</div>
 	<div class="cell w-100">
-		<a class="link" href="${pageContext.request.contextPath}/document/delivery-step"><button type="button" class="btn">배송대행 신청방법 보러가기</button></a>
+		<a class="link" href="${pageContext.request.contextPath}/document/delivery-step"><button type="button" class="btn" style="min-height: 60px;">배송대행 신청방법 보러가기</button></a>
 	</div>
 	<br><br>
 	<div class="box_form">
 		<form name="form_agency_buy_write" id="form_agency_buy_write" class="check-form"
-			method="post" action="${pageContext.request.contextPath}/member/ship/request">
+			method="post" action="/member/ship/request">
 			<div class="content content-head" style="border-bottom: none;">
 				<div class="content-head-text">신청서 작성시 유의사항</div>
 			</div>
@@ -445,11 +469,11 @@ $(function() {
 					<p></p>
 					<p>* 아이템 작성이 제대로 되지 않아 발생한 모든 사고에 대해 다사조에서는 책임을 지지 않습니다.</p>
 				</div>
-			</div>
 			<div class="checkbox text-right">
 				<label><input name="shipSvcAgree" type="checkbox"
 					class="type_checkbox" value="Y" /> 위의 주의사항을 모두 확인하였으며, 위 사항에
 					동의합니다.</label>
+			</div>
 			</div>
 	</div>
 	<div class="content content-head">
@@ -533,6 +557,7 @@ $(function() {
 							.on('click',function() {
 								var currency = $(this).data('currency');
 								// 선택된 국가의 통화를 가져와서 변수에 저장
+								console.log('선택된 통화: ' + currency);
 								$('Form').find('input[name=shipSvcCurrency]').remove();
 								$('Form').append('<input type="hidden" name="shipSvcCurrency" value="' + currency + '">');
 						});
@@ -546,51 +571,56 @@ $(function() {
 			구매대행 불가 쇼핑몰 : 메루카리, 라쿠마(프릴), 오타마트 등 어플기반 사이트, 토호 애니매이션, 아미아미, cos,
 			Levi's 등</div>
 	</div>
-	<div class="container left" style="border-color: #e0e0e0;">
-		<div class="info-head w-100">배송대행 상품정보 입력</div>
+	<div class="container left flex-cell" style="border-color: #e0e0e0;">
+		<div class="info-head w-50">배송대행 상품정보 입력</div>
+		<div class="info-head w-50 right" style="font-size: 14px;"><i class="fa-solid fa-asterisk red"></i>는 필수입니다</div>
 	</div>
 	<div class="flex-cell">
 		<div class="cell sfont left"  style="margin-bottom: 0px;">
-			<label for="shipSvcItemEngName">상품이름(영문)</label> <input type="text"
+			<label for="shipSvcItemEngName">상품이름(영문)<i class="fa-solid fa-asterisk red"></i></label> <input type="text"
 				name="shipSvcItemEngName" class="tool w-100 line" id="shipSvcItemEngName"
-				placeholder="영어로 입력해주세요">
+				placeholder="">
 		</div>
 		<div class="cell sfont left" style="margin-bottom: 0px;">
-			<label for="shipSvcItemCategory">카테고리</label> <input type="text"
+			<label for="shipSvcItemCategory">카테고리<i class="fa-solid fa-asterisk red"></i></label> <input type="text"
 				name="shipSvcItemCategory" class="tool w-100 line" id="shipSvcItemCategory"
 				placeholder="ex)가방">
 		</div>
 		<div class="cell sfont left" style="margin-bottom: 0px;">
-			<label for="shipSvcFx">금액(외화)</label> <input type="text" name="shipSvcFx"
-				class="tool w-100 line" id="shipSvcFx" placeholder="배송비 포함금액">
+			<label for="shipSvcFx">금액(외화)<i class="fa-solid fa-asterisk red"></i></label> <input type="text" name="shipSvcFx"
+				class="tool w-100 line" id="shipSvcFx" placeholder="">
 		</div>
 		<div class="cell sfont left" style="margin-bottom: 0px;">
 			<!-- 최소수량 1개에서 최대 100개로 설정해둠 -->
-			<label for="shipSvcQty">구매수량</label> <input type="number" name="shipSvcQty"
+			<label for="shipSvcQty">구매수량<i class="fa-solid fa-asterisk red"></i></label> <input type="number" name="shipSvcQty"
 				class="tool w-100 line" value="1" id="shipSvcQty" min="1" max="100">
 		</div>
 	</div>
 	<div class="flex-cell" >
 	<div class="cell left w-50 sfont ">
-		<label for="shipSvcUserShipper">운송사(본인이 업체로부터 받은)</label><input type="text" name="shipSvcUserShipper" class="tool w-100 line"
-			id="shipSvcUserShipper" placeholder="(필수) 운송사를 입력하세요">
+		<label for="shipSvcUserShipper">운송사(본인이 업체로부터 받은)<i class="fa-solid fa-asterisk red"></i></label><input type="text" name="shipSvcUserShipper" class="tool w-100 line"
+			id="shipSvcUserShipper" placeholder="">
 	</div>
 	<div class="cell left w-50 sfont">
-		<label for="shipSvcUserAwbNumber">트레킹넘버</label><input type="text" name="shipSvcUserAwbNumber" class="tool w-100 line"
-			id="shipSvcUserAwbNumber" placeholder="(필수) 트레킹넘버를 입력하세요">
+		<label for="shipSvcUserAwbNumber">트레킹넘버<i class="fa-solid fa-asterisk red"></i></label><input type="text" name="shipSvcUserAwbNumber" class="tool w-100 line"
+			id="shipSvcUserAwbNumber" placeholder="">
 	</div>
 	</div>
-	<div class="cell">
-		<input type="text" name="shipSvcLink" class="tool w-100 line"
+	<div class="cell left sfont">
+	<label for="shipSvcLink">상품URL<i class="fa-solid fa-asterisk red"></i></label>
+		<input type="text" name="shipSvcLink" class="tool w-100 line" id="shipSvcLink"
 			placeholder="(필수) 상품 URL을 입력하세요">
 	</div>
-		<div class="cell sfont">
-			<input type="text" name="shipSvcItemOption1" class="tool w-100 line" 
+		<div class="cell left sfont">
+	<label for="shipSvcItemOption1">상세옵션</label>
+			<input type="text" name="shipSvcItemOption1" class="tool w-100 line"  id="shipSvcItemOption1"
 			id="shipSvcItemOption1"	placeholder="기타사항을 입력하세요">
 		</div>
 	<div class="cell">
-		<input type="text" name="shipSvcDComment" class="tool w-100 line"
-			placeholder="배송요청사항을 입력하세요 (ex:경비실에 맡겨주세요)">
+		<div class="cell left sfont">
+			<label for="shipSvcDComment">배송요청사항</label>
+				<input type="text" name="shipSvcDComment" class="tool w-100 line" id="shipSvcDComment"
+				placeholder="배송요청사항을 입력하세요 (ex:경비실에 맡겨주세요)">
 	</div>
 <br>
 <div class="container left">
@@ -598,27 +628,29 @@ $(function() {
 </div>
 <div class="flex-cell">
 	<div class="cell sfont">
-		구매자(한글) <input type="text" name="shipSvcNameKor" class="tool w-100 line" value="${loginDto.memberNameKor}"
+		구매자(한글) <i class="fa-solid fa-asterisk red"></i><input type="text" name="shipSvcNameKor" class="tool w-100 line" value="${loginDto.memberNameKor}"
 			placeholder="한글이름">
 	</div>
 	<div class="cell sfont">
-		구매자(영문) <input type="text" name="shipSvcNameEng" class="tool w-100 line" value="${loginDto.memberNameEng}"
+		구매자(영문)<i class="fa-solid fa-asterisk red"></i> <input type="text" name="shipSvcNameEng" class="tool w-100 line" value="${loginDto.memberNameEng}"
 			placeholder="영어이름">
 	</div>
 	<div class="cell sfont">
-		통관고유번호 <input type="text" name="shipSvcClearanceId" class="tool w-100 line" value="${loginDto.memberClearanceId}"
+		통관고유번호<i class="fa-solid fa-asterisk red"></i> <input type="text" name="shipSvcClearanceId" class="tool w-100 line" value="${loginDto.memberClearanceId}"
 			placeholder="P로시작">
 	</div>
 	<div class="cell sfont">
-		연락처 <input type="text" name="shipSvcContact" class="tool w-100 line" value="${loginDto.memberContact1}"
+		연락처<i class="fa-solid fa-asterisk red"></i> <input type="text" name="shipSvcContact" class="tool w-100 line" value="${loginDto.memberContact1}"
 			placeholder="전화번호">
 	</div>
 </div>
-<div class="cell left">
+<div class="cell left" >
 	<div class="cell">
-		<input type="text" name="shipSvcZipcode" class="tool w-20 line" value="${loginDto.memberZipcode}"
+	<div class="cell sfont">
+			<label for="shipSvcZipcode">주소<i class="fa-solid fa-asterisk red"></i></label><br>
+		<input type="text" name="shipSvcZipcode" class="tool w-20 line"  id="shipSvcZipcode"value="${loginDto.memberZipcode}" 
 			placeholder="우편번호">
-		<button type="button" class="btn btn-address-search">
+		<button type="button" class="btn btn-address-search btn-submit">
 			<i class="fa-solid fa-magnifying-glass"></i>
 		</button>
 	</div>
@@ -632,8 +664,9 @@ $(function() {
 	</div>
 	<br>
 </div>
+</div>
 <div class="button_area text-center">
-	<button type="submit" class="btn mt-10 btn-click">신청서 작성하기</button>
+	<button type="submit" class="btn mt-10 btn-click btn-submit">신청서 작성하기</button>
 </div>
 </form>
 </div>
