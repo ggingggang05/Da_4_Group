@@ -78,7 +78,7 @@
 }
 
 .head-middle {
- 	height: 80px;
+ 	height: 80px !important;
 }
 
 .home>a {

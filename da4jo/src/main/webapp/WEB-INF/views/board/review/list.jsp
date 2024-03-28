@@ -116,7 +116,7 @@
 				</ul>
 
 				<c:forEach var="reviewDto" items="${list}">
-					<ul class="menu menu-list center py-30">
+					<ul class="menu menu-list center">
 						<li id="reviewNo">${reviewDto.reviewNo}</li>
 						<!-- <li><img src="${pageContext.request.contextPath}/download?imgNo=166"></li> -->
 						<li id="reviewImg"><img
