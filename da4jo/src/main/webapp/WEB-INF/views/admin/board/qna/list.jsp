@@ -9,7 +9,7 @@
 .menu.menu-type {
 	border-bottom: 1px solid #CAE4FF;
 	border-top: 1px solid #CAE4FF;
-	background-color: #DEEEFF;
+	background-color: #e6f2ff;
 }
 
 .bottom-bar div:first-child {
@@ -57,7 +57,7 @@
 }
 
 #qnaWdate {
-	width: 21% !important;
+	width: 15% !important;
 }
 
 #qnaStatusType {
@@ -67,7 +67,6 @@
 
 #qnaStatus {
 	width: 15% !important;
-	color: red;
 }
 </style>
 
@@ -80,13 +79,53 @@
 	<div class="container inner-container">
 		<div class="content content-head">
 			<div class="content-head-text">
-				<i class="fa-solid fa-pause"></i> Q&A 게시판
+				<i class="fa-solid fa-pause"></i>Q&A 게시판 [관리자 전용]
 			</div>
 		</div>
 
 		<%-- 질문글 미답변 목록 --%>
 		<div class="content content-head">
-			<div class="content-head-text mt-50">질문글 미답변 목록</div>
+		
+		<div class="cell flex-cell">
+				<div class="cell searchArea w-75 left">
+					<!-- 검색 기능 -->
+					<form action="list" method="get">
+						<select name="column" class="searchSelect searchOption">
+							<option value="qna_no"
+								${empty param.column || param.column == 'qna_no' ? 'selected' : ''}>글번호</option>
+							<option value="qna_secret"
+								${param.column == '"qna_secret"' ? 'selected' : ''}>잠금현황</option>
+							<option value="qna_title"
+								${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
+							<option value="qna_content"
+								${param.column == 'qna_content' ? 'selected' : ''}>내용</option>
+							<option value="qna_wdate"
+								${param.column == 'qna_wdate' ? 'selected' : ''}>작성일</option>
+							<option value="qna_status"
+								${param.column == 'qna_status' ? 'selected' : ''}>현재상태</option>
+
+						</select>
+						<!-- <div class="DateInput" style="display: none;">
+									<input type="text" name="startDate" placeholder="날짜 선택" value="$(settlementVO.qnaPayDate)">
+								</div> -->
+						<input type="search" name="keyword" placeholder="내용을 입력해주세요"
+							value="${param.keyword}" class="searchBar" autocomplete="off">
+						<button class="btn searchBtn" type="submit">
+							<i class="fa-solid fa-search"></i>
+						</button>
+					</form>
+				</div>
+				<!-- 검색기능 닫는 태그 -->
+				<div class="cell w-25 right">
+					<a class="btn requestBtn"
+						href="${pageContext.request.contextPath}/admin/board/notice/write"
+						style="color: #60A1F8;">공지 작성하기</a>
+				</div>
+			</div>
+		
+			<div class="content-head-text mt-30">질문글 미답변 목록</div>
+
+			
 		</div>
 		<div class="content content-body right">
 			<div class="cell center"></div>
@@ -98,7 +137,7 @@
 						<li id="qnaRock">잠금상태</li>
 						<li id="typeQnaTitle">제목</li>
 						<li id="qnaWdate">작성일</li>
-						<li id="qnaStatusType">현재상태</li>
+						<li id="qnaStatusType">답변달기</li>
 					</ul>
 
 					<c:forEach var="qnaDto" items="${list}">
@@ -108,41 +147,15 @@
 								<li id="qnaRock">${qnaDto.qnaSecret}</li>
 								<c:set var="formattedTitle"
 									value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
-								<li id="qnaTitle"><a href="${pageContext.request.contextPath}/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
+								<li id="qnaTitle"><a
+									href="${pageContext.request.contextPath}/board/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></li>
 								<li id="qnaWdate">${qnaDto.qnaWdate}</li>
 								<li id="qnaStatus"><a
-									href="write?qnaTarget=${qnaDto.qnaNo}">${qnaDto.qnaStatus}</a></li>
+									href="write?qnaTarget=${qnaDto.qnaNo}"><i
+										class="fa-solid fa-file-pen blue"></i></a></li>
 							</ul>
 						</c:if>
 					</c:forEach>
-				</div>
-				
-				<div class="flex-cell">
-					<div class="cell flex-cell mt-30 bottom-bar">
-						<div class="cell">
-							<%-- 검색창 --%>
-							<form action="list" method="get" class="center">
-								<select name="column" class="searchSelect">
-									<option value="qna_no"
-										${param.column == 'qna_no' ? 'selected' : ''}>글번호</option>
-									<option value="qna_title"
-										${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
-									<option value="qna_writer"
-										${param.column == 'qna_writer' ? 'selected' : ''}>작성자</option>
-									<option value="qna_content"
-										${param.column == 'qna_content' ? 'selected' : ''}>내용</option>
-									<option value="qna_status"
-									${param.column == 'qna_content' ? 'selected' : ''}>현재상태</option>
-								</select> <input class="searchBar w-400" type="search" name="keyword"
-									placeholder="검색어 입력" required value="${param.keyword}">
-								<button class="btn searchBtn">검색</button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="cell">
-					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>
@@ -173,10 +186,12 @@
 								value="${fn:replace(qnaDto.qnaTitle, ',', '')}" />
 							<li id="qnaTitle"><a href="detail?qnaNo=${qnaDto.qnaNo}">${formattedTitle}</a></li>
 							<li id="qnaWdate">${qnaDto.qnaWdate}</li>
-							<li id="qnaStatus" style="color: ${qnaDto.qnaStatus == '답변완료' ? '#00b894' : (qnaDto.qnaStatus == '답변용글' ? '#00b894' : 'red')}">${qnaDto.qnaStatus}</li>
+							<li id="qnaStatus"
+								style="color: ${qnaDto.qnaStatus == '답변완료' ? '#00b894' : (qnaDto.qnaStatus == '답변용글' ? '#00b894' : 'red')}">${qnaDto.qnaStatus}</li>
 						</ul>
 					</c:forEach>
 				</div>
+
 				<div class="cell mt-40">
 					<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 				</div>
