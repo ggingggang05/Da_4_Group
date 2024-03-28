@@ -47,7 +47,6 @@
 								memberId : value
 							},
 							success : function(response) {
-								console.log(response);
 								if (response == "joinN") {
 									$("[name=memberId]").removeClass(
 											"success fail fail2").addClass(
@@ -152,7 +151,6 @@
 								memberEmail : value
 							},
 							success : function(response) {
-								console.log(response);
 								if (response == "emailN") {
 									$("[name=memberEmail]").removeClass(
 											"success fail fail2").addClass(
@@ -360,7 +358,6 @@
 						},
 						success : function(response) {
 							//response는 true 아니면 false이므로 상태를 갱신하도록 처리
-							console.log(response);
 							$(".cert-input").removeClass("success fail")
 									.addClass(
 											response === true ? "success"

@@ -17,7 +17,6 @@
 		var picker;
 
 		$(".searchOption").on("input", function(){
-			console.log("input", $(this).val());
 			if($(this).val() == "po_sdate") {
 				//$(".DateInput").show();
 				picker = new Lightpick({

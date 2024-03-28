@@ -158,9 +158,6 @@
 						contentType : false,
 						success : function(response) {
 							//서버에서 응답 받은 후 실행되는 함수
-							console.log(response);
-							console.log(response[0]);
-							console.log(response[1]);
 							if (response == null)
 								return;
 

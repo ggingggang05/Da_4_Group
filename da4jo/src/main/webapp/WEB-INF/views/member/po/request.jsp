@@ -493,7 +493,6 @@ $(function() {
 							.on('click',function() {
 								var currency = $(this).data('currency');
 								// 선택된 국가의 통화를 가져와서 변수에 저장
-								console.log('선택된 통화: ' + currency);
 								$('Form').find('input[name=poCurrency]').remove();
 								$('Form').append('<input type="hidden" name="poCurrency" value="' + currency + '">');
 						});
