@@ -41,7 +41,7 @@
 			</div>
 			<div class="btn-unipass">
 				<a href="https://unipass.customs.go.kr/csp/persIndex.do" target="_blank" class="link">
-					<img src="${pageContext.request.contextPath}/image/btn-unipass.jpg">
+					<img src="/image/btn-unipass.jpg">
 				</a>
 			</div>
 		</div>
