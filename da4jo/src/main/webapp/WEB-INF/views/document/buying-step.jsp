@@ -29,7 +29,7 @@
 				</div>
 				<br>
 				<div class="cell center">
-				<img src="${pageContext.request.contextPath}/image/신청서작성00.png" width="20%" height="50%">
+				<img src="/image/신청서작성00.png" width="20%" height="50%">
 				</div>
 				<div class="cell">
 					<strong>2. 구매대행시 주의사항을 꼼꼼하게 확인 후 동의해 주십시오. </strong><br> 
@@ -39,7 +39,7 @@
 					</ul>
 				</div>
 				<div class="cell center" style="border: 1px solid #DEE2E6;">
-				<img src="${pageContext.request.contextPath}/image/신청서작성2.png" width="800px">
+				<img src="/image/신청서작성2.png" width="800px">
 				</div>
 				<br>
 				<div class="cell">
@@ -71,7 +71,7 @@
 					</ul>
 				</div>
 				<div class="cell">
-					<img src="${pageContext.request.contextPath}/image/신청서작성3.png" width="800px">
+					<img src="/image/신청서작성3.png" width="800px">
 				</div>
 				<div class="cell">
 					<strong>7. 신청서 확인</strong><br>

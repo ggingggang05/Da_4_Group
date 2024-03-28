@@ -9,9 +9,9 @@
 </style>
 <div class="container">
 	<div class="cell center">
-		<img src="${pageContext.request.contextPath}/image/고양이1.gif">
-		<img src="${pageContext.request.contextPath}/image/고양이2.gif">
-		<img src="${pageContext.request.contextPath}/image/고양이3.gif">
+		<img src="/image/고양이1.gif">
+		<img src="/image/고양이2.gif">
+		<img src="/image/고양이3.gif">
 	</div>
 </div>
 

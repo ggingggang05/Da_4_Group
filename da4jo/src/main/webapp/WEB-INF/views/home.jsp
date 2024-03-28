@@ -215,7 +215,7 @@
 	<div class="link-wrapper">
 		<div class="link-kh center">
 			<a class="link" href="https://kh-academy.co.kr/main/main.kh" target='_blank'> <img
-				class="m-10" src="${pageContext.request.contextPath}/image/KH정보교육원 로고.png">
+				class="m-10" src="/image/KH정보교육원 로고.png">
 			</a>
 		</div>
 		<div class="link-ship center">
@@ -247,18 +247,18 @@
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
 				<a class="link" href="https://docs.sysout.co.kr/" target='_blank'>
-					<img class="add" src="${pageContext.request.contextPath}/image/Hacademy.png">
+					<img class="add" src="/image/Hacademy.png">
 				</a>
 			</div>
 			<div class="swiper-slide">
 				<a class="link"
 					href="https://www.youtube.com/channel/UCdllyP_VgK-PY7VJRWOkOKQ"
-					target='_blank'> <img class="add" src="${pageContext.request.contextPath}/image/열혈강사youtube.png">
+					target='_blank'> <img class="add" src="/image/열혈강사youtube.png">
 				</a>
 			</div>
 			<div class="swiper-slide">
 				<a class="link" href="https://video.sysout.co.kr/" target='_blank'>
-					<img class="add" src="${pageContext.request.contextPath}/image/video-sysout.png">
+					<img class="add" src="/image/video-sysout.png">
 				</a>
 			</div>
 		</div>
@@ -316,66 +316,66 @@
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.amazon.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/amazon.jpg">
+							<img src="/image/us_shop/amazon.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.ebay.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/ebay.jpg">
+							<img src="/image/us_shop/ebay.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.shopbop.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/shopbop.jpg">
+							<img src="/image/us_shop/shopbop.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.6pm.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/6pm.jpg">
+							<img src="/image/us_shop/6pm.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.target.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/target.jpg">
+							<img src="/image/us_shop/target.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://athleta.gap.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/gap.jpg">
+							<img src="/image/us_shop/gap.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.yoox.com/us/women" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/yoox.jpg">
+							<img src="/image/us_shop/yoox.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="http://www.ralphlauren.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/ralph_lauren.jpg">
+							<img src="/image/us_shop/ralph_lauren.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.walmart.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/walmart.jpg">
+							<img src="/image/us_shop/walmart.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.zappos.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/zappos.jpg">
+							<img src="/image/us_shop/zappos.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.footlocker.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/Foot_locker.jpg">
+							<img src="/image/us_shop/Foot_locker.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.gymboree.com/home?lang=en_KR" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/us_shop/gymboree.jpg">
+							<img src="/image/us_shop/gymboree.jpg">
 						</a>
 						</li>
 					</ul>
@@ -386,66 +386,66 @@
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.asos.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/asos.jpg">
+							<img src="/image/uk_shop/asos.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.ebay.co.uk/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/ebay.jpg">
+							<img src="/image/uk_shop/ebay.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.asos.com/topshop/?ctaref=ts|ww|gb|web" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/topshop.jpg">
+							<img src="/image/uk_shop/topshop.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.amazon.co.uk/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/amazon.jpg">
+							<img src="/image/uk_shop/amazon.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.boots.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/boots.jpg">
+							<img src="/image/uk_shop/boots.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.nealsyardremedies.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/nealsyardremedies1.jpg">
+							<img src="/image/uk_shop/nealsyardremedies1.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.nealsyardremedies.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/nealsyardremedies2.jpg">
+							<img src="/image/uk_shop/nealsyardremedies2.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.lush.com/uk/en" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/lush.jpg">
+							<img src="/image/uk_shop/lush.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.harrods.com/en-gb" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/harrods.jpg">
+							<img src="/image/uk_shop/harrods.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.next.co.uk/cath-kidston" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/next.jpg">
+							<img src="/image/uk_shop/next.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.cos.com/ko-kr/index.html" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/cos.jpg">
+							<img src="/image/uk_shop/cos.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.selfridges.com/GB/en/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/uk_shop/selfridges.jpg">
+							<img src="/image/uk_shop/selfridges.jpg">
 						</a>
 						</li>
 					</ul>
@@ -456,66 +456,66 @@
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.nespresso.com/de/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/nespresso.jpg">
+							<img src="/image/de_shop/nespresso.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.shop-apotheke.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/shop_apotheke.jpg">
+							<img src="/image/de_shop/shop_apotheke.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://myapo-shop.de/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/myapo_shop.jpg">
+							<img src="/image/de_shop/myapo_shop.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.amazon.de/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/amazon.jpg">
+							<img src="/image/de_shop/amazon.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.peek-cloppenburg.de/de/stylebop" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/peek.jpg">
+							<img src="/image/de_shop/peek.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.playmobil.com/de-de/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/playmobil.jpg">
+							<img src="/image/de_shop/playmobil.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.mytheresa.com/de/en?rdr_src=mag" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/mytheresa.jpg">
+							<img src="/image/de_shop/mytheresa.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.mycare.de/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/mycare.jpg">
+							<img src="/image/de_shop/mycare.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.cos.com/ko-kr/index.html" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/cos.jpg">
+							<img src="/image/de_shop/cos.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.zalando.de/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/zalando.jpg">
+							<img src="/image/de_shop/zalando.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.otto.de/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/otto.jpg">
+							<img src="/image/de_shop/otto.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.otto.de/mytoys/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/de_shop/mytoys.jpg">
+							<img src="/image/de_shop/mytoys.jpg">
 						</a>
 						</li>
 					</ul>
@@ -526,66 +526,66 @@
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.rakuten.co.jp/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/rakuten.jpg">
+							<img src="/image/jp_shop/rakuten.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://auctions.yahoo.co.jp/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/yahoo.jpg">
+							<img src="/image/jp_shop/yahoo.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://zozo.jp/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/zozo.jpg">
+							<img src="/image/jp_shop/zozo.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.buyma.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/buyma.jpg">
+							<img src="/image/jp_shop/buyma.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://hands.net/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/hands.jpg">
+							<img src="/image/jp_shop/hands.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://francfranc.com/shop?pc_header_h" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/franc.jpg">
+							<img src="/image/jp_shop/franc.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.muji.com/jp/ja/store" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/muji.jpg">
+							<img src="/image/jp_shop/muji.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.suruga-ya.jp/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/suruga.jpg">
+							<img src="/image/jp_shop/suruga.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://ssx.xebio-online.com/ec/cmShopTopPage1.html" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/xebio.jpg">
+							<img src="/image/jp_shop/xebio.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.konami.com/games/jp/ja/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/konami.jpg">
+							<img src="/image/jp_shop/konami.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.yodobashi.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/yodobashi.jpg">
+							<img src="/image/jp_shop/yodobashi.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://p-bandai.jp/global_pc.html" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/jp_shop/bandai.jpg">
+							<img src="/image/jp_shop/bandai.jpg">
 						</a>
 						</li>
 					</ul>
@@ -596,39 +596,39 @@
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.1688.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/cn_shop/1688.jpg">
+							<img src="/image/cn_shop/1688.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://global.jd.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/cn_shop/jd.jpg">
+							<img src="/image/cn_shop/jd.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.tmall.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/cn_shop/tmall.jpg">
+							<img src="/image/cn_shop/tmall.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.dangdang.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/cn_shop/dangdang.jpg">
+							<img src="/image/cn_shop/dangdang.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="http://www.suning.com" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/cn_shop/suning.jpg">
+							<img src="/image/cn_shop/suning.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://ko.aliexpress.com/?gateayAdapt=glo2kor" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/cn_shop/ali.jpg">
+							<img src="/image/cn_shop/ali.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="http://www.taobao.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/cn_shop/taobao.jpg">
+							<img src="/image/cn_shop/taobao.jpg">
 						</a>
 						</li>
 						<li class="">
@@ -644,61 +644,61 @@
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.zara.com/es/en/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/zara.jpg">
+							<img src="/image/es_shop/zara.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.zarahome.com/es/en/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/zara_home.jpg">
+							<img src="/image/es_shop/zara_home.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="http://shop.mango.com/es" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/mango.jpg">
+							<img src="/image/es_shop/mango.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.lush.com/es/es" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/lush.jpg">
+							<img src="/image/es_shop/lush.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://es.maje.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/maje.jpg">
+							<img src="/image/es_shop/maje.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.massimodutti.com/es/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/massimodutti.jpg">
+							<img src="/image/es_shop/massimodutti.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.bershka.com/es/h-woman.html" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/bershka.jpg">
+							<img src="/image/es_shop/bershka.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="http://es.sandro-paris.com/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/sandro.jpg">
+							<img src="/image/es_shop/sandro.jpg">
 						</a>
 						</li>
 					</ul>
 					<ul class="menu line">
 						<li class="image-wrapper">
 						<a class="link" href="https://www.oysho.com/es/en/" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/oysho.jpg">
+							<img src="/image/es_shop/oysho.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.massimodutti.com/es" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/massimodutti.jpg">
+							<img src="/image/es_shop/massimodutti.jpg">
 						</a>
 						</li>
 						<li class="image-wrapper">
 						<a class="link" href="https://www.camper.com/en_ES" target="_blank">
-							<img src="${pageContext.request.contextPath}/image/es_shop/camper.jpg">
+							<img src="/image/es_shop/camper.jpg">
 						</a>
 						</li>
 						<li class="">

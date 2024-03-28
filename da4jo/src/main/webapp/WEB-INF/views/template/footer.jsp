@@ -13,9 +13,9 @@
 					<div class="cell pt-20">
 						<ul class="menu">
 							<li><a href="${pageContext.request.contextPath}/board/qna/list"> <img
-									src="${pageContext.request.contextPath}/image/1대1문의.png">
+									src="/image/1대1문의.png">
 							</a></li>
-							<li><a href=""> <img src="${pageContext.request.contextPath}/image/FAQ.png">
+							<li><a href=""> <img src="/image/FAQ.png">
 							</a></li>
 						</ul>
 					</div>
@@ -35,7 +35,7 @@
 					</h3>
 					<div class="cell center">
 						<a href="${pageContext.request.contextPath}">
-							<img src="${pageContext.request.contextPath}/image/logotemplate.png" width="350px">
+							<img src="/image/logotemplate.png" width="350px">
 						</a>
 					</div>
 				</div>
