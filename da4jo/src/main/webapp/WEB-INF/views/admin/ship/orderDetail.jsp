@@ -71,7 +71,6 @@
 					weight : weight
 				},
 				success : function(response) {
-					console.log(response.length);
 					$(".itemPrice").text(response.itemPrice); // 물건원화가격
 					$(".vat").text(response.vat); // 물건의 부가세
 					$(".serviceFee").text(response.fee); // 물건의 수수료

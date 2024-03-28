@@ -73,11 +73,9 @@ $(function(){
 	$(".profileEdit").on("input", function(){
 		//파일이 없으면 리턴(전송 X)
 		if(this.files.length == 0) return;
-		console.log(this.files);
 		
 		var formData = new FormData();
 		formData.append("img", this.files[0]);
-		console.log(formData);
 		
 		//비동기 통신
 		$.ajax({
