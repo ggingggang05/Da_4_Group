@@ -78,7 +78,7 @@
 }
 
 .head-middle {
-	height: 80px;
+ 	height: 80px;
 }
 
 .home>a {
@@ -179,7 +179,7 @@
 </script>
 
 <!-- 내가 만든 JS -->
-<script src="/js/commons.js"></script>
+<script src="${pageContext.request.contextPath}/js/commons.js"></script>
 
 </head>
 
@@ -216,7 +216,7 @@
 					<li class="us-or nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_us.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_us.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>미국(OR)</strong></span>
@@ -226,7 +226,7 @@
 					<li class="us-nj nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_us.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_us.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>미국(NJ)</strong></span>
@@ -236,7 +236,7 @@
 					<li class="jp nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_jp.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_jp.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>일본(JP)</strong></span>
@@ -246,7 +246,7 @@
 					<li class="uk nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_uk.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_uk.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>영국(UK)</strong></span>
@@ -256,7 +256,7 @@
 					<li class="de nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_de.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_de.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>독일(DE)</strong></span>
@@ -266,7 +266,7 @@
 					<li class="es nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_es.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_es.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>스페인(ES)</strong></span>
@@ -276,7 +276,7 @@
 					<li class="cn nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_cn.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_cn.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>중국(CN)</strong></span>
@@ -286,7 +286,7 @@
 					<li class="au nation">
 						<a href="${pageContext.request.contextPath}/document/delivery-address" class="link">
 							<div class="nation-icon">
-								<img src="/image/top_iso_au.png">
+								<img src="${pageContext.request.contextPath}/image/top_iso_au.png">
 							</div>
 							<div class="nation-text">
 								<span><strong>호주(AU)</strong></span>

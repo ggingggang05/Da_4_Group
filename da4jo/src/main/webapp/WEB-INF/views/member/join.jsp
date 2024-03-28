@@ -556,7 +556,7 @@ input[type="file"]::-webkit-file-upload-button {
 			enctype="multipart/form-data" class="check-form">
 			<div class="container w-550">
 				<div class="cell center">
-					<label><img src="/image/logotemplatecut.png"
+					<label><img src="${pageContext.request.contextPath}/image/logotemplatecut.png"
 						style="width: 200px"></label>
 				</div>
 
@@ -809,7 +809,7 @@ input[type="file"]::-webkit-file-upload-button {
 					</div>
 					<!-- 프로필 이미지 입력창 -->
 					<div class="cell">
-						<!-- 							<label for="img"><img src="/image/user.png" style="width: 200px"></label> -->
+						<!-- 							<label for="img"><img src="${pageContext.request.contextPath}/image/user.png" style="width: 200px"></label> -->
 						<label style="color: #b2bec3; font-size: 15px;">프로필 이미지</label> <input
 							type="file" id="img" name="img" class="tool w-100 box input">
 					</div>

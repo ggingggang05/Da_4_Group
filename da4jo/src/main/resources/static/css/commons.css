@@ -600,7 +600,6 @@ textarea.tool.tool-fixed {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 60px;
 }
 .menu a, .head a {
     color: inherit; /* 글자색상은 외부상태를 따라가겠다 */

@@ -27,7 +27,7 @@
 				</div>
 				<br>
 				<div class="cell center">
-				<img src="/image/신청서작성01.png" width="20%" height="50%">
+				<img src="${pageContext.request.contextPath}/image/신청서작성01.png" width="20%" height="50%">
 				</div>
 				<div class="cell">
 					<strong>2. 주의사항 확인 후 신청서 작성 </strong><br> 
@@ -37,7 +37,7 @@
 					</ul>
 				</div>
 				<div class="cell center" style="border: 1px solid #DEE2E6;">
-				<img src="/image/신청서작성02.png" width="800px">
+				<img src="${pageContext.request.contextPath}/image/신청서작성02.png" width="800px">
 				</div>
 				<br>
 				<div class="cell">
@@ -66,7 +66,7 @@
 					</ul>
 				</div>
 				<div class="cell">
-					<img src="/image/신청서작성03.png" width="800px">
+					<img src="${pageContext.request.contextPath}/image/신청서작성03.png" width="800px">
 				</div>
 				<div class="cell">
 					<strong>7. 신청서 확인</strong><br>
